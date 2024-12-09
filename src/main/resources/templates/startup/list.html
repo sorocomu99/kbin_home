@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment/config :: configFragment"></head>
+<body>
+    <!-- 헤더 -->
+    <app-header></app-header>
+
+    <!-- 본문 -->
+    <main class="main">
+        <div class="section-top section-top--startup">
+            <div class="section-top-wrap">
+                <nav aria-label="Breadcrumb" class="breadcrumb" data-breadcrub-theme="transparent">
+                    <ul>
+                        <li><a href="#"><i class="icon icon-home"></i><span class="blind">HOME</span></a></li>
+                        <li><a href="javascript:">스타트업 정보</a></li>
+                        <li><span aria-current="page">정보검색</span></li>
+                    </ul>
+                </nav>
+                <!--<h2 class="title">정보검색</h2>-->
+            </div>
+        </div>
+        <div class="proximal">
+
+            <div class="proximal-wrap">
+                <form id="masForm" name="masForm" th:action="@{/startup/list}" method="get">
+                <input type="hidden" id="detSearch" name="detSearch" value="" />
+                <div class="proximal-search">
+                    <input class="input" type="text" id="keyWord" name="keyWord" placeholder="스타트업 이름을 입력해주세요" value="">
+                    <button class="button" type="submit"><span class="blind">검색</span></button>
+                </div>
+                </form>
+                <div class="proximal-filter">
+                    <button class="proximal-filter-button" id="searchBtn" aria-expanded="false"><i class="icon-option"></i> <span>상세 옵션 열기</span></button>
+                    <form id="detForm" name="detForm" th:action="@{/startup/list}" method="get">
+                        <input class="input" type="hidden" id="keyWord1" name="keyWord1" value="">
+                        <input type="hidden" id="detSearch1" name="detSearch1" value="" />
+                        <input type="hidden" id="pageNum" name="pageNum" />
+                        <input type="hidden" name="pageSize" id="pageSize" />
+                        <div class="proximal-pannel">
+                        <div class="proximal-filter-body">
+                            <div class="proximal-filter-list">
+                                <div class="proximal-filter-heading">최종 투자단계</div>
+                                <div class="proximal-filter-contents">
+                                    <div class="check-block">
+                                        <input id="option1-1" class="input" type="checkbox" name="option1" value="ZZZ" onclick="addFilter(this, 'option1-1')">
+                                        <label for="option1-1" class="label">해당없음</label>
+                                    </div>
+                                    <div class="check-block">
+                                        <input id="option1-2" class="input" type="checkbox" name="option1" value="SEED" onclick="addFilter(this, 'option1-2')">
+                                        <label for="option1-2" class="label">Seed</label>
+                                    </div>
+                                    <div class="check-block">
+                                        <input id="option1-3" class="input" type="checkbox" name="option1" value="PREA" onclick="addFilter(this, 'option1-3')">
+                                        <label for="option1-3" class="label">Pre-A</label>
+                                    </div>
+                                    <div class="check-block">
+                                        <input id="option1-4" class="input" type="checkbox" name="option1" value="SERIESA" onclick="addFilter(this, 'option1-4')">
+                                        <label for="option1-4" class="label">Series A</label>
+                                    </div>
+                                    <div class="check-block">
+                                        <input id="option1-5" class="input" type="checkbox" name="option1" value="SERIESB" onclick="addFilter(this, 'option1-5')">
+                                        <label for="option1-5" class="label">Series B</label>
+                                    </div>
+                                    <div class="check-block">
+                                        <input id="option1-6" class="input" type="checkbox" name="option1" value="SERIESC" onclick="addFilter(this, 'option1-6')">
+                                        <label for="option1-6" class="label">Series C</label>
+                                    </div>
+                                    <div class="check-block">
+                                        <input id="option1-7" class="input" type="checkbox" name="option1" value="SERIESD" onclick="addFilter(this, 'option1-7')">
+                                        <label for="option1-7" class="label">Series D</label>
+                                    </div>
+                                    <div class="check-block">
+                                        <input id="option1-8" class="input" type="checkbox" name="option1" value="SERIESE" onclick="addFilter(this, 'option1-8')">
+                                        <label for="option1-8" class="label">Series E</label>
+                                    </div>
+                                    <div class="check-block">
+                                        <input id="option1-9" class="input" type="checkbox" name="option1" value="SERIESF" onclick="addFilter(this, 'option1-9')">
+                                        <label for="option1-9" class="label">Series F</label>
+                                    </div>
+                                    <div class="check-block">
+                                        <input id="option1-10" class="input" type="checkbox" name="option1" value="SERIESG" onclick="addFilter(this, 'option1-10')">
+                                        <label for="option1-10" class="label">Series G</label>
+                                    </div>
+                                    <div class="check-block">
+                                        <input id="option1-11" class="input" type="checkbox" name="option1" value="PREIPO" onclick="addFilter(this, 'option1-11')">
+                                        <label for="option1-11" class="label">Pre-IPO</label>
+                                    </div>
+                                    <div class="check-block">
+                                        <input id="option1-12" class="input" type="checkbox" name="option1" value="SERIESIPO" onclick="addFilter(this, 'option1-12')">
+                                        <label for="option1-12" class="label">IPO</label>
+                                    </div>
+                                    <div class="check-block">
+                                        <input id="option1-13" class="input" type="checkbox" name="option1" value="M&A" onclick="addFilter(this, 'option1-13')">
+                                        <label for="option1-13" class="label">M&A</label>
+                                    </div>
+                                    <div class="check-block">
+                                        <input id="option1-14" class="input" type="checkbox" name="option1" value="TIPS" onclick="addFilter(this, 'option1-14')">
+                                        <label for="option1-14" class="label">TIPS</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="proximal-filter-list">
+                                <div class="proximal-filter-heading">누적투자금액</div>
+                                <div class="proximal-filter-contents">
+                                    <div class="check-block">
+                                        <input id="option2-1" class="input" type="radio" name="option2" value="9" onclick="addFilter(this, 'option2-1')">
+                                        <label for="option2-1" class="label">10억원 이하</label>
+                                    </div>
+                                    <div class="check-block">
+                                        <input id="option2-2" class="input" type="radio" name="option2" value="10" onclick="addFilter(this, 'option2-2')">
+                                        <label for="option2-2" class="label">10억원~100억원</label>
+                                    </div>
+                                    <div class="check-block">
+                                        <input id="option2-3" class="input" type="radio" name="option2" value="100" onclick="addFilter(this, 'option2-3')">
+                                        <label for="option2-3" class="label">100억원~500억원</label>
+                                    </div>
+                                    <div class="check-block">
+                                        <input id="option2-4" class="input" type="radio" name="option2" value="500" onclick="addFilter(this, 'option2-4')">
+                                        <label for="option2-4" class="label">500억원~1,000억원</label>
+                                    </div>
+                                    <div class="check-block">
+                                        <input id="option2-5" class="input" type="radio" name="option2" value="1000" onclick="addFilter(this, 'option2-5')">
+                                        <label for="option2-5" class="label">1,000억원 이상</label>
+                                    </div>
+                                    <div id="range1" class="block-group block-group-range">
+                                        <input class="input" type="number" id="minAmt" name="minAmt" placeholder="최소"> <span class="span">-</span>
+                                        <input class="input" type="number" id="maxAmt" name="maxAmt" placeholder="최대"> <span class="span">억원</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="proximal-filter-list">
+                                <div class="proximal-filter-heading">근무자</div>
+                                <div class="proximal-filter-contents">
+                                    <div class="check-block">
+                                        <input id="option3-1" class="input" type="radio" name="option3" value="10" onclick="addFilter(this, 'option3-1')">
+                                        <label for="option3-1" class="label">10명 이하</label>
+                                    </div>
+                                    <div class="check-block">
+                                        <input id="option3-2" class="input" type="radio" name="option3" value="11" onclick="addFilter(this, 'option3-2')">
+                                        <label for="option3-2" class="label">11명~50명</label>
+                                    </div>
+                                    <div class="check-block">
+                                        <input id="option3-3" class="input" type="radio" name="option3" value="51" onclick="addFilter(this, 'option3-3')">
+                                        <label for="option3-3" class="label">51명~100명</label>
+                                    </div>
+                                    <div class="check-block">
+                                        <input id="option3-4" class="input" type="radio" name="option3" value="100" onclick="addFilter(this, 'option3-4')">
+                                        <label for="option3-4" class="label">100명 초과</label>
+                                    </div>
+                                    <div id="range2" class="block-group block-group-range">
+                                        <input class="input" type="number" id="minEmp" name="minEmp" th:value="${minEmp}" placeholder="최소"> <span class="span">-</span>
+                                        <input class="input" type="number" id="maxEmp" name="maxEmp" th:value="${minEmp}" placeholder="최대"> <span class="span">명</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="proximal-filter-list">
+                                <div class="proximal-filter-heading">설립일</div>
+                                <div class="proximal-filter-contents">
+                                    <div class="check-block">
+                                        <input id="option4-1" class="input" type="radio" name="option4" value="3" onclick="addFilter(this, 'option4-1')" th:checked="${option4 == '3'}">
+                                        <label for="option4-1" class="label">3년 이하</label>
+                                    </div>
+                                    <div class="check-block">
+                                        <input id="option4-2" class="input" type="radio" name="option4" value="7" onclick="addFilter(this, 'option4-2')" th:checked="${option4 == '7'}">
+                                        <label for="option4-2" class="label">3년~7년</label>
+                                    </div>
+                                    <div class="check-block">
+                                        <input id="option4-3" class="input" type="radio" name="option4" value="10" onclick="addFilter(this, 'option4-3')" th:checked="${option4 == '10'}">
+                                        <label for="option4-3" class="label">7년~10년</label>
+                                    </div>
+                                    <div class="block-group block-group-calendar">
+                                        <input id="dateRange" name="dateRange" class="input" type="text">
+                                        <i class="icon-calendar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="proximal-filter-list">
+                                <div class="proximal-filter-heading">KB스타터스</div>
+                                <div class="proximal-filter-contents">
+                                    <div class="check-block">
+                                        <input id="option5-1" class="input" type="checkbox" name="option5" value="KB" onclick="addFilter(this, 'option5-1')" th:checked="${option5 == 'KB'}">
+                                        <label for="option5-1" class="label">KB스타터스</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="proximal-filter-foot">
+                            <div class="proximal-sort">
+                                <div class="proximal-sort-head"><i class="icon-filter"></i> Filter</div>
+                                <div class="proximal-sort-body">
+                                    <!-- <div class="filter">
+                                        <button class="item" type="button" onclick="removeFilter(this, 'option1')" data-name="service3">옵션</button>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <div class="proximal-sort-button">
+                                <button id="reset" class="button" type="button"><i class="icon icon-rotate-cw"></i>선택 초기화</button>
+                                <button class="button button-dark" type="submit">검색하기</button>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+                <div class="proximal-result">
+                    <div class="proximal-result-head">
+                        <p class="heading">검색결과 총 <span class="color-primary" th:text="${#numbers.formatInteger(totCnt, 0, 'COMMA')}"></span>건의 스타트업이 있습니다.</p>
+                        <p class="text">*스타트업정보는 KB스타터스 기업 '피치덱'에서 제공합니다.</p>
+                    </div>
+                    <div class="proximal-result-body">
+                        <div class="proximal-result-sort">
+                            <span class="text">노출개수</span>
+                            <!--<select class="select" id="selectbox" name="selectbox" onchange="changePageSize()">-->
+                            <select class="select" id="selectbox" name="selectbox">
+                                <option value="12" th:selected="${searchList.pageSize == '12'}">12개</option>
+                                <option value="24" th:selected="${searchList.pageSize == '24'}">24개</option>
+                                <option value="48" th:selected="${searchList.pageSize == '48'}">48개</option>
+                            </select>
+                        </div>
+                        <div class="proximal-result-info">
+                            <div class="col">
+                                <span class="item-1">기업명</span>
+                                <span class="item-1">제품/서비스</span>
+                                <span class="item-1">기업소개</span>
+                            </div>
+                            <div class="col">
+                                <span class="item-2">최종투자단계</span>
+                                <span class="item-2">누적투자금액</span>
+                                <span class="item-2">고용인원</span>
+                            </div>
+                        </div>
+                        <ul class="proximal-list">
+                            <li class="proximal-list-item" th:unless="${startUpList == null or startUpList.isEmpty()}" th:each="list : ${startUpList}">
+                                <a class="proximal-list-link" href="javascript:void(0)" th:attr="onclick=|javascript:detailPage('${list.ent_cd}');|" >
+                                <!--<a class="proximal-list-link" href="view.html">-->
+                                    <div class="row">
+                                        <th:block th:if="${list.kb_starters_yn == 'Y'}">
+                                            <span class="badge">KB 스타터스</span>
+                                        </th:block>
+                                        <p class="title" th:text="${list.ent_nm}"></p>
+                                        <p class="product" th:text="${list.main_biz}"></p>
+                                        <p class="text" th:text="${list.tpbiz}"></p>
+                                    </div>
+                                    <div class="row">
+                                        <th:block th:if="${list.series_nm != null and list.series_nm != ''}">
+                                            <span class="chip chip-blue" ><i class="icon"></i><span th:text="${list.series_nm}"></span></span>
+                                        </th:block>
+                                        <!--<th:block th:if="${list.invest_amt != null and list.invest_amt != ''}">
+                                            <span class="chip chip-red" ><i class="icon"></i><span th:text="${#numbers.formatInteger(list.invest_amt, 0, 'COMMA') + ' 억원'}"></span></span>
+                                        </th:block>-->
+                                        <span class="chip chip-red" ><i class="icon"></i><span th:text="${list.invest_amt_str}"></span></span>
+                                        <span class="chip chip-green"><i class="icon"></i><span th:text="${list.now_wrkr_nocs} + 명"></span></span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="proximal-result-foot">
+                        <ul class="pagination">
+                            <!-- 
+                                #클래스 가이드
+                                1. 이전/다음 버튼 비활성화: li 태그에 "disabled" 클래스 추가
+                                2. 활성화 상태: li태그에 "active" 클래스 및 "aria-current='page'" 추가
+                             -->
+                            <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled' : ''">
+                                <!--<a class="page-link" th:href="@{/startup/list/?page=1}" aria-label="Previous">-->
+                                <a class="page-link" href="#" th:src="1" aria-label="Previous">
+                                    <span class="first"></span>
+                                </a>
+                            </li>
+                            <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled' : ''">
+                                <!--<a class="page-link" th:href="@{/startup/list/?page={page} (page = ${pagination.prevBlock})}" aria-label="이전 페이지">-->
+                                <a class="page-link" href="#" th:src="${currentPage - 1}" aria-label="이전 페이지">
+                                    <span class="previous"></span>
+                                </a>
+                            </li>
+                            <th:block th:if="${totCnt > 0}">
+                                <th:block th:with="start = ${pagination.startPage}, end = ${pagination.endPage}">
+                                    <li class="page-item" aria-current="page" th:if="${pagination.endPage != null}" th:each="pageButton : ${#numbers.sequence(start, end)}" th:classappend="${currentPage != null and pageButton == currentPage} ? 'active' : ''">
+                                        <!--<a class="page-link" th:href="@{/startup/list?page={page} (page = ${pageButton})}" th:text="${pageButton}" aria-label="현재 페이지"></a>-->
+                                        <a class="page-link" href="#" th:src="${pageButton}" th:text="${pageButton}" aria-label="현재 페이지"></a>
+                                        <!--<a class="page-link" th:href="|javascript:pageMove('${pageButton}')|" th:text="${pageButton}" aria-label="현재 페이지"></a>-->
+                                    </li>
+
+                                    <li class="page-item" th:classappend="${pagination.totalPageCnt == currentPage} ? 'disabled' : ''">
+                                        <!--<a class="page-link" th:href="@{/startup/list?page={page} (page = ${pagination.nextBlock})}" aria-label="다음 페이지">-->
+                                        <a class="page-link" href="#" th:src="${currentPage + 1}" aria-label="다음 페이지">
+                                            <span class="next"></span>
+                                        </a>
+                                    </li>
+                                    <li class="page-item" th:classappend="${pagination.totalPageCnt == currentPage} ? 'disabled' : ''">
+                                        <!--<a class="page-link" th:href="@{/startup/list?page={page} (page = ${pagination.totalPageCnt})}" aria-label="맨 뒤 페이지">-->
+                                        <a class="page-link" href="#" th:src="${pagination.totalPageCnt}" aria-label="맨 뒤 페이지">
+                                            <span class="last"></span>
+                                        </a>
+                                    </li>
+                                </th:block>
+                            </th:block>
+                            <th:block th:if="${totCnt == 0}">
+                                <li class="page-item active" aria-current="page">
+                                    <a class="page-link" href="#" aria-label="현재 페이지">1</a>
+                                </li>
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" aria-label="다음 페이지"><span class="next"></span></a>
+                                </li>
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" aria-label="맨 뒤 페이지"><span class="last"></span></a>
+                                </li>
+                            </th:block>
+                            <!--
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" aria-label="맨 앞 페이지">
+                                    <span class="first"></span>
+                                </a>
+                            </li>
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" aria-label="이전 페이지">
+                                    <span class="previous"></span>
+                                </a>
+                            </li>
+                            <li class="page-item active" aria-current="page"><a class="page-link" href="#" aria-label="1 페이지, 현재 페이지">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#" aria-label="2 페이지">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#" aria-label="3 페이지">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#" aria-label="4 페이지">4</a></li>
+                            <li class="page-item"><a class="page-link" href="#" aria-label="5 페이지">5</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="다음 페이지">
+                                    <span class="next"></span>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="맨 뒤 페이지">
+                                    <span class="last"></span>
+                                </a>
+                            </li>
+                            -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 푸터 -->
+    <app-footer></app-footer>
+
+    <!-- 스크립트 -->
+    <script th:inline="javascript">
+        let fp;
+
+        var findList = [[${searchList}]];
+        //console.log(findList);
+        //console.log(findList);
+        window.addEventListener('DOMContentLoaded', () => {
+            calendar();
+            proximalPannel();
+            setInputVal();
+
+            const blockGroups = document.querySelectorAll('.block-group-range');
+            const reset = document.getElementById('reset');
+
+            // 초기화
+            reset.addEventListener('click', () => {
+                const filters = document.querySelectorAll('.proximal-sort .filter');
+
+                filters.forEach(filter => {
+                    filter.click();
+                });
+
+                document.getElementById('minAmt').value = '';
+                document.getElementById('maxAmt').value = '';
+                document.getElementById('minEmp').value = '';
+                document.getElementById('maxEmp').value = '';
+            });
+
+            // 누적투자금액, 근무자 인풋 그룹 선택
+            blockGroups.forEach(group => {
+                const inputs = group.querySelectorAll('.input');
+
+                inputs.forEach(input => {
+                    input.addEventListener('input', () => {
+                        if (inputs[0].value && inputs[1].value) {
+                            group.classList.add('selected');
+                        } else {
+                            group.classList.remove('selected');
+                        }
+                    });
+                });
+            });
+
+            // 수동 입력 시 체크 해제
+            const range1 = document.querySelectorAll('#range1 .input');
+            const range2 = document.querySelectorAll('#range2 .input');
+
+            range1.forEach(input => {
+                input.addEventListener('input', () => {
+                    document.querySelector('[data-name="option2"]') && document.querySelector('[data-name="option2"]').remove();
+                    document.querySelectorAll('input[name="option2"]').forEach(input => input.checked = false);
+                });
+            });
+            range2.forEach(input => {
+                input.addEventListener('input', () => {
+                    document.querySelector('[data-name="option3"]') && document.querySelector('[data-name="option3"]').remove();
+                    document.querySelectorAll('input[name="option3"]').forEach(input => input.checked = false);
+                });
+            });
+        });
+
+        function calendar() {
+            const input = document.getElementById('dateRange');
+            const body = document.querySelector('.proximal-sort-body');
+            let state = false;
+
+            fp = flatpickr(input, {
+                locale: "ko",
+                mode: "range",
+                dateFormat: "Y-m-d",
+                onValueUpdate: function(selectedDates, dateStr, instance) {
+                    state = true;
+                },
+                onClose: function(selectedDates, dateStr, instance){
+                    if(dateStr) {
+                        const node = document.querySelector('[data-name="dateRange"]');
+
+                        if(node) {
+                            body.removeChild(node);
+                        }
+
+                        addFilter(input, 'calendar');
+                    }
+                }
+            });
+        }
+
+        function proximalPannel() {
+            const button = document.getElementsByClassName('proximal-filter-button')[0];
+            const pannel = document.getElementsByClassName('proximal-pannel')[0];
+            // const filterItems = document.querySelectorAll('.proximal-result-info .item-2');
+            // let filterItemPrev;
+            pannel.style.height = 0 + 'px';
+
+            button.addEventListener('click', toggle);
+
+            if (findList.detSearch === '1' || findList.detSearch1 === '1') {
+                document.getElementById('searchBtn').click();
+                //this.setAttribute('aria-expanded', 'false');
+                //toggle();
+                //document.getElementsByClassName('proximal-filter-button')[0].trigger('click');
+            }
+
+            // filterItems.forEach(item => {
+            //     item.addEventListener('click', setFilterItem);
+            // });
+            // function setFilterItem() {
+            //     if(filterItemPrev) {
+            //         filterItemPrev.classList.remove('on');
+            //     }
+            //     this.classList.add('on');
+            //     filterItemPrev = this;
+            // }
+
+            function toggle() {
+                if(this.getAttribute('aria-expanded') === 'true') {
+                    this.setAttribute('aria-expanded', 'false');
+                    button.querySelector('span').textContent = '상세 옵션 열기';
+                    pannel.classList.remove('show');
+                    gsap.fromTo(pannel, 0.35, { height: pannel.scrollHeight }, { height: 0 })
+                    // pannel.style.height = 0 + 'px';
+                    document.getElementById('detSearch').value = "0";
+                    document.getElementById('detSearch1').value = "0";
+                } else {
+                    this.setAttribute('aria-expanded', 'true');
+                    button.querySelector('span').textContent = '상세 옵션 닫기';
+                    pannel.classList.add('show');
+                    gsap.to(pannel, 0.35, { height: pannel.scrollHeight })
+                    document.getElementById('detSearch').value = "1";
+                    document.getElementById('detSearch1').value = "1";
+                }
+            }
+        }
+
+        function addFilter(element, type, value1, value2) {
+            const pannel = document.getElementsByClassName('proximal-pannel')[0];
+            const body = document.querySelector('.proximal-sort-body');
+            const filter = document.createElement('div');
+            const button = document.createElement('button');
+            const radio = document.querySelector('[data-name="'+ element.name +'"]');
+
+            pannel.style.removeProperty('height');
+
+            if(element.type === 'radio') {
+                radio && radio.remove();
+
+                if(element.name === 'option2') {
+                    //console.log(document.querySelector('#range1'));
+
+                    document.querySelector('#range1').classList.remove('selected');
+                    document.querySelectorAll('#range1 .input').forEach(input => input.value = '');
+                }
+
+                if(element.name === 'option3') {
+                    //console.log(document.querySelector('#range2'));
+
+                    document.querySelector('#range2').classList.remove('selected');
+                    document.querySelectorAll('#range2 .input').forEach(input => input.value = '');
+                }
+
+                if(element.name === 'option4') {
+                    const input = document.getElementById('dateRange');
+
+                    input.value = '';
+                    input.classList.remove('selected');
+                    document.querySelector('[data-name="calendar"]') && document.querySelector('[data-name="calendar"]').remove();
+                }
+            }
+
+            if(type === 'calendar') {
+                button.setAttribute('type', 'button');
+                filter.setAttribute('onclick', 'removeFilter(this, "' + element.getAttribute('id') + '")');
+
+                button.classList.add('item');
+                filter.classList.add('filter');
+                filter.dataset.name = 'calendar';
+
+                button.textContent = element.value;
+                //alert(document.getElementById('dateRange').value);
+                filter.appendChild(button);
+                body.appendChild(filter);
+
+                element.classList.add('selected');
+
+                document.querySelectorAll('input[name="option4"]').forEach(input => input.checked = false);
+                document.querySelector('[data-name="option4"]') && document.querySelector('[data-name="option4"]').remove();
+            } else if(type === 'range') {
+                button.setAttribute('type', 'button');
+                filter.setAttribute('onclick', 'removeFilter(this, "' + element.getAttribute('id') + '")');
+
+                button.classList.add('item');
+                filter.classList.add('filter');
+                filter.dataset.name = element.name;
+                button.textContent = (element.id === 'range1') ? value1 + '~' + value2 + '억원' : value1 + ' ~ ' + value2 + '명';
+                filter.appendChild(button);
+                body.appendChild(filter);
+            } else if(element.checked) {
+                button.setAttribute('type', 'button');
+                filter.setAttribute('onclick', 'removeFilter(this, "' + element.getAttribute('id') + '")');
+
+                button.classList.add('item');
+                filter.classList.add('filter');
+                filter.dataset.id = element.id;
+                filter.dataset.name = element.name;
+                button.textContent = element.nextElementSibling.textContent;
+                filter.appendChild(button);
+                body.appendChild(filter);
+            } else {
+                const filter = document.querySelector('[data-id="' + element.id + '"]');
+                if(filter) {
+                    body.removeChild(filter);
+                }
+            }
+        }
+
+        function removeFilter(element, name) {
+            element.remove();
+
+            if(name === 'dateRange') {
+                const input = document.getElementById('dateRange');
+
+                input.value = '';
+                input.classList.remove('selected');
+
+                return;
+            }
+
+
+            element.classList.remove('selected');
+            document.getElementById(name).checked = false;
+        }
+
+        function detailPage(ent_cd) {
+            // 빈 form 전달
+            let pageMoveForm = document.createElement('form');
+            // 인수 값 전달
+            let obj = document.createElement('input');
+            obj.setAttribute('type', 'hidden');
+            obj.setAttribute('name', 'ent_cd');
+            obj.setAttribute('value', ent_cd);
+            //obj.setAttribute('value', '2d5c537706fce56d');
+            pageMoveForm.appendChild(obj);
+
+            pageMoveForm.setAttribute('method', 'post');
+            pageMoveForm.setAttribute('action', '/startup/detail');
+            document.body.appendChild(pageMoveForm);
+            pageMoveForm.submit();
+            //this.preventDefault();
+        }
+    </script>
+    <!--<script src="https://code.jquery.com/jquery-3.4.1.js"></script>-->
+    <script language="javascript">
+        var actionForm = $("#detForm");
+        $(".page-item a").on("click", function(e) {
+            e.preventDefault();
+            actionForm.find("input[name='pageNum']").val($(this).attr("src"));
+
+            actionForm.attr("action", "/startup/list");
+            actionForm.submit();
+            //var aaa = $(this).attr("src");
+            //alert(aaa);
+        });
+
+        function setInputVal() {
+            /* 최상단 키워드명 검색어 세팅 시작 */
+            if (findList.keyWord !== '' && findList.keyWord !== null) {
+                document.getElementById('keyWord').value = findList.keyWord;
+                document.getElementById('keyWord1').value = findList.keyWord;
+            }
+
+            if (findList.keyWord1 !== '' && findList.keyWord1 !== null) {
+                document.getElementById('keyWord').value = findList.keyWord1;
+                document.getElementById('keyWord1').value = findList.keyWord1;
+            }
+            /* 최상단 키워드명 검색어 세팅 종료 */
+            /* 최종 투자단계 세팅 시작 */
+            if (findList.option1 !== null && findList.option1 !== '') {
+                var str = findList.option1;
+                if (str.indexOf('ZZZ') > -1) {
+                    document.getElementById('option1-1').click();
+                }
+                if (str.indexOf('SEED') > -1) {
+                    document.getElementById('option1-2').click();
+                }
+                if (str.indexOf('PREA') > -1) {
+                    document.getElementById('option1-3').click();
+                }
+                if (str.indexOf('SERIESA') > -1) {
+                    document.getElementById('option1-4').click();
+                }
+                if (str.indexOf('SERIESB') > -1) {
+                    document.getElementById('option1-5').click();
+                }
+                if (str.indexOf('SERIESC') > -1) {
+                    document.getElementById('option1-6').click();
+                }
+                if (str.indexOf('SERIESD') > -1) {
+                    document.getElementById('option1-7').click();
+                }
+                if (str.indexOf('SERIESE') > -1) {
+                    document.getElementById('option1-8').click();
+                }
+                if (str.indexOf('SERIESF') > -1) {
+                    document.getElementById('option1-9').click();
+                }
+                if (str.indexOf('SERIESG') > -1) {
+                    document.getElementById('option1-10').click();
+                }
+                if (str.indexOf('PREIPO') > -1) {
+                    document.getElementById('option1-11').click();
+                }
+                if (str.indexOf('SERIESIPO') > -1) {
+                    document.getElementById('option1-12').click();
+                }
+                if (str.indexOf('M&A') > -1) {
+                    document.getElementById('option1-13').click();
+                }
+                if (str.indexOf('TIPS') > -1) {
+                    document.getElementById('option1-14').click();
+                }
+            }
+            /* 최종 투자단계 세팅 종료 */
+            /* 투자금액 세팅 시작 */
+            if (findList.option2 !== null && findList.option2 !== '') {
+                if (findList.option2 === '9') {
+                    document.getElementById('option2-1').click();
+                }
+                if (findList.option2 === '10') {
+                    document.getElementById('option2-2').click();
+                }
+                if (findList.option2 === '100') {
+                    document.getElementById('option2-3').click();
+                }
+                if (findList.option2 === '500') {
+                    document.getElementById('option2-4').click();
+                }
+                if (findList.option2 === '1000') {
+                    document.getElementById('option2-5').click();
+                }
+            }
+            if (findList.minAmt !== '' && findList.minAmt !== null) {
+                document.getElementById('minAmt').value = findList.minAmt;
+            }
+            if (findList.maxAmt !== '' && findList.maxAmt !== null) {
+                document.getElementById('maxAmt').value = findList.maxAmt;
+            }
+            /* 투자금액 세팅 종료 */
+            /* 근무자 세팅 시작 */
+            if (findList.option3 !== null && findList.option3 !== '') {
+                if (findList.option3 === '10') {
+                    document.getElementById('option3-1').click();
+                }
+                if (findList.option3 === '11') {
+                    document.getElementById('option3-2').click();
+                }
+                if (findList.option3 === '51') {
+                    document.getElementById('option3-3').click();
+                }
+                if (findList.option3 === '100') {
+                    document.getElementById('option3-4').click();
+                }
+            }
+            if (findList.minEmp !== '' && findList.minEmp !== null) {
+                document.getElementById('minEmp').value = findList.minEmp;
+            }
+            if (findList.maxEmp !== '' && findList.maxEmp !== null) {
+                document.getElementById('maxEmp').value = findList.maxEmp;
+            }
+            /* 근무자 세팅 종료 */
+            /* 설립일 세팅 시작 */
+            if (findList.option4 !== null && findList.option4 !== '') {
+                if (findList.option4 === '3') {
+                    document.getElementById('option4-1').click();
+                }
+                if (findList.option4 === '7') {
+                    document.getElementById('option4-2').click();
+                }
+                if (findList.option4 === '10') {
+                    document.getElementById('option4-3').click();
+                }
+            }
+            if (findList.dateRange !== '' && findList.dateRange !== null) {
+                document.getElementById('dateRange').value = findList.dateRange;
+                addFilter(document.getElementById('dateRange'), 'calendar');
+            }
+            /* 설립일 세팅 종료 */
+            document.getElementById('pageSize').value = findList.pageSize;
+        }
+
+        function changePageSize() {
+            var langSelect = document.getElementById("selectbox");
+            document.getElementById('pageSize').value = langSelect.options[langSelect.selectedIndex].value;
+
+            actionForm.attr("action", "/startup/list");
+            actionForm.submit();
+        }
+
+        function pageMove(pageNo) {
+            //var actionForm = $("form");
+            //location.href="http://116.124.133.200:8080/startup/list?page="+pageNo;
+            location.href="http://localhost:9080/startup/list?page="+pageNo;
+            /*
+            let pageMoveForm = document.createElement('form');
+            let obj = document.createElement('input');
+            obj.setAttribute('type', 'hidden');
+            obj.setAttribute('name', 'page');
+            obj.setAttribute('value', pageNo);
+            pageMoveForm.setAttribute('method', 'get');
+            pageMoveForm.setAttribute('action', '/startup/list');
+            document.body.appendChild(pageMoveForm);
+            pageMoveForm.submit();
+            */
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kbin.inno.Main.DAO.MainDAO">
+    <!-- 육성 현황 조회 -->
+    <select id="selectResult" resultType="com.kbin.inno.Main.DTO.ResultDTO">
+        /* 육성 현황 조회 */
+        SELECT ENT_NOCS
+             , ENT_CRTR_YMD
+             , INVEST_NOCS
+             , INVEST_CRTR_YMD
+             , AFFILIATE_NOCS
+             , AFFILIATE_CRTR_YMD
+          FROM KB_RSLT_INFO
+    </select>
+    <!-- 메인 비주얼 조회 -->
+    <select id="selectVisual" resultType="com.kbin.inno.Main.DTO.VisualDTO">
+        /* 메인 비주얼 조회 */
+        SELECT VISUAL.MAIN_SN      AS MAIN_SN
+             , VISUAL.MAIN_CN      AS MAIN_CN
+             , FILES.ORGNL_FILE_NM AS ORIGIN_FILE_NAME
+             , FILES.FILE_NM       AS MAIN_FILE_NAME
+             , FILES.FILE_PATH     AS MAIN_PATH
+        FROM KB_MAIN_INFO VISUAL
+           , KB_FILE_INFO FILES
+        WHERE VISUAL.ATCH_FILE_SN = FILES.FILE_SN(+)
+          AND VISUAL.EXPSR_YN = 'Y'
+        ORDER BY SORT_NO ASC
+    </select>
+</mapper>

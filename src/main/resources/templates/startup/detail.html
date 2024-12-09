@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragment/config :: configFragment}"></head>
+<body>
+    <!-- 헤더 -->
+    <app-header></app-header>
+
+    <!-- 본문 -->
+    <main class="main">
+        <div class="section-top section-top--startup">
+            <div class="section-top-wrap">
+                <nav aria-label="Breadcrumb" class="breadcrumb" data-breadcrub-theme="transparent">
+                    <ul>
+                        <li><a href="/"><i class="icon icon-home"></i><span class="blind">HOME</span></a></li>
+                        <li><a href="/startup/detail">스타트업 정보</a></li>
+                        <li><span aria-current="page">정보검색</span></li>
+                    </ul>
+                </nav>
+                <h2 class="title">
+                    리벨리온
+                    <span class="badge">KB 스타터스</span>
+                </h2>
+                <p class="text">가속 전용 저전력 인공지능 반도체 제조</p>
+                <ul class="dashboard">
+                    <li>
+                        <div class="box">
+                            <p class="name"><i class="icon icon-1"></i>최종투자단계</p>
+                            <p class="value"><em>Series B</em></p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="box">
+                            <p class="name"><i class="icon icon-2"></i>누적투자금액</p>
+                            <p class="value"><em data-count="2970"></em>억원</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="box">
+                            <p class="name"><i class="icon icon-3"></i>근무자</p>
+                            <p class="value"><em data-count="137"></em>명</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="proximal-view">
+            <div class="proximal-view-wrap">
+                <div class="proximal-section">
+                    <p class="top-note">*스타트업정보는 KB스타터스 기업 '피치덱'에서 제공합니다.</p>
+                    <div class="top-info">
+                        <div class="thumbnail">
+                            <img src="/images/sub/startup/top-info-thumbnail-icon.svg" alt="">
+                        </div>
+                        <div class="contents">
+                            <p class="name">리벨리온</p>
+                            <div class="context">
+                                <p class="text">시스템 소프트웨어 개발 및 공급업</p>
+                                <p class="location"><i class="icon icon-pin"></i>경기도 성남시</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="heading line">기업정보</p>
+                    <dl class="datatable">
+                        <div class="row">
+                            <div class="col">
+                                <dt>CEO</dt><dd>박성현</dd>
+                            </div>
+                            <div class="col">
+                                <dt>설립일</dt><dd>2020-06-23</dd>
+                            </div>
+                            <div class="col">
+                                <dt>사업자번호</dt><dd>669-87-01717</dd>
+                            </div>
+                            <div class="col">
+                                <dt>법인등록번호</dt><dd>131111-0596452</dd>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <dt>자본금(원)</dt><dd>258,221,000</dd>
+                            </div>
+                            <div class="col">
+                                <dt>형태</dt><dd>외감</dd>
+                            </div>
+                            <div class="col">
+                                <dt>외감</dt><dd>Y</dd>
+                            </div>
+                            <div class="col">
+                                <dt>벤처인증</dt><dd>Y</dd>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-3">
+                                <dt>주소</dt><dd>경기도 성남시 분당구 정자일로 239, 102동 801호(정자동,아이파크분당1)</dd>
+                            </div>
+                            <div class="col">
+                                <dt>규모</dt><dd>중소기업</dd>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <dt>업종</dt>
+                                <dd>
+                                    <ol class="process">
+                                        <li>
+                                            <div class="box">
+                                                <span class="number">01</span>
+                                                <span class="text">정보통신업</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="box">
+                                                <span class="number">02</span>
+                                                <span class="text">출판업</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="box">
+                                                <span class="number">03</span>
+                                                <span class="text">소프트웨어 개발 및 공급업</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="box">
+                                                <span class="number">04</span>
+                                                <span class="text">시스템·응용 소프트웨어 개발 및 공급업</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="box">
+                                                <span class="number">05</span>
+                                                <span class="text">시스템 소프트웨어 개발 및 공급업</span>
+                                            </div>
+                                        </li>
+                                    </ol>
+                                </dd>
+                            </div>
+                        </div>
+                    </dl>
+                    <div class="grid">
+                        <div class="col">
+                            <p class="heading line">사업</p>
+                            <dl class="datatable">
+                                <div class="row">
+                                    <div class="col">
+                                        <dt>제품</dt><dd>ATOM, ION</dd>
+                                    </div>
+                                    <div class="col">
+                                        <dt>주요 사업</dt><dd>가속 전용 저전력 인공지능 반도체 제조</dd>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <dt>홈페이지</dt><dd><a class="text-link" href="https://rebellions.ai/" target="_blank">https://rebellions.ai/<i class="icon icon-certify"></i></a></dd>
+                                    </div>
+                                </div>
+                            </dl>
+                        </div>
+                        <div class="col">
+                            <p class="heading line">고용</p>
+                            <dl class="datatable">
+                                <div class="row">
+                                    <div class="col">
+                                        <dt>근무자 (명)</dt><dd>137</dd>
+                                    </div>
+                                    <div class="col">
+                                        <dt>연간 입사자 (명)</dt><dd>59</dd>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <dt>연간 퇴사자 (명)</dt><dd>24</dd>
+                                    </div>
+                                    <div class="col">
+                                        <dt>연간 퇴사율</dt><dd>20.09%</dd>
+                                    </div>
+                                </div>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="proximal-section">
+                    <p class="heading line">제공 서비스/제품</p>
+                    <dl class="datatable">
+                        <div class="row">
+                            <div class="col">
+                                <dt class="fw">ATOM</dt><dd><span class="chip chip-web"><i class="icon icon-web"></i> Web</span></dd>
+                            </div>
+                            <div class="col">
+                                <dt class="fw">ION</dt><dd><span class="chip chip-web"><i class="icon icon-web"></i> Web</span></dd>
+                            </div>
+                        </div>
+                    </dl>
+                </div>
+                <div class="proximal-section">
+                    <!-- 투자유치 -->
+                    <div class="section-row">
+                        <p class="heading">투자유치</p>
+                        <div class="table-dashboard">
+                            <div class="col">
+                                <div class="box">
+                                    <p class="title">최종투자단계</p>
+                                    <p class="badge-round blue">Series B</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="box">
+                                    <p class="title">누적투자유치금액</p>
+                                    <p class="text">2,970억원</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="box">
+                                    <p class="title">투자유치횟수</p>
+                                    <p class="text">7회</p>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table-basic">
+                            <thead>
+                                <tr>
+                                    <th style="width:16.66666%">날짜</th>
+                                    <th style="width:16.66666%">투자단계</th>
+                                    <th style="width:16.66666%">투자유치금액</th>
+                                    <th class="width:50%">투자자</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2024-10</td>
+                                    <td><p class="badge-round">알수없음</p></td>
+                                    <td>1,000억원</td>
+                                    <td class="text-left">MSTV(모간스탠리 택티컬밸류)</td>
+                                </tr>
+                                <tr>
+                                    <td>2024-10</td>
+                                    <td><p class="badge-round blue">Series D</p></td>
+                                    <td>1,000억원</td>
+                                    <td class="text-left">LG유플러스,GS,KB국민은행,KB증권,케이클라비스,유경PSG</td>
+                                </tr>
+                                <tr>
+                                    <td>2024-10</td>
+                                    <td><p class="badge-round green">Series C</p></td>
+                                    <td>1,000억원</td>
+                                    <td class="text-left">파빌리온,GS홀딩스,KB국민은행</td>
+                                </tr>
+                                <tr>
+                                    <td>2024-10</td>
+                                    <td><p class="badge-round orange">Series A</p></td>
+                                    <td>1,000억원</td>
+                                    <td class="text-left">은행권청년창업재단,케이큐브벤처스</td>
+                                </tr>
+                                <tr>
+                                    <td>2024-10</td>
+                                    <td><p class="badge-round">알수없음</p></td>
+                                    <td>1,000억원</td>
+                                    <td class="text-left">은행권청년창업재단,케이큐브벤처스</td>
+                                </tr>
+                                <tr>
+                                    <td>2024-10</td>
+                                    <td><p class="badge-round">알수없음</p></td>
+                                    <td>1,000억원</td>
+                                    <td class="text-left">은행권청년창업재단,케이큐브벤처스</td>
+                                </tr>
+                                <tr>
+                                    <td>2024-10</td>
+                                    <td><p class="badge-round">알수없음</p></td>
+                                    <td>1,000억원</td>
+                                    <td class="text-left">은행권청년창업재단,케이큐브벤처스</td>
+                                </tr>
+                                <tr>
+                                    <td>2024-10</td>
+                                    <td><p class="badge-round">알수없음</p></td>
+                                    <td>4억5,000만원</td>
+                                    <td class="text-left">은행권청년창업재단,케이큐브벤처스</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- 조직분석 -->
+                    <div class="section-row">
+                        <p class="heading">조직분석-고용현황</p>
+                        <div class="chart chart-organization">
+                            <div id="organizationChart" class="item"></div>
+                        </div>
+                    </div>
+                    <!-- 손익계산서 -->
+                    <div class="section-row">
+                        <div class="heading">
+                            <p>주요 손익계산서</p>
+                            <p class="note">단위: 백만원</p>
+                        </div>
+                        <table class="table-basic table-basic-theme">
+                            <thead>
+                                <tr>
+                                    <th>항목</th>
+                                    <th>2019</th>
+                                    <th>2020</th>
+                                    <th>2021</th>
+                                    <th>2022</th>
+                                    <th>2023</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>매출액</th>
+                                    <td>18.9</td>
+                                    <td>29.9</td>
+                                    <td>39.5</td>
+                                    <td>46.3</td>
+                                    <td>64.5</td>
+                                </tr>
+                                <tr>
+                                    <th>매출원가</th>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <th>매출총이</th>
+                                    <td>18.9</td>
+                                    <td>29.9</td>
+                                    <td>39.5</td>
+                                    <td>46.5</td>
+                                    <td>64.5</td>
+                                </tr>
+                                <tr>
+                                    <th>판관비</th>
+                                    <td>97.0</td>
+                                    <td>150.8</td>
+                                    <td>276.2</td>
+                                    <td>343.6</td>
+                                    <td>365.4</td>
+                                </tr>
+                                <tr>
+                                    <th>영업이익</th>
+                                    <td><span class="color-red">-78.0</span></td>
+                                    <td><span class="color-red">-120.9</span></td>
+                                    <td><span class="color-red">-236.7</span></td>
+                                    <td><span class="color-red">-297.3</span></td>
+                                    <td><span class="color-red">-300.9</span></td>
+                                </tr>
+                                <tr>
+                                    <th>순이익</th>
+                                    <td><span class="color-red">-67.5</span></td>
+                                    <td><span class="color-red">-114.9</span></td>
+                                    <td><span class="color-red">-251.5</span></td>
+                                    <td><span class="color-red">-369.3</span></td>
+                                    <td><span class="color-red">-368.7</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- 재무상태표 -->
+                    <div class="section-row">
+                        <div class="heading">
+                            <p>주요 재무상태표</p>
+                            <p class="note">단위: 백만원</p>
+                        </div>
+                        <table class="table-basic table-basic-theme">
+                            <thead>
+                                <tr>
+                                    <th>항목</th>
+                                    <th>2019</th>
+                                    <th>2020</th>
+                                    <th>2021</th>
+                                    <th>2022</th>
+                                    <th>2023</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>유동자산</th>
+                                    <td>7.9</td>
+                                    <td>9.7</td>
+                                    <td>53.3</td>
+                                    <td>7.3</td>
+                                    <td>53.2</td>
+                                </tr>
+                                <tr>
+                                    <th>비유동자</th>
+                                    <td>0.73</td>
+                                    <td>1.4</td>
+                                    <td>4.1</td>
+                                    <td>102.9</td>
+                                    <td>92.4</td>
+                                </tr>
+                                <tr>
+                                    <th>자산총계</th>
+                                    <td>8.6</td>
+                                    <td>11.2</td>
+                                    <td>57.4</td>
+                                    <td>110.3</td>
+                                    <td>145.7</td>
+                                </tr>
+                                <tr>
+                                    <th>부채총계</th>
+                                    <td>0.67</td>
+                                    <td>1.2</td>
+                                    <td>5.5</td>
+                                    <td>36.6</td>
+                                    <td>93.0</td>
+                                </tr>
+                                <tr>
+                                    <th>자본금</th>
+                                    <td>0.03</td>
+                                    <td>4.1</td>
+                                    <td>4.7</td>
+                                    <td>5.0</td>
+                                    <td>5.1</td>
+                                </tr>
+                                <tr>
+                                    <th>자본총계</th>
+                                    <td>7.9</td>
+                                    <td>9.9</td>
+                                    <td>51.9</td>
+                                    <td>73.6</td>
+                                    <td>52.7</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="proximal-section">
+                    <p class="heading">뉴스</p>
+                    <div class="news">
+                        <article class="headline-main">
+                            <div class="thumbnail"><img src="/images/dummy/news-headline-main-thumbnail.jpg" alt=""></div>
+                            <div class="item">
+                                <a class="link" href="javascript:">
+                                    <div class="title">리벨리온, 삼성 · ARM과 손잡고 AI 반도체 개발한다</div>
+                                    <div class="name">중앙일보</div>
+                                </a>
+                            </div>
+                        </article>
+                        <article class="headline-sub">
+                            <article class="item">
+                                <a class="link" href="javascript:">
+                                    <div class="title">리벨리온, 네이버에 스타트업까지···’제2 중동의 봄’ 꿈꾸는 국내 IT 기업</div>
+                                    <div class="name">국민일보</div>
+                                </a>
+                            </article>
+                            <article class="item">
+                                <a class="link" href="javascript:">
+                                    <div class="title">리벨리온, 아람코 기술 콘퍼런스 참가</div>
+                                    <div class="name">전자신문</div>
+                                </a>
+                            </article>
+                            <article class="item">
+                                <a class="link" href="javascript:">
+                                    <div class="title">리벨리온, 아람코 주최 테크 컨퍼런스 참가···”한국 기업 유일”</div>
+                                    <div class="name">머니투데이</div>
+                                </a>
+                            </article>
+                            <article class="item">
+                                <a class="link" href="javascript:">
+                                    <div class="title">리벨리온, 사우디 아람코 주최 ‘테크시프트’ 참여.. AI반도체 소개</div>
+                                    <div class="name">파이낸셜뉴스</div>
+                                </a>
+                            </article>
+                            <article class="item">
+                                <a class="link" href="javascript:">
+                                    <div class="title">리벨리온, 사우디서 韓대표로 AI 반도체 기술력 선봬</div>
+                                    <div class="name">아주경제</div>
+                                </a>
+                            </article>
+                            <article class="item">
+                                <a class="link" href="javascript:">
+                                    <div class="title">토종 AI 반도체 스타트업 리벨리온 삼성·ARM과 반도체 기술 협력한다</div>
+                                    <div class="name">중앙일보</div>
+                                </a>
+                            </article>
+                            <article class="item">
+                                <a class="link" href="javascript:">
+                                    <div class="title">리벨리온·Arm·삼성전자·에이디테크, ‘칩렛 플랫폼’ 공동 개발</div>
+                                    <div class="name">머니투데이</div>
+                                </a>
+                            </article>
+                            <article class="item">
+                                <a class="link" href="javascript:">
+                                    <div class="title">에이디테크놀로지, 삼성·리벨리온·Arm과 2나노 공정 협력</div>
+                                    <div class="name">서울경제</div>
+                                </a>
+                            </article>
+                        </article>
+                    </div>
+                </div>
+                <div class="proximal-section">
+                    <p class="heading">자주 언급된 키워드</p>
+                    <div class="keyword">
+                        <div class="keyword-main">
+                            <div class="chart chart-word">
+                                <div id="wordChart" class="item"></div>
+                            </div>
+                        </div>
+                        <div class="keyword-sub">
+                            <div class="title">
+                                <p>전체 키워드</p>
+                                <p class="note">2024.09.19 기준</p>
+                            </div>
+                            <div class="chart chart-word2">
+                                <div id="wordChart2" class="item"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 푸터 -->
+    <app-footer></app-footer>
+
+    <!-- 스크립트 -->
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const counters = document.querySelectorAll("[data-count]");
+            
+            counters.forEach((item) => {
+                const value = item.dataset.count;
+                const counter = new countUp.CountUp(item, value, {
+                    // enableScrollSpy: true,
+                    // scrollSpyDelay: 0,
+                    decimalPlaces: value % 1 !== 0 ? 1 : 0,
+                    decimal: '.',
+                    duration: 2
+                });
+                counter.start();
+            });
+
+            organizationChart();
+            wordChart();
+        });
+
+        function organizationChart() {
+            const chart = echarts.init(document.getElementById('organizationChart'), null, {
+                renderer: 'svg',
+            });
+            
+            window.addEventListener('resize', () => chart.resize());
+            
+            chart.setOption({
+                // title: {
+                //     text: 'ECharts Getting Started Example'
+                // },
+                grid: {
+                    left: '2%',
+                    right: '2%',
+                    top: '2%',
+                    bottom: '18%'
+                },
+                useCoarsePointer: true,
+                tooltip: {},
+                xAxis: {
+                    data: ['202105', '202106', '202107', '202108', '202109', '202110', '202111', '202112', '202201', '202202', '202203', '202204', '202205', '202206', '202207', '202208', '202209', '202210', '202211', '202212', '202301', '202302', '202303', '202304', '202305', '202306', '202307', '202308'],
+                    axisLabel: {
+                        interval: 2
+                    },
+                    axisTick: {
+                        alignWithLabel: true
+                    },
+                },
+                yAxis: {
+                    alignTicks: true,
+                },
+                legend: {
+                    orient: 'horizontal',
+                    // left: '0',
+                    // right: '0',
+                    top: 'bottom',
+                    width: '100%',
+                    backgroundColor: '#F8F8F8',
+                    borderRadius: 10,
+                    padding: 16,
+                    itemGap: 30,
+                    itemWidth: 18,
+                    itemHeight: 18,
+                    textStyle: {
+                        fontFamily: 'KBFG Display',
+                        fontSize: (handler.device === 'desktop') ? 20 : 15,
+                        fontWeight: 500,
+                        color: '#111111'
+                    },
+                },
+                series: [
+                    {
+                        name: '입사자(명)',
+                        type: 'bar',
+                        color: '#00D9A6',
+                        itemStyle: {
+                            borderRadius: [50, 50, 0, 0],
+                        },
+                        data: [10, 16, 19, 22, 14, 15, 18, 22, 17, 27, 14, 20, 15, 23, 24, 26, 21, 22, 22, 19, 12, 13, 17, 27, 16, 24, 10, 5]
+                    },
+                    {
+                        name: '퇴사자(명)',
+                        type: 'bar',
+                        color: '#D3D3D3',
+                        itemStyle: {
+                            borderRadius: [50, 50, 0, 0],
+                        },
+                        data: [4, 3, 5, 7, 1, 3, 8, 2, 9, 7, 10, 3, 5, 3, 4, 6, 2, 2, 1, 1, 2, 3, 4, 8, 4, 3, 1, 5]
+                    },
+                    // 근무자 데이터 (뒤에 배경용)
+                    {
+                        name: '근무자(명)',
+                        type: 'line',
+                        color: '#246BEB',
+                        areaStyle: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                {
+                                    offset: 0,
+                                    color: 'rgba(36, 107, 235, .2)'
+                                },
+                                {
+                                    offset: 1,
+                                    color: 'rgba(36, 107, 235, 0)'
+                                }
+                            ]),
+                        },
+                        data: [4, 8, 10, 11, 12, 10, 15, 16, 14, 12, 11, 13, 15, 13, 14, 16, 17, 18, 19, 18, 22, 23, 24, 26, 27, 28, 29, 31],
+                        silent: true,
+                        tooltip: { show: false },
+                        z: 0
+                    },
+                    // 근무자 데이터 (위에 배경용과 같은 데이터로 설정해주시면 됩니다.)
+                    {
+                        name: '근무자(명)',
+                        type: 'line',
+                        color: '#246BEB',
+                        data: [4, 8, 10, 11, 12, 10, 15, 16, 14, 12, 11, 13, 15, 13, 14, 16, 17, 18, 19, 18, 22, 23, 24, 26, 27, 28, 29, 31],
+                        z: 10
+                    }
+                ]
+            });
+        }
+
+        function wordChart() {
+            // 워드 차트 생성
+            const chart = echarts.init(document.getElementById('wordChart'), null, {
+                renderer: 'svg',
+            });
+            // 키워드 막대 차트 생성
+            const chart2 = echarts.init(document.getElementById('wordChart2'), null, {
+                renderer: 'svg',
+            });
+
+            window.addEventListener('resize', () => {
+                chart.resize();
+                chart2.resize();
+            });
+
+            // API 데이터
+            const apiData = [
+                { keyword: '사업', count: 23 },
+                { keyword: '에너지', count: 16 },
+                { keyword: '지사', count: 15 },
+                { keyword: '한지', count: 14 },
+                { keyword: '운전자', count: 14 },
+                { keyword: '홍보', count: 13 },
+                { keyword: '젓갈', count: 12 },
+                { keyword: '대표', count: 12 },
+                { keyword: '연장', count: 11 },
+                { keyword: '이양', count: 10 },
+                { keyword: '농지', count: 10 },
+                { keyword: '논산', count: 10 },
+                { keyword: '한국농어촌공사', count: 10 },
+                { keyword: '사용', count: 10 },
+                { keyword: '선루프', count: 10 },
+                { keyword: '닥나무', count: 9 },
+                { keyword: '강경', count: 9 },
+                { keyword: '축제', count: 9 },
+                { keyword: '전기차', count: 9 },
+                { keyword: '지이디', count: 9 },
+                { keyword: '지원', count: 9 },
+                { keyword: '은퇴직불', count: 8 },
+                { keyword: '미군', count: 8 },
+                { keyword: '변경', count: 7 },
+                { keyword: '방식', count: 7 },
+                { keyword: '체험', count: 7 },
+                { keyword: '가능', count: 7 },
+                { keyword: '시장', count: 7 },
+                { keyword: '평택', count: 7 },
+                { keyword: '비상문', count: 6 }
+            ];
+            const chartData = apiData.map(item => ({
+                name: item.keyword,
+                value: item.count
+            }));
+
+            // 키워드 데이터 값을 상위 10위 까지만 필터링
+            const topData = chartData.sort((a, b) => b.value - a.value).slice(0, 10);
+            // 그래프 최대 수치 적용
+            const maxValue = chartData.sort((a, b) => b.value - a.value).slice(0, 1)[0].value * 2;
+
+            // 10위권 중 가장 긴 키워드 반환
+            const longestNameItem = topData.reduce((max, item) => {
+                return item.name.length > max.name.length ? item : max;
+            }, topData[0]);
+            
+            // 가장 긴 키워드 순위
+            const longestNameRank = topData.findIndex(item => item === longestNameItem) + 1;
+            const word = longestNameRank + '. ' + longestNameItem.name;
+
+            function calculateTextWidth(text) {
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                context.font = (handler.device === 'desktop') ? '19px "KBFG Text"' : '15px "KBFG Text"';
+            
+                let totalWidth = 0;
+            
+                for (let i = 0; i < text.length; i++) {
+                    const char = text[i];
+                    totalWidth += context.measureText(char).width;
+                }
+            
+                return Math.round(totalWidth);
+            }
+
+            // x, y축으로 변환
+            const yAxisData = topData.map((item, index) => `${index + 1}. ${item.name}`);
+            const xAxisData = topData.map((item) => item.value );
+            const gradientColors = [
+                ['#FE6C6C', '#FE464B'],
+                ['#FF9364', '#F25F33'],
+                ['#FFD572', '#FEBD38'],
+                ['#B2E95F', '#8ED129'],
+                ['#5CDFD0', '#20BEAC'],
+                ['#5CE1B1', '#2DC38D'],
+                ['#7AD3FF', '#4FBAF0'],
+                ['#82B3FF', '#478CF7'],
+                ['#B09FFF', '#8D79F6'],
+                ['#F3A1FF', '#DB52F0']
+            ];
+            const resultData = xAxisData.map((value, index) => ({
+                value: value,
+                itemStyle: {
+                    borderRadius: 50,
+                    color: {
+                        type: 'linear',
+                        x: 0,
+                        y: 0,
+                        x2: 0,
+                        y2: 1,
+                        colorStops: [
+                            { offset: 0, color: gradientColors[index][0] },
+                            { offset: 1, color: gradientColors[index][1] }
+                        ]
+                    }
+                }
+            }));
+            const longestLabel = yAxisData.reduce((max, label) => Math.max(max, label.length), 0);
+            const dynamicMargin = -(longestLabel / 0.075);
+                
+            // 워드 차트 옵션
+            chart.setOption({
+                tooltip: {},
+                series: [{
+                    type: 'wordCloud',
+                    shape: 'circle',
+                    sizeRange: [16, 64],
+                    rotationRange: [0, 0],
+                    gridSize: 32,
+                    width: '100%',
+                    height: '100%',
+                    drawOutOfBound: false,
+                    textStyle: {
+                        fontFamily: 'KBFG Text',
+                        fontWeight: 'bold',
+                        color: function() {
+                            if (Math.random() < 0.03) {
+                                const lightness = Math.random() * 50;
+                                return `hsl(0, 0%, ${lightness}%)`;
+                            }
+
+                            const hue = Math.round(Math.random() * 360);
+                            const saturation = 80 + Math.random() * 30;
+                            const lightness = 30 + Math.random() * 13;
+                        
+                            return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+                        }
+                    },
+                    data: chartData
+                }]
+            });
+
+            // 키워드 막대 차트 옵션
+            chart2.setOption({
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+                },
+                grid: {
+                    top: '0%',
+                    // left: -dynamicMargin + 20,
+                    left: '0%',
+                    right: '0%',
+                    bottom: '0%',
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'value',
+                    axisLabel: false,
+                    splitLine: false,
+                    min: 0,
+                    max: maxValue
+                },
+                yAxis: {
+                    type: 'category',
+                    axisLine: false,
+                    axisTick: false,
+                    axisLabel: {
+                        padding: [0, 0, 0, -(calculateTextWidth(word))],
+                        // margin: 200,
+                        // inside: true,
+                        // width: 100,
+                        align: 'left',
+                        fontFamily: 'KBFG Text',
+                        color: '#222',
+                        fontSize: (handler.device === 'desktop') ? 19 : 15,
+                        fontWeight: 500,
+                    },
+                    inverse: true,
+                    data: yAxisData
+                },
+                series: [
+                    {
+                        name: '2011',
+                        type: 'bar',
+                        barWidth: 16,
+                        itemStyle: {
+                            color: {
+                                type: 'linear',
+                                x: 0,
+                                y: 0,
+                                x2: 0,
+                                y2: 1,
+                                colorStops: [
+                                    { offset: 0, color: '#FE6C6C' },
+                                    { offset: 1, color: '#FE464B' }
+                                ],
+                            },
+                        },
+                        showBackground: true,
+                        backgroundStyle: {
+                            color: '#E0E0E0',
+                            borderRadius: 50
+                        },
+                        data: resultData
+                    },
+                ]
+            });
+        }
+    </script>
+</body>
+</html>

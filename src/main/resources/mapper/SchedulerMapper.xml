@@ -1,0 +1,511 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kbin.inno.Scheduler.DAO.SchedulerDAO">
+    <!-- KB_API_STARTER_INFO API 스타터스 기업 정보 등록 및 수정 -->
+    <update id="staterIns" parameterType="com.kbin.inno.Scheduler.DTO.StaterDTO">
+        /* KB_API_STARTER_INFO API 스타터스 기업 정보 등록 및 수정 */
+        MERGE INTO KB_API_STARTER_INFO A
+            USING DUAL ON (A.ENT_CD = #{ent_cd})
+        WHEN MATCHED THEN
+            UPDATE
+               SET
+                   BRNO = #{brno}
+                 , RPRSV_NM = #{rprsv_nm}
+                 , ENT_NM = #{ent_nm}
+             <if test="corp_no != null and corp_no != ''">
+                 , CORP_NO = #{corp_no}
+             </if>
+             <if test="tpbiz != null and tpbiz != ''">
+                 , TPBIZ = #{tpbiz}
+             </if>
+             <if test="ent_shape != null and ent_shape != ''">
+                 , ENT_SHAPE = #{ent_shape}
+             </if>
+             <if test="ent_scale != null and ent_scale != ''">
+                 , ENT_SCALE = #{ent_scale}
+             </if>
+             <if test="addr != null and addr != ''">
+                 , ADDR = #{addr}
+             </if>
+             <if test="fndn_ymd != null and fndn_ymd != ''">
+                 , FNDN_YMD = #{fndn_ymd}
+             </if>
+             <if test="ksic_cd != null and ksic_cd != ''">
+                 , KSIC_CD = #{ksic_cd}
+             </if>
+             <if test="telno != null and telno != ''">
+                 , TELNO = #{telno}
+             </if>
+             <if test="fxno != null and fxno != ''">
+                 , FXNO = #{fxno}
+             </if>
+             <if test="zip != null and zip != ''">
+                 , ZIP = #{zip}
+             </if>
+             <if test="public_ent_yn != null and public_ent_yn != ''">
+                 , PUBLIC_ENT_YN = #{public_ent_yn}
+             </if>
+             <if test="indiv_bzmn_yn != null and indiv_bzmn_yn != ''">
+                 , INDIV_BZMN_YN = #{indiv_bzmn_yn}
+             </if>
+             <if test="hdofc_yn != null and hdofc_yn != ''">
+                 , HDOFC_YN = #{hdofc_yn}
+             </if>
+             <if test="venture_cert_yn != null and venture_cert_yn != ''">
+                 , VENTURE_CERT_YN = #{venture_cert_yn}
+             </if>
+             <if test="ipo_yn != null and ipo_yn != ''">
+                 , IPO_YN = #{ipo_yn}
+             </if>
+             <if test="foreign_invest_yn != null and foreign_invest_yn != ''">
+                 , FOREIGN_INVEST_YN = #{foreign_invest_yn}
+             </if>
+             <if test="fnst_yn != null and fnst_yn != ''">
+                 , FNST_YN = #{fnst_yn}
+             </if>
+             <if test="listing_ymd != null and listing_ymd != ''">
+                 , LISTING_YMD = #{listing_ymd}
+             </if>
+             <if test="listing_co != null and listing_co != ''">
+                 , LISTING_CO = #{listing_co}
+             </if>
+             <if test="major_ent_yn != null and major_ent_yn != ''">
+                 , MAJOR_ENT_YN = #{major_ent_yn}
+             </if>
+             <if test="medium_ent_yn != null and medium_ent_yn != ''">
+                 , MEDIUM_ENT_YN = #{medium_ent_yn}
+             </if>
+             <if test="kospi_yn != null and kospi_yn != ''">
+                 , KOSPI_YN = #{kospi_yn}
+             </if>
+             <if test="kosdaq_yn != null and kosdaq_yn != ''">
+                 , KOSDAQ_YN = #{kosdaq_yn}
+             </if>
+             <if test="konex_yn != null and konex_yn != ''">
+                 , KONEX_YN = #{konex_yn}
+             </if>
+             <if test="kotc_yn != null and kotc_yn != ''">
+                 , KOTC_YN = #{kotc_yn}
+             </if>
+             <if test="external_audit_yn != null and external_audit_yn != ''">
+                 , EXTERNAL_AUDIT_YN = #{external_audit_yn}
+             </if>
+             <if test="general_ent_yn != null and general_ent_yn != ''">
+                 , GENERAL_ENT_YN = #{general_ent_yn}
+             </if>
+             <if test="non_profit_yn != null and non_profit_yn != ''">
+                 , NON_PROFIT_YN = #{non_profit_yn}
+             </if>
+             <if test="absorption_merged_yn != null and absorption_merged_yn != ''">
+                 , ABSORPTION_MERGED_YN = #{absorption_merged_yn}
+             </if>
+             <if test="clsbiz_yn != null and clsbiz_yn != ''">
+                 , CLSBIZ_YN = #{clsbiz_yn}
+             </if>
+             <if test="tcbiz_yn != null and tcbiz_yn != ''">
+                 , TCBIZ_YN = #{tcbiz_yn}
+             </if>
+             <if test="bankruptcy_yn != null and bankruptcy_yn != ''">
+                 , BANKRUPTCY_YN = #{bankruptcy_yn}
+             </if>
+             <if test="main_biz != null and main_biz != ''">
+                 , MAIN_BIZ = #{main_biz}
+             </if>
+             <if test="prdct != null and prdct != ''">
+                 , PRDCT = #{prdct}
+             </if>
+             <if test="hmpg != null and hmpg != ''">
+                 , HMPG = #{hmpg}
+             </if>
+             <if test="crtr_ym != null and crtr_ym != ''">
+                 , CRTR_YM = #{crtr_ym}
+             </if>
+             <if test="mm12_jncmp_nocs != null and mm12_jncmp_nocs != ''">
+                 , MM12_JNCMP_NOCS = #{mm12_jncmp_nocs}
+             </if>
+             <if test="mm12_rsgntn_nocs != null and mm12_rsgntn_nocs != ''">
+                 , MM12_RSGNTN_NOCS = #{mm12_rsgntn_nocs}
+             </if>
+             <if test="mm12_rsgntn_rt != null and mm12_rsgntn_rt != ''">
+                 , MM12_RSGNTN_RT = #{mm12_rsgntn_rt}
+             </if>
+             <if test="now_wrkr_nocs != null and now_wrkr_nocs != ''">
+                 , NOW_WRKR_NOCS = #{now_wrkr_nocs}
+             </if>
+             <if test="cptl_amt != null and cptl_amt != ''">
+                 , CPTL_AMT = #{cptl_amt}
+             </if>
+             <if test="profit_amt != null and profit_amt != ''">
+                 , PROFIT_AMT = #{profit_amt}
+             </if>
+                 , LAST_MDFCN_DT = SYSDATE
+             WHERE ENT_CD = #{ent_cd}
+        WHEN NOT MATCHED THEN
+            INSERT ( ENT_CD
+                   , BRNO
+                   , CORP_NO
+                   , RPRSV_NM
+                   , ENT_NM
+                   , TPBIZ
+                   , ENT_SHAPE
+                   , ENT_SCALE
+                   , ADDR
+                   , FNDN_YMD
+                   , KSIC_CD
+                   , TELNO
+                   , FXNO
+                   , ZIP
+                   , PUBLIC_ENT_YN
+                   , INDIV_BZMN_YN
+                   , HDOFC_YN
+                   , VENTURE_CERT_YN
+                   , IPO_YN
+                   , FOREIGN_INVEST_YN
+                   , FNST_YN
+                   , LISTING_YMD
+                   , LISTING_CO
+                   , MAJOR_ENT_YN
+                   , MEDIUM_ENT_YN
+                   , KOSPI_YN
+                   , KOSDAQ_YN
+                   , KONEX_YN
+                   , KOTC_YN
+                   , EXTERNAL_AUDIT_YN
+                   , GENERAL_ENT_YN
+                   , NON_PROFIT_YN
+                   , ABSORPTION_MERGED_YN
+                   , CLSBIZ_YN
+                   , TCBIZ_YN
+                   , BANKRUPTCY_YN
+                   , MAIN_BIZ
+                   , PRDCT
+                   , HMPG
+                   , CRTR_YM
+                   , MM12_JNCMP_NOCS
+                   , MM12_RSGNTN_NOCS
+                   , MM12_RSGNTN_RT
+                   , NOW_WRKR_NOCS
+                   , CPTL_AMT
+                   , PROFIT_AMT
+                   , FRST_REG_DT
+                   , LAST_MDFCN_DT
+                   )
+            VALUES ( #{ent_cd}
+                   , #{brno, jdbcType=VARCHAR}
+                   , #{corp_no, jdbcType=VARCHAR}
+                   , #{rprsv_nm, jdbcType=VARCHAR}
+                   , #{ent_nm, jdbcType=VARCHAR}
+                   , #{tpbiz, jdbcType=VARCHAR}
+                   , #{ent_shape, jdbcType=VARCHAR}
+                   , #{ent_scale, jdbcType=VARCHAR}
+                   , #{addr, jdbcType=VARCHAR}
+                   , #{fndn_ymd, jdbcType=VARCHAR}
+                   , #{ksic_cd, jdbcType=VARCHAR}
+                   , #{telno, jdbcType=VARCHAR}
+                   , #{fxno, jdbcType=VARCHAR}
+                   , #{zip, jdbcType=VARCHAR}
+                   , #{public_ent_yn, jdbcType=VARCHAR}
+                   , #{indiv_bzmn_yn, jdbcType=VARCHAR}
+                   , #{hdofc_yn, jdbcType=VARCHAR}
+                   , #{venture_cert_yn, jdbcType=VARCHAR}
+                   , #{ipo_yn, jdbcType=VARCHAR}
+                   , #{foreign_invest_yn, jdbcType=VARCHAR}
+                   , #{fnst_yn, jdbcType=VARCHAR}
+                   , #{listing_ymd, jdbcType=VARCHAR}
+                   , #{listing_co, jdbcType=VARCHAR}
+                   , #{major_ent_yn, jdbcType=VARCHAR}
+                   , #{medium_ent_yn, jdbcType=VARCHAR}
+                   , #{kospi_yn, jdbcType=VARCHAR}
+                   , #{kosdaq_yn, jdbcType=VARCHAR}
+                   , #{konex_yn, jdbcType=VARCHAR}
+                   , #{kotc_yn, jdbcType=VARCHAR}
+                   , #{external_audit_yn, jdbcType=VARCHAR}
+                   , #{general_ent_yn, jdbcType=VARCHAR}
+                   , #{non_profit_yn, jdbcType=VARCHAR}
+                   , #{absorption_merged_yn, jdbcType=VARCHAR}
+                   , #{clsbiz_yn, jdbcType=VARCHAR}
+                   , #{tcbiz_yn, jdbcType=VARCHAR}
+                   , #{bankruptcy_yn, jdbcType=VARCHAR}
+                   , #{main_biz, jdbcType=VARCHAR}
+                   , #{prdct, jdbcType=VARCHAR}
+                   , #{hmpg, jdbcType=VARCHAR}
+                   , #{crtr_ym, jdbcType=VARCHAR}
+                   , #{mm12_jncmp_nocs}
+                   , #{mm12_rsgntn_nocs}
+                   , #{mm12_rsgntn_rt}
+                   , #{now_wrkr_nocs}
+                   , #{cptl_amt}
+                   , #{profit_amt}
+                   , SYSDATE
+                   , SYSDATE
+                   )
+    </update>
+    <delete id="bizSrvcDel" parameterType="String">
+        /* KB_API_BIZ_SRVC_INFO API 사업 서비스 정보 삭제 */
+        DELETE
+          FROM KB_API_BIZ_SRVC_INFO
+         WHERE ENT_CD = #{ent_cd}
+    </delete>
+    <insert id="bizSrvcIns" parameterType="com.kbin.inno.Scheduler.DTO.BizSrvcDTO">
+        /* KB_API_BIZ_SRVC_INFO API 사업 서비스 정보 등록 */
+        INSERT INTO KB_API_BIZ_SRVC_INFO
+        ( ENT_CD
+        , SRVC_NM
+        , GOOGLE_APP_LINK
+        , GOOGLE_ICON_LINK
+        , APPLE_APP_LINK
+        , APPLE_ICON_LINK
+        , WEB_SRVC_LINK
+        , FRST_REG_DT
+        , LAST_MDFCN_DT
+        )
+        VALUES
+        ( #{ent_cd}
+        , #{srvc_nm, jdbcType=VARCHAR}
+        , #{google_app_link, jdbcType=VARCHAR}
+        , #{google_icon_link, jdbcType=VARCHAR}
+        , #{apple_app_link, jdbcType=VARCHAR}
+        , #{apple_icon_link, jdbcType=VARCHAR}
+        , #{web_srvc_link, jdbcType=VARCHAR}
+        , SYSDATE
+        , SYSDATE
+        )
+    </insert>
+    <update id="emploIns" parameterType="com.kbin.inno.Scheduler.DTO.EmploDTO">
+        /* KB_API_EMPLO_INFO API 고용 정보 등록 및 수정 */
+        MERGE INTO KB_API_EMPLO_INFO A
+            USING DUAL ON (A.ENT_CD = #{ent_cd} AND A.CRTR_YM = #{crtr_ym})
+        WHEN MATCHED THEN
+            UPDATE
+               SET LAST_MDFCN_DT = SYSDATE
+             <if test="jncmp_nocs != null and jncmp_nocs != ''">
+                 , JNCMP_NOCS = #{jncmp_nocs}
+             </if>
+             <if test="rsgntn_nocs != null and rsgntn_nocs != ''">
+                 , RSGNTN_NOCS = #{rsgntn_nocs}
+             </if>
+             <if test="hdof_nocs != null and hdof_nocs != ''">
+                 , HDOF_NOCS = #{hdof_nocs}
+             </if>
+             WHERE ENT_CD = #{ent_cd}
+               AND CRTR_YM = #{crtr_ym}
+        WHEN NOT MATCHED THEN
+            INSERT ( ENT_CD
+                   , CRTR_YM
+                   , JNCMP_NOCS
+                   , RSGNTN_NOCS
+                   , HDOF_NOCS
+                   , FRST_REG_DT
+                   , LAST_MDFCN_DT
+                   )
+            VALUES ( #{ent_cd}
+                   , #{crtr_ym, jdbcType=VARCHAR}
+                   , #{jncmp_nocs}
+                   , #{rsgntn_nocs}
+                   , #{hdof_nocs}
+                   , SYSDATE
+                   , SYSDATE
+                   )
+    </update>
+    <delete id="investDel" parameterType="String">
+        /* KB_API_INVEST_INFO API 투자 정보 삭제 */
+        DELETE
+          FROM KB_API_INVEST_INFO
+         WHERE ENT_CD = #{ent_cd}
+    </delete>
+    <insert id="investIns" parameterType="com.kbin.inno.Scheduler.DTO.InvestDTO">
+        /* KB_API_INVEST_INFO API 투자 정보 등록 */
+        INSERT INTO KB_API_INVEST_INFO
+        ( ENT_CD
+        , INVESTOR
+        , SERIES_NM
+        , INVEST_AMT
+        , INVEST_YMD
+        , NEWS_LINK
+        , FRST_REG_DT
+        , LAST_MDFCN_DT
+        )
+        VALUES
+        ( #{ent_cd}
+        , #{investor, jdbcType=VARCHAR}
+        , #{series_nm, jdbcType=VARCHAR}
+        , #{invest_amt}
+        , #{invest_ymd, jdbcType=VARCHAR}
+        , #{news_link, jdbcType=VARCHAR}
+        , SYSDATE
+        , SYSDATE
+        )
+    </insert>
+    <update id="slsIns" parameterType="com.kbin.inno.Scheduler.DTO.SlsDTO">
+        /* KB_API_SLS_INFO API 매출정보(손익계산서) 등록 및 수정 */
+        MERGE INTO KB_API_SLS_INFO A
+            USING DUAL ON (A.ENT_CD = #{ent_cd} AND A.YR = #{yr})
+        WHEN MATCHED THEN
+            UPDATE
+               SET LAST_MDFCN_DT = SYSDATE
+             <if test="sls_amt != null and sls_amt != ''">
+                 , SLS_AMT = #{sls_amt}
+             </if>
+             <if test="operating_revenue != null and operating_revenue != ''">
+                 , OPERATING_REVENUE = #{operating_revenue}
+             </if>
+             <if test="sls_cost_amt != null and sls_cost_amt != ''">
+                 , SLS_COST_AMT = #{sls_cost_amt}
+             </if>
+             <if test="sls_gramt != null and sls_gramt != ''">
+                 , SLS_GRAMT = #{sls_gramt}
+             </if>
+             <if test="sga_amt != null and sga_amt != ''">
+                 , SGA_AMT = #{sga_amt}
+             </if>
+             <if test="operating_profit != null and operating_profit != ''">
+                 , OPERATING_PROFIT = #{operating_profit}
+             </if>
+             <if test="net_profit != null and net_profit != ''">
+                 , NET_PROFIT = #{net_profit}
+             </if>
+             WHERE ENT_CD = #{ent_cd}
+               AND YR = #{yr}
+        WHEN NOT MATCHED THEN
+            INSERT ( ENT_CD
+                   , YR
+                   , SLS_AMT
+                   , OPERATING_REVENUE
+                   , SLS_COST_AMT
+                   , SLS_GRAMT
+                   , SGA_AMT
+                   , OPERATING_PROFIT
+                   , NET_PROFIT
+                   , FRST_REG_DT
+                   , LAST_MDFCN_DT
+                   )
+            VALUES ( #{ent_cd}
+                   , #{yr}
+                   , #{sls_amt}
+                   , #{operating_revenue}
+                   , #{sls_cost_amt}
+                   , #{sls_gramt}
+                   , #{sga_amt}
+                   , #{operating_profit}
+                   , #{net_profit}
+                   , SYSDATE
+                   , SYSDATE
+                   )
+    </update>
+    <update id="astIns" parameterType="com.kbin.inno.Scheduler.DTO.AstDTO">
+        /* KB_API_AST_INFO API 자산(재무상태) 등록 및 수정 */
+        MERGE INTO KB_API_AST_INFO A
+            USING DUAL ON (A.ENT_CD = #{ent_cd} AND A.YR = #{yr})
+        WHEN MATCHED THEN
+            UPDATE
+               SET LAST_MDFCN_DT = SYSDATE
+             <if test="current_assets != null and current_assets != ''">
+                 , CURRENT_ASSETS = #{current_assets}
+             </if>
+             <if test="non_current_assets != null and non_current_assets != ''">
+                 , NON_CURRENT_ASSETS = #{non_current_assets}
+             </if>
+             <if test="ast_gramt != null and ast_gramt != ''">
+                 , AST_GRAMT = #{ast_gramt}
+             </if>
+             <if test="debt_gramt != null and debt_gramt != ''">
+                 , DEBT_GRAMT = #{debt_gramt}
+             </if>
+             <if test="cptl != null and cptl != ''">
+                 , CPTL = #{cptl}
+             </if>
+             <if test="cptl_gramt != null and cptl_gramt != ''">
+                 , CPTL_GRAMT = #{cptl_gramt}
+             </if>
+             WHERE ENT_CD = #{ent_cd}
+               AND YR = #{yr}
+        WHEN NOT MATCHED THEN
+            INSERT ( ENT_CD
+                   , YR
+                   , CURRENT_ASSETS
+                   , NON_CURRENT_ASSETS
+                   , AST_GRAMT
+                   , DEBT_GRAMT
+                   , CPTL
+                   , CPTL_GRAMT
+                   , FRST_REG_DT
+                   , LAST_MDFCN_DT
+                   )
+            VALUES ( #{ent_cd}
+                   , #{yr}
+                   , #{current_assets}
+                   , #{non_current_assets}
+                   , #{ast_gramt}
+                   , #{debt_gramt}
+                   , #{cptl}
+                   , #{cptl_gramt}
+                   , SYSDATE
+                   , SYSDATE
+                   )
+    </update>
+    <update id="newsIns" parameterType="com.kbin.inno.Scheduler.DTO.NewsDTO">
+        /* KB_API_NEWS_INFO API 뉴스정보 등록 및 수정 */
+        MERGE INTO KB_API_NEWS_INFO A
+            USING DUAL ON (A.ENT_CD = #{ent_cd} AND A.NEWS_ID = #{news_id})
+        WHEN MATCHED THEN
+            UPDATE
+               SET LAST_MDFCN_DT = SYSDATE
+             <if test="provider != null and provider != ''">
+                 , PROVIDER = #{provider}
+             </if>
+             <if test="news_ttl != null and news_ttl != ''">
+                 , NEWS_TTL = #{news_ttl}
+             </if>
+             <if test="news_link != null and news_link != ''">
+                 , NEWS_LINK = #{news_link}
+             </if>
+             <if test="thumb_url != null and thumb_url != ''">
+                 , THUMB_URL = #{thumb_url}
+             </if>
+             WHERE ENT_CD = #{ent_cd}
+               AND NEWS_ID = #{news_id}
+        WHEN NOT MATCHED THEN
+            INSERT ( ENT_CD
+                   , NEWS_ID
+                   , PROVIDER
+                   , NEWS_TTL
+                   , NEWS_LINK
+                   , THUMB_URL
+                   , FRST_REG_DT
+                   , LAST_MDFCN_DT
+                   )
+            VALUES ( #{ent_cd}
+                   , #{news_id}
+                   , #{provider, jdbcType=VARCHAR}
+                   , #{news_ttl, jdbcType=VARCHAR}
+                   , #{news_link, jdbcType=VARCHAR}
+                   , #{thumb_url, jdbcType=VARCHAR}
+                   , SYSDATE
+                   , SYSDATE
+                   )
+    </update>
+    <delete id="keywdDel" parameterType="String">
+        /* KB_API_KEYWD_INFO API 키워드 정보 삭제 */
+        DELETE
+        FROM KB_API_KEYWD_INFO
+        WHERE ENT_CD = #{ent_cd}
+    </delete>
+    <insert id="keywdIns" parameterType="com.kbin.inno.Scheduler.DTO.KeywdDTO">
+        /* KB_API_KEYWD_INFO API 키워드 정보 등록 */
+        INSERT INTO KB_API_KEYWD_INFO
+        ( ENT_CD
+        , KEYWD
+        , NOCS
+        , FRST_REG_DT
+        , LAST_MDFCN_DT
+        )
+        VALUES
+        ( #{ent_cd}
+        , #{keywd, jdbcType=VARCHAR}
+        , #{nocs}
+        , SYSDATE
+        , SYSDATE
+        )
+    </insert>
+</mapper>

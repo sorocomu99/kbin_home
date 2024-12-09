@@ -1,0 +1,550 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kbin.inno.Startup.DAO.StartupDAO">
+    <select id="selectTotalCount" parameterType="Map" resultType="int">
+        /* 스타트업 검색 갯수 조회(전체) */
+        SELECT COUNT(*)
+        FROM (SELECT ROWNUM RNUM
+                   , INFO.*
+              FROM (SELECT A.ENT_CD
+                         , A.ENT_NM
+                         , A.MAIN_BIZ
+                         , A.TPBIZ
+                         , A.KB_STARTERS_YN
+                         , B.SERIES_NM
+                         , (SELECT SUM(INVEST_AMT) / 100000000 FROM KB_API_INVEST_INFO WHERE A.ENT_CD = ENT_CD GROUP BY ENT_CD) INVEST_AMT
+                         , A.NOW_WRKR_NOCS
+                         , A.FNDN_YMD
+                         , C.SUM_INVEST_AMT
+                    FROM KB_API_STARTER_INFO A
+                       , (SELECT DISTINCT ENT_CD
+                               , SERIES_NM
+                          FROM KB_API_INVEST_INFO ZZ
+                          WHERE INVEST_YMD = (SELECT MAX(INVEST_YMD) FROM KB_API_INVEST_INFO ZZZ WHERE ZZZ.ENT_CD = ZZ.ENT_CD)
+                        ) B
+                      , (SELECT ENT_CD
+                              , SUM(INVEST_AMT) SUM_INVEST_AMT
+                           FROM KB_API_INVEST_INFO
+                          WHERE 1 = 1
+                          GROUP BY ENT_CD
+                        ) C
+                    WHERE A.ENT_CD = B.ENT_CD(+)
+                      AND A.ENT_CD = C.ENT_CD(+)
+                    ORDER BY A.ENT_CD
+                   ) INFO
+              WHERE 1 = 1
+               <if test="seriesList.size > 0">
+                   AND SERIES_NM IN
+                   <foreach collection="seriesList" index="index" item="item" open="(" close=")" separator=",">
+                       REPLACE(#{item}, 'SERIES', '')
+                   </foreach>
+               </if>
+               <if test="investAmt != null and investAmt != ''">
+                   <if test="investAmt == 9">
+                       AND SUM_INVEST_AMT <![CDATA[<]]>= 100000000
+                   </if>
+                   <if test="investAmt == 10">
+                       AND SUM_INVEST_AMT BETWEEN 1000000000 AND 10000000000
+                   </if>
+                   <if test="investAmt == 100">
+                       AND SUM_INVEST_AMT BETWEEN 10000000000 AND 50000000000
+                   </if>
+                   <if test="investAmt == 500">
+                       AND SUM_INVEST_AMT BETWEEN 50000000000 AND 100000000000
+                   </if>
+                   <if test="investAmt == 1000">
+                       AND SUM_INVEST_AMT <![CDATA[>]]>= 100000000000
+                   </if>
+               </if>
+               <if test="(minAmt != null and minAmt != '') and (maxAmt != null and maxAmt != '')">
+                   AND SUM_INVEST_AMT BETWEEN TO_NUMBER(#{minAmt}) AND TO_NUMBER(#{maxAmt})
+               </if>
+               <if test="emplo != null and emplo != ''">
+                   <if test="emplo == 10">
+                       AND NOW_WRKR_NOCS <![CDATA[<]]>= 10
+                   </if>
+                   <if test="emplo == 11">
+                       AND NOW_WRKR_NOCS BETWEEN 11 AND 50
+                   </if>
+                   <if test="emplo == 51">
+                       AND NOW_WRKR_NOCS BETWEEN 51 AND 100
+                   </if>
+                   <if test="emplo == 100">
+                       AND NOW_WRKR_NOCS <![CDATA[>]]> 100
+                   </if>
+               </if>
+               <if test="(minEmp != null and minEmp != '') and (maxEmp != null and maxEmp != '')">
+                   AND NOW_WRKR_NOCS BETWEEN #{minEmp} AND #{maxEmp}
+               </if>
+               <if test="keyWord != null and keyWord != ''">
+                   AND ENT_NM LIKE #{keyWord} || '%'
+               </if>
+               <if test="keyWord1 != null and keyWord1 != ''">
+                   AND ENT_NM LIKE #{keyWord1} || '%'
+               </if>
+               <if test="date == 3">
+                   AND FNDN_YMD <![CDATA[<]]>= (SELECT ADD_MONTHS(SYSDATE, -36) FROM DUAL)
+               </if>
+               <if test="date == 7">
+                   AND FNDN_YMD <![CDATA[>]]>= (SELECT ADD_MONTHS(SYSDATE, -36) FROM DUAL)
+                   OR FNDN_YMD <![CDATA[<]]>= (SELECT ADD_MONTHS(SYSDATE, -84) FROM DUAL)
+               </if>
+               <if test="date == 10">
+                   AND FNDN_YMD <![CDATA[>]]>= (SELECT ADD_MONTHS(SYSDATE, -84) FROM DUAL)
+                   OR FNDN_YMD <![CDATA[<]]>= (SELECT ADD_MONTHS(SYSDATE, -120) FROM DUAL)
+               </if>
+               <if test="(fromDate != null and fromDate != '') and (toDate != null and toDate != '')">
+                   AND FNDN_YMD BETWEEN #{fromDate} AND #{toDate}
+               </if>
+             )
+    </select>
+    <select id="selectPageList" parameterType="java.util.HashMap" resultType="com.kbin.inno.Startup.DTO.StartupDTO">
+        /* 스타터스 기업 정보 리스트 가져오기 */
+        SELECT ENT_CD
+             , ENT_NM
+             , MAIN_BIZ
+             , TPBIZ
+             , KB_STARTERS_YN
+             , NVL(SERIES_NM, '알수없음') SERIES_NM
+             , INVEST_AMT
+             , NVL(INVEST_AMT_STR, '비공개') INVEST_AMT_STR
+             , NOW_WRKR_NOCS
+             , ORG_SERIES_NM
+          FROM (SELECT ROWNUM RNUM
+                     , INFO.*
+                  FROM (SELECT A.ENT_CD
+                             , A.ENT_NM
+                             , A.MAIN_BIZ
+                             , A.TPBIZ
+                             , A.KB_STARTERS_YN
+                             , B.SERIES_NM
+                             , (SELECT SUM(INVEST_AMT) / 100000000 FROM KB_API_INVEST_INFO WHERE A.ENT_CD = ENT_CD GROUP BY ENT_CD) INVEST_AMT
+                             , A.NOW_WRKR_NOCS
+                             , A.FNDN_YMD
+                             , B.ORG_SERIES_NM
+                             , C.SUM_INVEST_AMT
+                             , (SELECT CASE WHEN SUM(INVEST_AMT) IS NULL THEN '비공개'
+                                            WHEN SUM(INVEST_AMT) = 0 THEN '비공개'
+                                            ELSE TO_CHAR(TO_CHAR(SUM(INVEST_AMT)/ 100000000), 'fm999,999,999,990.00') || ' 억원'
+                                        END INVEST_AMT_STR
+                                   FROM KB_API_INVEST_INFO WHERE A.ENT_CD = ENT_CD GROUP BY ENT_CD) INVEST_AMT_STR
+                        FROM KB_API_STARTER_INFO A
+                             , (SELECT DISTINCT ENT_CD
+                                     , CASE WHEN LENGTH(SERIES_NM) = 1 THEN 'Series ' || SUBSTR(SERIES_NM, -1)
+                                            WHEN SERIES_NM = 'SEED' THEN SERIES_NM
+                                            WHEN SERIES_NM = 'TIPS' THEN SERIES_NM
+                                            WHEN SERIES_NM LIKE 'M%' THEN SERIES_NM
+                                            WHEN SERIES_NM = 'IPO' THEN SERIES_NM
+                                            WHEN SERIES_NM LIKE 'PRE%' THEN 'Pre-' || SUBSTR(SERIES_NM, 4, LENGTH(SERIES_NM))
+                                            ELSE ''
+                                            END SERIES_NM
+                                     , SERIES_NM ORG_SERIES_NM
+                                  FROM KB_API_INVEST_INFO ZZ
+                                 WHERE INVEST_YMD = (SELECT MAX(INVEST_YMD) FROM KB_API_INVEST_INFO ZZZ WHERE ZZZ.ENT_CD = ZZ.ENT_CD)
+                               ) B
+                             , (SELECT ENT_CD
+                                     , SUM(INVEST_AMT) SUM_INVEST_AMT
+                                  FROM KB_API_INVEST_INFO
+                                 WHERE 1 = 1
+                                 GROUP BY ENT_CD
+                               ) C
+                         WHERE A.ENT_CD = B.ENT_CD(+)
+                           AND A.ENT_CD = C.ENT_CD(+)
+                         ORDER BY A.ENT_CD
+                       ) INFO
+                 WHERE 1 = 1
+                 <if test="seriesList.size > 0">
+                     AND ORG_SERIES_NM IN
+                     <foreach collection="seriesList" index="index" item="item" open="(" close=")" separator=",">
+                         REPLACE(#{item}, 'SERIES', '')
+                     </foreach>
+                 </if>
+                 <if test="investAmt != null and investAmt != ''">
+                     <if test="investAmt == 9">
+                         AND SUM_INVEST_AMT <![CDATA[<]]>= 100000000
+                     </if>
+                     <if test="investAmt == 10">
+                         AND SUM_INVEST_AMT BETWEEN 1000000000 AND 10000000000
+                     </if>
+                     <if test="investAmt == 100">
+                         AND SUM_INVEST_AMT BETWEEN 10000000000 AND 50000000000
+                     </if>
+                     <if test="investAmt == 500">
+                         AND SUM_INVEST_AMT BETWEEN 50000000000 AND 100000000000
+                     </if>
+                     <if test="investAmt == 1000">
+                         AND SUM_INVEST_AMT <![CDATA[>]]>= 100000000000
+                     </if>
+                 </if>
+                 <if test="(minAmt != null and minAmt != '') and (maxAmt != null and maxAmt != '')">
+                     AND SUM_INVEST_AMT BETWEEN TO_NUMBER(#{minAmt}) AND TO_NUMBER(#{maxAmt})
+                 </if>
+                 <if test="emplo != null and emplo != ''">
+                     <if test="emplo == 10">
+                         AND NOW_WRKR_NOCS <![CDATA[<]]>= 10
+                     </if>
+                     <if test="emplo == 11">
+                         AND NOW_WRKR_NOCS BETWEEN 11 AND 50
+                     </if>
+                     <if test="emplo == 51">
+                         AND NOW_WRKR_NOCS BETWEEN 51 AND 100
+                     </if>
+                     <if test="emplo == 100">
+                         AND NOW_WRKR_NOCS <![CDATA[>]]> 100
+                     </if>
+                 </if>
+                 <if test="(minEmp != null and minEmp != '') and (maxEmp != null and maxEmp != '')">
+                     AND NOW_WRKR_NOCS BETWEEN #{minEmp} AND #{maxEmp}
+                 </if>
+                 <if test="keyWord != null and keyWord != ''">
+                     AND ENT_NM LIKE #{keyWord} || '%'
+                 </if>
+                 <if test="keyWord1 != null and keyWord1 != ''">
+                     AND ENT_NM LIKE #{keyWord1} || '%'
+                 </if>
+                 <if test="date == 3">
+                     AND FNDN_YMD <![CDATA[<]]>= (SELECT ADD_MONTHS(SYSDATE, -36) FROM DUAL)
+                 </if>
+                 <if test="date == 7">
+                      AND FNDN_YMD <![CDATA[>]]>= (SELECT ADD_MONTHS(SYSDATE, -36) FROM DUAL)
+                       OR FNDN_YMD <![CDATA[<]]>= (SELECT ADD_MONTHS(SYSDATE, -84) FROM DUAL)
+                 </if>
+                 <if test="date == 10">
+                      AND FNDN_YMD <![CDATA[>]]>= (SELECT ADD_MONTHS(SYSDATE, -84) FROM DUAL)
+                       OR FNDN_YMD <![CDATA[<]]>= (SELECT ADD_MONTHS(SYSDATE, -120) FROM DUAL)
+                 </if>
+                 <if test="(fromDate != null and fromDate != '') and (toDate != null and toDate != '')">
+                     AND FNDN_YMD BETWEEN #{fromDate} AND #{toDate}
+                 </if>
+               )
+         WHERE 1 = 1
+           AND RNUM BETWEEN #{start} AND #{end}
+    </select>
+    <select id="select" parameterType="String" resultType="com.kbin.inno.Startup.DTO.StaterDTO">
+        /* 스타트업 정보 검색 */
+        SELECT ENT_CD
+             , SUBSTR(BRNO, 1, 3) || '-' || SUBSTR(BRNO, 4, 2) || '-' || SUBSTR(BRNO, 6) BRNO
+             , SUBSTR(CORP_NO, 1, 6) || '-' || SUBSTR(CORP_NO, 7) CORP_NO
+             , RPRSV_NM
+             , ENT_NM
+             , TPBIZ
+             , ENT_SHAPE
+             , ENT_SCALE
+             , ADDR
+             , TO_CHAR(TO_DATE(FNDN_YMD, 'YYYYMMDD'), 'YYYY-MM-DD') FNDN_YMD
+             , KSIC_CD
+             , TELNO
+             , FXNO
+             , ZIP
+             , PUBLIC_ENT_YN
+             , INDIV_BZMN_YN
+             , HDOFC_YN
+             , VENTURE_CERT_YN
+             , IPO_YN
+             , FOREIGN_INVEST_YN
+             , FNST_YN
+             , LISTING_YMD
+             , LISTING_CO
+             , MAJOR_ENT_YN
+             , MEDIUM_ENT_YN
+             , KOSPI_YN
+             , KOSDAQ_YN
+             , KONEX_YN
+             , KOTC_YN
+             , EXTERNAL_AUDIT_YN
+             , GENERAL_ENT_YN
+             , NON_PROFIT_YN
+             , ABSORPTION_MERGED_YN
+             , CLSBIZ_YN
+             , TCBIZ_YN
+             , BANKRUPTCY_YN
+             , MAIN_BIZ
+             , PRDCT
+             , CASE WHEN UPPER(SUBSTR(HMPG, 1, 4)) LIKE 'HTTP%' THEN HMPG
+                    WHEN HMPG IS NULL THEN NULL
+               ELSE 'https://' || HMPG
+               END HMPG
+             , CRTR_YM
+             , MM12_JNCMP_NOCS
+             , MM12_RSGNTN_NOCS
+             , ROUND(MM12_RSGNTN_RT, 2) MM12_RSGNTN_RT
+             , NOW_WRKR_NOCS
+             , CPTL_AMT
+             , PROFIT_AMT
+             , (SELECT NVL((SUM(INVEST_AMT) / 100000000), 0) FROM KB_API_INVEST_INFO WHERE ENT_CD = #{ent_cd}) INVEST_AMT
+             , NVL((SELECT CASE WHEN SUM(INVEST_AMT) IS NULL THEN '비공개'
+                                WHEN SUM(INVEST_AMT) = 0 THEN '비공개'
+                           ELSE TO_CHAR(TO_CHAR(SUM(INVEST_AMT)/ 100000000), 'fm999,999,999,990.00') || ' 억원'
+                           END INVEST_AMT_STR
+                      FROM KB_API_INVEST_INFO WHERE ENT_CD = #{ent_cd} GROUP BY ENT_CD), '비공개') INVEST_AMT_STR
+             , NVL((SELECT CASE WHEN LENGTH(SERIES_NM) = 1 THEN 'Series ' || SUBSTR(SERIES_NM, -1)
+                                WHEN SERIES_NM = 'SEED' THEN SERIES_NM
+                                WHEN SERIES_NM = 'TIPS' THEN SERIES_NM
+                                WHEN SERIES_NM LIKE 'M%' THEN SERIES_NM
+                                WHEN SERIES_NM = 'IPO' THEN SERIES_NM
+                                WHEN SERIES_NM LIKE 'PRE%' THEN 'Pre-' || SUBSTR(SERIES_NM, 4, LENGTH(SERIES_NM))
+                           ELSE ''
+                           END SERIES_NM
+                          FROM KB_API_INVEST_INFO ZZ
+                         WHERE ENT_CD = #{ent_cd}
+                           AND INVEST_YMD = (SELECT MAX(INVEST_YMD) FROM KB_API_INVEST_INFO ZZZ WHERE ZZZ.ENT_CD = ZZ.ENT_CD AND ZZZ.SERIES_NM IS NOT NULL)
+                           AND ZZ.SERIES_NM IS NOT NULL
+                   ), '알수없음') SERIES_NM
+             , (SELECT NVL(COUNT(*), 0) FROM KB_API_INVEST_INFO WHERE ENT_CD = #{ent_cd}) INVEST_CNT
+             , TO_CHAR(TO_DATE(SYSDATE), 'YYYY.MM.DD') NOW_DATE
+             , (SELECT CASE WHEN SERIES_NM = 'A' THEN 'BLUE'
+                            WHEN SERIES_NM = 'C' THEN 'GREEN'
+                            WHEN SERIES_NM = 'D' THEN 'ORANGE'
+                       ELSE 'BLACK'
+                       END SERIES_COLOR
+                  FROM KB_API_INVEST_INFO ZZ
+                 WHERE ENT_CD = #{ent_cd}
+                   AND INVEST_YMD = (SELECT MAX(INVEST_YMD) FROM KB_API_INVEST_INFO ZZZ WHERE ZZZ.ENT_CD = ZZ.ENT_CD AND ZZZ.SERIES_NM IS NOT NULL)
+                   AND ZZ.SERIES_NM IS NOT NULL
+               ) SERIES_COLOR
+          FROM KB_API_STARTER_INFO
+         WHERE ENT_CD = #{ent_cd}
+    </select>
+    <select id="selectBizList" parameterType="String" resultType="com.kbin.inno.Startup.DTO.BizSrvcDTO">
+        /* 사업서비스 정보 조회 (리스트) */
+        SELECT ENT_CD
+             , SRVC_NM
+             , GOOGLE_APP_LINK
+             , GOOGLE_ICON_LINK
+             , APPLE_APP_LINK
+             , APPLE_ICON_LINK
+             , WEB_SRVC_LINK
+          FROM KB_API_BIZ_SRVC_INFO
+         WHERE ENT_CD = #{ent_cd}
+    </select>
+    <select id="selectEmploList" parameterType="String" resultType="com.kbin.inno.Startup.DTO.EmploDTO">
+        /* 고용정보 조회 (리스트) */
+        SELECT ENT_CD
+             , SUBSTR(CRTR_YM, 1, 4) || '.' || SUBSTR(CRTR_YM, 5, 2) CRTR_YM
+             , JNCMP_NOCS
+             , RSGNTN_NOCS
+             , HDOF_NOCS
+             , TO_CHAR(JNCMP_NOCS, 'fm999,999,999,990.00') JNCMP_NOCS_STR
+             , TO_CHAR(RSGNTN_NOCS, 'fm999,999,999,990.00') RSGNTN_NOCS_STR
+             , TO_CHAR(HDOF_NOCS, 'fm999,999,999,990.00') HDOF_NOCS_STR
+          FROM KB_API_EMPLO_INFO
+         WHERE ENT_CD = #{ent_cd}
+    </select>
+    <select id="selectInvestList" parameterType="String" resultType="com.kbin.inno.Startup.DTO.InvestDTO">
+        /* 투자정보 조회 (리스트) */
+        SELECT ENT_CD
+             , INVESTOR
+             , CASE WHEN LENGTH(SERIES_NM) = 1 THEN 'Series ' || SUBSTR(SERIES_NM, -1)
+                    WHEN SERIES_NM = 'SEED' THEN SERIES_NM
+                    WHEN SERIES_NM = 'TIPS' THEN SERIES_NM
+                    WHEN SERIES_NM LIKE 'M%' THEN SERIES_NM
+                    WHEN SERIES_NM = 'IPO' THEN SERIES_NM
+                    WHEN SERIES_NM LIKE 'PRE%' THEN 'Pre-' || SUBSTR(SERIES_NM, 4, LENGTH(SERIES_NM))
+               ELSE '알수없음'
+               END SERIES_NM
+             , CASE WHEN SERIES_NM = 'A' THEN 'BLUE'
+                    WHEN SERIES_NM = 'C' THEN 'GREEN'
+                    WHEN SERIES_NM = 'D' THEN 'ORANGE'
+               ELSE 'BLACK'
+               END SERIES_COLOR
+             , (INVEST_AMT / 100000000) INVEST_AMT
+             , CASE WHEN INVEST_AMT IS NULL THEN '비공개'
+                    WHEN INVEST_AMT = 0 THEN '비공개'
+               ELSE TO_CHAR((INVEST_AMT / 100000000), 'fm999,999,999,990.00') || ' 억원'
+               END INVEST_AMT_STR
+             , INVEST_YMD
+             , NEWS_LINK
+          FROM KB_API_INVEST_INFO
+         WHERE ENT_CD = #{ent_cd}
+         ORDER BY INVEST_YMD DESC
+    </select>
+    <select id="selectSlsList" parameterType="String" resultType="com.kbin.inno.Startup.DTO.SlsDTO">
+        /* 매출정보 조회 (리스트) */
+        SELECT ENT_CD
+             , YR
+             , SLS_AMT
+             , OPERATING_REVENUE
+             , SLS_COST_AMT
+             , SLS_GRAMT
+             , SGA_AMT
+             , OPERATING_PROFIT
+             , NET_PROFIT
+          FROM KB_API_SLS_INFO
+         WHERE ENT_CD = #{ent_cd}
+         ORDER BY YR ASC
+    </select>
+    <select id="selectSlsChgList" parameterType="com.kbin.inno.Startup.DTO.SlsDTO" resultType="com.kbin.inno.Startup.DTO.SlsDTO">
+        /* 매출정보 조회 (리스트) */
+        SELECT ENT_CD
+             , YR
+             , SLS_AMT
+             , SLS_COST_AMT
+             , SLS_GRAMT
+             , SGA_AMT
+             , OPERATING_PROFIT
+             , NET_PROFIT
+             , CASE WHEN SLS_AMT >= 0 THEN 'BLACK'
+               ELSE 'RED'
+               END SLS_AMT_COL
+             , CASE WHEN SLS_COST_AMT >= 0 THEN 'BLACK'
+               ELSE 'RED'
+               END SLS_COST_AMT_COL
+             , CASE WHEN SLS_GRAMT >= 0 THEN 'BLACK'
+               ELSE 'RED'
+               END SLS_GRAMT_COL
+             , CASE WHEN SGA_AMT >= 0 THEN 'BLACK'
+               ELSE 'RED'
+               END SGA_AMT_COL
+             , CASE WHEN OPERATING_PROFIT >= 0 THEN 'BLACK'
+               ELSE 'RED'
+               END OPERATING_PROFIT_COL
+             , CASE WHEN NET_PROFIT >= 0 THEN 'BLACK'
+               ELSE 'RED'
+               END NET_PROFIT_COL
+             , TO_CHAR(SLS_AMT, 'fm999,999,999,990.00') SLS_AMT_STR
+             , TO_CHAR(SLS_COST_AMT, 'fm999,999,999,990.00') SLS_COST_AMT_STR
+             , TO_CHAR(SLS_GRAMT, 'fm999,999,999,990.00') SLS_GRAMT_STR
+             , TO_CHAR(SGA_AMT, 'fm999,999,999,990.00') SGA_AMT_STR
+             , TO_CHAR(OPERATING_PROFIT, 'fm999,999,999,990.00') OPERATING_PROFIT_STR
+             , TO_CHAR(NET_PROFIT, 'fm999,999,999,990.00') NET_PROFIT_STR
+          FROM (SELECT ENT_CD
+                     , YR
+                     , (SLS_AMT * 1000) / 1000000          SLS_AMT
+                     , (SLS_COST_AMT * 1000) / 1000000     SLS_COST_AMT
+                     , (SLS_GRAMT * 1000) / 1000000        SLS_GRAMT
+                     , (SGA_AMT * 1000) / 1000000          SGA_AMT
+                     , (OPERATING_PROFIT * 1000) / 1000000 OPERATING_PROFIT
+                     , (NET_PROFIT * 1000) / 1000000       NET_PROFIT
+                  FROM KB_API_SLS_INFO
+                 WHERE ENT_CD = #{ent_cd}
+                   AND YR = #{yr}
+                UNION ALL
+                SELECT #{ent_cd} ENT_CD
+                     , #{yr}     YR
+                     , 0         SLS_AMT
+                     , 0         SLS_COST_AMT
+                     , 0         SLS_GRAMT
+                     , 0         SGA_AMT
+                     , 0         OPERATING_PROFIT
+                     , 0         NET_PROFIT
+                FROM DUAL
+               )
+         WHERE ROWNUM = 1
+    </select>
+    <select id="selectAstList" parameterType="String" resultType="com.kbin.inno.Startup.DTO.AstDTO">
+        /* 재무상태 조회 (리스트) */
+        SELECT ENT_CD
+             , YR
+             , CURRENT_ASSETS
+             , NON_CURRENT_ASSETS
+             , AST_GRAMT
+             , DEBT_GRAMT
+             , CPTL
+             , CPTL_GRAMT
+          FROM KB_API_AST_INFO
+         WHERE ENT_CD = #{ent_cd}
+         ORDER BY YR ASC
+    </select>
+    <select id="selectAstChgList" parameterType="String" resultType="com.kbin.inno.Startup.DTO.AstDTO">
+        /* 재무상태 조회 (리스트) */
+        SELECT ENT_CD
+             , YR
+             , CURRENT_ASSETS
+             , NON_CURRENT_ASSETS
+             , AST_GRAMT
+             , DEBT_GRAMT
+             , CPTL
+             , CPTL_GRAMT
+             , CASE WHEN CURRENT_ASSETS >= 0 THEN 'BLACK'
+               ELSE 'RED'
+               END CURRENT_ASSETS_COL
+             , CASE WHEN NON_CURRENT_ASSETS >= 0 THEN 'BLACK'
+               ELSE 'RED'
+               END NON_CURRENT_ASSETS_COL
+             , CASE WHEN AST_GRAMT >= 0 THEN 'BLACK'
+               ELSE 'RED'
+               END AST_GRAMT_COL
+             , CASE WHEN DEBT_GRAMT >= 0 THEN 'BLACK'
+               ELSE 'RED'
+               END DEBT_GRAMT_COL
+             , CASE WHEN CPTL >= 0 THEN 'BLACK'
+               ELSE 'RED'
+               END CPTL_COL
+             , CASE WHEN CPTL_GRAMT >= 0 THEN 'BLACK'
+               ELSE 'RED'
+               END CPTL_GRAMT_COL
+             , TO_CHAR(CURRENT_ASSETS, 'fm999,999,999,990.00') CURRENT_ASSETS_STR
+             , TO_CHAR(NON_CURRENT_ASSETS, 'fm999,999,999,990.00') NON_CURRENT_ASSETS_STR
+             , TO_CHAR(AST_GRAMT, 'fm999,999,999,990.00') AST_GRAMT_STR
+             , TO_CHAR(DEBT_GRAMT, 'fm999,999,999,990.00') DEBT_GRAMT_STR
+             , TO_CHAR(CPTL, 'fm999,999,999,990.00') CPTL_STR
+             , TO_CHAR(CPTL_GRAMT, 'fm999,999,999,990.00') CPTL_GRAMT_STR
+          FROM (SELECT ENT_CD, YR, (CURRENT_ASSETS * 1000) / 1000000 CURRENT_ASSETS
+                     , (NON_CURRENT_ASSETS * 1000) / 1000000 NON_CURRENT_ASSETS
+                     , (AST_GRAMT * 1000) / 1000000 AST_GRAMT
+                     , (DEBT_GRAMT * 1000) / 1000000 DEBT_GRAMT
+                     , (CPTL * 1000) / 1000000 CPTL
+                     , (CPTL_GRAMT * 1000) / 1000000 CPTL_GRAMT
+                  FROM KB_API_AST_INFO WHERE ENT_CD = #{ent_cd} AND YR = #{yr}
+                UNION ALL
+                SELECT #{ent_cd} ENT_CD, #{yr} YR
+                     , 0 CURRENT_ASSETS, 0 NON_CURRENT_ASSETS, 0 AST_GRAMT, 0 DEBT_GRAMT, 0 CPTL, 0 CPTL_GRAMT
+                  FROM DUAL
+               )
+         WHERE ROWNUM = 1
+    </select>
+    <select id="selectNewsMain" parameterType="String" resultType="com.kbin.inno.Startup.DTO.NewsDTO">
+        SELECT ENT_CD
+             , NEWS_ID
+             , PROVIDER
+             , NEWS_TTL
+             , CASE WHEN UPPER(SUBSTR(NEWS_LINK, 1, 4)) LIKE 'HTTP%' THEN NEWS_LINK
+                    WHEN NEWS_LINK IS NULL THEN NULL
+               ELSE 'https://' || NEWS_LINK
+               END NEWS_LINK
+             , CASE WHEN UPPER(SUBSTR(THUMB_URL, 1, 4)) LIKE 'HTTP%' THEN THUMB_URL
+                    WHEN THUMB_URL IS NULL THEN NULL
+               ELSE 'https://' || THUMB_URL
+               END THUMB_URL
+          FROM KB_API_NEWS_INFO
+         WHERE ENT_CD = #{ent_cd}
+           AND NEWS_ID = (SELECT MAX(NEWS_ID) FROM KB_API_NEWS_INFO Z WHERE Z.ENT_CD = #{ent_cd})
+    </select>
+    <select id="selectNewsList" parameterType="String" resultType="com.kbin.inno.Startup.DTO.NewsDTO">
+        /* 뉴스정보 조회 (리스트) */
+        SELECT ENT_CD
+             , NEWS_ID
+             , PROVIDER
+             , NEWS_TTL
+             , NEWS_LINK
+             , THUMB_URL
+          FROM (SELECT ENT_CD
+                     , NEWS_ID
+                     , PROVIDER
+                     , NEWS_TTL
+                     , CASE WHEN UPPER(SUBSTR(NEWS_LINK, 1, 4)) LIKE 'HTTP%' THEN NEWS_LINK
+                            WHEN NEWS_LINK IS NULL THEN NULL
+                       ELSE 'https://' || NEWS_LINK
+                       END NEWS_LINK
+                     , CASE WHEN UPPER(SUBSTR(THUMB_URL, 1, 4)) LIKE 'HTTP%' THEN THUMB_URL
+                            WHEN THUMB_URL IS NULL THEN NULL
+                       ELSE 'https://' || THUMB_URL
+                       END THUMB_URL
+                  FROM KB_API_NEWS_INFO
+                 WHERE ENT_CD = #{ent_cd}
+                   AND NEWS_ID != (SELECT MAX(NEWS_ID) FROM KB_API_NEWS_INFO Z WHERE Z.ENT_CD = #{ent_cd})
+                 ORDER BY SUBSTR(NEWS_ID, 10, LENGTH(NEWS_ID)) DESC
+               )
+         WHERE 1 = 1
+           AND ROWNUM <![CDATA[<]]>= 10
+    </select>
+    <select id="selectKeywdList" parameterType="String" resultType="com.kbin.inno.Startup.DTO.KeywdDTO">
+        /* 키워드정보 조회 (리스트) */
+        SELECT KEYWD
+             , NOCS
+          FROM KB_API_KEYWD_INFO
+         WHERE ENT_CD = #{ent_cd}
+         ORDER BY NOCS DESC
+    </select>
+</mapper>
