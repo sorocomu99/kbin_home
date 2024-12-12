@@ -25,6 +25,7 @@
            , KB_FILE_INFO FILES
         WHERE VISUAL.ATCH_FILE_SN = FILES.FILE_SN(+)
           AND VISUAL.EXPSR_YN = 'Y'
-        ORDER BY SORT_NO ASC
+        ORDER BY VISUAL.SORT_NO ASC
     </select>
+
 </mapper>

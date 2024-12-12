@@ -21,14 +21,6 @@ window.addEventListener('load', () => {
     variableHeader();
 });
 
-function env() {
-    return typeof ENV === 'undefined' ? true : false;
-}
-
-if(!env()) {
-    document.title = 'KB 사용자'
-}
-
 const common = {
     initialize() {
         HTML = document.getElementsByTagName('html')[0];
@@ -62,6 +54,8 @@ const common = {
         gsap.ticker.lagSmoothing(0);
 
         scrollTop.initialize();
+        
+        mobileScroll();
     },
     onResize() {
         window.addEventListener('resize', () => {
@@ -168,7 +162,7 @@ let hamburger = {
     closeButton: '',
     currentDevice: '',
     initialize() {
-        this.depth1 = header.gnb.querySelectorAll('.depth1 > li > a');
+        this.depth1 = header.gnb.querySelectorAll('.header-primary .gnb .depth1 .title');
         this.openButton = header.el.querySelector('.header .hamburger a');
         this.closeButton = header.el.querySelector('.header-primary .gnb .close a');
  
@@ -183,6 +177,19 @@ let hamburger = {
         this.openButton.addEventListener('click', this.openMenu);
         this.closeButton.addEventListener('click', this.closeMenu);
         this.depth1.forEach((element) => element.addEventListener('click', this.accordion) );
+
+        header.gnb.dataset.lenisPrevent = '';
+
+        window.addEventListener('click', (e) => {
+            if(e.target.closest('.header')) {
+                return;
+            }
+
+            console.log('aa');
+            
+            
+            hamburger.closeMenu();
+        });
     },
     removeBurger(){
         this.openButton.removeEventListener('click', this.openMenu);
@@ -192,10 +199,19 @@ let hamburger = {
     openMenu(){
         lenis.stop();
         header.el.dataset.hamburger = 'opened';
+        document.documentElement.style.overflow = 'hidden';
+
+        hamburger.depth1.forEach(element => {
+            element.removeAttribute('aria-expanded');
+            if(element.nextElementSibling !== null){
+                element.nextElementSibling.removeAttribute('style')
+            }
+        });
     },
     closeMenu(){
         lenis.start();
         header.el.dataset.hamburger = 'closed';
+        document.documentElement.style.removeProperty('overflow');
     },
     resetMenu(){
         this.closeMenu();
@@ -360,6 +376,17 @@ function category() {
             swiper.slideTo(i, 0);
         }
     });
+}
+
+function mobileScroll() {
+    const mobileScroll = new Swiper('.mobile-scroll', {
+        freeMode: true,
+        slidesPerView: 'auto',
+        scrollbar: {
+            el: '.mobile-scroll .swiper-scrollbar',
+            draggable: true,
+        },
+    });    
 }
 
 function openModal(id){

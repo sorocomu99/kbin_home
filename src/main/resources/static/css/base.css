@@ -67,7 +67,7 @@ html {
     overscroll-behavior: none;
     line-height: 1.6;
     font-family: "KBFG Text", sans-serif;
-    font-size: 18px;
+    font-size: 62.5%;
     font-weight: 300;
     letter-spacing: 0;
     color: #333;
@@ -76,7 +76,7 @@ html {
     overflow-wrap: break-word;
     -webkit-text-size-adjust: 100%;-moz-text-size-adjust: 100%;-ms-text-size-adjust: 100%;-moz-osx-font-smoothing: grayscale;-webkit-font-smoothing: antialiased;
 }
-body { margin: 0 }
+body { margin: 0; font-size: 1.8rem; }
 h1, h2, h3, h4, h5, h6, p { margin: 0 }
 blockquote { margin: 0 }
 article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, summary { display: block }
@@ -93,9 +93,9 @@ button { overflow: visible; vertical-align: middle; padding: 0; margin: 0; line-
 button:active { outline: none }
 button::-moz-focus-inner { padding: 0; border: 0 }
 button:disabled { cursor: default }
-input { padding: 16px 20px; height: 64px; font-family: inherit; font-size: inherit; color: #333333; background-color: #ffffff; border: 1px solid #DDDDDD; border-radius: 8px; -webkit-transition: all ease 0.1s; transition: all ease 0.1s }
+input { padding: 16px 20px; height: 65px; font-family: inherit; font-size: inherit; color: #333333; background-color: #ffffff; border: 1px solid #DDDDDD; border-radius: 8px; -webkit-transition: all ease 0.1s; transition: all ease 0.1s }
 textarea { vertical-align: middle; padding: 16px 20px; line-height: inherit; font-family: inherit; font-size: inherit; color: #333333; background-color: #ffffff; border: 1px solid #DDDDDD; border-radius: 0; -webkit-transition: all ease 0.1s; transition: all ease 0.1s; resize: none; overflow-y: auto; -ms-overflow-style: auto }
-select { margin: 0; padding: 16px 50px 16px 20px; height: 64px; font-family: inherit; font-size: inherit; color: #333333; -moz-appearance: none; -webkit-appearance: none; appearance: none; -webkit-appearance: none; background-image: url("/images/select-arrow-fill.svg"); background-color: #ffffff; background-size: auto 14px; background-repeat: no-repeat; background-position: right 18px center; border: 1px solid #DDDDDD; border-radius: 8px; box-shadow: none }
+select { margin: 0; padding: 16px 50px 16px 20px; height: 65px; font-family: inherit; font-size: inherit; color: #333333; -moz-appearance: none; -webkit-appearance: none; appearance: none; -webkit-appearance: none; background-image: url("/images/select-arrow-fill.svg"); background-color: #ffffff; background-size: auto 14px; background-repeat: no-repeat; background-position: right 18px center; border: 1px solid #DDDDDD; border-radius: 8px; box-shadow: none }
 select::-ms-expand { display: none }
 input[type=number] { -moz-appearance: textfield }
 input:-moz-read-only, textarea:-moz-read-only { background-color: #f8f8f8 }
@@ -110,13 +110,12 @@ textarea.is-invalid::placeholder { color: #FF692D }
 :-ms-input-placeholder { color: #999999 }
 ::-ms-input-placeholder { color: #999999 }
 [lang="en"] body { letter-spacing: -0.01em }
-
 @media screen and (max-width: 1024px) {
-    body { font-size: 17px }
+body { font-size: 1.6rem }
+input, select { height: 45px; }
 }
-
 @media screen and (max-width: 768px) {
-body { font-size: 15px }
+body { font-size: 1.5rem }
 select { padding-top: 11px; padding-bottom: 11px; padding-left: 16px; background-size: auto 16px }
 input, textarea { padding-top: 11px; padding-bottom: 11px; padding-right: 16px; padding-left: 16px }
 }

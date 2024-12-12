@@ -30,8 +30,9 @@
                 </div>
                 </form>
                 <div class="proximal-filter">
-                    <button class="proximal-filter-button" id="searchBtn" aria-expanded="false"><i class="icon-option"></i> <span>상세 옵션 열기</span></button>
-                    <form id="detForm" name="detForm" th:action="@{/startup/list}" method="get">
+                    <!--<button class="proximal-filter-button" id="searchBtn" aria-expanded="false"><i class="icon-option"></i> <span>상세 옵션 열기</span></button>-->
+                    <button class="proximal-filter-button" aria-expanded="false" id="searchBtn"><i class="icon icon-option"></i> <span>상세 옵션 열기</span></button>
+                    <form id="detForm" name="detForm" th:action="@{/startup/list}" onsubmit="return validateForm()" method="get">
                         <input class="input" type="hidden" id="keyWord1" name="keyWord1" value="">
                         <input type="hidden" id="detSearch1" name="detSearch1" value="" />
                         <input type="hidden" id="pageNum" name="pageNum" />
@@ -195,7 +196,8 @@
                             </div>
                             <div class="proximal-sort-button">
                                 <button id="reset" class="button" type="button"><i class="icon icon-rotate-cw"></i>선택 초기화</button>
-                                <button class="button button-dark" type="submit">검색하기</button>
+                                <!--<button class="button button-dark" id="search" type="submit">검색하기</button>-->
+                                <button id="search" class="button button-dark" type="submit"><span>검색하기</span></button>
                             </div>
                         </div>
                     </div>
@@ -230,7 +232,7 @@
                         </div>
                         <ul class="proximal-list">
                             <li class="proximal-list-item" th:unless="${startUpList == null or startUpList.isEmpty()}" th:each="list : ${startUpList}">
-                                <a class="proximal-list-link" href="javascript:void(0)" th:attr="onclick=|javascript:detailPage('${list.ent_cd}');|" >
+                                <a class="proximal-list-link" href="#" th:onclick="detailPage([[${list.ent_cd}]])" >
                                 <!--<a class="proximal-list-link" href="view.html">-->
                                     <div class="row">
                                         <th:block th:if="${list.kb_starters_yn == 'Y'}">
@@ -336,6 +338,10 @@
                         </ul>
                     </div>
                 </div>
+                <!-- 모바일: 상세옵션 플로팅 버튼 -->
+                <div class="proximal-floaing">
+                    <button class="button" type="button" aria-expanded="false"><i class="icon icon-option"></i><span>상세 옵션 열기</span></button>
+                </div>
             </div>
         </div>
     </main>
@@ -354,6 +360,7 @@
             calendar();
             proximalPannel();
             setInputVal();
+            proximalFloaing();
 
             const blockGroups = document.querySelectorAll('.block-group-range');
             const reset = document.getElementById('reset');
@@ -431,6 +438,54 @@
             });
         }
 
+        function proximalFloaing() {
+            const search = document.getElementById('search');
+            const toggle = document.querySelector('.proximal-floaing .button');
+            const pannel = document.querySelector('.proximal-filter');
+
+            toggle.addEventListener('click', togglePannel);
+            search.addEventListener('click', () => {
+                if(handler.isDesktop()) {
+                    return;
+                }
+
+                closePannel();
+            });
+
+            function togglePannel() {
+                toggle.getAttribute('aria-expanded') === 'false' ? openPannel() : closePannel();
+            }
+
+            function openPannel() {
+                toggle.setAttribute('aria-expanded', 'true');
+                toggle.querySelector('span').textContent = '상세 옵션 닫기';
+                pannel.style.display = 'block';
+                document.documentElement.dataset.scrollY = 'false';
+            }
+
+            function closePannel() {
+                toggle.setAttribute('aria-expanded', 'false');
+                toggle.querySelector('span').textContent = '상세 옵션 열기';
+                pannel.style.removeProperty('display');
+                document.documentElement.removeAttribute('data-scroll-y');
+            }
+/*
+            function togglePannel(e) {
+                const element = e.target.closest('.button');
+                if(element.getAttribute('aria-expanded') === 'false') {
+                    element.setAttribute('aria-expanded', 'true');
+                    element.querySelector('span').textContent = '상세 옵션 닫기';
+                    pannel.style.display = 'block';
+                    document.documentElement.style.overflow = 'hidden';
+                } else {
+                    element.setAttribute('aria-expanded', 'false');
+                    element.querySelector('span').textContent = '상세 옵션 열기';
+                    pannel.style.removeProperty('display');
+                    document.documentElement.style.removeProperty('overflow');
+                }
+            }
+ */
+        }
         function proximalPannel() {
             const button = document.getElementsByClassName('proximal-filter-button')[0];
             const pannel = document.getElementsByClassName('proximal-pannel')[0];
@@ -739,6 +794,63 @@
 
             actionForm.attr("action", "/startup/list");
             actionForm.submit();
+        }
+
+        function validateForm() {
+            var minAmt = $("#minAmt").val();
+            var maxAmt = $("#maxAmt").val();
+            var minEmp = $("#minEmp").val();
+            var maxEmp = $("#maxEmp").val();
+
+            if (minAmt === "0") {
+                alert("누적투자금액의 최소 입력값은 0보다 커야 합니다.");
+                return false;
+            }
+
+            if (maxAmt === "0") {
+                alert("누적투자금액의 최대 입력값은 0보다 커야 합니다.");
+                return false;
+            }
+
+            if (minAmt !== "" && maxAmt !== "") {
+                minAmt = Number(minAmt);
+                maxAmt = Number(maxAmt);
+                if (minAmt > maxAmt) {
+                    alert("누적투자금액 최소금액은 최대금액보다 클 수 없습니다.");
+                    return false;
+                }
+
+                if (minAmt === maxAmt) {
+                    alert("누적투자금액 최소금액과 최대금액이 같습니다.");
+                    return false;
+                }
+            }
+
+            if (minEmp === "0") {
+                alert("근무자 최소값은 0보다 커야 합니다.");
+                return false;
+            }
+
+            if (maxEmp === "0") {
+                alert("근무자 최대값은 0보다 커야 합니다.");
+                return false;
+            }
+
+            if (minEmp !== "" && maxEmp !== "") {
+                minEmp = Number(minEmp);
+                maxEmp = Number(maxEmp);
+                if (minEmp > maxEmp) {
+                    alert("근무자 최소값은 최대값보다 클 수 없습니다.");
+                    return false;
+                }
+
+                if (minEmp === maxEmp) {
+                    alert("근무자 최소값과 최대값이 같습니다.");
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         function pageMove(pageNo) {

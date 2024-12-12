@@ -27,6 +27,6 @@ public class MainController {
 //        List<VisualDTO> selectList = mainService.selectVisual();
 //        model.addAttribute("selectList", selectList);
         return "main/main";
+    	//return "redirect:/startup/list";
     }
-
 }
