@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment/config :: configFragment"></head>
+<body>
+    <!-- 헤더 -->
+    <app-header></app-header>
+
+    <!-- 본문 -->
+    <main class="main">
+        <div class="apply">
+            <div class="apply-image">
+                <img src="/images/dummy/apply-image.jpg" alt="">
+            </div>
+            <div class="apply-contents">
+                 <!--
+                    다음으로 버튼 클릭 후 항목에 미 체크되어 있으면 form 태그에 need-invalid 클래스 추가 해주세요.
+                    기본상태는 클래스 비워주시면 됩니다.
+                -->
+                <form class="need-invalid">
+                    <!-- 기본 상태 <form> -->
+                    <div class="context">
+                        <!-- 질문 -->
+                        <h1 class="h5">16. 회사 소개자료를 올려주세요.</h1>
+                        <p class="p">
+                            - 파일명 양식 : [회사명]_회사소개서.pdf (10MB이내 PDF 파일만) <br>
+                            - 동영상 및 데모는 링크로 회사소개서내 첨부 요망
+                        </p>
+                        <!-- 첨부파일 -->
+                        <div class="file-upload">
+                            <input id="fileUpload" class="file-input" type="file" name="upfile1">
+                            <div class="input-wrap">
+                                <span id="fileName" class="input file-name"></span>
+                                <i class="delete"></i>
+                            </div>
+                            <label class="button button-border" for="fileUpload"><i class="icon icon-upload"></i><span>파일 찾기</span></label>
+                        </div>
+                        <!-- 유효성 체크 문구(form 태그에 need-invalid 클래스가 있으면 아래 문구가 나타납니다) -->
+                        <div class="invalid-feedback"><i class="icon icon-danger"></i>파일을 첨부해주세요.</div>
+                    </div>
+                    <div class="bottom-button">
+                        <!-- 제출버튼입니다. (아래건 임시용) <button class="button button-border" type="submit"><span>다음으로</span> <i class="icon icon-chevron-right"></i></button> -->
+                        <a class="button button-border" href="/starters/apply/complete"><span>다음으로</span> <i class="icon icon-chevron-right"></i></a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- 푸터 -->
+    <app-footer></app-footer>
+
+    <!-- 스크립트 -->
+    <script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const form = document.querySelector('form');
+        const inputs = document.querySelectorAll('input');
+
+        // 파일 첨부 시 유효성 문구 제거
+        inputs.forEach(input => input.addEventListener('change', (e) => checkState(e)));
+        
+        function checkState(input) {
+            form.classList.remove('need-invalid');
+        }
+
+        // 파일 첨부
+        selectFile();
+    });
+
+    // 파일 첨부
+    function selectFile() {
+        const inputFile = document.querySelector('#fileUpload');
+        const inputName = document.querySelector('#fileName');
+        const deleteInput = document.querySelector('.input-wrap .delete');
+        const text = inputName.innerText;
+    
+        inputName.addEventListener('click', () => {
+            inputFile.click();
+        });
+        deleteInput.addEventListener('click', () => {
+            inputName.innerText = text;
+            inputName.classList.remove('is-selected');
+        });
+        inputFile.addEventListener('change', () => {
+            const filename = inputFile.files[0].name;
+            inputName.innerText = filename;
+            inputName.classList.add('is-selected');
+        });
+    }
+    </script>
+</body>
+</html>

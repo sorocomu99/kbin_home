@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment/config :: configFragment"></head>
+<body>
+<!-- 헤더 -->
+<app-header></app-header>
+
+<!-- 본문 -->
+<main class="main">
+    <div class="section-top">
+        <div class="section-top-wrap">
+            <nav aria-label="Breadcrumb" class="breadcrumb" data-breadcrub-theme="light">
+                <ul>
+                    <li><a href="/"><i class="icon icon-home"></i><span class="blind">HOME</span></a></li>
+                    <li><a href="/community/notice/list">커뮤니티</a></li>
+                    <li><span aria-current="page">HUB센터 소식</span></li>
+                </ul>
+            </nav>
+            <h2 class="title">HUB센터 소식</h2>
+        </div>
+    </div>
+    <div class="board board--page">
+        <div class="board-list">
+            <div class="board-list-head">
+                <div class="col">
+                    <form action="">
+                        <div class="search">
+                            <select name="" id="">
+                                <option value="" selected>제목</option>
+                            </select>
+                            <div class="box">
+                                <input type="text" placeholder="검색어를 입력해주세요.">
+                                <button type="submit"><span class="blind">검색</span></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="board-list-body">
+                <div class="total">
+                    Total: <em class="color-primary">5</em>건의 게시물이 있습니다.
+                </div>
+                <ul class="magazine-board-list">
+                    <!-- 게시글 없을 때 -->
+                    <!-- <li class="list">
+                        <p class="empty">등록된 게시글이 없습니다.</p>
+                    </li> -->
+                    <li class="list">
+                        <a class="block" href="/community/hub/detail/1">
+                            <div class="thumbnail"><img src="/images/dummy/image0.jpg" alt=""></div>
+                            <div class="contents">
+                                <div class="row">
+                                    <p class="title">KB금융, 혁신 스타트업과 상생하는 '2024 허브데이' 개최 <i class="icon icon-file"></i></p>
+                                    <p class="text">
+                                        [이데일리 양희동 기자] KB금융그룹은 지난 3일 서울 서초구 ‘KB 이노베이션 허브(Innovation HUB)센터’에서 유망 스타트업의 성장을 지원하는 ‘2024 허브데이(HUB Day)’를 개최했다고 4일 밝혔다. 허브데이는 KB금융이 ‘KB스타터스’와의 협업·지원을 강화하고자 마련한 스타트업 데모데이다. 데모데이란 스타트업이 정부의 육성·투자 기관, 창업 지원 기관, 벤처캐피탈, 액셀러레이터 등을 대상으로 펼치는 투자 유치 활동이다.
+                                    </p>
+                                </div>
+                                <div class="row">
+                                    <p class="category">행사소식</p>
+                                    <p class="date">2024. 12. 04</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a class="block" href="/community/hub/detail/1">
+                            <div class="thumbnail"><img src="/images/dummy/thumbnail1.jpg" alt=""></div>
+                            <div class="contents">
+                                <div class="row">
+                                    <p class="title">KB금융, 핀테크랩 'KB스타터스' 선발로 스타트업 육성ㆍ발굴 <i class="icon icon-file"></i></p>
+                                    <p class="text">
+                                        지난 4월 권대영(왼쪽 여덟번째) 금융위원회 사무처장과 양종희(왼쪽 여섯번째) KB금융그룹 회장, 이재근(왼쪽 네번째) KB국민은행장이 30일 열린 'KB Innovation HUB센터' 10주년 기념행사에서 기념촬영을 하고 있다. [사진=KB금융그룹]
+                                        컨슈머타임스=김하은 기자 | KB금융이 운영하는 핀테크랩인 KB이노베이션허브는 KB금융과 핀테크 생태계를 잇는 구심점 역할을 하고 있다.
+                                    </p>
+                                </div>
+                                <div class="row">
+                                    <p class="category">HUB센터 활동</p>
+                                    <p class="date">2024. 10. 01</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a class="block" href="/community/hub/detail/1">
+                            <div class="thumbnail"><img src="/images/dummy/thumbnail2.jpg" alt=""></div>
+                            <div class="contents">
+                                <div class="row">
+                                    <p class="title">KB금융, 미래 혁신 협업 파트너 하반기 ‘KB스타터스’ 선정 <i class="icon icon-file"></i></p>
+                                    <p class="text">
+                                        ■ 생성형AI, 보안, 데이터 등 우수 스타트업 15개사 선정 KB금융그룹은 지난달 26일 ‘KB금융과 미래를 함께 혁신할 협업 파트너’로 성장 가능성이 있는  15개 스타트업을 2024년 하반기 ‘KB스타터스’로 최종 선정, ‘KB스타터스 Welcome
+                                    </p>
+                                </div>
+                                <div class="row">
+                                    <p class="category">HUB센터 활동</p>
+                                    <p class="date">2024. 10. 01</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a class="block" href="/community/hub/detail/1">
+                            <div class="thumbnail"><img src="/images/dummy/thumbnail3.jpg" alt=""></div>
+                            <div class="contents">
+                                <div class="row">
+                                    <p class="title">KB이노베이션허브 운영현황 <i class="icon icon-file"></i></p>
+                                    <p class="text">
+                                        ■ 2020년 스타트업 스케일업 성과 요약 ▲스타트업 선발 ▲제휴 ▲투자 ▲공간 ▲글로벌 지원 등
+                                    </p>
+                                </div>
+                                <div class="row">
+                                    <p class="category">행사 소식</p>
+                                    <p class="date">2022. 11. 04</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="board-list-foot board-list-foot--center">
+                <a class="button button-border" href="">더 보기</a>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script th:inline="javascript">
+    // 글자만 추출하여 목록에서 출력
+    $(document).ready(function (){
+        for(var i = 0; i < $('#magazine-board-list').children().length; i++) {
+            var hub_cn = $('#hub_cn' + i).val();
+            var content = tagToText(hub_cn);
+            $('#hub_content' + i).text(content);
+        }
+    });
+
+    function tagToText(hub_cn) {
+        var parser = new DOMParser();
+        var doc = parser.parseFromString(hub_cn, 'text/html');
+        return doc.body.innerText;
+    }
+
+    // 더보기 눌렀을 때 이벤트
+    function morePage() {
+        var more_num = $('#more_num').val();
+        $.ajax({
+            url: '/community/hub/list/' + more_num, // 요청 URL
+            type: 'GET', // HTTP 메서드
+            dataType: 'json',
+            success: function(data) {
+                // 게시글 전체 갯수와 li 태그 갯수가 일치하면 종료
+                if(data.allCount == $('#magazine-board-list').children().length) {
+                    return false;
+                }
+
+                var selectList = data.selectList;
+                var htmlCode = '';
+                for(var i = 0; i < selectList.length; i++) {
+                    htmlCode += '<li class="list">';
+                    htmlCode += '   <a class="block" href="/community/hub/detail/ ' + selectList[i].hub_sn + '">';
+                    htmlCode += '       <div class="thumbnail"><img src="' + selectList[i].hub_path_img + selectList[i].hub_img_name + '" alt=""></div>';
+                    htmlCode += '       <div class="contents">';
+                    htmlCode += '           <div class="row">';
+                    htmlCode += '               <p class="title">';
+                    htmlCode += '                   <span>' + selectList[i].hub_ttl + '</span>';
+                    if (selectList[i].atch_file_sn3 != 0) {
+                        htmlCode += '               <i class="icon icon-file"></i>';
+                    }
+                    htmlCode += '               </p>';
+                    htmlCode += '               <p>' + tagToText(selectList[i].hub_cn) + '</p>';
+                    htmlCode += '           </div>';
+                    htmlCode += '           <div class="row">';
+                    htmlCode += '               <p class="category">' + selectList[i].ctgry + '</p>';
+                    htmlCode += '               <p class="date">' + selectList[i].frst_reg_dt + '</p>';
+                    htmlCode += '           </div>';
+                    htmlCode += '       </div>';
+                    htmlCode += '   </a>';
+                    htmlCode += '</li>';
+                }
+                $('#magazine-board-list').append(htmlCode);
+
+                $('#input[name=more_num]').val($('#input[name=more_num]').val() + 1);
+
+                if (data.allCount == $('#magazine-board-list').children().length) {
+                    $('#more-btn').hide();
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+    }
+</script>
+
+<!-- 푸터 -->
+<app-footer></app-footer>
+</body>
+</html>

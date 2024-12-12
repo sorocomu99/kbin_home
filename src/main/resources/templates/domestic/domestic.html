@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment/config :: configFragment"></head>
+<body>
+    <!-- 헤더 -->
+    <app-header></app-header>
+
+    <!-- 본문 -->
+    <main class="main">
+        <div class="nurture nurture-domestic">
+            <div class="section-intro">
+                <div class="sticky">
+                    <div class="section-top">
+                        <div class="section-top-wrap">
+                            <nav aria-label="Breadcrumb" class="breadcrumb" data-breadcrub-theme="light">
+                                <ul>
+                                    <li class="item"><a href="/"><i class="icon icon-home"></i><span class="blind">HOME</span></a></li>
+                                    <li class="item"><a href="javascript:">스타트업 육성</a></li>
+                                    <li class="item"><span aria-current="page">국내 프로그램</span></li>
+                                </ul>
+                            </nav>
+                            <h2 class="title">국내 프로그램</h2>
+                        </div>
+                    </div>
+                    <div class="background">
+                        <img class="item" src="/images/sub/nurture/global/intro-background-domestic.jpg" alt="">
+                    </div>
+                    <div class="block">
+                        <div class="flex">
+                            <div class="side">
+                                <p class="heading">KB금융그룹 내 인프라를 <br class="pc">활용하여 <br class="sp">스타트업의 <br class="pc">성장을 지원합니다</p>
+                            </div>
+                            <div class="contents">
+                                <div class="chart-box">
+                                    <p class="title">육성기업</p>
+                                    <div class="chart chart-nurture">
+                                        <div id="nurtureChart" class="item"></div>
+                                    </div>
+                                    <p class="footnote">2024.11월 기준</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <div class="section-wrap">
+                    <h3 class="section-heading color-primary">KB스타터스</h3>
+                    <p class="section-text">‘KB스타터스’는 KB금융그룹에서 육성하는 스타트업입니다. <br>KB Innovation HUB센터는 유망 스타트업을 KB스타터스로 선발하여 다양한 육성 프로그램을 지원하고 있습니다.</p>
+                    <div class="wideban"><div class="background"></div></div>
+                </div>
+            </div>
+            <div class="section section-cases section-border">
+                <div class="section-wrap">
+                    <h3 class="section-heading">육성 프로그램</h3>
+                    <div class="section-context">
+                        <h4 class="section-title"><span class="block"><span class="highlight">제휴</span><sup>01</sup></span></h4>
+                        <p class="section-text">상품·서비스 개선 및 출시 등 KB와의 실질적인 협업 논의 지원을 위해 유관 부서 실무자와 ‘1:1 밋업’ 등 제휴 연계 프로그램을 제공합니다.</p>
+                    </div>
+                    <div class="section-flex">
+                        <div class="side"></div>
+                        <div class="contents">
+                            <div class="cases">
+                                <div class="cases-head">
+                                    <p class="title">대표 사례</p>
+                                    <div class="controls">
+                                        <div class="swiper-pagination"></div>
+                                        <div class="swiper-button-prev"></div>
+                                        <div class="swiper-button-next"></div>
+                                    </div>
+                                </div>
+                                <div class="cases-body">
+                                    <div class="swiper cases-slider">
+                                        <div class="swiper-wrapper">
+                                            <div class="swiper-slide">
+                                                <div class="thumbnail"><img src="/images/dummy/nurture-case-thumbnail-1.jpg" alt=""></div>
+                                                <p class="sub"><b>KB국민은행</b> X 빅테크플러스</p>
+                                                <p class="title">KB부동산 ‘전세안전진단’ 서비스</p>
+                                                <div class="chips"><span class="chip">부동산 빅데이터 플랫폼</span></div>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <div class="thumbnail"><img src="/images/dummy/nurture-case-thumbnail-2.jpg" alt=""></div>
+                                                <p class="sub"><b>KB국민은행</b> X 딥브레인에이아이</p>
+                                                <p class="title">KB AI금융비서</p>
+                                                <div class="chips"><span class="chip">생성형 AI 솔루션</span></div>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <div class="thumbnail"><img src="/images/dummy/nurture-case-thumbnail-3.jpg" alt=""></div>
+                                                <p class="sub"><b>KB국민카드</b> X 아티웰스</p>
+                                                <p class="title">KB Pay ‘자산수명 계산기’ 서비스</p>
+                                                <div class="chips"><span class="chip">부동산 자산관리 솔루션</span></div>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <div class="thumbnail"><img src="/images/dummy/nurture-case-thumbnail-1.jpg" alt=""></div>
+                                                <p class="sub"><b>KB국민은행</b> X 빅테크플러스</p>
+                                                <p class="title">KB부동산 ‘전세안전진단’ 서비스</p>
+                                                <div class="chips"><span class="chip">부동산 빅데이터 플랫폼</span></div>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <div class="thumbnail"><img src="/images/dummy/nurture-case-thumbnail-2.jpg" alt=""></div>
+                                                <p class="sub"><b>KB국민은행</b> X 딥브레인에이아이</p>
+                                                <p class="title">KB AI금융비서</p>
+                                                <div class="chips"><span class="chip">생성형 AI 솔루션</span></div>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <div class="thumbnail"><img src="/images/dummy/nurture-case-thumbnail-3.jpg" alt=""></div>
+                                                <p class="sub"><b>KB국민카드</b> X 아티웰스</p>
+                                                <p class="title">KB Pay ‘자산수명 계산기’ 서비스</p>
+                                                <div class="chips"><span class="chip">부동산 자산관리 솔루션</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="swiper-scrollbar"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section section-investment section-background">
+                <div class="section-wrap">
+                    <div class="section-context">
+                        <h4 class="section-title"><span class="block"><span class="highlight">투자</span><sup>02</sup></span></h4>
+                        <p class="section-text">피치데이, 데모데이 등을 통해 스타트업에게 투자 IR 기회를 제공하고 그룹 CVC, SI 펀드 및 계열사 투자 재원을 활용해 성장 단계별 투자를 지원합니다.</p>
+                    </div>
+                    <div class="section-flex">
+                        <div class="side">
+                            <img class="kb-logo" src="/images/sub/nurture/domestic/kb-logo-gray.svg" alt="">
+                        </div>
+                        <div class="contents">
+                            <div class="chart-box">
+                                <div class="flex">
+                                    <p class="title">누적 투자 금액</p>
+                                    <p class="text">(억원)</p>
+                                </div>
+                                <div class="chart chart-investment">
+                                    <div id="investmentChart" class="item"></div>
+                                </div>
+                                <p class="footnote">2024.11월 기준</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <div class="section-wrap">
+                    <div class="section-context">
+                        <h4 class="section-title"><span class="block"><span class="highlight">멘토링/컨설팅</span><sup>03</sup></span></h4>
+                        <p class="section-text">KB금융그룹 내부 전문가와 외부 협력 기관의 전문가를 연계하여 금융 컨설팅, 기업 자금관리, 정부 지원 사업 프로그램 등 스타트업이 필요로하는 각종 멘토링과 컨설팅을 제공합니다.</p>
+                    </div>
+                    <div class="section-flex">
+                        <div class="side"></div>
+                        <div class="contents">
+                            <ul class="consulting-list">
+                                <li>
+                                    <div class="block">
+                                        <p class="badge">CONSULTING</p>
+                                        <p class="title">KB Wise 컨설팅</p>
+                                        <p class="text">세무/법률/인사/노무 등 KB금융그룹의 전문인력 연계 상담 및 KB스타터스 대상 무료 강연 제공</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="block">
+                                        <p class="badge">CONSULTING</p>
+                                        <p class="title">기업 자금관리 컨설팅</p>
+                                        <p class="text">기업 자금관리를 위한 KB의 맞춤 금융 상담 제공 (직원 급여관리, 퇴직연금 제도, CMS, 외환, 절세 등)</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="block">
+                                        <p class="badge">CONSULTING</p>
+                                        <p class="title">협력기관 연계 멘토링</p>
+                                        <p class="text">스타트업 생태계의 다양한 협력기관과 연계하여 법률/세무/회계/특허 등 분야별 전문 경영 자문 제공</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section section-background">
+                <div class="section-wrap">
+                    <div class="section-context">
+                        <h4 class="section-title"><span class="block"><span class="highlight">협력기관 연계</span><sup>04</sup></span></h4>
+                        <p class="section-text">정부기관 등 외부 육성기관과 연계한 외부 IR 기회 제공, 사업화 자금 지원 추천 등 스타트업 성장 단계별 외부 프로그램 연계를 통해 스타트업의 성장을 지원합니다.</p>
+                    </div>
+                    <ul class="cooperation-list">
+                        <li><div class="thumbnail"><img src="/images/dummy/cooperation-thumbnail-1.jpg" alt=""></div></li>
+                        <li><div class="thumbnail"><img src="/images/dummy/cooperation-thumbnail-2.jpg" alt=""></div></li>
+                        <li><div class="thumbnail"><img src="/images/dummy/cooperation-thumbnail-3.jpg" alt=""></div></li>
+                        <li><div class="thumbnail"><img src="/images/dummy/cooperation-thumbnail-4.jpg" alt=""></div></li>
+                        <li><div class="thumbnail"><img src="/images/dummy/cooperation-thumbnail-5.jpg" alt=""></div></li>
+                        <li><div class="thumbnail"><img src="/images/dummy/cooperation-thumbnail-6.jpg" alt=""></div></li>
+                        <li><div class="thumbnail"><img src="/images/dummy/cooperation-thumbnail-7.jpg" alt=""></div></li>
+                        <li><div class="thumbnail"><img src="/images/dummy/cooperation-thumbnail-8.jpg" alt=""></div></li>
+                        <li><div class="thumbnail"><img src="/images/dummy/cooperation-thumbnail-9.jpg" alt=""></div></li>
+                        <li><div class="thumbnail"><img src="/images/dummy/cooperation-thumbnail-10.jpg" alt=""></div></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="section section-roomy">
+                <div class="section-wrap">
+                    <h3 class="section-heading">지원 혜택</h3>
+                    <div class="section-context">
+                        <h4 class="section-title"><span class="block"><span class="highlight">육성공간</span><sup>01</sup></span></h4>
+                        <p class="section-text">스타트업 인프라가 풍부한 ‘강남’과 초기 스타트업 육성을 위한 ‘관악’에 입주 공간을 운영하여 스타트업이 일하기 좋은 환경을 제공합니다.</p>
+                    </div>
+                    <div class="roomy-nested">
+                        <!-- roomy-parent-slider: 육성 공간 슬라이드 -->
+                        <div class="slider-container">
+                            <div class="swiper roomy-parent-slider">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <!-- roomy-child-slider: 썸네일 슬라이드 -->
+                                        <div class="swiper roomy-child-slider">
+                                            <div class="swiper-wrapper">
+                                                <div class="swiper-slide"><div class="thumbnail"><img src="/images/sub/nurture/domestic/roomy-nested-1-image-1.jpg" alt=""></div></div>
+                                                <div class="swiper-slide"><div class="thumbnail"><img src="/images/sub/nurture/domestic/roomy-nested-2-image-1.jpg" alt=""></div></div>
+                                                <div class="swiper-slide"><div class="thumbnail"><img src="/images/sub/nurture/domestic/roomy-nested-1-image-1.jpg" alt=""></div></div>
+                                            </div>
+                                            <div class="controls">
+                                                <div class="swiper-pagination"></div>
+                                                <div class="swiper-button-prev"></div>
+                                                <div class="swiper-button-next"></div>
+                                            </div>
+                                        </div>
+                                        <div class="context">
+                                            <p class="title">강남 HUB</p>
+                                            <p class="text">서울 서초구 서초대로 77길 55, Wework신논현점</p>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <!-- roomy-child-slider: 썸네일 슬라이드 -->
+                                        <div class="swiper roomy-child-slider">
+                                            <div class="swiper-wrapper">
+                                                <div class="swiper-slide"><div class="thumbnail"><img src="/images/sub/nurture/domestic/roomy-nested-2-image-1.jpg" alt=""></div></div>
+                                                <div class="swiper-slide"><div class="thumbnail"><img src="/images/sub/nurture/domestic/roomy-nested-1-image-1.jpg" alt=""></div></div>
+                                                <div class="swiper-slide"><div class="thumbnail"><img src="/images/sub/nurture/domestic/roomy-nested-2-image-1.jpg" alt=""></div></div>
+                                            </div>
+                                            <div class="controls">
+                                                <div class="swiper-pagination"></div>
+                                                <div class="swiper-button-prev"></div>
+                                                <div class="swiper-button-next"></div>
+                                            </div>
+                                        </div>
+                                        <div class="context">
+                                            <p class="title">강남 HUB</p>
+                                            <p class="text">서울 서초구 서초대로 77길 55, Wework신논현점</p>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <!-- roomy-child-slider: 썸네일 슬라이드 -->
+                                        <div class="swiper roomy-child-slider">
+                                            <div class="swiper-wrapper">
+                                                <div class="swiper-slide"><div class="thumbnail"><img src="/images/sub/nurture/domestic/roomy-nested-1-image-1.jpg" alt=""></div></div>
+                                                <div class="swiper-slide"><div class="thumbnail"><img src="/images/sub/nurture/domestic/roomy-nested-2-image-1.jpg" alt=""></div></div>
+                                                <div class="swiper-slide"><div class="thumbnail"><img src="/images/sub/nurture/domestic/roomy-nested-1-image-1.jpg" alt=""></div></div>
+                                            </div>
+                                            <div class="controls">
+                                                <div class="swiper-pagination"></div>
+                                                <div class="swiper-button-prev"></div>
+                                                <div class="swiper-button-next"></div>
+                                            </div>
+                                        </div>
+                                        <div class="context">
+                                            <p class="title">강남 HUB</p>
+                                            <p class="text">서울 서초구 서초대로 77길 55, Wework신논현점</p>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <!-- roomy-child-slider: 썸네일 슬라이드 -->
+                                        <div class="swiper roomy-child-slider">
+                                            <div class="swiper-wrapper">
+                                                <div class="swiper-slide"><div class="thumbnail"><img src="/images/sub/nurture/domestic/roomy-nested-2-image-1.jpg" alt=""></div></div>
+                                                <div class="swiper-slide"><div class="thumbnail"><img src="/images/sub/nurture/domestic/roomy-nested-1-image-1.jpg" alt=""></div></div>
+                                                <div class="swiper-slide"><div class="thumbnail"><img src="/images/sub/nurture/domestic/roomy-nested-2-image-1.jpg" alt=""></div></div>
+                                            </div>
+                                            <div class="controls">
+                                                <div class="swiper-pagination"></div>
+                                                <div class="swiper-button-prev"></div>
+                                                <div class="swiper-button-next"></div>
+                                            </div>
+                                        </div>
+                                        <div class="context">
+                                            <p class="title">강남 HUB</p>
+                                            <p class="text">서울 서초구 서초대로 77길 55, Wework신논현점</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-scrollbar"></div>
+                            </div>
+                            <div class="swiper-button-prev roomy-parent-prev"></div>
+                            <div class="swiper-button-next roomy-parent-next"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section section-background">
+                <div class="section-wrap">
+                    <div class="section-context">
+                        <h4 class="section-title"><span class="block"><span class="highlight">채용지원</span><sup>02</sup></span></h4>
+                        <p class="section-text">우수기업 취업박람회 KB굿잡을 통한 채용 지원 우수 기업 채용 박람회인 ‘KB굿잡‘ 참여 기회를 제공하며, ‘KB굿잡’의 인재 매칭 서비스를 통해 정규직원 채용 시 채용지원금을 제공하여 스타트업의 유망한 인재 확보를 지원합니다.</p>
+                    </div>
+                    <div class="section-flex">
+                        <div class="side"></div>
+                        <div class="contents">
+                            <div class="job">
+                                <div class="job-head">
+                                    <div data-animate class="circle-1">
+                                        <img src="/images/sub/nurture/domestic/job-circle.png" alt="국민과 함께하는 일자리 찾기 KB Good Job. KB 국민은행.">
+                                    </div>
+                                    <div data-animate class="circle-2">
+                                        <p class="year">2023년</p>
+                                        <p class="title">1,142명 채용</p>
+                                        <div class="data">
+                                            <p class="text"><i class="icon icon-1"></i>6.7억원</p>
+                                            <p class="text"><i class="icon icon-2"></i>116개사</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="job-body">
+                                    <div data-animate class="thumbnail"><img src="/images/sub/nurture/domestic/job-thumbnail.jpg" alt=""></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 푸터 -->
+    <app-footer></app-footer>
+
+<script th:inline="javascript">
+    window.addEventListener('DOMContentLoaded', () => {
+        sr.reveal('.section-1 .section-heading', {distance: 0});
+        sr.reveal('.section-title', {distance: 0, opacity: 1});
+        sr.reveal('.section-text');
+        sr.reveal('.wideban', {distance: 0, opacity: 1});
+        sr.reveal('.cases');
+        sr.reveal('.section-investment .chart-box');
+        sr.reveal('.roomy-nested');
+        sr.reveal('.cooperation-list li', {distance: '85%', interval: 50});
+        sr.reveal('.consulting-list li', {distance: '60%', interval: 150});
+        sr.reveal('.job [data-animate]', {origin: 'left', interval: 150});
+
+        introduce();
+        nurtureChart();
+        investmentChart();
+        slider();
+        roomy();
+    });
+
+    function introduce() {
+        const tl = gsap.timeline();
+        let mm = gsap.matchMedia();
+
+        mm.add("(min-width: 1025px)", () => {
+            gsap.to('.nurture .section-intro .background', 0.65, {ease: 'power1.out', opacity: 1, delay: 0.2});
+
+            tl.fromTo('.nurture .section-intro .background', 1.5, {
+                top: 'calc(1.8vw + 340px)',
+                width: '90%',
+                maxWidth: '1420px',
+                maxHeight: '460px',
+                height: 'calc(95vh - 380px)',
+                borderRadius: '24px'
+            }, {
+                ease: 'power2.inOut',
+                top: 'calc(0vw + 0px)',
+                maxWidth: '100vw',
+                width: '100%',
+                maxHeight: '100vh',
+                height: 'calc(100vh - 0px)',
+                borderRadius: '0px',
+            })
+            tl.to('.section-top', {opacity: 0, yPercent: -10}, '<+15%')
+            tl.fromTo('.nurture .section-intro .heading', 0.45, {opacity: 0, yPercent: 35}, {
+                opacity: 1,
+                yPercent: 0
+            }, '>+25%')
+            tl.fromTo('.nurture .section-intro .chart-box', 0.7, {opacity: 0, yPercent: 20}, {
+                opacity: 1,
+                yPercent: 0
+            }, '<+30%')
+            tl.to('.nurture .section-intro .background .item', 0.35, {opacity: 0.6}, '<')
+                .to({}, 1, {})
+
+            ScrollTrigger.create({
+                animation: tl,
+                trigger: '.section-intro',
+                start: 'top top',
+                end: 'bottom bottom',
+                scrub: 1,
+                // markers: true
+            });
+        });
+    }
+
+        function nurtureChart() {
+            // 차트 데이터 배열에 담기
+            var data = [[${promote}]];
+
+            var graph_yr = [];
+            graph_yr.push(data.graph1_yr);
+            graph_yr.push(data.graph2_yr);
+            graph_yr.push(data.graph3_yr);
+            graph_yr.push(data.graph4_yr);
+            graph_yr.push(data.graph5_yr);
+            graph_yr.push("????");
+
+            for(var i = 0; i < graph_yr.length; i++) {
+                if(graph_yr[i] == null) {
+                    graph_yr.splice(i, 1);
+                }
+            }
+
+            // data 데이터 배열에 담기
+            var graph_nocs = [];
+            graph_nocs.push(data.graph1_nocs);
+            graph_nocs.push(data.graph2_nocs);
+            graph_nocs.push(data.graph3_nocs);
+            graph_nocs.push(data.graph4_nocs);
+            graph_nocs.push(data.graph5_nocs);
+
+            for(var i = 0; i < graph_nocs.length; i++) {
+                if(graph_nocs[i] == 0) {
+                    graph_nocs.splice(i, 1);
+                }
+            }
+
+            // 최대 자릿 수 구해서 그래프 채우기
+            // 1. 값에 0.2 증가하게 작업
+            var lastValue = graph_nocs[graph_nocs.length - 1] + (graph_nocs[graph_nocs.length - 1] * 0.1);
+            // 3. 마지막 값 대입
+            graph_nocs.push(lastValue);
+
+            const chart = echarts.init(document.getElementById('nurtureChart'), null, {
+                renderer: 'svg',
+            });
+
+            // 차트 데이터
+            const categories = graph_yr;
+            const dataValues = graph_nocs;
+
+            window.addEventListener('resize', () => chart.resize());
+
+            chart.setOption({
+                grid: {
+                    top: '0%',
+                    left: '0%',
+                    right: '0%',
+                    bottom: '0%',
+                },
+                // tooltip: {},
+                xAxis: {
+                    type: 'category',
+                    data: categories,
+                    boundaryGap: false,
+                    position: 'top',
+                    axisLabel: {
+                        interval: 0,
+                        padding: [0, 0, 0, 10],
+                        align: 'left',
+                        margin: -70,
+                        formatter: function (value, index) {
+                            if (index < graph_nocs.length - 1) {
+                                if (index === graph_nocs.length - 2) {
+                                    return `{label|${value}}\n{value2|${dataValues[index].toLocaleString()}}`;
+                                } else {
+                                    return `{label|${value}}\n{value|${dataValues[index].toLocaleString()}}`;
+                                }
+                            }
+                        },
+                        rich: {
+                            label: {
+                                padding: (handler.device === 'desktop') ? [0, 0, 0, 0] : [0, 0, 0, -5],
+                                fontFamily: 'KBFG Text',
+                                fontSize: (handler.device === 'desktop') ? 16 : 13,
+                                fontWeight: 'medium',
+                                color: '#333'
+                            },
+                            value: {
+                                padding: (handler.device === 'desktop') ? [16, 0, 0, 0] : [16, 0, 0, -5],
+                                fontFamily: 'KBFG Display',
+                                fontSize: (handler.device === 'desktop') ? 24 : 16,
+                                fontWeight: 'bold',
+                                color: '#252525'
+                            },
+                            value2: {
+                                padding: (handler.device === 'desktop') ? [16, 0, 0, 0] : [16, 0, 0, -5],
+                                fontFamily: 'KBFG Display',
+                                fontSize: (handler.device === 'desktop') ? 24 : 16,
+                                fontWeight: 'bold',
+                                color: '#FCAF17'
+                            }
+                        },
+                    },
+                    axisLine: {
+                        show: false,
+                    },
+                    axisTick: {
+                        show: false,
+                    },
+                    splitLine: {
+                        show: true,
+                        lineStyle: {
+                            type: 'solid',
+                            color: '#f3f3f3',
+                            width: 1
+                        }
+                    },
+                },
+                yAxis: {
+                    show: false,
+                    max: 500
+                },
+                visualMap: {
+                    type: 'piecewise',
+                    show: false,
+                    dimension: 0,
+                    seriesIndex: 0,
+                    opacity: 1,
+                    pieces: [
+                        {gt: -1, lt: 1, color: '#fff2cf'},
+                        {gt: 1, lt: 2, color: '#ffe59f'},
+                        {gt: 2, lt: 3, color: '#fed870'},
+                        {gt: 3, lt: 4, color: '#fecb40'},
+                        {gt: 4, lt: 5, color: '#fcaf17'},
+                    ]
+                },
+                series: [
+                    {
+                        name: '육성기업',
+                        type: 'line',
+                        showSymbol: false,
+                        data: dataValues,
+                        smooth: true,
+                        itemStyle: {
+                            color: function (params) {
+                                const colors = [
+                                    'rgba(254,190,16,0.2)',
+                                    'rgba(254,190,16,0.4)',
+                                    'rgba(254,190,16,0.6)',
+                                    'rgba(254,190,16,0.8)',
+                                    'rgba(252,175,23,1)'
+                                ];
+                                return colors[params.dataIndex];
+                            }
+                        },
+                        markArea: {
+                            itemStyle: {
+                                color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
+                                    {offset: 0, color: 'rgba(251, 228, 163, 1)'},
+                                    {offset: 1, color: 'rgba(251, 228, 163, 0)'}
+                                ])
+                            },
+                            data: [
+                                [
+                                    {
+                                        xAxis: '2024'
+                                    },
+                                    {
+                                        xAxis: '????'
+                                    }
+                                ],
+                            ]
+                        },
+                        lineStyle: {},
+                        areaStyle: {},
+                        emphasis: {
+                            scale: false,
+                            label: {
+                                offset: [0, -10]
+                            }
+                        }
+                    }
+                ]
+            });
+        }
+
+        function investmentChart() {
+
+            // 차트 데이터 배열에 담기
+            var data = [[${investment}]];
+
+            var graph_yr = [];
+            graph_yr.push(data.graph1_yr);
+            graph_yr.push(data.graph2_yr);
+            graph_yr.push(data.graph3_yr);
+            graph_yr.push(data.graph4_yr);
+            graph_yr.push(data.graph5_yr);
+            graph_yr.push("????");
+
+            var graph_yr2 = [];
+            for(var i = 0; i < graph_yr.length; i++) {
+                if(graph_yr[i] != null) {
+                    graph_yr2.push(graph_yr[i]);
+                }
+            }
+
+            // data 데이터 배열에 담기
+            var graph_nocs = [];
+            graph_nocs.push(data.graph1_nocs);
+            graph_nocs.push(data.graph2_nocs);
+            graph_nocs.push(data.graph3_nocs);
+            graph_nocs.push(data.graph4_nocs);
+            graph_nocs.push(data.graph5_nocs);
+
+            var graph_nocs2 = [];
+            for(var i = 0; i < graph_nocs.length; i++) {
+                if(graph_nocs[i] != 0) {
+                    graph_nocs2.push(graph_nocs[i]);
+                }
+            }
+
+            // 최대 자릿 수 구해서 그래프 채우기
+            // 1. 값에 0.2 증가하게 작업
+            var lastValue = graph_nocs2[graph_nocs2.length - 1] + (graph_nocs2[graph_nocs2.length - 1] * 0.1);
+            // 3. 마지막 값 대입
+            graph_nocs2.push(lastValue);
+
+            const chart = echarts.init(document.getElementById('investmentChart'), null, {
+                renderer: 'svg',
+            });
+
+            const categories = graph_yr2;
+            const dataValues = graph_nocs2;
+
+            window.addEventListener('resize', () => chart.resize());
+
+            chart.setOption({
+                grid: {
+                    top: '0%',
+                    left: '0%',
+                    right: '0%',
+                    bottom: '0%',
+                },
+                // tooltip: {},
+                xAxis: {
+                    type: 'category',
+                    data: categories,
+                    boundaryGap: false,
+                    position: 'top',
+                    axisLabel: {
+                        interval: 0,
+                        padding: [0, 0, 0, 16],
+                        align: 'left',
+                        margin: -70,
+                        formatter: function (value, index) {
+                            if (index < graph_nocs2.length - 1) {
+                                if (index === graph_nocs2.length - 2) {
+                                    return `{label|${value}}\n{value2|${dataValues[index].toLocaleString()}}`;
+                                } else {
+                                    return `{label|${value}}\n{value|${dataValues[index].toLocaleString()}}`;
+                                }
+                            }
+                        },
+                        rich: {
+                            label: {
+                                padding: (handler.device === 'desktop') ? [0, 0, 0, 0] : [0, 0, 0, -10],
+                                fontFamily: 'KBFG Text',
+                                fontSize: (handler.device === 'desktop') ? 16 : 13,
+                                fontWeight: 'medium',
+                                color: '#333'
+                            },
+                            value: {
+                                padding: (handler.device === 'desktop') ? [16, 0, 0, 0] : [16, 0, 0, -10],
+                                fontFamily: 'KBFG Display',
+                                fontSize: (handler.device === 'desktop') ? 24 : 16,
+                                fontWeight: 'bold',
+                                color: '#252525'
+                            },
+                            value2: {
+                                padding: (handler.device === 'desktop') ? [16, 0, 0, 0] : [16, 0, 0, -10],
+                                fontFamily: 'KBFG Display',
+                                fontSize: (handler.device === 'desktop') ? 24 : 16,
+                                fontWeight: 'bold',
+                                color: '#FCAF17'
+                            }
+                        },
+                    },
+                    axisLine: {
+                        show: false,
+                    },
+                    axisTick: {
+                        show: false,
+                    },
+                    splitLine: {
+                        show: true,
+                        lineStyle: {
+                            type: 'solid',
+                            color: '#f3f3f3',
+                            width: 1
+                        }
+                    },
+                },
+                yAxis: {
+                    show: false,
+                    max: 5000,
+                },
+                visualMap: {
+                    type: 'piecewise',
+                    show: false,
+                    dimension: 0,
+                    seriesIndex: 0,
+                    pieces: [
+                        {gt: -1, lt: 1, color: '#fff2cf'},
+                        {gt: 1, lt: 2, color: '#ffe59f'},
+                        {gt: 2, lt: 3, color: '#fed870'},
+                        {gt: 3, lt: 4, color: '#fecb40'},
+                        {gt: 4, lt: 5, color: '#fcaf17'},
+                    ]
+                },
+                series: [
+                    {
+                        name: '투자 금액',
+                        type: 'line',
+                        showSymbol: false,
+                        data: dataValues,
+                        smooth: true,
+                        itemStyle: {
+                            color: function (params) {
+                                const colors = [
+                                    'rgba(254,190,16,0.2)',
+                                    'rgba(254,190,16,0.4)',
+                                    'rgba(254,190,16,0.6)',
+                                    'rgba(254,190,16,0.8)',
+                                    'rgba(252,175,23,1)'
+                                ];
+                                return colors[params.dataIndex];
+                            }
+                        },
+                        markArea: {
+                            itemStyle: {
+                                color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
+                                    {offset: 0, color: 'rgba(255, 241, 201, 1)'},
+                                    {offset: 1, color: 'rgba(255, 241, 201, 0)'}
+                                ])
+                            },
+                            data: [
+                                [
+                                    {
+                                        xAxis: '2024'
+                                    },
+                                    {
+                                        xAxis: '????'
+                                    }
+                                ],
+                            ]
+                        },
+                        lineStyle: {},
+                        areaStyle: {},
+                        emphasis: {
+                            scale: false,
+                            label: {
+                                offset: [0, -10]
+                            }
+                        }
+                    }
+                ]
+            });
+        }
+
+        function slider() {
+            var slider = new Swiper('.cases-slider', {
+                speed: 400,
+                spaceBetween: 16,
+                slidesPerView: 1.5,
+                slidesPerGroup: 1,
+                scrollbar: {
+                    el: '.section-cases .swiper-scrollbar',
+                    draggable: true,
+                },
+                pagination: {
+                    el: '.section-cases .swiper-pagination',
+                    type: 'fraction',
+                    renderFraction: function (currentClass, totalClass) {
+                        return '<span class="' + currentClass + '"></span> / <span class="' + totalClass + '"></span>';
+                    }
+                },
+                navigation: {
+                    nextEl: '.section-cases .swiper-button-next',
+                    prevEl: '.section-cases .swiper-button-prev',
+                },
+                breakpoints: {
+                    769: {
+                        spaceBetween: 24,
+                        slidesPerView: 2.245,
+                        slidesPerGroup: 1,
+                    }
+                }
+            });
+        }
+
+        function roomy() {
+            var parentSlider = new Swiper('.roomy-parent-slider', {
+                speed: 400,
+                spaceBetween: 16,
+                slidesPerView: 1.5,
+                slidesPerGroup: 1,
+                scrollbar: {
+                    el: '.roomy-parent-slider .swiper-scrollbar',
+                    draggable: true,
+                },
+                navigation: {
+                    nextEl: '.roomy-parent-next',
+                    prevEl: '.roomy-parent-prev',
+                },
+                breakpoints: {
+                    1025: {
+                        spaceBetween: 60,
+                        slidesPerView: 2,
+                        slidesPerGroup: 1,
+                    }
+                }
+            });
+
+            var childSlider = new Swiper('.roomy-child-slider', {
+                speed: 400,
+                effect: 'fade',
+                slidesPerView: 1,
+                slidesPerGroup: 1,
+                pagination: {
+                    el: '.roomy-child-slider .swiper-pagination',
+                    type: 'fraction',
+                    renderFraction: function (currentClass, totalClass) {
+                        return '<span class="' + currentClass + '"></span> | <span class="' + totalClass + '"></span>';
+                    }
+                },
+                navigation: {
+                    nextEl: '.roomy-child-slider .swiper-button-next',
+                    prevEl: '.roomy-child-slider .swiper-button-prev',
+                },
+            });
+        }
+    </script>
+</body>
+</html>

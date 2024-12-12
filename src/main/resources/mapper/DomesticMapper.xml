@@ -1,0 +1,108 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kbin.inno.Nurture.DAO.DomesticDAO">
+    <!-- 국내 프로그램 - 육성 그래프 조회 -->
+    <select id="selectPromote" resultType="com.kbin.inno.Nurture.DTO.PromoteDTO">
+        /* 국내 프로그램 - 육성 그래프 조회 */
+        SELECT GRAPH_SN
+             , CRTR_YM
+             , GRAPH1_YR
+             , GRAPH1_NOCS
+             , GRAPH2_YR
+             , GRAPH2_NOCS
+             , GRAPH3_YR
+             , GRAPH3_NOCS
+             , GRAPH4_YR
+             , GRAPH4_NOCS
+             , GRAPH5_YR
+             , GRAPH5_NOCS
+        FROM KB_ENT_GRAPH_INFO
+    </select>
+    <!-- 국내 프로그램 - 투자 그래프 관리 조회 -->
+    <select id="selectInvestment" resultType="com.kbin.inno.Nurture.DTO.InvestmentDTO">
+        /* 국내 프로그램 - 투자 그래프 관리 조회 */
+        SELECT GRAPH_SN
+             , CRTR_YM
+             , GRAPH1_YR
+             , GRAPH1_NOCS
+             , GRAPH2_YR
+             , GRAPH2_NOCS
+             , GRAPH3_YR
+             , GRAPH3_NOCS
+             , GRAPH4_YR
+             , GRAPH4_NOCS
+             , GRAPH5_YR
+             , GRAPH5_NOCS
+        FROM KB_INVEST_GRAPH_INFO
+    </select>
+    <!-- 국내 프로그램 - 제휴 사례 목록 조회 -->
+    <select id="selectAffiliate" resultType="com.kbin.inno.Nurture.DTO.AffiliateDTO">
+        /* 국내 프로그램 - 제휴 사례 목록 조회 */
+        SELECT AFFI.AFFILIATE_SN AS AFFILIATE_SN
+             , AFFI.AFFILIATE_NM AS AFFILIATE_NM
+             , AFFI.STARTER_NM   AS STARTER_NM
+             , AFFI.SRVC_NM      AS SRVC_NM
+             , AFFI.SORT_NO      AS SORT_NO
+             , AFFI.CTGRY_NM     AS CTGRY_NM
+             , FILES.FILE_NM     AS AFFILIATE_FILE_NAME
+             , FILES.FILE_PATH   AS AFFILIATE_PATH
+        FROM KB_AFFILIATE_INFO AFFI
+           , KB_FILE_INFO FILES
+        WHERE AFFI.ATCH_FILE_SN = FILES.FILE_SN(+)
+        ORDER BY AFFI.SORT_NO ASC
+    </select>
+    <!-- 국내 프로그램 - 협력 기관 리스트 조회 -->
+    <select id="selectCooperation" resultType="com.kbin.inno.Nurture.DTO.CooperationDTO">
+        /* 국내 프로그램 - 협력 기관 리스트 조회 */
+        SELECT COOPE.COOPE_SN      AS COOPE_SN
+             , COOPE.BZENTY_NM     AS BZENTY_NM
+             , COOPE.EXPSR_YN      AS EXPSR_YN
+             , COOPE.SORT_NO       AS SORT_NO
+             , FILES.ORGNL_FILE_NM AS ORIGIN_FILE_NAME
+             , FILES.FILE_NM       AS COOPE_FILE_NAME
+             , FILES.FILE_PATH     AS COOPE_PATH
+        FROM KB_COOPE_INFO COOPE
+           , KB_FILE_INFO FILES
+        WHERE COOPE.ATCH_FILE_ID = FILES.FILE_SN(+)
+        ORDER BY COOPE.COOPE_SN DESC
+    </select>
+    <!-- 국내 프로그램 - 육성 공간 조회 -->
+    <select id="selectPlace" resultType="com.kbin.inno.Nurture.DTO.PlaceDTO">
+        /* 국내 프로그램 - 육성 공간 조회 */
+        SELECT PLC.PLC_SN           AS PLC_SN
+             , PLC.PLC_NM           AS PLC_NM
+             , PLC.PLC_ADDR         AS PLC_ADDR
+             , PLC.SORT_NO          AS SORT_NO
+             , PLC.ATCH_FILE_SN1    AS ATCH_FILE_SN1
+             , FILES1.FILE_PATH     AS PLC_PATH1
+             , FILES1.FILE_NM       AS PLC_FILE_NAME1
+             , PLC.ATCH_FILE_SN2    AS ATCH_FILE_SN2
+             , FILES2.FILE_PATH     AS PLC_PATH2
+             , FILES2.FILE_NM       AS PLC_FILE_NAME2
+             , PLC.ATCH_FILE_SN3    AS ATCH_FILE_SN3
+             , FILES3.FILE_PATH     AS PLC_PATH3
+             , FILES3.FILE_NM       AS PLC_FILE_NAME3
+        FROM KB_PLC_INFO PLC
+           , KB_FILE_INFO FILES1
+           , KB_FILE_INFO FILES2
+           , KB_FILE_INFO FILES3
+        WHERE PLC.ATCH_FILE_SN1 = FILES1.FILE_SN(+)
+          AND PLC.ATCH_FILE_SN2 = FILES2.FILE_SN(+)
+          AND PLC.ATCH_FILE_SN3 = FILES3.FILE_SN(+)
+    </select>
+    <!-- 국내 프로그램 - 채용 지원 조회 -->
+    <select id="selectRecruit" resultType="com.kbin.inno.Nurture.DTO.RecruitDTO">
+        /* 국내 프로그램 - 채용 지원 조회 */
+        SELECT EMPLOY_SN
+             , EMPLOY_YR
+             , EMPLOY_EMP_NOCS
+             , SPRT_AMT
+             , EMPLOY_ENT_NOCS
+             , FRST_RGTR
+             , FRST_REG_DT
+             , LAST_MDFR
+             , LAST_MDFCN_DT
+        FROM KB_EMPLOY_INFO
+    </select>
+</mapper>

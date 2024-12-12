@@ -1,0 +1,183 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kbin.inno.Community.DAO.NoticeDAO">
+    <!-- 공지사항 리스트 갯수 조회(전체) -->
+    <select id="selectPageCount" parameterType="String" resultType="int">
+        /* 공지사항 리스트 갯수 조회(전체) */
+        SELECT COUNT(*)
+          FROM KB_NTC_INFO
+         WHERE 1=1
+        <if test='keyword != null and keyword != ""'>
+        <choose>
+        <when test="type == 'all'">
+           AND NTC_TTL LIKE '%'|| #{keyword} ||'%'
+            OR NTC_CN   LIKE '%'|| #{keyword} ||'%'
+        </when>
+        <when test="type == 'title'">
+           AND NTC_TTL LIKE '%'|| #{keyword} ||'%'
+        </when>
+        <when test="type == 'content'">
+           AND NTC_CN   LIKE '%'|| #{keyword} ||'%'
+        </when>
+        </choose>
+        </if>
+    </select>
+    <!-- 공지사항 리스트 조회 -->
+    <select id="selectList" parameterType="com.kbin.inno.Community.DTO.SearchDTO" resultType="com.kbin.inno.Community.DTO.NoticeDTO">
+        /* 공지사항 리스트 조회 */
+        SELECT NOTICE_PAGE.*
+          FROM
+              (
+               /* 순번 매기기 */
+               SELECT ROWNUM ROWNUMBER
+                    , NOTICE.*
+                 FROM
+                     (
+                      /* 리스트 조회 */
+                      SELECT NTC.*
+                        FROM (
+                              SELECT NTC.NTC_SN                              AS NTC_SN
+                                   , NTC.NTC_TTL                             AS NTC_TTL
+                                   , NTC.NTC_CN                              AS NTC_CN
+                                   , TO_CHAR(NTC.FRST_REG_DT, 'YYYY.MM.DD') AS FRST_REG_DT
+                                   , NTC.NTC_YN                              AS NTC_YN
+                                   , FILES.FILE_SN                           AS ATCH_FILE_SN
+                                   , FILES.ORGNL_FILE_NM                     AS ORIGIN_FILE_NAME
+                                   , FILES.FILE_NM                           AS NTC_FILE_NAME
+                                   , FILES.FILE_PATH                         AS NTC_PATH
+                                FROM KB_NTC_INFO NTC
+                                   , KB_FILE_INFO FILES
+                               WHERE NTC.NTC_YN = 'Y'
+                                 AND NTC.EXPSR_YN = 'Y'
+                                 AND NTC.ATCH_FILE_SN = FILES.FILE_SN(+)
+                               ORDER BY NTC.SORT_NO, NTC.NTC_SN DESC
+                              ) NTC
+                       UNION ALL
+                       SELECT NTC.*
+                        FROM (
+                              SELECT NTC.NTC_SN                              AS NTC_SN
+                                   , NTC.NTC_TTL                             AS NTC_TTL
+                                   , NTC.NTC_CN                              AS NTC_CN
+                                   , TO_CHAR(NTC.FRST_REG_DT, 'YYYY.MM.DD') AS FRST_REG_DT
+                                   , NTC.NTC_YN                              AS NTC_YN
+                                   , FILES.FILE_SN       AS ATCH_FILE_SN
+                                   , FILES.ORGNL_FILE_NM AS ORIGIN_FILE_NAME
+                                   , FILES.FILE_NM       AS NTC_FILE_NAME
+                                   , FILES.FILE_PATH     AS NTC_PATH
+                                FROM KB_NTC_INFO NTC
+                                   , KB_FILE_INFO FILES
+                               WHERE NTC_YN = 'N'
+                                 AND NTC.EXPSR_YN = 'Y'
+                                 AND NTC.ATCH_FILE_SN = FILES.FILE_SN(+)
+                               ORDER BY NTC.SORT_NO, NTC.NTC_SN DESC
+                             ) NTC
+                      ) NOTICE
+                        WHERE 1=1
+                        <if test='keyword != null and keyword != ""'>
+                        <choose>
+                        <when test="type == 'all'">
+                          AND NOTICE.NTC_TTL LIKE '%'|| #{keyword} ||'%'
+                           OR NOTICE.NTC_CN   LIKE '%'|| #{keyword} ||'%'
+                        </when>
+                        <when test="type == 'title'">
+                          AND NOTICE.NTC_TTL LIKE '%'|| #{keyword} ||'%'
+                        </when>
+                        <when test="type == 'content'">
+                          AND NOTICE.NTC_CN   LIKE '%'|| #{keyword} ||'%'
+                        </when>
+                        </choose>
+                        </if>
+               ) NOTICE_PAGE
+           WHERE ROWNUMBER BETWEEN #{start} AND #{end}
+    </select>
+    <!-- 공지사항 상세 조회 -->
+    <select id="select" parameterType="int" resultType="com.kbin.inno.Community.DTO.NoticeDTO">
+        /* 공지사항 상세 조회 */
+        SELECT NOTICE.NTC_SN                              AS NTC_SN
+             , NOTICE.MNGR_NM							  AS MNGR_NM
+             , NOTICE.NTC_TTL                             AS NTC_TTL
+             , NOTICE.NTC_CN                              AS NTC_CN
+             , NOTICE.ATCH_FILE_SN                        AS ATCH_FILE_SN
+             , NOTICE.NTC_YN                              AS NTC_YN
+             , NOTICE.FRST_REG_DT                         AS FRST_REG_DT
+             , NOTICE.NTC_SN_BEF                          AS NTC_SN_BEF
+             , NOTICE.NTC_TTL_BEF                         AS NTC_TTL_BEF
+             , NOTICE.ATCH_FILE_SN_BEF                    AS ATCH_FILE_SN_BEF
+             , NOTICE.NTC_SN_AFT                          AS NTC_SN_AFT
+             , NOTICE.NTC_TTL_AFT                         AS NTC_TTL_AFT
+             , NOTICE.ATCH_FILE_SN_AFT                    AS ATCH_FILE_SN_AFT
+             , FILES.FILE_SN                              AS ATCH_FILE_SN
+             , FILES.ORGNL_FILE_NM                        AS ORIGIN_FILE_NAME
+             , FILES.FILE_NM                              AS NTC_FILE_NAME
+             , FILES.FILE_PATH                            AS NTC_PATH
+        FROM (
+              SELECT NTC.NTC_SN
+                   , NTC.NTC_TTL
+                   , NTC.ATCH_FILE_SN
+                   , NTC.NTC_CN
+                   , NTC.NTC_YN
+                   , NTC.FRST_REG_DT
+                   , NTC.MNGR_NM
+                   , NTC.SORT_NO
+                   , LAG(NTC.NTC_SN, 1) OVER(ORDER BY NTC.SORT_NO)        AS NTC_SN_BEF
+                   , LAG(NTC.NTC_TTL, 1) OVER(ORDER BY NTC.SORT_NO) 	   AS NTC_TTL_BEF
+                   , LAG(NTC.ATCH_FILE_SN, 1) OVER(ORDER BY NTC.SORT_NO)  AS ATCH_FILE_SN_BEF
+                   , LEAD(NTC.NTC_SN, 1) OVER(ORDER BY NTC.SORT_NO) 	   AS NTC_SN_AFT
+                   , LEAD(NTC.NTC_TTL, 1) OVER(ORDER BY NTC.SORT_NO) 	   AS NTC_TTL_AFT
+                   , LEAD(NTC.ATCH_FILE_SN, 1) OVER(ORDER BY NTC.SORT_NO) AS ATCH_FILE_SN_AFT
+               FROM (
+                     SELECT NTC1.*
+                       FROM (
+                             SELECT NTC.NTC_SN                              AS NTC_SN
+                                  , NTC.SORT_NO						        AS SORT_NO
+                                  , NTC.NTC_TTL                             AS NTC_TTL
+                                  , MEM.MNGR_NM
+                                  , NTC.NTC_CN                              AS NTC_CN
+                                  , TO_CHAR(NTC.FRST_REG_DT, 'YYYY.MM.DD')  AS FRST_REG_DT
+                                  , NTC.FRST_RGTR							AS FRST_RGTR
+                                  , NTC.NTC_YN                              AS NTC_YN
+                                  , FILES.FILE_SN                           AS ATCH_FILE_SN
+                                  , FILES.ORGNL_FILE_NM                     AS ORIGIN_FILE_NAME
+                                  , FILES.FILE_NM                           AS NTC_FILE_NAME
+                                  , FILES.FILE_PATH                         AS NTC_PATH
+                               FROM KB_NTC_INFO NTC
+                                  , KB_FILE_INFO FILES
+                                  , KB_MNGR_MBR_INFO MEM
+                              WHERE NTC.NTC_YN = 'Y'
+                                AND MEM.MNGR_SN = NTC.FRST_RGTR
+                                AND NTC.EXPSR_YN = 'Y'
+                                AND NTC.ATCH_FILE_SN = FILES.FILE_SN(+)
+                              ORDER BY NTC.SORT_NO, NTC.NTC_SN DESC
+                             ) NTC1
+                         UNION ALL
+                        SELECT NTC2.*
+                          FROM (
+                                SELECT NTC.NTC_SN                              AS NTC_SN
+                                     , NTC.SORT_NO						        AS SORT_NO
+                                     , NTC.NTC_TTL                             AS NTC_TTL
+                                     , MEM.MNGR_NM
+                                     , NTC.NTC_CN                              AS NTC_CN
+                                     , TO_CHAR(NTC.FRST_REG_DT, 'YYYY.MM.DD')  AS FRST_REG_DT
+                                     , NTC.FRST_RGTR							AS FRST_RGTR
+                                     , NTC.NTC_YN                              AS NTC_YN
+                                     , FILES.FILE_SN                           AS ATCH_FILE_SN
+                                     , FILES.ORGNL_FILE_NM                     AS ORIGIN_FILE_NAME
+                                     , FILES.FILE_NM                           AS NTC_FILE_NAME
+                                     , FILES.FILE_PATH                         AS NTC_PATH
+                                  FROM KB_NTC_INFO NTC
+                                     , KB_FILE_INFO FILES
+                                     , KB_MNGR_MBR_INFO MEM
+                                 WHERE NTC_YN = 'N'
+                                   AND NTC.EXPSR_YN = 'Y'
+                                   AND MEM.MNGR_SN = NTC.FRST_RGTR
+                                   AND NTC.ATCH_FILE_SN = FILES.FILE_SN(+)
+                                 ORDER BY NTC.SORT_NO, NTC.NTC_SN DESC
+                                ) NTC2
+                     ) NTC
+             ) NOTICE
+             , KB_FILE_INFO FILES
+         WHERE NOTICE.ATCH_FILE_SN = FILES.FILE_SN(+)
+           AND NOTICE.NTC_SN = #{ntc_sn}
+    </select>
+</mapper>

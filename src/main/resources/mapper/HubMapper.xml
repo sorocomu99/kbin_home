@@ -1,0 +1,147 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kbin.inno.Community.DAO.HubDAO">
+    <!-- HUB 센터 소식 갯수 조회 -->
+    <select id="selectPageCount" parameterType="String" resultType="int">
+        /* HUB 센터 소식 갯수 조회 */
+        SELECT COUNT(*)
+        FROM KB_HUB_DAY_INFO
+        WHERE 1=1
+        <if test='keyword != null and keyword != ""'>
+            <choose>
+                <when test="type == 'all'">
+                    AND HUB_TTL LIKE '%'|| #{keyword} ||'%'
+                    OR HUB_CN  LIKE '%'|| #{keyword} ||'%'
+                </when>
+                <when test="type == 'title'">
+                    AND HUB_TTL LIKE '%'|| #{keyword} ||'%'
+                </when>
+                <when test="type == 'content'">
+                    AND HUB_TTL LIKE '%'|| #{keyword} ||'%'
+                </when>
+            </choose>
+        </if>
+    </select>
+    <!-- HUB 센터 소식 리스트 조회 -->
+    <select id="selectList" parameterType="com.kbin.inno.Community.DTO.SearchDTO" resultType="com.kbin.inno.Community.DTO.HubDTO">
+        /* HUB 센터 소식 리스트 조회 */
+        SELECT HUB_PAGE.HUB_SN
+             , HUB_PAGE.HUB_TTL
+             , HUB_PAGE.HUB_CN
+             , HUB_PAGE.ATCH_FILE_SN1
+             , HUB_PAGE.HUB_PATH_IMG
+             , HUB_PAGE.HUB_IMG_NAME
+             , HUB_PAGE.ATCH_FILE_SN3
+             , HUB_PAGE.HUB_PATH
+             , HUB_PAGE.HUB_FILE_NAME
+             , HUB_PAGE.FRST_REG_DT
+             , HUB_PAGE.CTGRY
+          FROM
+              (
+               /* 순번 매기기 */
+               SELECT ROWNUM ROWNUMBER
+                    , HUB.*
+                FROM (
+                      /* 리스트 조회 */
+                      SELECT HUB.HUB_SN                              AS HUB_SN
+                           , HUB.HUB_TTL                             AS HUB_TTL
+                           , HUB.HUB_CN                              AS HUB_CN
+                           , HUB.ATCH_FILE_SN1                       AS ATCH_FILE_SN1
+                           , FILES1.FILE_PATH                        AS HUB_PATH_IMG
+                           , FILES1.FILE_NM                          AS HUB_IMG_NAME
+                           , HUB.ATCH_FILE_SN2                       AS ATCH_FILE_SN2
+                           , FILES2.FILE_PATH                        AS HUB_PATH_MOV
+                           , FILES2.FILE_NM                          AS HUB_MOV_NAME
+                           , HUB.ATCH_FILE_SN3                       AS ATCH_FILE_SN3
+                           , FILES3.FILE_PATH                        AS HUB_PATH
+                           , FILES3.FILE_NM                          AS HUB_FILE_NAME
+                           , TO_CHAR(HUB.FRST_REG_DT, 'YYYY.MM.DD') AS FRST_REG_DT
+                           , HUB.CTGRY                               AS CTGRY
+                        FROM KB_HUB_DAY_INFO HUB
+                           , KB_FILE_INFO FILES1
+                           , KB_FILE_INFO FILES2
+                           , KB_FILE_INFO FILES3
+                       WHERE HUB.ATCH_FILE_SN1 = FILES1.FILE_SN(+)
+                         AND HUB.ATCH_FILE_SN2 = FILES2.FILE_SN(+)
+                         AND HUB.ATCH_FILE_SN3 = FILES3.FILE_SN(+)
+                         AND HUB.EXPSR_YN = 'Y'
+                       ORDER BY HUB.SORT_NO, HUB.HUB_SN DESC
+                      ) HUB
+                  WHERE 1=1
+                  <if test='keyword != null and keyword != ""'>
+                  <choose>
+                  <when test="type == 'all'">
+                    AND HUB.HUB_TTL LIKE '%'|| #{keyword} ||'%'
+                     OR HUB.HUB_CN  LIKE '%'|| #{keyword} ||'%'
+                  </when>
+                  <when test="type == 'title'">
+                    AND HUB.HUB_TTL LIKE '%'|| #{keyword} ||'%'
+                  </when>
+                  <when test="type == 'content'">
+                    AND HUB.HUB_TTL LIKE '%'|| #{keyword} ||'%'
+                  </when>
+                  </choose>
+                  </if>
+                ) HUB_PAGE
+         WHERE ROWNUMBER BETWEEN #{start} AND #{end}
+    </select>
+    <!-- HUB 센터 소식 상세 -->
+    <select id="select" parameterType="int" resultType="com.kbin.inno.Community.DTO.HubDTO">
+        SELECT HUB_PAGE.HUB_SN
+             , HUB_PAGE.HUB_TTL
+             , HUB_PAGE.HUB_CN
+             , HUB_PAGE.ATCH_FILE_SN1
+             , HUB_PAGE.HUB_PATH_IMG
+             , HUB_PAGE.HUB_IMG_NAME
+             , HUB_PAGE.ATCH_FILE_SN2
+             , HUB_PAGE.HUB_PATH_MOV
+             , HUB_PAGE.HUB_MOV_NAME
+             , HUB_PAGE.ATCH_FILE_SN3
+             , HUB_PAGE.HUB_PATH
+             , HUB_PAGE.HUB_FILE_NAME
+             , HUB_PAGE.ORIGIN_FILE_NAME
+             , HUB_PAGE.FRST_REG_DT
+             , HUB_PAGE.CTGRY
+             , HUB_PAGE.HUB_SN_BEF
+             , HUB_PAGE.HUB_TTL_BEF
+             , HUB_PAGE.ATCH_FILE_SN1_BEF
+             , HUB_PAGE.HUB_SN_AFT
+             , HUB_PAGE.HUB_TTL_AFT
+             , HUB_PAGE.ATCH_FILE_SN1_AFT
+        FROM (
+              /* 리스트 조회 */
+              SELECT HUB.HUB_SN                                            AS HUB_SN
+                   , HUB.HUB_TTL                                           AS HUB_TTL
+                   , HUB.HUB_CN                                            AS HUB_CN
+                   , HUB.ATCH_FILE_SN1                                     AS ATCH_FILE_SN1
+                   , FILES1.FILE_PATH                                      AS HUB_PATH_IMG
+                   , FILES1.FILE_NM                                        AS HUB_IMG_NAME
+                   , HUB.ATCH_FILE_SN2                                     AS ATCH_FILE_SN2
+                   , FILES2.FILE_PATH                                      AS HUB_PATH_MOV
+                   , FILES2.FILE_NM                                        AS HUB_MOV_NAME
+                   , HUB.ATCH_FILE_SN3                                     AS ATCH_FILE_SN3
+                   , FILES3.FILE_PATH                                      AS HUB_PATH
+                   , FILES3.FILE_NM                                        AS HUB_FILE_NAME
+                   , FILES3.ORGNL_FILE_NM                                  AS ORIGIN_FILE_NAME
+                   , TO_CHAR(HUB.FRST_REG_DT, 'YYYY.MM.DD')               AS FRST_REG_DT
+                   , HUB.CTGRY                                             AS CTGRY
+                   , LAG(HUB.HUB_SN, 1) OVER(ORDER BY HUB.SORT_NO)         AS HUB_SN_BEF
+                   , LAG(HUB.HUB_TTL, 1) OVER(ORDER BY HUB.SORT_NO) 	    AS HUB_TTL_BEF
+                   , LAG(HUB.ATCH_FILE_SN1, 1) OVER(ORDER BY HUB.SORT_NO)  AS ATCH_FILE_SN1_BEF
+                   , LEAD(HUB.HUB_SN, 1) OVER(ORDER BY HUB.SORT_NO) 	    AS HUB_SN_AFT
+                   , LEAD(HUB.HUB_TTL, 1) OVER(ORDER BY HUB.SORT_NO) 	    AS HUB_TTL_AFT
+                   , LEAD(HUB.ATCH_FILE_SN1, 1) OVER(ORDER BY HUB.SORT_NO) AS ATCH_FILE_SN1_AFT
+                FROM KB_HUB_DAY_INFO HUB
+                   , KB_FILE_INFO FILES1
+                   , KB_FILE_INFO FILES2
+                   , KB_FILE_INFO FILES3
+               WHERE HUB.ATCH_FILE_SN1 = FILES1.FILE_SN(+)
+                 AND HUB.ATCH_FILE_SN2 = FILES2.FILE_SN(+)
+                 AND HUB.ATCH_FILE_SN3 = FILES3.FILE_SN(+)
+                 AND HUB.EXPSR_YN = 'Y'
+               ORDER BY HUB.SORT_NO, HUB.HUB_SN DESC
+             ) HUB_PAGE
+         WHERE HUB_PAGE.HUB_SN        = #{hub_sn}
+    </select>
+</mapper>

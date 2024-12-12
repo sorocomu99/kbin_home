@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment/config :: configFragment"></head>
+<body>
+<!-- 헤더 -->
+<app-header></app-header>
+
+<!-- 본문 -->
+<main class="main">
+    <div class="section-top">
+        <div class="section-top-wrap">
+            <nav aria-label="Breadcrumb" class="breadcrumb" data-breadcrub-theme="light">
+                <ul>
+                    <li><a href="/"><i class="icon icon-home"></i><span class="blind">HOME</span></a></li>
+                    <li><a href="/community/notice/list">커뮤니티</a></li>
+                    <li><span aria-current="page">공지사항</span></li>
+                </ul>
+            </nav>
+            <h2 class="title">공지사항</h2>
+        </div>
+    </div>
+    <div class="board">
+        <div class="board-list">
+            <div class="board-list-head">
+                <div class="col">
+                    <form action="">
+                        <div class="search">
+                            <select name="" id="">
+                                <option value="" selected>제목</option>
+                            </select>
+                            <div class="box">
+                                <input type="text" placeholder="검색어를 입력해주세요.">
+                                <button type="submit"><span class="blind">검색</span></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="board-list-body">
+                <div class="board-card">
+                    <div class="total">
+                        Total: <em class="color-primary">62</em>건의 게시물이 있습니다.
+                    </div>
+                    <!-- 게시판 리스트 스킨: default -->
+                    <div class="default-board-list" role="table">
+                        <div class="thead" role="rowgroup">
+                            <div class="tr" role="row">
+                                <div class="th" style="width:8%" role="cell">
+                                    <span>번호</span>
+                                </div>
+                                <div class="th" style="width:68%" role="cell">
+                                    <span>제목</span>
+                                </div>
+                                <div class="th" style="width:10%" role="cell">
+                                    <span>파일</span>
+                                </div>
+                                <div class="th" style="width:14%" role="cell">
+                                    <span>등록일</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tbody" role="rowgroup">
+                            <div class="tr" role="row">
+                                <div class="td" role="cell">
+                                    <i class="icon icon-notice"></i>
+                                </div>
+                                <div class="td text-left" role="cell">
+                                    <a class="link" href="/community/notice/detail/1">
+                                        <span class="title">2024년 하반기 ‘KB스타터스’ 선정</span>
+                                        <i class="icon icon-file"></i>
+                                    </a>
+                                </div>
+                                <div class="td" role="cell">
+                                    <a href="javascript:" title="첨부파일 다운로드"><i class="icon icon-file"></i></a>
+                                </div>
+                                <div class="td" role="cell">
+                                    <span class="date">2024.10.01</span>
+                                </div>
+                            </div>
+                            <div class="tr" role="row">
+                                <div class="td" role="cell">
+                                    <i class="icon icon-notice"></i>
+                                </div>
+                                <div class="td text-left" role="cell">
+                                    <a class="link" href="/community/notice/detail/1">
+                                        <span class="title">KB스타터스 지원하기 관련 안내</span>
+                                        <i class="icon icon-file"></i>
+                                    </a>
+                                </div>
+                                <div class="td" role="cell">
+                                    <a href="javascript:" title="첨부파일 다운로드"><i class="icon icon-file"></i></a>
+                                </div>
+                                <div class="td" role="cell">
+                                    <span class="date">2024.10.01</span>
+                                </div>
+                            </div>
+                            <div class="tr" role="row">
+                                <div class="td" role="cell">
+                                    8
+                                </div>
+                                <div class="td text-left" role="cell">
+                                    <a class="link" href="/community/notice/detail/1">
+                                        <span class="title">KB 이노베이션 허브 홈페이지 리뉴얼!</span>
+                                        <i class="icon icon-file"></i>
+                                    </a>
+                                </div>
+                                <div class="td" role="cell">
+                                    <a href="javascript:" title="첨부파일 다운로드"><i class="icon icon-file"></i></a>
+                                </div>
+                                <div class="td" role="cell">
+                                    <span class="date">2024.10.01</span>
+                                </div>
+                            </div>
+                            <div class="tr" role="row">
+                                <div class="td" role="cell">
+                                    7
+                                </div>
+                                <div class="td text-left" role="cell">
+                                    <a class="link" href="/community/notice/detail/1">
+                                        <span class="title">HUB 소개자료를 확인해 보세요.</span>
+                                        <i class="icon icon-file"></i>
+                                    </a>
+                                </div>
+                                <div class="td" role="cell">
+                                    <a href="javascript:" title="첨부파일 다운로드"><i class="icon icon-file"></i></a>
+                                </div>
+                                <div class="td" role="cell">
+                                    <span class="date">2024.10.01</span>
+                                </div>
+                            </div>
+                            <div class="tr" role="row">
+                                <div class="td" role="cell">
+                                    6
+                                </div>
+                                <div class="td text-left" role="cell">
+                                    <a class="link" href="/community/notice/detail/1">
+                                        <span class="title">KB스타터스 현황 소개</span>
+                                        <i class="icon icon-file"></i>
+                                    </a>
+                                </div>
+                                <div class="td" role="cell">
+                                    <a href="javascript:" title="첨부파일 다운로드"><i class="icon icon-file"></i></a>
+                                </div>
+                                <div class="td" role="cell">
+                                    <span class="date">2024.10.01</span>
+                                </div>
+                            </div>
+                            <div class="tr" role="row">
+                                <div class="td" role="cell">
+                                    5
+                                </div>
+                                <div class="td text-left" role="cell">
+                                    <a class="link" href="/community/notice/detail/1">
+                                        <span class="title">HUB 파트너스 / 협력기관 소개</span>
+                                        <i class="icon icon-file"></i>
+                                    </a>
+                                </div>
+                                <div class="td" role="cell">
+                                    <a href="javascript:" title="첨부파일 다운로드"><i class="icon icon-file"></i></a>
+                                </div>
+                                <div class="td" role="cell">
+                                    <span class="date">2024.10.01</span>
+                                </div>
+                            </div>
+                            <div class="tr" role="row">
+                                <div class="td" role="cell">
+                                    4
+                                </div>
+                                <div class="td text-left" role="cell">
+                                    <a class="link" href="/community/notice/detail/1">
+                                        <span class="title">협업공간 위치 안내</span>
+                                        <i class="icon icon-file"></i>
+                                    </a>
+                                </div>
+                                <div class="td" role="cell">
+                                    <a href="javascript:" title="첨부파일 다운로드"><i class="icon icon-file"></i></a>
+                                </div>
+                                <div class="td" role="cell">
+                                    <span class="date">2024.10.01</span>
+                                </div>
+                            </div>
+                            <div class="tr" role="row">
+                                <div class="td" role="cell">
+                                    3
+                                </div>
+                                <div class="td text-left" role="cell">
+                                    <a class="link" href="/community/notice/detail/1">
+                                        <span class="title">글로벌 스케일업 소식을 확인해 보세요.</span>
+                                        <i class="icon icon-file"></i>
+                                    </a>
+                                </div>
+                                <div class="td" role="cell">
+                                    <a href="javascript:" title="첨부파일 다운로드"><i class="icon icon-file"></i></a>
+                                </div>
+                                <div class="td" role="cell">
+                                    <span class="date">2024.10.01</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 등록된 게시글 없을 때 -->
+                    <!-- <div class="default-board-list" role="table">
+                        <div class="tbody" role="rowgroup">
+                            <div class="tr" role="row">
+                                <div class="td" role="cell">
+                                    등록된 게시글이 없습니다.
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <div class="board-list-foot">
+                <ul class="pagination">
+                    <!--
+                        #클래스 가이드
+                        1. 이전/다음 버튼 비활성화: li 태그에 "disabled" 클래스 추가
+                        2. 활성화 상태: li태그에 "active" 클래스 및 "aria-current='page'" 추가
+                     -->
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" aria-label="맨 앞 페이지">
+                            <span class="first"></span>
+                        </a>
+                    </li>
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" aria-label="이전 페이지">
+                            <span class="previous"></span>
+                        </a>
+                    </li>
+                    <li class="page-item active" aria-current="page"><a class="page-link" href="#" aria-label="1 페이지, 현재 페이지">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#" aria-label="2 페이지">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#" aria-label="3 페이지">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#" aria-label="4 페이지">4</a></li>
+                    <li class="page-item"><a class="page-link" href="#" aria-label="5 페이지">5</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="다음 페이지">
+                            <span class="next"></span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="맨 뒤 페이지">
+                            <span class="last"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- 푸터 -->
+<app-footer></app-footer>
+</body>
+</html>

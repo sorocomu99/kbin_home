@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment/config :: configFragment"></head>
+<body>
+<!-- 헤더 -->
+<app-header></app-header>
+    <!-- 본문 -->
+    <main class="main">
+        <div class="section-top">
+            <div class="section-top-wrap">
+                <nav aria-label="Breadcrumb" class="breadcrumb" data-breadcrub-theme="light">
+                    <ul>
+                        <li><a href="/"><i class="icon icon-home"></i><span class="blind">HOME</span></a></li>
+                        <li><a href="/community/notice/list">커뮤니티</a></li>
+                        <li><span aria-current="page">FAQ</span></li>
+                    </ul>
+                </nav>
+                <h2 class="title">FAQ</h2>
+            </div>
+        </div>
+        <div class="board">
+            <div class="board-list">
+                <div class="board-list-head">
+                    <div class="col">
+                        <form action="">
+                            <div class="search">
+                                <select name="" id="">
+                                    <option value="" selected>제목</option>
+                                </select>
+                                <div class="box">
+                                    <input type="text" placeholder="검색어를 입력해주세요.">
+                                    <button type="submit"><span class="blind">검색</span></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="board-list-body">
+                    <div class="board-card">
+                        <div class="swiper category-list">
+                            <ul class="swiper-wrapper category-wrap">
+                                <li class="swiper-slide category-item category-item--active"><a class="category-button category-button--selected" href="javascript:">전체보기</a></li>
+                                <li class="swiper-slide category-item"><a class="category-button" href="javascript:">지원</a></li>
+                                <li class="swiper-slide category-item"><a class="category-button" href="javascript:">혜택</a></li>
+                                <li class="swiper-slide category-item"><a class="category-button" href="javascript:">HUB</a></li>
+                            </ul>
+                        </div>
+                        <div class="accordion">
+                            <ul class="accordion-list">
+                                <!-- 아코디언 id와 aria-* 애트리뷰트에 리스트 인덱스값 늘려주시면 됩니다. tab1... tab2... (개당 총 4군데에요.) -->
+                                <li class="accordion-group">
+                                    <div role="heading" aria-level="3" class="accordion-heading">
+                                        <button type="button" class="accordion-tab" id="tab1" aria-controls="tab1-section" aria-expanded="false">
+                                            <span class="category">혜택</span>
+                                            <span class="type">Q.</span>
+                                            HUB센터의 공간 규모는 얼마나 되나요?
+                                            <i class="icon"></i>
+                                        </button>
+                                    </div>
+                                    <section class="accordion-panel" id="tab1-section" aria-hidden="true" aria-labelledby="tab1">
+                                        <div class="accordion-contents">
+                                            <span class="type">A.</span>
+                                            <div class="context">강남HUB 전용 320평(7개 사무실 및 공용공간), 관악HUB 전용 120평(7개 사무실 및 공용공간) 규모입니다.</div>
+                                        </div>
+                                    </section>
+                                </li>
+                                <li class="accordion-group">
+                                    <div role="heading" aria-level="3" class="accordion-heading">
+                                        <button type="button" class="accordion-tab" id="tab2" aria-controls="tab2-section" aria-expanded="false">
+                                            <span class="category">혜택</span>
+                                            <span class="type">Q.</span>
+                                            입주 기간과 입주 조건은 어떻게 되나요?
+                                            <i class="icon"></i>
+                                        </button>
+                                    </div>
+                                    <section class="accordion-panel" id="tab2-section" aria-hidden="true" aria-labelledby="tab2">
+                                        <div class="accordion-contents">
+                                            <span class="type">A.</span>
+                                            <div class="context">입주 기간은 최대 1년입니다. 입주사는 KB스타터스 선발 기업 중 성장 가능성, KB금융그룹 계열사와의 협업 현황, 향후 추가 협업 가능성 등을 종합 고려하여 내부심사 후 선정됩니다.</div>
+                                        </div>
+                                    </section>
+                                </li>
+                                <li class="accordion-group">
+                                    <div role="heading" aria-level="3" class="accordion-heading">
+                                        <button type="button" class="accordion-tab" id="tab3" aria-controls="tab3-section" aria-expanded="false">
+                                            <span class="category">지원</span>
+                                            <span class="type">Q.</span>
+                                            꼭 입주를 해야하나요?
+                                            <i class="icon"></i>
+                                        </button>
+                                    </div>
+                                    <section class="accordion-panel" id="tab3-section" aria-hidden="true" aria-labelledby="tab3">
+                                        <div class="accordion-contents">
+                                            <span class="type">A.</span>
+                                            <div class="context">육성 공간 입주는 필수사항이 아닙니다.</div>
+                                        </div>
+                                    </section>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="board-list-foot">
+                    <ul class="pagination">
+                        <!--
+                            #클래스 가이드
+                            1. 이전/다음 버튼 비활성화: li 태그에 "disabled" 클래스 추가
+                            2. 활성화 상태: li태그에 "active" 클래스 및 "aria-current='page'" 추가
+                         -->
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" aria-label="맨 앞 페이지">
+                                <span class="first"></span>
+                            </a>
+                        </li>
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" aria-label="이전 페이지">
+                                <span class="previous"></span>
+                            </a>
+                        </li>
+                        <li class="page-item active" aria-current="page"><a class="page-link" href="#" aria-label="1 페이지, 현재 페이지">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#" aria-label="2 페이지">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#" aria-label="3 페이지">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#" aria-label="4 페이지">4</a></li>
+                        <li class="page-item"><a class="page-link" href="#" aria-label="5 페이지">5</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="다음 페이지">
+                                <span class="next"></span>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="맨 뒤 페이지">
+                                <span class="last"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 푸터 -->
+    <app-footer></app-footer>
+
+    <!-- 스크립트 -->
+    <script>
+
+        window.addEventListener('DOMContentLoaded', () => {
+            accordion();
+        });
+
+        function accordion(){
+            const opened = document.querySelectorAll('[aria-expanded=true]');
+
+            for (let i = 0, l = opened.length; i < l; i++) {
+                const panel = document.getElementById(opened[i].id + '-section');                
+
+                panel.style.height = panel.scrollHeight + 'px';
+            }
+
+            function toggleExpanded(element, show) {
+                const target = document.getElementById(element.getAttribute('aria-controls'));
+                const height = target.scrollHeight;
+
+                if (target) {
+                    element.setAttribute('aria-expanded', show);
+                    target.setAttribute('aria-hidden', !show);
+                    show ? target.style.height = height + 'px' : target.style.removeProperty('height');
+                }
+            }
+
+            function setupAccordion(accordionContainer) {
+                function closeAllPanels() {
+                    const openPanels = accordionContainer.querySelectorAll('[aria-expanded=true]');
+
+                    for (let i = 0, l = openPanels.length; i < l; i++) {
+                        toggleExpanded(openPanels[i], false);
+                    }
+                }
+
+                accordionContainer.addEventListener('click', function (event) {
+                    let target = event.target;
+
+                    if (target.closest) {
+                        target = target.closest('[class*="accordion-tab"]');
+                    }
+
+                    if (target) {
+                        const isTargetOpen = target.getAttribute('aria-expanded') === 'true';
+                        closeAllPanels();
+                        toggleExpanded(target, !isTargetOpen);
+                    }
+                });
+            }
+
+            const accordions = document.querySelectorAll('.accordion');
+
+            for (let i = 0, l = accordions.length; i < l; i++) {
+                setupAccordion(accordions[i]);
+            }
+        }
+    </script>
+</body>
+</html>

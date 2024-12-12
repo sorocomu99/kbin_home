@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment/config :: configFragment"></head>
+<body>
+    <!-- 헤더 -->
+    <app-header></app-header>
+
+    <!-- 본문 -->
+    <main class="main">
+        <div class="apply">
+            <div class="apply-image">
+                <img src="/images/dummy/apply-image.jpg" alt="">
+            </div>
+            <div class="apply-contents">
+                <!--
+                    다음으로 버튼 클릭 후 항목에 미 체크되어 있으면 form 태그에 need-invalid 클래스 추가 해주세요.
+                    기본상태는 클래스 비워주시면 됩니다.
+                -->
+                <form class="need-invalid">
+                <!-- 기본 상태 <form> -->
+                    <div class="context">
+                        <!-- 질문 -->
+                        <h1 class="h5">정보 수집·이용에 관한 사항</h1>
+                        <!-- 상세내용 -->
+                        <p>
+                            귀사가 지원시 입력하신 정보는 KB스타터스 선정을 위한 KB금융그룹 심사자료로 사용되며, 선정 종료시 일괄 삭제 됩니다. <br>
+                            <br>
+                            1. 정보의 수집/이용 목적 : KB스타터스 선정을 위한 심사 <br>
+                            2. 수집/이용 항목 : 기업명, 사업자번호, 법인등록번호, 이메일, 회사소개서 등 <br>
+                            3. 보유기간 : 2023 하반기 KB스타터스 선정 종료(`23.9월)까지
+                        </p>
+                        <!-- 객관식 -->
+                        <div class="input-group">
+                            <div class="radio">
+                                <input id="option1-1" class="input" type="radio" name="option1" value="">
+                                <i></i>
+                                <label for="option1-1" class="label">예</label>
+                            </div>
+                            <div class="radio">
+                                <input id="option1-2" class="input" type="radio" name="option1" value="">
+                                <i></i>
+                                <label for="option1-2" class="label">아니오</label>
+                            </div>
+                            <!-- 유효성 체크 문구(form 태그에 need-invalid 클래스가 있으면 아래 문구가 나타납니다) -->
+                            <div class="invalid-feedback"><i class="icon icon-danger"></i>항목을 선택 해주세요.</div>
+                        </div>
+                    </div>
+                    <div class="bottom-button">
+                        <!-- 제출버튼입니다. (아래건 임시용) <button class="button button-border" type="submit"><span>다음으로</span> <i class="icon icon-chevron-right"></i></button> -->
+                        <a class="button button-border" href="/starters/apply/input"><span>다음으로</span> <i class="icon icon-chevron-right"></i></a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- 푸터 -->
+    <app-footer></app-footer>
+
+    <!-- 스크립트 -->
+    <script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const form = document.querySelector('form');
+        const inputs = document.querySelectorAll('input');
+
+        // 항목 체크 시 유효성 문구 제거
+        inputs.forEach(input => input.addEventListener('change', (e) => checkState(e)));
+        
+        function checkState(input) {
+            if(!input.target.checked) {
+                return;
+            }
+            
+            form.classList.remove('need-invalid');
+        }
+    });
+    </script>
+</body>
+</html>
