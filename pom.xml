@@ -86,7 +86,8 @@
             <artifactId>tibero6-jdbc</artifactId>
             <version>6.0</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/target/tibero/tibero6-jdbc.jar</systemPath>
+            <!-- <systemPath>${project.basedir}/target/tibero/tibero6-jdbc.jar</systemPath> -->
+            <systemPath>${project.basedir}/src/main/resources/lib/tibero6-jdbc.jar</systemPath>
         </dependency>
         
         <dependency>

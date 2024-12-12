@@ -232,7 +232,7 @@
                         </div>
                         <ul class="proximal-list">
                             <li class="proximal-list-item" th:unless="${startUpList == null or startUpList.isEmpty()}" th:each="list : ${startUpList}">
-                                <a class="proximal-list-link" href="#" th:onclick="detailPage([[${list.ent_cd}]])" >
+                                <a class="proximal-list-link" href="javascript:void(0)" th:attr="onclick=|javascript:detailPage('${list.ent_cd}');|" >
                                 <!--<a class="proximal-list-link" href="view.html">-->
                                     <div class="row">
                                         <th:block th:if="${list.kb_starters_yn == 'Y'}">
