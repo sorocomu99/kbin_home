@@ -11,11 +11,16 @@
  */
 package com.kbin.inno.Startup.DTO;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 @Data
-public class StartupDTO {
-    private String ent_cd;
+public class StartupDTO implements Serializable {
+	
+	//private static final long serialVersionUID = 1L;
+    
+	private String ent_cd;
     private String ent_nm;
     private String main_biz;
     private String tpbiz;

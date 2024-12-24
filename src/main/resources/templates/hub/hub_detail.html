@@ -11,7 +11,7 @@
             <nav aria-label="Breadcrumb" class="breadcrumb" data-breadcrub-theme="light">
                 <ul>
                     <li><a href="/"><i class="icon icon-home"></i><span class="blind">HOME</span></a></li>
-                    <li><a href="/community/notice/list">커뮤니티</a></li>
+                    <li><a href="/kbinnovationhub/community/notice/list">커뮤니티</a></li>
                     <li><span aria-current="page">HUB센터 소식</span></li>
                 </ul>
             </nav>
@@ -19,10 +19,10 @@
     </div>
     <div class="board-view board-view--magazine">
         <div class="board-view-head">
-            <p class="title">KB금융, 혁신 스타트업과 상생하는 '2024 허브데이' 개최</p>
+            <p class="title" th:text="${hub.hub_ttl}"></p>
             <div class="info">
-                <span class="author"><b>Category</b> 행사소식</span>
-                <span class="date"><b>Date</b> 2024. 12. 04</span>
+                <span class="author"><b>Category</b> <span th:text="${hub.ctgry}"></span></span>
+                <span class="date"><b>Date</b> <span th:text="${hub.frst_reg_dt}"></span></span>
             </div>
         </div>
         <div class="board-view-body">
@@ -33,35 +33,26 @@
                     <iframe width="1206" height="615" src="https://www.youtube.com/embed/QuWi2qEfUG0" title="2023 HUB DAY 현장 스케치 영상" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 </div> -->
                 <!-- mp4 영상 -->
-                <!-- <video class="video" preload="auto" playsinline>
-                    <source src="" type='video/mp4'>
-                </video> -->
+                <video class="video" preload="auto" playsinline controls th:if="${hub.hub_mov_name != null}">
+                    <source th:src="|\kbinnovationhub${hub.hub_path_mov + hub.hub_mov_name}|" type='video/mp4'>
+                </video>
                 <!-- 이미지 -->
-                <div class="image">
-                    <p style="text-align: center;">
-                        <img src="/images/dummy/image0.jpg" alt="">
-                    </p>
-                </div>
+                <!--<div class="image" id="hub_img">
+                    <img src="" alt="">
+                </div>-->
                 <!-- 에디터 작성 -->
-                <p>[이데일리 양희동 기자] KB금융그룹은 지난 3일 서울 서초구 ‘KB 이노베이션 허브(Innovation HUB)센터’에서 유망 스타트업의 성장을 지원하는 ‘2024 허브데이(HUB Day)’를 개최했다고 4일 밝혔다. 허브데이는 KB금융이 ‘KB스타터스’와의 협업·지원을 강화하고자 마련한 스타트업 데모데이다. 데모데이란 스타트업이 정부의 육성·투자 기관, 창업 지원 기관, 벤처캐피탈, 액셀러레이터 등을 대상으로 펼치는 투자 유치 활동이다.</p>
-                <br>
-                <p>KB금융이 운영하는 금융권 최초 스타트업 육성 프로그램인 KB스타터스는 올해 육성 스타트업 300개 사를 달성했다. ‘스타트업과 함께한 2024년’이라는 주제로 열린 이번 행사에는 KB스타터스의 지원을 받고 있는 40여개의 스타트업이 참여했다. 또 KB인베스트먼트, 한국성장금융, 디캠프 등 내·외부 벤처캐피탈과 액셀러레이터가 참여해 스타트업 대표들과 사업 방향성, 사업 모델, 창업 아이템 등 다양한 분야에서의 투자·협업 방안을 심도있게 논의했다.</p>
-                <br>
-                <p>이날 행사는 스타트업 대표가 직접 참여하는 강연과 사례 발표로 진행했다. 강연에 나선 거대언어모델(LLM) 솔루션 기업 올거나이즈의 이원강 부대표는 행정고시 출신 공무원의 스타트업 도전기를 생생하게 전했다. 이어 퀀팃(AI자산관리)의 한덕희 대표가 KB글로벌 AC프로그램 참여에 대한 소감을, 이자(ETF투자플랫폼)의 신준 대표가 KB증권과의 제휴 사례를 소개하며 KB금융과의 협력 경험을 공유했다.</p>
-                <br>
-                <p>KB금융은 올해 첫 시범 운영한 ‘KB 오픈이노베이션 프로그램’(사전에 정해진 과제 해결을 위한 KB금융 계열사와 스타트업의 협업 활동)의 사업 성과와 2025년도 운영 계획 및 지원 방법도 공개했다. 또 ‘고객센터 실시간 AI 통·번역 솔루션 도입’(KB국민은행 X 엑스엘에이트에이아이)과 ‘전화를 통한 카드 신청 프로세스 완전 자동화’(KB국민카드 X 데이터큐·포티투마루) 등 주요 계열사와 참여 스타트업이 함께한 PoC(Proof of Concept) 진행 결과를 발표했다.</p>
-                <br>
-                <p>양종희 KB금융 회장은 ‘경쟁’과 ‘생존’이 아닌 ‘상생’과 ‘공존’으로의 패러다임 전환을 통해 국민·사회와 함께 지속가능한 성장을 이루기 위해 노력하고, 소상공인을 비롯한 중소기업과의 상생을 강조한 바 있다.</p>
-                <br>
-                <p>허브데이에 참석한 박재원 메타로고스 대표는 “이번 행사를 통해 실질적인 협업을 이룬 기업들의 사례가 인상 깊었다”며 “특히 ‘KB 오픈이노베이션 프로그램’에 대한 이해도를 높이는데 많은 도움이 되었으며 내년에 좋은 과제가 나오면 꼭 도전 해보겠다”고 말했다.</p>
-                <br>
-                <p>KB금융 관계자는 “신기술, 핀테크 기업뿐 아니라 돌봄드림(발달장애 아동, 노인 지원 서비스), 케이엘큐브(AI기반 청각장애인을 위한 수어서비스) 등 사회 소외계층 지원 서비스 기업도 KB스타터스로 선발해 육성·지원에 힘쓰고 있다”며 “앞으로도 사회와 함께 상생할 수 있는 다양한 분야의 스타트업과 협력을 통해 더 많은 사회적 가치를 창출하고 함께 성장해 나가겠다”고 말했다.</p>
+                <p th:utext="${hub.hub_cn}"></p>
             </div>
             <!-- 첨부파일 -->
-            <ul class="addition">
+            <ul class="addition" th:if="${hub.hub_path != null}">
                 <li class="file">
                     <ul class="list">
-                        <li><a href=""><i class="icon icon-download"></i>2024년 하반기 KB스타터스 모집 자료.jpg</a></li>
+                        <li>
+                            <a th:href="|\kbinnovationhub${hub.hub_path + hub.hub_file_name}|" th:download="${hub.origin_file_name}">
+                                <i class="icon icon-download"></i>
+                                <span th:text="${hub.origin_file_name}"></span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -69,25 +60,27 @@
         <div class="board-view-foot">
             <div class="col">
                 <!-- 이전/다음 글 없을 때, disabled 클래스 추가 -->
-                <a class="link previous disabled" href="">
+                <a class="link previous" th:href="@{|/community/hub/detail/${hub.hub_sn_bef}|}" th:classappend="${hub.hub_sn_bef == 0} ? 'disabled' : ''">
                     <i class="icon"></i>
                     <div class="text-wrap">
                         <span class="title">PREV</span>
-                        <span class="text">이전 글이 없습니다.</span>
+                        <span class="text" th:if="${hub.hub_sn_bef == 0 || hub.hub_sn_bef == null}">이전 글이 없습니다.</span>
+                        <span class="text" th:if="${hub.hub_sn_bef != 0 || hub.hub_sn_bef != null}" th:text="${hub.hub_ttl_bef}"></span>
                     </div>
                 </a>
             </div>
             <div class="col">
-                <a class="link next" href="">
+                <a class="link next" th:href="@{|/community/hub/detail/${hub.hub_sn_aft}|}" th:classappend="${hub.hub_sn_aft == 0} ? 'disabled' : ''">
                     <i class="icon"></i>
                     <div class="text-wrap">
                         <span class="title">NEXT</span>
-                        <span class="text">다음 게시글의 제목입니다. 다음 게시글의 제목입니다. 다음 게시글의 제목입니다. 다음 게시글의 제목입니다. 다음 게시글의 제목입니다.</span>
+                        <span class="text" th:if="${hub.hub_sn_aft == 0 || hub.hub_sn_aft == null}">다음 글이 없습니다.</span>
+                        <span class="text" th:if="${hub.hub_sn_aft != 0 || hub.hub_sn_aft != null}" th:text="${hub.hub_ttl_aft}"></span>
                     </div>
                 </a>
             </div>
             <div class="col">
-                <a class="button button-border" href="/community/hub/list">목록으로</a>
+                <a class="button button-border" th:href="@{/community/hub/list}">목록으로</a>
             </div>
         </div>
     </div>

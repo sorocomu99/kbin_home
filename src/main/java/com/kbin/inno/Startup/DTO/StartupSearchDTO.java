@@ -1,10 +1,15 @@
 package com.kbin.inno.Startup.DTO;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 @Data
-public class StartupSearchDTO {
-    private String keyWord;    //최상단 단어검색
+public class StartupSearchDTO implements Serializable {
+	
+	//private static final long serialVersionUID = 1L;
+    
+	private String keyWord;    //최상단 단어검색
     private String option1;    //최종 투자단계
     private String option2;    //누적투자금액
     private String option3;    //근무자

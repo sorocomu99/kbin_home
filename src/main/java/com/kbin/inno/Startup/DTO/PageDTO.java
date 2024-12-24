@@ -1,9 +1,13 @@
 package com.kbin.inno.Startup.DTO;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 @Data
-public class PageDTO {
+public class PageDTO implements Serializable {
+	//private static final long serialVersionUID = 1L;
+	
     /** 1. 페이지 당 보여지는 게시글의 최대 개수 **/
     private int pageSize = 12;
 

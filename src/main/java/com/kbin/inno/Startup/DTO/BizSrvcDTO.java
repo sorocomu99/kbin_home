@@ -12,11 +12,16 @@
  */
 package com.kbin.inno.Startup.DTO;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 @Data
-public class BizSrvcDTO {
-    private String ent_cd;            //기업 코드
+public class BizSrvcDTO implements Serializable {
+	
+	//private static final long serialVersionUID = 1L;
+    
+	private String ent_cd;            //기업 코드
     private String srvc_nm;           //서비스 명
     private String google_app_link;   //구글 플레이스토어 링크
     private String google_icon_link;  //구글 플레이스토어 아이콘 링크

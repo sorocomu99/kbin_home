@@ -13,11 +13,15 @@ package com.kbin.inno.Nurture.DTO;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class AffiliateDTO {
-    private int affiliate_sn;             // 제휴 일련번호
+public class AffiliateDTO implements Serializable {
+	
+	//private static final long serialVersionUID = 1L;
+    
+	private int affiliate_sn;             // 제휴 일련번호
     private String affiliate_nm;          // 계열사명
     private String starter_nm;            // 스타터스명
     private String srvc_nm;               // 서비스명

@@ -12,10 +12,14 @@
  */
 package com.kbin.inno.Scheduler.DTO;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 @Data
-public class InvestDTO {
+public class InvestDTO implements Serializable {
+	
+	//private static final long serialVersionUID = 1L;
 
     private String ent_cd;      //기업 코드
     private String investor;    //투자자

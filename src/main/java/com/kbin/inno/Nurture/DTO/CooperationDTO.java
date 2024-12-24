@@ -3,11 +3,15 @@ package com.kbin.inno.Nurture.DTO;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class CooperationDTO {
-    private int coope_sn;                 // 협력 일련번호
+public class CooperationDTO implements Serializable {
+	
+	//private static final long serialVersionUID = 1L;
+    
+	private int coope_sn;                 // 협력 일련번호
     private String bzenty_nm;             // 업체명
     private String expsr_yn;              // 노출 여부
     private int sort_no;                  // 정렬 번호

@@ -11,10 +11,16 @@
 package com.kbin.inno.Nurture.DTO;
 
 import lombok.Data;
+
+import java.io.Serializable;
+
 import org.springframework.web.multipart.MultipartFile;
 
 @Data
-public class PlaceDTO {
+public class PlaceDTO implements Serializable {
+	
+	//private static final long serialVersionUID = 1L;
+	
     private int plc_sn;               // 공간(장소) 일련 번호
     private String plc_nm;            // 공간(장소) 명
     private String plc_addr;          // 공간(장소) 주소

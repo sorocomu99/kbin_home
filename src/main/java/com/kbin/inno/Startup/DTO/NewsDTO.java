@@ -12,11 +12,16 @@
  */
 package com.kbin.inno.Startup.DTO;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 @Data
-public class NewsDTO {
-    private String ent_cd;     //기업 코드
+public class NewsDTO implements Serializable {
+	
+	//private static final long serialVersionUID = 1L;
+    
+	private String ent_cd;     //기업 코드
     private String news_id;    //뉴스 아이디
     private String provider;   //제공자
     private String news_ttl;   //기사 제목

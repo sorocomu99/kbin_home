@@ -33,6 +33,8 @@
              , FAQ_PAGE.CTGRY_NM
              , FAQ_PAGE.FAQ_QSTN
              , FAQ_PAGE.FAQ_ANS
+             , FAQ_PAGE.FAQ_ID
+             , FAQ_PAGE.FAQ_SEC
          FROM (
                /* 순번 매기기 */
                SELECT ROWNUM ROWNUMBER
@@ -44,6 +46,8 @@
                             , FAQ_CTGRY.CTGRY_NM
                             , FAQ_CTGRY.FAQ_QSTN
                             , FAQ_CTGRY.FAQ_ANS
+                            , 'tab' || FAQ_CTGRY.FAQ_SN AS FAQ_ID
+                            , 'tab' || FAQ_CTGRY.FAQ_SN || '-section' AS FAQ_SEC
                          FROM (
                                SELECT FAQ.*
                                     , CTGRY.CTGRY_NM

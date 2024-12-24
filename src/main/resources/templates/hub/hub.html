@@ -23,13 +23,15 @@
         <div class="board-list">
             <div class="board-list-head">
                 <div class="col">
-                    <form action="">
+                    <form action="/community/hub/list" method="get">
                         <div class="search">
-                            <select name="" id="">
-                                <option value="" selected>제목</option>
+                            <select class="form-select" aria-label="" name="type" th:value="${type}">
+                                <option value="all" th:selected="${type} == 'all'">전체</option>
+                                <option value="title" th:selected="${type} == 'title'">제목</option>
+                                <option value="content" th:selected="${type} == 'content'">내용</option>
                             </select>
                             <div class="box">
-                                <input type="text" placeholder="검색어를 입력해주세요.">
+                                <input type="text" placeholder="검색어를 입력해주세요." th:value="${keyword}">
                                 <button type="submit"><span class="blind">검색</span></button>
                             </div>
                         </div>
@@ -38,78 +40,25 @@
             </div>
             <div class="board-list-body">
                 <div class="total">
-                    Total: <em class="color-primary">5</em>건의 게시물이 있습니다.
+                    Total: <em class="color-primary" th:text="${allCount}"></em>건의 게시물이 있습니다.
                 </div>
-                <ul class="magazine-board-list">
-                    <!-- 게시글 없을 때 -->
-                    <!-- <li class="list">
-                        <p class="empty">등록된 게시글이 없습니다.</p>
-                    </li> -->
-                    <li class="list">
-                        <a class="block" href="/community/hub/detail/1">
-                            <div class="thumbnail"><img src="/images/dummy/image0.jpg" alt=""></div>
+                <ul id="magazine-board-list" class="magazine-board-list">
+                    <li id="magazine-item" class="list" th:each="list, iterStat : ${selectList}">
+                        <a class="block" th:href="@{/community/hub/detail/{hub_sn}(hub_sn=${list.hub_sn})}">
+                            <div class="thumbnail"><img th:src="|\kbinnovationhub${list.hub_path_img + list.hub_img_name}|" alt=""></div>
                             <div class="contents">
                                 <div class="row">
-                                    <p class="title">KB금융, 혁신 스타트업과 상생하는 '2024 허브데이' 개최 <i class="icon icon-file"></i></p>
-                                    <p class="text">
-                                        [이데일리 양희동 기자] KB금융그룹은 지난 3일 서울 서초구 ‘KB 이노베이션 허브(Innovation HUB)센터’에서 유망 스타트업의 성장을 지원하는 ‘2024 허브데이(HUB Day)’를 개최했다고 4일 밝혔다. 허브데이는 KB금융이 ‘KB스타터스’와의 협업·지원을 강화하고자 마련한 스타트업 데모데이다. 데모데이란 스타트업이 정부의 육성·투자 기관, 창업 지원 기관, 벤처캐피탈, 액셀러레이터 등을 대상으로 펼치는 투자 유치 활동이다.
+                                    <p class="title">
+                                        <span th:text="${list.hub_ttl}"></span>
+                                        <i class="icon icon-file" th:if="${list.atch_file_sn3 != 0}"></i>
                                     </p>
+                                    <input th:id="${'hub_cn' + iterStat.index}" type="hidden" th:value="${list.hub_cn}" />
+                                    <p th:class="${'text'}" th:id="${'hub_content' + iterStat.index}"></p>
+                                    <!--<p th:utext="${list.hub_cn}"></p>-->
                                 </div>
                                 <div class="row">
-                                    <p class="category">행사소식</p>
-                                    <p class="date">2024. 12. 04</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="list">
-                        <a class="block" href="/community/hub/detail/1">
-                            <div class="thumbnail"><img src="/images/dummy/thumbnail1.jpg" alt=""></div>
-                            <div class="contents">
-                                <div class="row">
-                                    <p class="title">KB금융, 핀테크랩 'KB스타터스' 선발로 스타트업 육성ㆍ발굴 <i class="icon icon-file"></i></p>
-                                    <p class="text">
-                                        지난 4월 권대영(왼쪽 여덟번째) 금융위원회 사무처장과 양종희(왼쪽 여섯번째) KB금융그룹 회장, 이재근(왼쪽 네번째) KB국민은행장이 30일 열린 'KB Innovation HUB센터' 10주년 기념행사에서 기념촬영을 하고 있다. [사진=KB금융그룹]
-                                        컨슈머타임스=김하은 기자 | KB금융이 운영하는 핀테크랩인 KB이노베이션허브는 KB금융과 핀테크 생태계를 잇는 구심점 역할을 하고 있다.
-                                    </p>
-                                </div>
-                                <div class="row">
-                                    <p class="category">HUB센터 활동</p>
-                                    <p class="date">2024. 10. 01</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="list">
-                        <a class="block" href="/community/hub/detail/1">
-                            <div class="thumbnail"><img src="/images/dummy/thumbnail2.jpg" alt=""></div>
-                            <div class="contents">
-                                <div class="row">
-                                    <p class="title">KB금융, 미래 혁신 협업 파트너 하반기 ‘KB스타터스’ 선정 <i class="icon icon-file"></i></p>
-                                    <p class="text">
-                                        ■ 생성형AI, 보안, 데이터 등 우수 스타트업 15개사 선정 KB금융그룹은 지난달 26일 ‘KB금융과 미래를 함께 혁신할 협업 파트너’로 성장 가능성이 있는  15개 스타트업을 2024년 하반기 ‘KB스타터스’로 최종 선정, ‘KB스타터스 Welcome
-                                    </p>
-                                </div>
-                                <div class="row">
-                                    <p class="category">HUB센터 활동</p>
-                                    <p class="date">2024. 10. 01</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="list">
-                        <a class="block" href="/community/hub/detail/1">
-                            <div class="thumbnail"><img src="/images/dummy/thumbnail3.jpg" alt=""></div>
-                            <div class="contents">
-                                <div class="row">
-                                    <p class="title">KB이노베이션허브 운영현황 <i class="icon icon-file"></i></p>
-                                    <p class="text">
-                                        ■ 2020년 스타트업 스케일업 성과 요약 ▲스타트업 선발 ▲제휴 ▲투자 ▲공간 ▲글로벌 지원 등
-                                    </p>
-                                </div>
-                                <div class="row">
-                                    <p class="category">행사 소식</p>
-                                    <p class="date">2022. 11. 04</p>
+                                    <p class="category" th:text="${list.ctgry}"></p>
+                                    <p class="date" th:text="${list.frst_reg_dt}"></p>
                                 </div>
                             </div>
                         </a>
@@ -117,7 +66,8 @@
                 </ul>
             </div>
             <div class="board-list-foot board-list-foot--center">
-                <a class="button button-border" href="">더 보기</a>
+                <input type="hidden" id="more_num" value="2"/>
+                <button id="more-btn" class="button button-border" onclick="morePage()">더 보기</button>
             </div>
         </div>
     </div>
@@ -143,7 +93,7 @@
     function morePage() {
         var more_num = $('#more_num').val();
         $.ajax({
-            url: '/community/hub/list/' + more_num, // 요청 URL
+            url: '/kbinnovationhub/community/hub/list/' + more_num, // 요청 URL
             type: 'GET', // HTTP 메서드
             dataType: 'json',
             success: function(data) {
@@ -156,8 +106,8 @@
                 var htmlCode = '';
                 for(var i = 0; i < selectList.length; i++) {
                     htmlCode += '<li class="list">';
-                    htmlCode += '   <a class="block" href="/community/hub/detail/ ' + selectList[i].hub_sn + '">';
-                    htmlCode += '       <div class="thumbnail"><img src="' + selectList[i].hub_path_img + selectList[i].hub_img_name + '" alt=""></div>';
+                    htmlCode += '   <a class="block" href="/kbinnovationhub/community/hub/detail/ ' + selectList[i].hub_sn + '">';
+                    htmlCode += '       <div class="thumbnail"><img src="\\kbinnovationhub' + selectList[i].hub_path_img + selectList[i].hub_img_name + '" alt=""></div>';
                     htmlCode += '       <div class="contents">';
                     htmlCode += '           <div class="row">';
                     htmlCode += '               <p class="title">';

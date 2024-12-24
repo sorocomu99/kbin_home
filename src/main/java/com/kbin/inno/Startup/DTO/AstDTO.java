@@ -12,11 +12,16 @@
  */
 package com.kbin.inno.Startup.DTO;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 @Data
-public class AstDTO {
-    private String ent_cd;           //기업 코드
+public class AstDTO implements Serializable {
+	
+	//private static final long serialVersionUID = 1L;
+    
+	private String ent_cd;           //기업 코드
     private String yr;               //년도
     private Double current_assets;      //유동자산(단위 : 천원)
     private Double non_current_assets;  //비유동자산(단위 : 천원)

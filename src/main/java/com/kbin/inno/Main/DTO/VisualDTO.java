@@ -3,11 +3,16 @@ package com.kbin.inno.Main.DTO;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
+//public class VisualDTO implements Serializable {
 public class VisualDTO {
-    private int main_sn;             // 메인 일련번호
+	
+	//private static final long serialVersionUID = 1L;
+    
+	private int main_sn;             // 메인 일련번호
     private String main_cn;          // 메인 내용
     private String expsr_yn;         // 노출 여부
     private int sort_no;             // 정렬 번호

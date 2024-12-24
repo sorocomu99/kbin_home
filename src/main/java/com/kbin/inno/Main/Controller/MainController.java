@@ -20,12 +20,12 @@ public class MainController {
     // 메인 페이지 이동
     @RequestMapping("/")
     public String main(Model model) {
-//        // 육성 현황 조회
-//        ResultDTO result = mainService.selectResult();
-//        model.addAttribute("result", result);
-//        // 비주얼 조회
-//        List<VisualDTO> selectList = mainService.selectVisual();
-//        model.addAttribute("selectList", selectList);
+        // 육성 현황 조회
+        ResultDTO result = mainService.selectResult();
+        model.addAttribute("result", result);
+        // 비주얼 조회
+        List<VisualDTO> selectList = mainService.selectVisual();
+        model.addAttribute("selectList", selectList);
         return "main/main";
     	//return "redirect:/startup/list";
     }

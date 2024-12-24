@@ -12,10 +12,14 @@
  */
 package com.kbin.inno.Scheduler.DTO;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 @Data
-public class EmploDTO {
+public class EmploDTO implements Serializable {
+	
+	//private static final long serialVersionUID = 1L;
 
     private String ent_cd;    //기업 코드
     private String crtr_ym;   //기준 년월

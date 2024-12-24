@@ -15,7 +15,7 @@
                             <nav aria-label="Breadcrumb" class="breadcrumb" data-breadcrub-theme="light">
                                 <ul>
                                     <li class="item"><a href="/"><i class="icon icon-home"></i><span class="blind">HOME</span></a></li>
-                                    <li class="item"><a href="javascript:">스타트업 육성</a></li>
+                                    <li class="item"><a href="/kbinnovationhub/nurture/dosmetic/info">스타트업 육성</a></li>
                                     <li class="item"><span aria-current="page">글로벌 프로그램</span></li>
                                 </ul>
                             </nav>
@@ -23,7 +23,7 @@
                         </div>
                     </div>
                     <div class="background">
-                        <img class="item" src="/images/sub/nurture/global/intro-background-global.jpg" alt="">
+                        <img class="item" src="/kbinnovationhub/images/sub/nurture/global/intro-background-global.jpg" alt="">
                     </div>
                     <div class="block">
                         <p class="heading">'KB글로벌 핀테크 랩'과 연계하여 국내 유망 스타트업의 <br>글로벌 진출 및 현지 정착을 지원합니다.</p>
@@ -46,7 +46,7 @@
                     <div class="onsite">
                         <div class="contents">
                             <ul class="list">
-                                <li>글로벌 핀테크랩 내 <br class="pc">상주직원을 통한 지원</li>
+                                <li>글로벌 핀테크랩 내 <br>상주직원을 통한 지원</li>
                                 <li>현지 법인 설립 지원</li>
                                 <li>현지 기관 대상 KB 육성기업 홍보</li>
                             </ul>
@@ -56,7 +56,7 @@
                                 <span class="light"></span>
                                 <span class="dot"></span>
                             </div>
-                            <img src="/images/sub/nurture/global/onsite-icon.svg" alt="">
+                            <img src="/kbinnovationhub/images/sub/nurture/global/onsite-icon.svg" alt="">
                             <p>현지 정착</p>
                         </div>
                     </div>
@@ -72,7 +72,7 @@
                         <li>
                             <div class="block">
                                 <div class="side">
-                                    <img src="/images/sub/nurture/global/ac-icon-1.svg" alt="">
+                                    <img src="/kbinnovationhub/images/sub/nurture/global/ac-icon-1.svg" alt="">
                                     <p class="title">글로벌 AC 프로그램</p>
                                 </div>
                                 <div class="context">
@@ -84,7 +84,7 @@
                         <li>
                             <div class="block">
                                 <div class="side">
-                                    <img src="/images/sub/nurture/global/ac-icon-2.svg" alt="">
+                                    <img src="/kbinnovationhub/images/sub/nurture/global/ac-icon-2.svg" alt="">
                                     <p class="title">글로벌 PoC 프로그램</p>
                                 </div>
                                 <div class="context">
@@ -104,35 +104,12 @@
                     <div class="slider-container">
                         <div class="swiper slider">
                             <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <div class="thumbnail"><img src="/images/dummy/nurture-thumbnail-1.jpg" alt=""></div>
-                                    <p class="title">Korea Mission Trip 간담회(2023)</p>
-                                    <p class="text">SFA(싱가포르 핀테크 협회) 및 싱가포르 핀테크 스타트업 대상 ‘Korea Mission Trip’ 간담회(2023)</p>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="thumbnail"><img src="/images/dummy/nurture-thumbnail-2.jpg" alt=""></div>
-                                    <p class="title">글로벌 진출 스타트업 현지 간담회(2023)</p>
-                                    <p class="text">금융위원회, 한국핀테크지원센터와 함께하는 글로벌 진출 스타트업 현지 간담회(2023)</p>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="thumbnail"><img src="/images/dummy/nurture-thumbnail-3.jpg" alt=""></div>
-                                    <p class="title">현지 VC연계 데모데이(2023)</p>
-                                    <p class="text">싱가포르 현지 VC와 함께하는 스타트업 데모데이 및 네트워킹 행사(2023)</p>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="thumbnail"><img src="/images/dummy/nurture-thumbnail-1.jpg" alt=""></div>
-                                    <p class="title">Korea Mission Trip 간담회(2023)</p>
-                                    <p class="text">SFA(싱가포르 핀테크 협회) 및 싱가포르 핀테크 스타트업 대상 ‘Korea Mission Trip’ 간담회(2023)</p>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="thumbnail"><img src="/images/dummy/nurture-thumbnail-2.jpg" alt=""></div>
-                                    <p class="title">글로벌 진출 스타트업 현지 간담회(2023)</p>
-                                    <p class="text">금융위원회, 한국핀테크지원센터와 함께하는 글로벌 진출 스타트업 현지 간담회(2023)</p>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="thumbnail"><img src="/images/dummy/nurture-thumbnail-3.jpg" alt=""></div>
-                                    <p class="title">현지 VC연계 데모데이(2023)</p>
-                                    <p class="text">싱가포르 현지 VC와 함께하는 스타트업 데모데이 및 네트워킹 행사(2023)</p>
+                                <div class="swiper-slide" th:each="list : ${interchange}">
+                                    <div class="thumbnail">
+                                        <img th:src="|\kbinnovationhub${list?.inter_path + list?.inter_file_name}|" alt="">
+                                    </div>
+                                    <p class="title" th:text="${list.exch_ttl}"></p>
+                                    <p class="text" th:text="${list.exch_cn}"></p>
                                 </div>
                             </div>
                             <div class="swiper-scrollbar"></div>
@@ -158,13 +135,13 @@
                             <div class="swiper roomy-slider">
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide">
-                                        <div class="thumbnail"><img src="/images/sub/nurture/global/roomy-image-1.jpg" alt=""></div>
+                                        <div class="thumbnail"><img src="/kbinnovationhub/images/sub/nurture/global/roomy-image-1.jpg" alt=""></div>
                                     </div>
                                     <div class="swiper-slide">
-                                        <div class="thumbnail"><img src="/images/sub/nurture/global/roomy-image-2.jpg" alt=""></div>
+                                        <div class="thumbnail"><img src="/kbinnovationhub/images/sub/nurture/global/roomy-image-2.jpg" alt=""></div>
                                     </div>
                                     <div class="swiper-slide">
-                                        <div class="thumbnail"><img src="/images/sub/nurture/global/roomy-image-3.jpg" alt=""></div>
+                                        <div class="thumbnail"><img src="/kbinnovationhub/images/sub/nurture/global/roomy-image-3.jpg" alt=""></div>
                                     </div>
                                 </div>
                                 <div class="swiper-scrollbar"></div>

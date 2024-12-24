@@ -3,11 +3,15 @@ package com.kbin.inno.Community.DTO;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class NoticeDTO {
-    private int ntc_sn;              // 공지사항 일련번호
+public class NoticeDTO implements Serializable {
+	
+	//private static final long serialVersionUID = 1L;
+    
+	private int ntc_sn;              // 공지사항 일련번호
     private String ntc_ttl;          // 공지사항 제목
     private String ntc_cn;           // 공지사항 내용
     private int atch_file_sn;        // 첨부파일 일련번호

@@ -12,11 +12,16 @@
  */
 package com.kbin.inno.Startup.DTO;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 @Data
-public class SlsDTO {
-    private String ent_cd;             //기업 코드
+public class SlsDTO implements Serializable {
+	
+	//private static final long serialVersionUID = 1L;
+    
+	private String ent_cd;             //기업 코드
     private String yr;                 //년도
     private Double sls_amt;            //매출액
     private Double operating_revenue;  //영업수익(단위 : 천원)

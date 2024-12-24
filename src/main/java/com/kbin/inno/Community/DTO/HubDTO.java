@@ -13,11 +13,15 @@ package com.kbin.inno.Community.DTO;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class HubDTO {
-    private int hub_sn;             // 허브 일련번호
+public class HubDTO implements Serializable {
+	
+	//private static final long serialVersionUID = 1L;
+    
+	private int hub_sn;             // 허브 일련번호
     private String hub_ttl;         // 허브 제목
     private String hub_cn;          // 허브 내용
     private String expsr_yn;        // 노출 여부

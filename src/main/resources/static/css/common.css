@@ -81,8 +81,8 @@ html.sr .load-hidden { visibility: hidden; }
 .swiper-rtl .swiper-button-next:after { content: none; }
 .swiper-button-next,
 .swiper-button-prev { width: 60px; height: 60px; background-repeat: no-repeat; background-position: center; background-size: auto 100%; }
-.swiper-button-next { right: 0; background-image: url('../images/slider-button-next.svg'); }
-.swiper-button-prev { left: 0; background-image: url('../images/slider-button-prev.svg'); }
+.swiper-button-next { right: 0; background-image: url('/kbinnovationhub/images/slider-button-next.svg'); }
+.swiper-button-prev { left: 0; background-image: url('/kbinnovationhub/images/slider-button-prev.svg'); }
 
 @media screen and (max-width: 1024px) {
     .swiper-horizontal > .swiper-scrollbar,
@@ -103,21 +103,21 @@ html.sr .load-hidden { visibility: hidden; }
 .check i { display: inline-block; vertical-align: middle; position: relative; width: 20px; height: 20px; pointer-events: none; }
 .check i::before,
 .check i::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 4px; }
-.check i::after { background-repeat: no-repeat; border: 1px solid #C7C7C7; background-color: #C7C7C7; background-image: url('../images/checked.svg'); background-size: auto 100%; background-position: center; transition: all ease .15s; }
+.check i::after { background-repeat: no-repeat; border: 1px solid #C7C7C7; background-color: #C7C7C7; background-image: url('/kbinnovationhub/images/checked.svg'); background-size: auto 100%; background-position: center; transition: all ease .15s; }
 .check i::before { background-color: #C7C7C7; border: 1px solid #C7C7C7; }
 .check input { z-index: 2; position: absolute; top: 0; left: 0; bottom: 0; margin: auto; width: 20px; height: 20px; color: #fff; opacity: 0; cursor: pointer; }
 .check input:checked ~ i::after { background-color: var(--clr-primary); border-color: var(--clr-primary); }
 .check a { background: linear-gradient(to bottom, #666, #666); background-size: 1px 1px; background-position: left bottom 3px; background-repeat: repeat-x; }
 .check a span { vertical-align: baseline; }
 .check-light label { color: #fff; cursor: pointer; }
-.check-light i::after { background-color: #fff; background-image: url('../images/check.svg'); border-color: transparent; }
+.check-light i::after { background-color: #fff; background-image: url('/kbinnovationhub/images/check.svg'); border-color: transparent; }
 .check-light i::before { border-color: transparent; }
 .radio { display: inline-flex; align-items: center; position: relative; user-select: none; }
 .radio label { padding-left: 0.375em; font-size: 1.6rem; color: var(--clr-dark); cursor: pointer; font-weight: 500; }
 .radio i { display: inline-block; vertical-align: middle; position: relative; width: 20px; height: 20px; pointer-events: none; }
 .radio i::before,
 .radio i::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 4px; }
-.radio i::after { padding: 4px; background: var(--clr-primary) url('../images/check.svg') no-repeat center / auto 80%; border: 1px solid var(--clr-primary); opacity: 0; }
+.radio i::after { padding: 4px; background: var(--clr-primary) url('/kbinnovationhub/images/check.svg') no-repeat center / auto 80%; border: 1px solid var(--clr-primary); opacity: 0; }
 .radio i::before { border: 1px solid #C7C7C7; }
 .radio input { z-index: 2; position: absolute; top: 0; left: 0; bottom: 0; margin: auto; width: 20px; height: 20px; color: #fff; opacity: 0; cursor: pointer; }
 .radio input:checked ~ i::after { opacity: 1; }
@@ -173,14 +173,14 @@ html.sr .load-hidden { visibility: hidden; }
 /* Icons */
 .icon { display: inline-block; vertical-align: middle; }
 .icon::before { content: ''; display: block; width: 100%; height: 100%; background-repeat: no-repeat; background-position: center; background-size: auto 100%; transition: all ease .15s; }
-.icon-chevron-right::before { background-image: url('../images/chevron-right.svg'); }
-.icon-rotate-cw::before { background-image: url('../images/icon-rotate-cw.svg'); }
-.icon-upload::before { background-image: url('../images/upload.svg'); }
-.icon-danger::before { background-image: url('../images/danger.svg'); }
-.icon-option::before { background-image: url('../images/option-light.svg'); }
+.icon-chevron-right::before { background-image: url('/kbinnovationhub/images/chevron-right.svg'); }
+.icon-rotate-cw::before { background-image: url('/kbinnovationhub/images/icon-rotate-cw.svg'); }
+.icon-upload::before { background-image: url('/kbinnovationhub/images/upload.svg'); }
+.icon-danger::before { background-image: url('/kbinnovationhub/images/danger.svg'); }
+.icon-option::before { background-image: url('/kbinnovationhub/images/option-light.svg'); }
 @media (hover: hover) and (pointer: fine) {
-    .button:hover .icon-chevron-right::before { background-image: url('../images/chevron-right-light.svg'); }
-    .button:hover .icon-upload::before { background-image: url('../images/upload-light.svg'); }
+    .button:hover .icon-chevron-right::before { background-image: url('/kbinnovationhub/images/chevron-right-light.svg'); }
+    .button:hover .icon-upload::before { background-image: url('/kbinnovationhub/images/upload-light.svg'); }
 }
 @media screen and (max-width: 1024px) {
 }
@@ -243,10 +243,10 @@ html.sr .load-hidden { visibility: hidden; }
 .header { z-index: 11; position: fixed; top: 0; left: 0; width: 100%; height: 100px; }
 .header-primary { position: relative; color: #fff; transition: background ease .3s; }
 .header-primary-wrap { margin: auto; position: relative; max-width: var(--inner); width: 90%; }
-.header-primary .logo { z-index: 2; position: absolute; top: 27px; left: 0; width: 170px; height: 45px; background: url('../images/logo.svg') no-repeat center / auto 100%; }
+.header-primary .logo { z-index: 2; position: absolute; top: 27px; left: 0; width: 170px; height: 45px; background: url('/kbinnovationhub/images/logo.svg') no-repeat center / auto 100%; }
 .header-primary .language { z-index: 2; position: absolute; top: 46px; right: 0; }
-.header-primary .language .current { position: relative; padding: 2px 20px 0 24px; font-size: 1.6rem; color: inherit; font-weight: 700; background: url('../images/language-arrow.svg') no-repeat top 7px right; border: none; }
-.header-primary .language .current::before { content: ''; position: absolute; top: 2px; left: 0; width: 18px; height: 18px; background: url('../images/language.svg') no-repeat center / auto 100%; }
+.header-primary .language .current { position: relative; padding: 2px 20px 0 24px; font-size: 1.6rem; color: inherit; font-weight: 700; background: url('/kbinnovationhub/images/language-arrow.svg') no-repeat top 7px right; border: none; }
+.header-primary .language .current::before { content: ''; position: absolute; top: 2px; left: 0; width: 18px; height: 18px; background: url('/kbinnovationhub/images/language.svg') no-repeat center / auto 100%; }
 .header-primary .language ul { position: absolute; left: -6px; top: 100%; margin-top: 5px; width: 80px; background: #fff; box-shadow: 0 3px 10px rgba(0, 0, 0, .1); visibility: hidden; opacity: 0; }
 .header-primary .language a { display: block; padding: 10px 0; text-align: center; font-size: 1.4rem; color: #212227; transition: all ease .15s; }
 .header-primary .language .current[aria-pressed="true"] + ul { visibility: visible; opacity: 1; }
@@ -275,7 +275,7 @@ html.sr .load-hidden { visibility: hidden; }
 [data-hamburger="opened"] .header-primary .language .current::before,
 [data-header-theme="black"] .header-primary .language .current::before,
 [data-header-theme="light"] .header-primary .language .current::before,
-[data-header-sticky="true"] .header-primary .language .current::before { background-image: url('../images/language-dark.svg'); }
+[data-header-sticky="true"] .header-primary .language .current::before { background-image: url('/kbinnovationhub/images/language-dark.svg'); }
 [data-header-theme="transparent"] .header-primary { color: #111; }
 [data-header-menu="true"] .header-primary,
 [data-header-theme="black"] .header-primary,
@@ -285,10 +285,10 @@ html.sr .load-hidden { visibility: hidden; }
 [data-header-menu="true"] .header-primary .logo,
 [data-header-theme="black"] .header-primary .logo,
 [data-header-theme="light"] .header-primary .logo,
-[data-header-sticky="true"] .header-primary .logo { background-image: url('../images/logo.svg'); }
+[data-header-sticky="true"] .header-primary .logo { background-image: url('/kbinnovationhub/images/logo.svg'); }
 [data-header-sticky="true"] .header-primary .language .current,
 [data-header-theme="black"] .header-primary .language .current,
-[data-header-theme="light"] .header-primary .language .current { background-image: url('../images/language-arrow-dark.svg'); }
+[data-header-theme="light"] .header-primary .language .current { background-image: url('/kbinnovationhub/images/language-arrow-dark.svg'); }
 [data-header-sticky="true"] .header-primary .hamburger a .circle,
 [data-header-theme="black"] .header-primary .hamburger a .circle,
 [data-header-theme="light"] .header-primary .hamburger a .circle { border-color: var(--clr-dark); }
@@ -346,7 +346,7 @@ html.sr .load-hidden { visibility: hidden; }
     [data-hamburger="opened"] .header-primary .close { opacity: 1; visibility: visible; }
     [data-hamburger="opened"] .header-primary .gnb { color: #212227; right: 0; }
     [data-hamburger="opened"] .header-primary .gnb .close { display: block; }
-    [data-hamburger="opened"] .header-primary .language .current { color: #212227; background-image: url('../images/language-arrow-dark.svg'); }
+    [data-hamburger="opened"] .header-primary .language .current { color: #212227; background-image: url('/kbinnovationhub/images/language-arrow-dark.svg'); }
 }
 @media screen and (max-width: 768px) {
 }
@@ -379,7 +379,7 @@ html.sr .load-hidden { visibility: hidden; }
 .footer-primary__link a { font-size: 1.6rem; color: #fff; font-weight: 600; transition: opacity ease .1s; } */
 
 .footer-floaty { position: absolute; bottom: 100%; right: 0; }
-.footer-floaty__top-button { width: 75px; height: 75px; background: var(--clr-dark) url('../images/scroll-top-arrow.svg') no-repeat center / auto 38%; border-radius: 0; outline: none; }
+.footer-floaty__top-button { width: 75px; height: 75px; background: var(--clr-dark) url('/kbinnovationhub/images/scroll-top-arrow.svg') no-repeat center / auto 38%; border-radius: 0; outline: none; }
 @media (hover: hover) and (pointer: fine) {
     /* .footer-primary__site-link:hover { color: #fff; }
     .footer-primary__social-link:hover { opacity: .8; }
@@ -414,7 +414,7 @@ html.sr .load-hidden { visibility: hidden; }
 .modal-container .head-title { margin-bottom: 15px; padding-bottom: 10px; text-align: center; font-size: 1.6rem; font-weight: 600; color: #111; }
 .modal-container .heading { margin-bottom: 26px; font-size: 1.4rem; font-weight: 500; color: var(--clr-dark); }
 .modal-container .modal-body { overflow-x: hidden; overflow-y: auto; padding: 40px; font-weight: 300; background: #fff; border-radius: 12px; }
-.modal-container .modal .close { display: block; position: absolute; top: 16px; right: 16px; width: 60px; height: 60px; background: url('../images/modal-close.svg') no-repeat center / auto 30%; }
+.modal-container .modal .close { display: block; position: absolute; top: 16px; right: 16px; width: 60px; height: 60px; background: url('/kbinnovationhub/images/modal-close.svg') no-repeat center / auto 30%; }
 .modal-container .modal img { max-width: 100%; }
 .modal-container .modal-agree h2{font-size:2rem}
 .modal-container .modal-agree p{font-size:1.6rem;}

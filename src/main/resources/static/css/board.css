@@ -5,7 +5,7 @@
 .popup-container .popup-body { word-break: break-word; background: #fff; }
 .popup-container .popup-body img { max-width: 100%; }
 .popup-container .popup-foot { display: flex; align-items: center; justify-content: space-between; background: var(--clr-dark); }
-.popup-container .popup-foot .close { display: block; width: 50px; height: 50px; background: url('../images/close-light.svg') no-repeat center; }
+.popup-container .popup-foot .close { display: block; width: 50px; height: 50px; background: url('/kbinnovationhub/images/close-light.svg') no-repeat center; }
 .popup-container .popup-foot .check i { top: 0; left: 20px; }
 .popup-container .popup-foot .check label { padding-top: 12px; padding-bottom: 12px; padding-left: 2em; }
 @keyframes popup-fade-in {
@@ -31,10 +31,10 @@
 .pagination .page-item:nth-last-child(1) .page-link,
 .pagination .page-item:nth-last-child(2) .page-link { border-color: #e0e0e0; } */
 .pagination .page-item .page-link span { display: block; width: 100%; height: 100%; background-repeat: no-repeat; background-position: center; }
-.pagination .page-item .page-link span.first { background-image: url('../images/pagination-arrow-first.svg'); }
-.pagination .page-item .page-link span.previous { background-image: url('../images/pagination-arrow-prev.svg'); }
-.pagination .page-item .page-link span.next { background-image: url('../images/pagination-arrow-next.svg'); }
-.pagination .page-item .page-link span.last { background-image: url('../images/pagination-arrow-last.svg'); }
+.pagination .page-item .page-link span.first { background-image: url('/kbinnovationhub/images/pagination-arrow-first.svg'); }
+.pagination .page-item .page-link span.previous { background-image: url('/kbinnovationhub/images/pagination-arrow-prev.svg'); }
+.pagination .page-item .page-link span.next { background-image: url('/kbinnovationhub/images/pagination-arrow-next.svg'); }
+.pagination .page-item .page-link span.last { background-image: url('/kbinnovationhub/images/pagination-arrow-last.svg'); }
 .pagination .page-item.disabled, 
 .pagination .disabled > .page-link { opacity: 0.55; pointer-events: none; }
 @media screen and (pointer: fine) {
@@ -75,7 +75,7 @@
 .board-list .search select { padding-top: 0; padding-bottom: 0; width: 180px; font-size: 1.6rem; font-weight: 500; }
 .board-list .search .box { flex: 1 1; overflow: hidden; position: relative; margin-left: 16px; padding-right: 76px; height: 65px; background: #fff; border: 2px solid var(--clr-primary); border-radius: 8px; }
 .board-list .search input { padding-top: 0; padding-bottom: 0; width: 504px; height: 100%; font-size: 1.6rem; border: none; }
-.board-list .search button { position: absolute; top: 0; right: 0; width: 76px; height: 100%; background: url('../images/search.svg') no-repeat center / auto 40%; }
+.board-list .search button { position: absolute; top: 0; right: 0; width: 76px; height: 100%; background: url('/kbinnovationhub/images/search.svg') no-repeat center / auto 40%; }
 .board-list .empty { margin-top: 5em; margin-bottom: 2.5em; text-align: center; }
 
 .board-card { padding: 64px; background: #fff; border-radius: 24px; box-shadow: 0px 12px 23px rgba(62, 73, 84, 0.04); }
@@ -119,15 +119,15 @@
 /* .board-view .addition > li { display: flex; margin-top: 20px; padding: 14px 16px; border-left: 2px solid #3574f2; } */
 .board-view .addition .title { flex: 0 0 auto; display: block; width: 120px; font-size: 1.6rem; color: var(--clr-dark); font-weight: 600; }
 .board-view .addition .title::before { content: ''; display: inline-block; vertical-align: middle; margin-right: 10px; margin-bottom: 2px; width: 20px; height: 20px; background-repeat: no-repeat; background-position: center; background-size: auto 20px; }
-.board-view .addition .link .title::before { background-image: url('../images/icon-link-dark.png'); }
-.board-view .addition .file .title::before { background-image: url('../images/icon-file-dark.png'); }
+.board-view .addition .link .title::before { background-image: url('/kbinnovationhub/images/icon-link-dark.png'); }
+.board-view .addition .file .title::before { background-image: url('/kbinnovationhub/images/icon-file-dark.png'); }
 /* .board-view .addition .file .list li { position: relative; padding-left: 14px; line-height: 1.4; } */
 /* .board-view .addition .file .list li::before { content: ''; position: absolute; top: 12px; left: 0; width: 3px; height: 3px; background: #3574f2; border-radius: 50%; } */
 .board-view .addition .list { margin-top: -2px; }
 .board-view .addition .list li:not(:last-child) { margin-bottom: 15px; }
 .board-view .addition .list a { display: inline-flex; align-items: center; padding: 9px 24px 7px; font-size: 1.9rem; font-weight: 200; color: var(--clr-dark); text-underline-offset: 0.25em; word-break: break-all; border: 1px solid var(--border); border-radius: 8px; }
 .board-view .addition .list .icon { display: inline-flex; margin-right: 6px; margin-bottom: 4px; width: 20px; height: 20px; background-repeat: no-repeat; background-position: center; background-size: auto 100%; }
-.board-view .addition .list .icon-download { background-image: url('../images/download.svg'); }
+.board-view .addition .list .icon-download { background-image: url('/kbinnovationhub/images/download.svg'); }
 .board-view-head { padding-bottom: 40px; border-bottom: 2px solid var(--clr-dark); }
 .board-view-head .title { margin-bottom: 40px; line-height: 1.5; font-size: 3.2rem; font-weight: 700; color: var(--clr-dark); }
 .board-view-head .info { display: flex; font-size: 2rem; font-weight: 500; color: #656565; }
@@ -150,10 +150,10 @@
 .board-view-foot .link { display: inline-block; position: relative; max-width: 100%; }
 .board-view-foot .link.disabled { pointer-events: none; }
 .board-view-foot .link.previous { padding-left: 24px; }
-.board-view-foot .link.previous .icon { left: -6px; background-image: url('../images/chevron-left.svg'); }
+.board-view-foot .link.previous .icon { left: -6px; background-image: url('/kbinnovationhub/images/chevron-left.svg'); }
 .board-view-foot .link.previous .title { margin-right: 28px; }
 .board-view-foot .link.next { padding-right: 24px; }
-.board-view-foot .link.next .icon { right: -6px; background-image: url('../images/chevron-right.svg'); }
+.board-view-foot .link.next .icon { right: -6px; background-image: url('/kbinnovationhub/images/chevron-right.svg'); }
 .board-view-foot .link.next .text-wrap { padding-right: 74px; }
 .board-view-foot .link.next .title { position: absolute; top: 0; right: 0; }
 .board-view-foot .link .icon { display: block; position: absolute; top: 0; bottom: 0; margin: auto; width: 24px; height: 24px; background-repeat: no-repeat; background-position: center; background-size: auto 100%; }
@@ -162,8 +162,8 @@
 .board-view-foot .button { width: 190px; }
 @media screen and (pointer: fine) {
     .board-view .addition .list a:hover { text-decoration: underline; }
-    .board-view-foot .link.previous:hover .icon::after { background-image: url('../images/board-arrow-left.png'); }
-    .board-view-foot .link.next:hover .icon::after { background-image: url('../images/board-arrow-right.png'); }
+    .board-view-foot .link.previous:hover .icon::after { background-image: url('/kbinnovationhub/images/board-arrow-left.png'); }
+    .board-view-foot .link.next:hover .icon::after { background-image: url('/kbinnovationhub/images/board-arrow-right.png'); }
     .board-view-foot .link:not(.disabled):hover .text { text-decoration: underline; text-underline-offset: 0.125em; }
     .board-view-foot .button-foot:hover { color: #fff; background: #FEBE10; border-color: #FEBE10; }
 }
@@ -222,12 +222,12 @@
 .default-board-list .link { display: inline-flex; position: relative; max-width: 100%; }
 .default-board-list .link .title { display: inline-block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; color: var(--clr-dark); font-weight: 600; }
 .default-board-list .link .icon { flex: 1 0 auto; display: inline-block; margin-top: 4px; margin-left: 10px; width: 20px; height: 20px; background-repeat: no-repeat; background-position: center; background-size: auto 100%; }
-.default-board-list .link .icon-file { background-image: url('../images/icon-file-dark.png'); }
+.default-board-list .link .icon-file { background-image: url('/kbinnovationhub/images/icon-file-dark.png'); }
 .default-board-list .badge { display: inline-block; padding: 9px 18px; min-width: 60px; line-height: 0.8; text-align: center; font-family: inherit; color: #fff; background: #3574f2; }
 .default-board-list .date { color: #757575; }
 .default-board-list .icon { display: inline-flex; width: 24px; height: 24px; background-repeat: no-repeat; background-position: center; background-size: auto 100%; }
-.default-board-list .icon-file { background-image: url('../images/file.svg'); }
-.default-board-list .icon-notice { background-image: url('../images/notice-primary.svg'); }
+.default-board-list .icon-file { background-image: url('/kbinnovationhub/images/file.svg'); }
+.default-board-list .icon-notice { background-image: url('/kbinnovationhub/images/notice-primary.svg'); }
 @media screen and (pointer: fine) {
     /* .default-board-list .tr:hover { background: #f8f8f8; } */
     .default-board-list .link:hover,
@@ -272,7 +272,7 @@
 .magazine-board-list .contents .badge { display: inline-block; margin-right: auto; margin-bottom: 20px; padding: 9px 18px; min-width: 60px; line-height: 0.8; text-align: center; color: #fff; font-weight: 500; font-size: 15px; background: #3574f2; }
 .magazine-board-list .contents .title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: inline-block; position: relative; margin-bottom: 16px; margin-right: auto; padding-right: 1em; max-width: 100%; font-size: 2.4rem; font-weight: 500; color: var(--clr-dark); }
 .magazine-board-list .contents .title .icon { position: absolute; top: 0.365em; right: 0; width: 18px; height: 18px; }
-.magazine-board-list .contents .title .icon-file::before { background-image: url('../images/file-gray.svg'); }
+.magazine-board-list .contents .title .icon-file::before { background-image: url('/kbinnovationhub/images/file-gray.svg'); }
 .magazine-board-list .contents .text { overflow: hidden; margin-bottom: 48px; line-height: 1.7; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; font-weight: 300; color: #333; }
 .magazine-board-list .contents .category { position: relative; padding-right: 24px; }
 .magazine-board-list .contents .category::after { content: ''; position: absolute; top: 0; bottom: 0; right: 12px; margin: auto; width: 1px; height: 50%; background: var(--border); }
@@ -323,7 +323,7 @@
 .gallery-board-list .thumbnail { overflow: hidden; position: relative; }
 .gallery-board-list .thumbnail::before { content: ''; z-index: 2; display: block; position: relative; padding-top: calc(330 / 560 * 100%); width: 100%; height: 0; }
 .gallery-board-list .thumbnail img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform ease .6s; }
-.gallery-board-list .thumbnail-media::after { content: ''; z-index: 3; position: absolute; top: 0; left: 0; right: 0; bottom: 0; margin: auto; width: 70px; height: 70px; background: url('../images/icon-play.png') no-repeat center / auto 25px; border: 1px solid #fff; border-radius: 50%; }
+.gallery-board-list .thumbnail-media::after { content: ''; z-index: 3; position: absolute; top: 0; left: 0; right: 0; bottom: 0; margin: auto; width: 70px; height: 70px; background: url('/kbinnovationhub/images/icon-play.png') no-repeat center / auto 25px; border: 1px solid #fff; border-radius: 50%; }
 .gallery-board-list .thumbnail-media::before { background: rgba(0, 0, 0, 0.4); }
 .gallery-board-list .contents .title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; position: relative; margin: 15px 0; font-size: 2rem; color: var(--clr-dark); font-weight: 500; }
 @media screen and (pointer: fine) {
@@ -349,7 +349,7 @@
 .video-container .image-container img { width: 100%; height: auto; }
 .video-container .button-play { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 .video-container .button-play::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 1); opacity: 0.6; transition: opacity ease .3s; }
-.video-container .button-play::after { content: ''; z-index: 3; position: absolute; top: 0; left: 0; right: 0; bottom: 0; margin: auto; width: 70px; height: 70px; background: url('../images/icon-play.png') no-repeat center / auto 25px; border: 1px solid #fff; border-radius: 50%; }
+.video-container .button-play::after { content: ''; z-index: 3; position: absolute; top: 0; left: 0; right: 0; bottom: 0; margin: auto; width: 70px; height: 70px; background: url('/kbinnovationhub/images/icon-play.png') no-repeat center / auto 25px; border: 1px solid #fff; border-radius: 50%; }
 .video-container .embed-responsive { position: relative; display: block; width: 100%; padding: 0; overflow: hidden; }
 .video-container .embed-responsive::before { display: block; content: ""; }
 .video-container .embed-responsive-16by9::before { padding-top: 56.25%; }

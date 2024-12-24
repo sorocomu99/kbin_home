@@ -6,39 +6,26 @@
     <app-header></app-header>
 
     <!-- 본문 -->
-    <!-- 본문 -->
     <main class="main">
         <div class="home">
             <div class="section-visual">
                 <div class="swiper">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <div class="background"><img class="item" src="/images/main/visual-slide-image-1.png" alt=""></div>
+                        <div class="swiper-slide" th:each="list : ${selectList}">
+                            <div class="background"><img class="item" th:src="|\kbinnovationhub${list.main_path + list.main_file_name}|" alt=""></div>
                             <div class="context">
-                                <p class="text" data-split>스타트업 육성을 통해 <br>대한민국 디지털 금융 혁신을 이끌어갑니다.</p>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="background background-2"><img class="item" src="/images/main/visual-slide-image-2.jpg" alt=""></div>
-                            <div class="context">
-                                <p class="text" data-split>글로벌 육성 프로그램을 통해 <br>스타트업의 성공적인 글로벌 진출을 지원합니다.</p>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="background"><img class="item" src="/images/main/visual-slide-image-3.jpg" alt=""></div>
-                            <div class="context">
-                                <p class="text" data-split>KB Innovation HUB는 앞으로도 스타트업과 함께 <br>더 나은 미래를 만들어 나가겠습니다.</p>
+                                <p class="text" data-split th:utext="${list.main_cn}"></p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="title">
-                    <img class="item" src="/images/main/visual-slide-title.svg" alt="">
+                    <img class="item" th:src="@{/images/main/visual-slide-title.svg}" alt="">
                 </div>
             </div>
             <div class="section-introduce">
                 <div class="sticky">
-                    <img class="background" src="/images/main/indroduce-background.jpg" alt="">
+                    <img class="background" src="/kbinnovationhub/images/main/indroduce-background.jpg" alt="">
                     <div data-animate="fade-in" class="container container-1">
                         <h4 class="section-title"><span class="block">스타트업과 함께 만드는<br><span class="highlight">금융 혁신 핀테크 랩</span></span></h4>
                         <div class="context">
@@ -52,8 +39,8 @@
                             </div>
                             <div class="contents">
                                 <picture>
-                                    <source media="(max-width:768px)" srcset="/images/main/indroduce-image-mo.png">
-                                    <img class="box" src="/images/main/indroduce-image.png" alt="혁신주도: 스타트업 혁신적인 아이디어를 KB금융그룹에 이식하여 변화와 금융혁신을 주도합니다. 동반성장: 스타트업 발굴 및 육성 지원을 통해 스타트업과 KB금융그룹의 동반성장을 지원합니다.">
+                                    <source media="(max-width:768px)" srcset="/kbinnovationhub/images/main/indroduce-image-mo.png">
+                                    <img class="box" src="/kbinnovationhub/images/main/indroduce-image.png" alt="혁신주도: 스타트업 혁신적인 아이디어를 KB금융그룹에 이식하여 변화와 금융혁신을 주도합니다. 동반성장: 스타트업 발굴 및 육성 지원을 통해 스타트업과 KB금융그룹의 동반성장을 지원합니다.">
                                 </picture>
                             </div>
                         </div>
@@ -86,7 +73,7 @@
                         </li>
                         <li class="item">
                             <div class="side">
-                                <img class="shape shape-1" src="/images/main/history-shape-1.svg" alt="">
+                                <img class="shape shape-1" src="/kbinnovationhub/images/main/history-shape-1.svg" alt="">
                             </div>
                             <div class="contents">
                                 <p class="year">2022</p>
@@ -172,7 +159,7 @@
                         </li>
                         <li class="item">
                             <div class="side">
-                                <img class="shape shape-2" src="/images/main/history-shape-2.svg" alt="">
+                                <img class="shape shape-2" src="/kbinnovationhub/images/main/history-shape-2.svg" alt="">
                             </div>
                             <div class="contents">
                                 <p class="year">2017</p>
@@ -194,7 +181,7 @@
                         </li>
                         <li class="item">
                             <div class="side">
-                                <img class="shape shape-3" src="/images/main/history-shape-3.svg" alt="">
+                                <img class="shape shape-3" src="/kbinnovationhub/images/main/history-shape-3.svg" alt="">
                             </div>
                             <div class="contents">
                                 <p class="year">2016</p>
@@ -237,16 +224,16 @@
                         <ul>
                             <li data-animate="fade-up">
                                 <div class="block">
-                                    <div class="icon-wrap"><img src="/images/main/program-icon-1.svg" alt=""></div>
+                                    <div class="icon-wrap"><img src="/kbinnovationhub/images/main/program-icon-1.svg" alt=""></div>
                                     <div class="contents">
                                         <p class="title">국내</p>
-                                        <p class="text">KB금융그룹의 제휴 및 투자 인프라를 기반으로 <br class="pc">스타트업의 성장을 지원합니다.</p>
+                                        <p class="text">KB금융그룹의 제휴 및 투자 인프라를 기반으로 <br>스타트업의 성장을 지원합니다.</p>
                                     </div>
                                 </div>
                             </li>
                             <li data-animate="fade-up">
                                 <div class="block">
-                                    <div class="icon-wrap"><img src="/images/main/program-icon-2.svg" alt=""></div>
+                                    <div class="icon-wrap"><img src="/kbinnovationhub/images/main/program-icon-2.svg" alt=""></div>
                                     <div class="contents">
                                         <p class="title">글로벌</p>
                                         <p class="text">‘KB 글로벌 핀테크 랩’과 연계하여 국내 유망 스타트업의 글로벌 진출 및 현지 정착을 지원합니다.</p>
@@ -263,20 +250,38 @@
                     <div class="grid">
                         <div class="col">
                             <div class="box">
-                                <p class="title"><b>육성</b> 2024.11</p>
-                                <p class="text"><b data-count="300">300</b> 개사</p>
+                                <th:block th:if="${result == null or result == ''}">
+                                    <p class="title"><b>육성</b> 2024.11</p>
+                                    <p class="text"><b data-count="300">300</b> 개사</p>
+                                </th:block>
+                                <th:block th:if="${result != null and result != ''}">
+                                    <p class="title"><b>육성</b> <span  th:text="${result?.ent_crtr_ymd}"></span></p>
+                                    <p class="text"><b th:data-count="${result?.ent_nocs}"></b> 개사</p>
+                                </th:block>
                             </div>
                         </div>
                         <div class="col">
                             <div class="box">
-                                <p class="title"><b>투자</b> 2024.11</p>
-                                <p class="text"><b data-count="2252">2,252</b> 억원</p>
+                                <th:block th:if="${result == null or result == ''}">
+                                    <p class="title"><b>투자</b> 2024.11</p>
+                                    <p class="text"><b data-count="2252">2,252</b> 억원</p>
+                                </th:block>
+                                <th:block th:if="${result != null and result != ''}">
+                                    <p class="title"><b>투자</b> <span th:text="${result.invest_crtr_ymd}"></span></p>
+                                    <p class="text"><b th:data-count="${result.invest_nocs}"></b> 억원</p>
+                                </th:block>
                             </div>
                         </div>
                         <div class="col">
                             <div class="box">
-                                <p class="title"><b>제휴</b> 2024.11</p>
-                                <p class="text"><b data-count="343">343</b> 건</p>
+                                <th:block th:if="${result == null or result == ''}">
+                                    <p class="title"><b>제휴</b> 2024.11</p>
+                                    <p class="text"><b data-count="343">343</b> 건</p>
+                                </th:block>
+                                <th:block th:if="${result != null and result != ''}">
+                                    <p class="title"><b>제휴</b> <span th:text="${result.affiliate_crtr_ymd}"></span></p>
+                                    <p class="text"><b th:data-count="${result.affiliate_nocs}"></b> 건</p>
+                                </th:block>
                             </div>
                         </div>
                     </div>

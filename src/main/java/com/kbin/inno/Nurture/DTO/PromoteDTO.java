@@ -1,10 +1,15 @@
 package com.kbin.inno.Nurture.DTO;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 @Data
-public class PromoteDTO {
-    private int graph_sn;       // 그래프 일련번호
+public class PromoteDTO implements Serializable {
+	
+	//private static final long serialVersionUID = 1L;
+    
+	private int graph_sn;       // 그래프 일련번호
     private String crtr_ym;     // 기준년월
     private String graph1_yr;   // 그래프 1 연도
     private int graph1_nocs;    // 그래프 1 기업 수

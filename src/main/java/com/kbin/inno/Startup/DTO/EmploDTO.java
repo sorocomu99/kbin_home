@@ -12,11 +12,16 @@
  */
 package com.kbin.inno.Startup.DTO;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 @Data
-public class EmploDTO {
-    private String ent_cd;    //기업 코드
+public class EmploDTO implements Serializable {
+	
+	//private static final long serialVersionUID = 1L;
+    
+	private String ent_cd;    //기업 코드
     private String crtr_ym;   //기준 년월
     private long jncmp_nocs;   //입사자 수
     private long rsgntn_nocs;  //퇴사자 수

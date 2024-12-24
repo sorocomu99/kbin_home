@@ -643,7 +643,7 @@
             pageMoveForm.appendChild(obj);
 
             pageMoveForm.setAttribute('method', 'post');
-            pageMoveForm.setAttribute('action', '/startup/detail');
+            pageMoveForm.setAttribute('action', '/kbinnovationhub/startup/detail');
             document.body.appendChild(pageMoveForm);
             pageMoveForm.submit();
             //this.preventDefault();
@@ -656,7 +656,7 @@
             e.preventDefault();
             actionForm.find("input[name='pageNum']").val($(this).attr("src"));
 
-            actionForm.attr("action", "/startup/list");
+            actionForm.attr("action", "/kbinnovationhub/startup/list");
             actionForm.submit();
             //var aaa = $(this).attr("src");
             //alert(aaa);
@@ -792,7 +792,7 @@
             var langSelect = document.getElementById("selectbox");
             document.getElementById('pageSize').value = langSelect.options[langSelect.selectedIndex].value;
 
-            actionForm.attr("action", "/startup/list");
+            actionForm.attr("action", "/kbinnovationhub/startup/list");
             actionForm.submit();
         }
 

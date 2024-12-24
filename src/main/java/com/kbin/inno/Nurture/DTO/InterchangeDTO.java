@@ -13,11 +13,15 @@ package com.kbin.inno.Nurture.DTO;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class InterchangeDTO {
-    private int exch_sn;                // 교류 일련번호
+public class InterchangeDTO implements Serializable {
+	
+	//private static final long serialVersionUID = 1L;
+    
+	private int exch_sn;                // 교류 일련번호
     private String exch_ttl;            // 교류 제목
     private String exch_cn;             // 교류 내용
     private String expsr_yn;            // 노출 여부

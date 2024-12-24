@@ -12,11 +12,15 @@ package com.kbin.inno.Nurture.DTO;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class RecruitDTO {
-    private int employ_sn;       // 채용 일련번호
+public class RecruitDTO implements Serializable {
+	
+	//private static final long serialVersionUID = 1L;
+    
+	private int employ_sn;       // 채용 일련번호
     private String employ_yr;    // 연도
     private int employ_emp_nocs; // 채용 직원 수
     private double sprt_amt;        // 지원 금액

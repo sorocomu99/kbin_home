@@ -12,11 +12,16 @@
  */
 package com.kbin.inno.Startup.DTO;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 @Data
-public class InvestDTO {
-    private String ent_cd;      //기업 코드
+public class InvestDTO implements Serializable {
+	
+	//private static final long serialVersionUID = 1L;
+    
+	private String ent_cd;      //기업 코드
     private String investor;    //투자자
     private String series_nm;   //투자 시리즈명
     private long invest_amt;     //투자 금액(단위 : 억)

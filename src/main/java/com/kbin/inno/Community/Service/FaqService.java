@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -63,9 +64,14 @@ public class FaqService {
         int start = end + 1 - pageLetter;
 
         search.setStart(start);
+        
+        HashMap map = new HashMap();
+        map.put("start",  start);
+        map.put("end", end);
 
         // 리스트 조회
-        List<FaqDTO> selectList = faqDAO.selectList(search);
+        //List<FaqDTO> selectList = faqDAO.selectList(search);
+        List<FaqDTO> selectList = faqDAO.selectList(map);
 
         // 카테고리 조회
         List<CategoryDTO> selectCategory = faqDAO.selectCategory();

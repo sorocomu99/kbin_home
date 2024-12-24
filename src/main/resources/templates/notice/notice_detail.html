@@ -12,7 +12,7 @@
             <nav aria-label="Breadcrumb" class="breadcrumb" data-breadcrub-theme="light">
                 <ul>
                     <li><a href="/"><i class="icon icon-home"></i><span class="blind">HOME</span></a></li>
-                    <li><a href="javascript:">커뮤니티</a></li>
+                    <li><a href="/kbinnovationhub/community/notice/list">커뮤니티</a></li>
                     <li><span aria-current="page">공지사항</span></li>
                 </ul>
             </nav>
@@ -20,32 +20,25 @@
     </div>
     <div class="board-view">
         <div class="board-view-head">
-            <p class="title">2024년 하반기 ‘KB스타터스’ 선정</p>
+            <p class="title" th:text="${notice.ntc_ttl}"></p>
             <div class="info">
-                <span class="author"><b>Author</b> 관리자</span>
-                <span class="date"><b>Date</b> 2024. 09. 30</span>
+                <span class="author"><b>Author</b> <span th:text="${notice.mngr_nm}"></span></span>
+                <span class="date"><b>Date</b> <span th:text="${notice.frst_reg_dt}"></span></span>
             </div>
         </div>
         <div class="board-view-body">
             <!-- 에디터로 작성된 콘텐츠 영역 -->
-            <div class="contents">
-                <p>KB금융그룹(회장 양종희)은 지난 26일, 15개의 스타트업을 2024년 하반기 ‘KB스타터스’로 최종 선정하고, ‘KB스타터스 웰컴데이(Welcome Day)’를 개최했다.</p>
-                <br>
-                <p>이번 선발 과정에서 KB금융은 ▲초기 창업 기업(설립 3년 이내)과 ▲생성형AI·데이터 등 각 분야의 유망 기업을 발굴하기 위해 오픈공모 방식의 정시모집과 수시모집을 병행했다.</p>
-                <br>
-                <p>시장에서의 성장성과 KB금융과의 협업 가능성을 균형 있게 반영하고자 내·외부 투자 전문 심사역과 KB금융 계열사의 전문인력 등으로 구성된 심사위원의 심사를 거쳐 총 15개의 유망 스타트업을 선정했다.</p>
-                <br>
-                <p>2024년 하반기 ‘KB스타터스’에 선발된 스타트업은 생성형 AI·보안·데이터 등 신기술 분야에서 탁월한 기술력을 보유하거나, 핀테크·헬스케어·커뮤니케이션·IT자산관리 등 다양한 영역에서 경쟁력 있는 사업 모형(Business Model)을 가진 기업이다.</p>
-                <br>
-                <p>차별화된 생성형 AI 분야의 기술력을 가진 ‘파일러’는 성장이 기대되는 스타트업으로 AI를 활용한 동영상 맥락 분석을 통해 기업 광고의 부적절한 노출을 방지하는 솔루션을 제공하고 있다.</p>
-                <br>
-                <p>AI 기반의 수어 번역 기술을 보유한 ‘케이엘큐브’는 향후 KB금융과 협업해 청각·언어장애 고객을 위한 수어 상담서비스도 제공할 수 있을 것으로 기대된다. </p>
-            </div>
+            <div class="contents" th:utext="${notice.ntc_cn}"></div>
             <!-- 첨부파일 -->
-            <ul class="addition">
+            <ul class="addition" th:if="${notice.ntc_path != null}">
                 <li class="file">
                     <ul class="list">
-                        <li><a href=""><i class="icon icon-download"></i>2024년 하반기 KB스타터스 선정 업체 리스트 (총 15개사).jpg</a></li>
+                        <li>
+                            <a th:href="${notice?.ntc_path + notice?.ntc_file_name}" th:download="${notice?.origin_file_name}" title="첨부파일 다운로드">
+                                <i class="icon icon-download"></i>
+                                <span th:text="${notice?.origin_file_name}"></span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -53,20 +46,22 @@
         <div class="board-view-foot">
             <div class="col">
                 <!-- 이전/다음 글 없을 때, disabled 클래스 추가 -->
-                <a class="link previous disabled" href="">
+                <a class="link previous" th:href="@{|/community/notice/detail/${notice.ntc_sn_bef}|}" th:classappend="${notice.ntc_sn_bef == 0} ? 'disabled' : ''">
                     <i class="icon"></i>
                     <div class="text-wrap">
                         <span class="title">PREV</span>
-                        <span class="text">이전 글이 없습니다.</span>
+                        <span class="text" th:if="${notice.ntc_sn_bef == 0 || notice.ntc_sn_bef == null}">이전 글이 없습니다.</span>
+                        <span class="text" th:if="${notice.ntc_sn_bef != 0 || notice.ntc_sn_bef != null}" th:text="${notice.ntc_ttl_bef}"></span>
                     </div>
                 </a>
             </div>
             <div class="col">
-                <a class="link next" href="">
+                <a class="link next" th:href="@{|/community/notice/detail/${notice.ntc_sn_aft}|}" th:classappend="${notice.ntc_sn_aft == 0} ? 'disabled' : ''">
                     <i class="icon"></i>
                     <div class="text-wrap">
                         <span class="title">NEXT</span>
-                        <span class="text">다음 게시글의 제목입니다. 다음 게시글의 제목입니다. 다음 게시글의 제목입니다. 다음 게시글의 제목입니다. 다음 게시글의 제목입니다.</span>
+                        <span class="text" th:if="${notice.ntc_sn_aft == 0 || notice.ntc_sn_aft == null}">다음 글이 없습니다.</span>
+                        <span class="text" th:if="${notice.ntc_sn_aft != 0 || notice.ntc_sn_aft != null}" th:text="${notice.ntc_ttl_aft}"></span>
                     </div>
                 </a>
             </div>

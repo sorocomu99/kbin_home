@@ -12,10 +12,15 @@
  */
 package com.kbin.inno.Startup.DTO;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 @Data
-public class KeywdDTO {
-    private String keywd;   //키워드
+public class KeywdDTO implements Serializable {
+	
+	//private static final long serialVersionUID = 1L;
+    
+	private String keywd;   //키워드
     private long nocs;       //건수
 }

@@ -12,11 +12,16 @@
  */
 package com.kbin.inno.Startup.DTO;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 @Data
-public class StaterDTO {
-    private String ent_cd;                //기업 코드(UNIQUE)
+public class StaterDTO implements Serializable {
+	
+	//private static final long serialVersionUID = 1L;
+    
+	private String ent_cd;                //기업 코드(UNIQUE)
     private String brno;                  //사업자번호
     private String corp_no;               //법인 번호
     private String rprsv_nm;              //대표자 명(CEO)

@@ -23,13 +23,15 @@
         <div class="board-list">
             <div class="board-list-head">
                 <div class="col">
-                    <form action="">
+                    <form action="/community/notice/list" method="get">
                         <div class="search">
-                            <select name="" id="">
-                                <option value="" selected>제목</option>
+                            <select class="form-select" aria-label="" name="type" th:value="${type}">
+                                <option value="all" th:selected="${type} == 'all'">전체</option>
+                                <option value="title" th:selected="${type} == 'title'">제목</option>
+                                <option value="content" th:selected="${type} == 'content'">내용</option>
                             </select>
                             <div class="box">
-                                <input type="text" placeholder="검색어를 입력해주세요.">
+                                <input type="text" name="keyword" placeholder="검색어를 입력해주세요." th:value="${keyword}">
                                 <button type="submit"><span class="blind">검색</span></button>
                             </div>
                         </div>
@@ -39,10 +41,20 @@
             <div class="board-list-body">
                 <div class="board-card">
                     <div class="total">
-                        Total: <em class="color-primary">62</em>건의 게시물이 있습니다.
+                        Total: <em class="color-primary" th:text="${pageCount}"></em>건의 게시물이 있습니다.
+                    </div>
+                    <!-- 등록된 게시글 없을 때 -->
+                    <div class="default-board-list" role="table" th:if="${#lists.size(selectList) == 0}">
+                        <div class="tbody" role="rowgroup">
+                            <div class="tr" role="row">
+                                <div class="td" role="cell">
+                                    등록된 게시글이 없습니다.
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!-- 게시판 리스트 스킨: default -->
-                    <div class="default-board-list" role="table">
+                    <div class="default-board-list" role="table" th:unless="${#lists.size(selectList) == 0}">
                         <div class="thead" role="rowgroup">
                             <div class="tr" role="row">
                                 <div class="th" style="width:8%" role="cell">
@@ -60,154 +72,28 @@
                             </div>
                         </div>
                         <div class="tbody" role="rowgroup">
-                            <div class="tr" role="row">
+                            <div class="tr" role="row" th:each="list : ${selectList}">
                                 <div class="td" role="cell">
-                                    <i class="icon icon-notice"></i>
+                                    <i class="icon icon-notice" th:if="${list.ntc_yn =='Y'}"></i>
+                                    <th:block th:unless="${list.ntc_yn =='Y'}" th:text="${list.ntc_sn}"></th:block>
                                 </div>
                                 <div class="td text-left" role="cell">
-                                    <a class="link" href="/community/notice/detail/1">
-                                        <span class="title">2024년 하반기 ‘KB스타터스’ 선정</span>
+                                    <a class="link" th:href="@{/community/notice/detail/{ntc_sn}(ntc_sn=${list.ntc_sn})}">
+                                        <span class="title" th:text="${list.ntc_ttl}"></span>
                                         <i class="icon icon-file"></i>
                                     </a>
                                 </div>
                                 <div class="td" role="cell">
-                                    <a href="javascript:" title="첨부파일 다운로드"><i class="icon icon-file"></i></a>
-                                </div>
-                                <div class="td" role="cell">
-                                    <span class="date">2024.10.01</span>
-                                </div>
-                            </div>
-                            <div class="tr" role="row">
-                                <div class="td" role="cell">
-                                    <i class="icon icon-notice"></i>
-                                </div>
-                                <div class="td text-left" role="cell">
-                                    <a class="link" href="/community/notice/detail/1">
-                                        <span class="title">KB스타터스 지원하기 관련 안내</span>
+                                    <a th:href="${list.ntc_path + list.ntc_file_name}" th:download="${list.origin_file_name}" title="첨부파일 다운로드" th:if="${list.atch_file_sn != 0}">
                                         <i class="icon icon-file"></i>
                                     </a>
                                 </div>
                                 <div class="td" role="cell">
-                                    <a href="javascript:" title="첨부파일 다운로드"><i class="icon icon-file"></i></a>
-                                </div>
-                                <div class="td" role="cell">
-                                    <span class="date">2024.10.01</span>
-                                </div>
-                            </div>
-                            <div class="tr" role="row">
-                                <div class="td" role="cell">
-                                    8
-                                </div>
-                                <div class="td text-left" role="cell">
-                                    <a class="link" href="/community/notice/detail/1">
-                                        <span class="title">KB 이노베이션 허브 홈페이지 리뉴얼!</span>
-                                        <i class="icon icon-file"></i>
-                                    </a>
-                                </div>
-                                <div class="td" role="cell">
-                                    <a href="javascript:" title="첨부파일 다운로드"><i class="icon icon-file"></i></a>
-                                </div>
-                                <div class="td" role="cell">
-                                    <span class="date">2024.10.01</span>
-                                </div>
-                            </div>
-                            <div class="tr" role="row">
-                                <div class="td" role="cell">
-                                    7
-                                </div>
-                                <div class="td text-left" role="cell">
-                                    <a class="link" href="/community/notice/detail/1">
-                                        <span class="title">HUB 소개자료를 확인해 보세요.</span>
-                                        <i class="icon icon-file"></i>
-                                    </a>
-                                </div>
-                                <div class="td" role="cell">
-                                    <a href="javascript:" title="첨부파일 다운로드"><i class="icon icon-file"></i></a>
-                                </div>
-                                <div class="td" role="cell">
-                                    <span class="date">2024.10.01</span>
-                                </div>
-                            </div>
-                            <div class="tr" role="row">
-                                <div class="td" role="cell">
-                                    6
-                                </div>
-                                <div class="td text-left" role="cell">
-                                    <a class="link" href="/community/notice/detail/1">
-                                        <span class="title">KB스타터스 현황 소개</span>
-                                        <i class="icon icon-file"></i>
-                                    </a>
-                                </div>
-                                <div class="td" role="cell">
-                                    <a href="javascript:" title="첨부파일 다운로드"><i class="icon icon-file"></i></a>
-                                </div>
-                                <div class="td" role="cell">
-                                    <span class="date">2024.10.01</span>
-                                </div>
-                            </div>
-                            <div class="tr" role="row">
-                                <div class="td" role="cell">
-                                    5
-                                </div>
-                                <div class="td text-left" role="cell">
-                                    <a class="link" href="/community/notice/detail/1">
-                                        <span class="title">HUB 파트너스 / 협력기관 소개</span>
-                                        <i class="icon icon-file"></i>
-                                    </a>
-                                </div>
-                                <div class="td" role="cell">
-                                    <a href="javascript:" title="첨부파일 다운로드"><i class="icon icon-file"></i></a>
-                                </div>
-                                <div class="td" role="cell">
-                                    <span class="date">2024.10.01</span>
-                                </div>
-                            </div>
-                            <div class="tr" role="row">
-                                <div class="td" role="cell">
-                                    4
-                                </div>
-                                <div class="td text-left" role="cell">
-                                    <a class="link" href="/community/notice/detail/1">
-                                        <span class="title">협업공간 위치 안내</span>
-                                        <i class="icon icon-file"></i>
-                                    </a>
-                                </div>
-                                <div class="td" role="cell">
-                                    <a href="javascript:" title="첨부파일 다운로드"><i class="icon icon-file"></i></a>
-                                </div>
-                                <div class="td" role="cell">
-                                    <span class="date">2024.10.01</span>
-                                </div>
-                            </div>
-                            <div class="tr" role="row">
-                                <div class="td" role="cell">
-                                    3
-                                </div>
-                                <div class="td text-left" role="cell">
-                                    <a class="link" href="/community/notice/detail/1">
-                                        <span class="title">글로벌 스케일업 소식을 확인해 보세요.</span>
-                                        <i class="icon icon-file"></i>
-                                    </a>
-                                </div>
-                                <div class="td" role="cell">
-                                    <a href="javascript:" title="첨부파일 다운로드"><i class="icon icon-file"></i></a>
-                                </div>
-                                <div class="td" role="cell">
-                                    <span class="date">2024.10.01</span>
+                                    <span class="date" th:text="${list.frst_reg_dt}"></span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- 등록된 게시글 없을 때 -->
-                    <!-- <div class="default-board-list" role="table">
-                        <div class="tbody" role="rowgroup">
-                            <div class="tr" role="row">
-                                <div class="td" role="cell">
-                                    등록된 게시글이 없습니다.
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
             </div>
             <div class="board-list-foot">
@@ -217,28 +103,31 @@
                         1. 이전/다음 버튼 비활성화: li 태그에 "disabled" 클래스 추가
                         2. 활성화 상태: li태그에 "active" 클래스 및 "aria-current='page'" 추가
                      -->
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" aria-label="맨 앞 페이지">
+                    <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled' : ''">
+                        <a class="page-link" th:href="@{|/community/notice/list?page=1|}" aria-label="맨 앞 페이지">
                             <span class="first"></span>
                         </a>
                     </li>
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" aria-label="이전 페이지">
+                    <!-- 이전으로 이동하는 버튼 -->
+                    <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled' : ''">
+                        <a class="page-link" th:href="@{|/community/notice/list?page=${currentPage - 1 < 1 ? 1 : currentPage - 1}|}" aria-label="이전 페이지">
                             <span class="previous"></span>
                         </a>
                     </li>
-                    <li class="page-item active" aria-current="page"><a class="page-link" href="#" aria-label="1 페이지, 현재 페이지">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#" aria-label="2 페이지">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#" aria-label="3 페이지">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#" aria-label="4 페이지">4</a></li>
-                    <li class="page-item"><a class="page-link" href="#" aria-label="5 페이지">5</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="다음 페이지">
+                    <th:block th:if="${repeat != null}" th:each="num : ${#numbers.sequence(1, repeat)}">
+                        <li class="page-item" aria-current="page" th:classappend="${currentPage != null ? num == currentPage : num == 1} ? 'active' : ''">
+                            <a th:id="${'page' + num}" class="page-link" th:href="@{|/community/notice/list?page=${num}|}" th:text="${num}" aria-label=""></a>
+                        </li>
+                    </th:block>
+                    <!-- 다음으로 이동하는 버튼 -->
+                    <li class="page-item" th:classappend="${currentPage == repeat} ? 'disabled' : ''">
+                        <a class="page-link" th:href="@{|/community/notice/list?page=${currentPage + 1 > repeat ? repeat : currentPage + 1}|}" aria-label="다음 페이지">
                             <span class="next"></span>
                         </a>
                     </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="맨 뒤 페이지">
+                    <!-- 맨 끝페이지 이동 버튼 -->
+                    <li class="page-item" th:classappend="${currentPage == repeat} ? 'disabled' : ''">
+                        <a class="page-link" th:href="@{|/community/notice/list?page=${repeat}|}" aria-label="맨 뒤 페이지">
                             <span class="last"></span>
                         </a>
                     </li>
