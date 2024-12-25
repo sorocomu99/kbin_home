@@ -22,7 +22,6 @@ public class ImageController {
     @RequestMapping("/upload/{imageName:.+}")
 	@ResponseBody
     public ResponseEntity<Resource> getImage(@PathVariable String imageName) {
-		//System.out.println("imageName==================="+imageName);
         //Path path = Paths.get("D:/fsfile/dev_kbinnovation/").resolve(imageName).normalize();
         String imagePath = "D:/fsfile/dev_kbinnovation/" + imageName;
         //System.out.println("imagePath==================="+imagePath);
