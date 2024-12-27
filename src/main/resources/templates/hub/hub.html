@@ -45,7 +45,12 @@
                 <ul id="magazine-board-list" class="magazine-board-list">
                     <li id="magazine-item" class="list" th:each="list, iterStat : ${selectList}">
                         <a class="block" th:href="@{/community/hub/detail/{hub_sn}(hub_sn=${list.hub_sn})}">
-                            <div class="thumbnail"><img th:src="|\kbinnovationhub${list.hub_path_img + list.hub_img_name}|" alt=""></div>
+                            <th:block th:if="${list.hub_path_img != null and list.hub_path_img != ''}">
+                                <div class="thumbnail"><img th:src="|\kbinnovationhub${list.hub_path_img + list.hub_img_name}|" alt=""></div>
+                            </th:block>
+                            <th:block th:if="${list.hub_path_img == null or list.hub_path_img == ''}">
+                                <div class="thumbnail"><img src="/kbinnovationhub/images/sub/startup/no_news_image.png" alt=""></div>
+                            </th:block>
                             <div class="contents">
                                 <div class="row">
                                     <p class="title">
@@ -107,12 +112,17 @@
                 for(var i = 0; i < selectList.length; i++) {
                     htmlCode += '<li class="list">';
                     htmlCode += '   <a class="block" href="/kbinnovationhub/community/hub/detail/ ' + selectList[i].hub_sn + '">';
-                    htmlCode += '       <div class="thumbnail"><img src="\\kbinnovationhub' + selectList[i].hub_path_img + selectList[i].hub_img_name + '" alt=""></div>';
+                    if (selectList[i].hub_path_img !== null && selectList[i].hub_img_name !== '') {
+                        htmlCode += '       <div class="thumbnail"><img src="\\kbinnovationhub' + selectList[i].hub_path_img + selectList[i].hub_img_name + '" alt=""></div>';
+                    }
+                    if (selectList[i].hub_path_img === null || selectList[i].hub_img_name === '') {
+                        htmlCode += '       <div class="thumbnail"><img src="/kbinnovationhub/images/sub/startup/no_news_image.png" alt=""></div>';
+                    }
                     htmlCode += '       <div class="contents">';
                     htmlCode += '           <div class="row">';
                     htmlCode += '               <p class="title">';
                     htmlCode += '                   <span>' + selectList[i].hub_ttl + '</span>';
-                    if (selectList[i].atch_file_sn3 != 0) {
+                    if (selectList[i].atch_file_sn3 !== 0) {
                         htmlCode += '               <i class="icon icon-file"></i>';
                     }
                     htmlCode += '               </p>';

@@ -55,9 +55,10 @@
                             <ul class="accordion-list">
                                 <!-- 아코디언 id와 aria-* 애트리뷰트에 리스트 인덱스값 늘려주시면 됩니다. tab1... tab2... (개당 총 4군데에요.) -->
                                 <li class="accordion-group" th:each="list : ${selectList}">
-                                    <div role="heading" aria-level="3" class="accordion-heading">
+                                    <div role="heading" aria-level="3" class="accordion-heading" th:with="faq_sec='abcde'">
                                         <!-- <button type="button" class="accordion-tab" th:id="${list.faq_id}" th:aria-controls="${list.faq_sec}" aria-expanded="false"> -->
-                                        <button type="button" class="accordion-tab" th:id="${list.faq_id}" th:aria-controls="${list.faq_sec}" aria-expanded="false">
+                                        <!--<button type="button" class="accordion-tab" th:id="${list.faq_id}" aria-controls=[[${faq_sec}]] aria-expanded="false">-->
+                                        <button type="button" class="accordion-tab" th:id="${list.faq_id}" th:src="${list.faq_sec}" aria-controls="" aria-expanded="false">
                                             <span class="category" th:text="${list.ctgry_nm}"></span>
                                             <span class="type">Q.</span>
                                             <span th:text="${list.faq_qstn}"></span>
@@ -121,7 +122,6 @@
 
     <!-- 스크립트 -->
     <script>
-
 	    window.addEventListener('DOMContentLoaded', () => {
 	        accordion();
 	    });
@@ -130,13 +130,16 @@
 	        const opened = document.querySelectorAll('[aria-expanded=true]');
 	
 	        for (let i = 0, l = opened.length; i < l; i++) {
-	            const panel = document.getElementById(opened[i].id + '-section');                
+	            const panel = document.getElementById(opened[i].id + '-section');
+                //const panel = document.getElementById(opened[i].id);
 	
 	            panel.style.height = panel.scrollHeight + 'px';
 	        }
 	
 	        function toggleExpanded(element, show) {
-	            const target = document.getElementById(element.getAttribute('aria-controls'));
+	            //const target = document.getElementById(element.getAttribute('aria-controls'));
+                //const target = document.getElementById(element.getAttribute('accordion-tab'));
+                const target = document.getElementById(element.getAttribute('src'));
 	            const height = target.scrollHeight;
 	
 	            if (target) {
@@ -145,7 +148,7 @@
 	                show ? target.style.height = height + 'px' : target.style.removeProperty('height');
 	            }
 	        }
-	
+
 	        function setupAccordion(accordionContainer) {
 	            function closeAllPanels() {
 	                const openPanels = accordionContainer.querySelectorAll('[aria-expanded=true]');
@@ -169,7 +172,7 @@
 	                }
 	            });
 	        }
-	
+
 	        const accordions = document.querySelectorAll('.accordion');
 	
 	        for (let i = 0, l = accordions.length; i < l; i++) {
