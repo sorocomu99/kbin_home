@@ -2,6 +2,24 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragment/config :: configFragment"></head>
 <body>
+    <th:block th:if="${selectPopup != null and selectPopup != ''}">
+        <div th:id="${'popup' + listStat.index}" class="popup-container" th:each="list,listStat : ${selectPopup}" th:style="${'top:' + list.popup_top_pstn +  'px;left:' + list.popup_left_pstn + 'px;'}">
+            <div class="popup-body">
+                <!--&lt;!&ndash;<img src="/images/logo.svg" alt="">&ndash;&gt;-->
+                <span th:utext="${list.popup_cn}"></span>
+            </div>
+            <div class="popup-foot">
+                <div class="check check-light">
+                    <input th:id="${'popupClose' + listStat.index}" type="checkbox">
+                    <i></i>
+                    <label th:for="${'popupClose' + listStat.index}">오늘 하루 열지 않기</label>
+                </div>
+                <!--<a class="close" href="javascript:" onclick="this.parentNode.parentNode.remove();"><span class="blind">팝업 닫기</span></a>-->
+                <a class="close" href="javascript:" th:onclick="|closePopup('${listStat.index}');|"><span class="blind">팝업 닫기</span></a>
+            </div>
+        </div>
+    </th:block>
+
     <!-- 헤더 -->
     <app-header></app-header>
 
@@ -256,7 +274,7 @@
                                 </th:block>
                                 <th:block th:if="${result != null and result != ''}">
                                     <p class="title"><b>육성</b> <span  th:text="${result?.ent_crtr_ymd}"></span></p>
-                                    <p class="text"><b th:data-count="${result?.ent_nocs}"></b> 개사</p>
+                                    <p class="text"><b th:text="${#numbers.formatInteger(result.ent_nocs, 0, 'COMMA')}" th:data-count="${result.ent_nocs}"></b> 개사</p>
                                 </th:block>
                             </div>
                         </div>
@@ -268,7 +286,7 @@
                                 </th:block>
                                 <th:block th:if="${result != null and result != ''}">
                                     <p class="title"><b>투자</b> <span th:text="${result.invest_crtr_ymd}"></span></p>
-                                    <p class="text"><b th:data-count="${result.invest_nocs}"></b> 억원</p>
+                                    <p class="text"><b th:text="${#numbers.formatInteger(result.invest_nocs, 0, 'COMMA')}" th:data-count="${result.invest_nocs}"></b> 억원</p>
                                 </th:block>
                             </div>
                         </div>
@@ -280,7 +298,7 @@
                                 </th:block>
                                 <th:block th:if="${result != null and result != ''}">
                                     <p class="title"><b>제휴</b> <span th:text="${result.affiliate_crtr_ymd}"></span></p>
-                                    <p class="text"><b th:data-count="${result.affiliate_nocs}"></b> 건</p>
+                                    <p class="text"><b th:text="${#numbers.formatInteger(result.affiliate_nocs, 0, 'COMMA')}" th:data-count="${result.affiliate_nocs}"></b> 건</p>
                                 </th:block>
                             </div>
                         </div>
@@ -295,5 +313,55 @@
 
     <!-- 개별페이지 스크립트 -->
     <script th:src="@{/js/main.js}"></script>
+    <script th:inline="javascript">
+        var popList = [[${selectPopup}]];
+
+        $(document).ready(function () {
+            if (popList.length > 0) {
+                popList.forEach((data, index) => {
+                    var chkPopup = getCookie('popup'+index);
+                    console.log("chkPopup============"+chkPopup);
+
+                    if (chkPopup === 'Y') {
+                        $("#popup"+index+"").hide();
+                    } else {
+                        $("#popup"+index+"").show();
+                    }
+                });
+            }
+        });
+
+        //쿠키설정
+        function setCookie( name, value, expiredays ) {
+            var todayDate = new Date();
+            todayDate.setDate( todayDate.getDate() + expiredays );
+            document.cookie = name + '=' + value + '; path=/kbinnovationhub; expires=' + todayDate.toGMTString() + ';'
+        }
+
+        //쿠키 불러오기
+        function getCookie(name) {
+            var obj = name + "=";
+            var x = 0;
+            while ( x <= document.cookie.length ) {
+                var y = (x+obj.length);
+                if ( document.cookie.substring( x, y ) === obj ) {
+                    if ((endOfCookie=document.cookie.indexOf( ";", y )) === -1 )
+                        endOfCookie = document.cookie.length;
+                    return ( document.cookie.substring( y, endOfCookie ) );
+                }
+                x = document.cookie.indexOf( " ", x ) + 1;
+
+                if ( x === 0 ) break;
+            }
+            return "";
+        }
+
+        function closePopup(key) {
+            if ($("#popupClose"+key).prop("checked")) {
+                setCookie('popup'+key, 'Y' , 1 );
+            }
+            $("#popup"+key+"").hide();
+        }
+    </script>
 </body>
 </html>

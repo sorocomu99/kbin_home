@@ -27,5 +27,20 @@
           AND VISUAL.EXPSR_YN = 'Y'
         ORDER BY VISUAL.SORT_NO ASC
     </select>
-
+    <!-- 팝업 조회 -->
+    <select id="selectPopup" resultType="com.kbin.inno.Main.DTO.PopupDTO">
+        /* 팝업 조회 */
+        SELECT POPUP_SN
+             , MNGR_TTL
+             , BGNG_YMD
+             , BGNG_HR
+             , END_YMD
+             , END_HR
+             , POPUP_LEFT_PSTN
+             , POPUP_TOP_PSTN
+             , REPLACE(POPUP_CN, 'kbinnovationhub_devadm', 'kbinnovationhub') POPUP_CN
+          FROM KB_POPUP_INFO
+         WHERE 1 = 1
+           AND TO_CHAR(TO_DATE(END_YMD, 'YYYYMMDD'), 'YYYYMMDD') || ' ' || TO_CHAR(TO_DATE(END_HR, 'HH24MI'), 'HH24MI') >= TO_CHAR(SYSDATE, 'YYYYMMDD HH24MI');
+    </select>
 </mapper>

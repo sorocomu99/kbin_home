@@ -85,5 +85,6 @@
         SELECT CTGRY_SN
              , CTGRY_NM
           FROM KB_CTGRY_INFO
+         ORDER BY CTGRY_SN
     </select>
 </mapper>

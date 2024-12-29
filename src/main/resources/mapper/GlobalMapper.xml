@@ -12,9 +12,10 @@
              , EXCH.SORT_NO        AS SORT_NO
              , FILES.FILE_PATH     AS INTER_PATH
              , FILES.FILE_NM       AS INTER_FILE_NAME
-        FROM KB_EXCH_INFO EXCH
-           , KB_FILE_INFO FILES
-        WHERE EXCH.ATCH_FILE_SN1 = FILES.FILE_SN(+)
-        ORDER BY EXCH.EXCH_SN DESC
+          FROM KB_EXCH_INFO EXCH
+             , KB_FILE_INFO FILES
+         WHERE EXCH.ATCH_FILE_SN1 = FILES.FILE_SN(+)
+           AND EXCH.EXPSR_YN = 'Y'
+         ORDER BY EXCH.EXCH_SN DESC
     </select>
 </mapper>

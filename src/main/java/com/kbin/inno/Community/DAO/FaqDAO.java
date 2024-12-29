@@ -17,8 +17,8 @@ public interface FaqDAO {
     // FAQ 리스트 갯수 조회
     int selectPageCount(SearchDTO search);
     // FAQ 리스트 조회
-    //List<FaqDTO> selectList(SearchDTO search);
-    List<FaqDTO> selectList(HashMap map);
+    List<FaqDTO> selectList(SearchDTO search);
+    //List<FaqDTO> selectList(HashMap map);
     // 카테고리 조회
     List<CategoryDTO> selectCategory();
 }

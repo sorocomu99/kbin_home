@@ -19,6 +19,7 @@ public class FaqService {
     private final FaqDAO faqDAO;
 
     public void selectList(int ctgry, Model model, String type, String keyword, int page) {
+        HashMap map = new HashMap();
         // Search DTO에 담기
         SearchDTO search = new SearchDTO();
         search.setType(type);
@@ -64,14 +65,10 @@ public class FaqService {
         int start = end + 1 - pageLetter;
 
         search.setStart(start);
-        
-        HashMap map = new HashMap();
-        map.put("start",  start);
-        map.put("end", end);
 
         // 리스트 조회
         //List<FaqDTO> selectList = faqDAO.selectList(search);
-        List<FaqDTO> selectList = faqDAO.selectList(map);
+        List<FaqDTO> selectList = faqDAO.selectList(search);
 
         // 카테고리 조회
         List<CategoryDTO> selectCategory = faqDAO.selectCategory();

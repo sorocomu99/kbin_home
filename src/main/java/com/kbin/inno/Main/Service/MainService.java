@@ -1,6 +1,7 @@
 package com.kbin.inno.Main.Service;
 
 import com.kbin.inno.Main.DAO.MainDAO;
+import com.kbin.inno.Main.DTO.PopupDTO;
 import com.kbin.inno.Main.DTO.ResultDTO;
 import com.kbin.inno.Main.DTO.VisualDTO;
 import lombok.RequiredArgsConstructor;
@@ -23,5 +24,10 @@ public class MainService {
     // 메인 비주얼 조회
     public List<VisualDTO> selectVisual() {
         return mainDAO.selectVisual();
+    }
+
+    // 팝업조회
+    public List<PopupDTO> selectPopup() {
+        return mainDAO.selectPopup();
     }
 }
