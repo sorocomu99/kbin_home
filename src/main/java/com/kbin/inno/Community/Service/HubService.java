@@ -20,6 +20,7 @@ public class HubService {
     
     // HUB 리스트 조회
     public Map<String, Object> selectListMore(Model model, String type, String keyword, int more_num) {
+    //public void selectListMore(Model model, String type, String keyword, int more_num) {
         // Search DTO에 담기
         SearchDTO search = new SearchDTO();
         search.setType(type);
@@ -70,6 +71,12 @@ public class HubService {
         result.put("more_num", more_num);
         result.put("selectList", selectList);
         result.put("allCount", allCount);
+        model.addAttribute("repeat", repeat);
+        model.addAttribute("more_num", more_num);
+        model.addAttribute("selectList", selectList);
+        model.addAttribute("allCount", allCount);
+        model.addAttribute("type", type);
+        model.addAttribute("keyword", keyword);
 
         return result;
     }
@@ -118,11 +125,18 @@ public class HubService {
         search.setStart(start);
 
         List<HubDTO> selectList = hubDAO.selectList(search);
-
+        /*
         model.addAttribute("repeat", repeat);
         model.addAttribute("more_num", more_num);
         model.addAttribute("selectList", selectList);
         model.addAttribute("allCount", allCount);
+       */
+        model.addAttribute("repeat", repeat);
+        model.addAttribute("more_num", more_num);
+        model.addAttribute("selectList", selectList);
+        model.addAttribute("allCount", allCount);
+        model.addAttribute("type", type);
+        model.addAttribute("keyword", keyword);
     }
 
     // HUB 센터 소식 상세 조회

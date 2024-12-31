@@ -27,6 +27,7 @@ public class HubController {
     @ResponseBody
     @RequestMapping("/list/{more_num}")
     public Map<String, Object> moreList(Model model, @PathVariable int more_num,
+    //public String moreList(Model model, @PathVariable int more_num,
                                         @RequestParam(value = "type", required = false, defaultValue = "") String type,
                                         @RequestParam(value = "keyword", required = false, defaultValue = "") String keyword) {
         return hubService.selectListMore(model, type, keyword, more_num);

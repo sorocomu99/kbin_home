@@ -67,7 +67,7 @@
              , KB_FILE_INFO FILES
          WHERE COOPE.ATCH_FILE_ID = FILES.FILE_SN(+)
            AND COOPE.EXPSR_YN = 'Y'
-         ORDER BY COOPE.COOPE_SN DESC
+         ORDER BY COOPE.SORT_NO ASC
     </select>
     <!-- 국내 프로그램 - 육성 공간 조회 -->
     <select id="selectPlace" resultType="com.kbin.inno.Nurture.DTO.PlaceDTO">
@@ -92,6 +92,7 @@
         WHERE PLC.ATCH_FILE_SN1 = FILES1.FILE_SN(+)
           AND PLC.ATCH_FILE_SN2 = FILES2.FILE_SN(+)
           AND PLC.ATCH_FILE_SN3 = FILES3.FILE_SN(+)
+        ORDER BY PLC.SORT_NO ASC
     </select>
     <!-- 국내 프로그램 - 채용 지원 조회 -->
     <select id="selectRecruit" resultType="com.kbin.inno.Nurture.DTO.RecruitDTO">

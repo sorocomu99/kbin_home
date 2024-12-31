@@ -16,6 +16,6 @@
              , KB_FILE_INFO FILES
          WHERE EXCH.ATCH_FILE_SN1 = FILES.FILE_SN(+)
            AND EXCH.EXPSR_YN = 'Y'
-         ORDER BY EXCH.EXCH_SN DESC
+         ORDER BY EXCH.SORT_NO ASC
     </select>
 </mapper>

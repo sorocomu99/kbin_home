@@ -72,14 +72,14 @@
                   <if test='keyword != null and keyword != ""'>
                   <choose>
                   <when test="type == 'all'">
-                    AND HUB.HUB_TTL LIKE '%'|| #{keyword} ||'%'
-                     OR HUB.HUB_CN  LIKE '%'|| #{keyword} ||'%'
+                    AND HUB.HUB_TTL LIKE '%'|| UPPER(#{keyword}) ||'%'
+                     OR HUB.HUB_CN  LIKE '%'|| UPPER(#{keyword}) ||'%'
                   </when>
                   <when test="type == 'title'">
-                    AND HUB.HUB_TTL LIKE '%'|| #{keyword} ||'%'
+                    AND HUB.HUB_TTL LIKE '%'|| UPPER(#{keyword}) ||'%'
                   </when>
                   <when test="type == 'content'">
-                    AND HUB.HUB_TTL LIKE '%'|| #{keyword} ||'%'
+                    AND HUB.HUB_CN LIKE '%'|| UPPER(#{keyword}) ||'%'
                   </when>
                   </choose>
                   </if>
