@@ -183,10 +183,7 @@ let hamburger = {
         window.addEventListener('click', (e) => {
             if(e.target.closest('.header')) {
                 return;
-            }
-
-            console.log('aa');
-            
+            }           
             
             hamburger.closeMenu();
         });
@@ -201,6 +198,7 @@ let hamburger = {
         header.el.dataset.hamburger = 'opened';
         document.documentElement.style.overflow = 'hidden';
 
+        
         hamburger.depth1.forEach(element => {
             element.removeAttribute('aria-expanded');
             if(element.nextElementSibling !== null){
@@ -210,7 +208,7 @@ let hamburger = {
     },
     closeMenu(){
         lenis.start();
-        header.el.dataset.hamburger = 'closed';
+        header.el.dataset.hamburger = 'closed';        
         document.documentElement.style.removeProperty('overflow');
     },
     resetMenu(){

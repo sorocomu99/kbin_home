@@ -45,6 +45,7 @@ public class PageDTO implements Serializable {
     private int nextBlock;
 
     public PageDTO(int totalListCnt, int page) {
+    //public PageDTO(int totalListCnt, int page, String pageSize) {
         // 총 게시물 수와 현재 페이지를 Controller로 부터 받아온다.
 
         // 총 게시물 수	- totalListCnt
@@ -57,12 +58,15 @@ public class PageDTO implements Serializable {
 
         /** 5. 총 게시글 수 **/
         setTotalListCnt(totalListCnt);
-
+        int pgSize = 12;
+        //pgSize = Integer.parseInt(pageSize);
         setPageSize(pageSize);
+        //setPageSize(pgSize);
 
         /** 6. 총 페이지 수 **/
         // 한 페이지의 최대 개수를 총 게시물 수 * 1.0로 나누어주고 올림 해준다.
         // 총 페이지 수 를 구할 수 있다.
+        //setTotalPageCnt((int) Math.ceil(totalListCnt * 1.0 / pgSize));
         setTotalPageCnt((int) Math.ceil(totalListCnt * 1.0 / pageSize));
 
         /** 7. 총 블럭 수 **/
@@ -98,5 +102,6 @@ public class PageDTO implements Serializable {
 
         /** 10. DB 접근 시작 index **/
         setStartIndex((page-1) * pageSize);
+        //setStartIndex((page-1) * pgSize);
     }
 }

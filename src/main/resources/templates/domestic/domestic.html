@@ -55,7 +55,7 @@
                     <h3 class="section-heading">육성 프로그램</h3>
                     <div class="section-context">
                         <h4 class="section-title"><span class="block"><span class="highlight">제휴</span><sup>01</sup></span></h4>
-                        <p class="section-text">상품·서비스 개선 및 출시 등 KB와의 실질적인 협업 논의 지원을 위해 유관 부서 실무자와 ‘1:1 밋업’ 등 제휴 연계 프로그램을 제공합니다.</p>
+                        <p class="section-text">상품·서비스 개선 및 출시 등 KB와의 실질적인 협업 논의 지원을 위해 <br class="pc">유관 부서 실무자와 ‘1:1 밋업’ 등 제휴 연계 프로그램을 제공합니다.</p>
                     </div>
                     <div class="section-flex">
                         <div class="side"></div>
@@ -91,7 +91,7 @@
                 <div class="section-wrap">
                     <div class="section-context">
                         <h4 class="section-title"><span class="block"><span class="highlight">투자</span><sup>02</sup></span></h4>
-                        <p class="section-text">피치데이, 데모데이 등을 통해 스타트업에게 투자 IR 기회를 제공하고 그룹 CVC, SI 펀드 및 계열사 투자 재원을 활용해 성장 단계별 투자를 지원합니다.</p>
+                        <p class="section-text">피치데이, 데모데이 등을 통해 스타트업에게 투자 IR 기회를 제공하고 <br class="pc">그룹 CVC, SI 펀드 및 계열사 투자 재원을 활용해 성장 단계별 투자를 지원합니다.</p>
                     </div>
                     <div class="section-flex">
                         <div class="side">
@@ -116,7 +116,7 @@
                 <div class="section-wrap">
                     <div class="section-context">
                         <h4 class="section-title"><span class="block"><span class="highlight">멘토링/컨설팅</span><sup>03</sup></span></h4>
-                        <p class="section-text">KB금융그룹 내부 전문가와 외부 협력 기관의 전문가를 연계하여 금융 컨설팅, 기업 자금관리, 정부 지원 사업 프로그램 등 스타트업이 필요로하는 각종 멘토링과 컨설팅을 제공합니다.</p>
+                        <p class="section-text">KB금융그룹 내부 전문가와 외부 협력 기관의 전문가를 연계하여 금융 컨설팅, 기업 자금관리, <br class="pc">정부 지원 사업 프로그램 등 스타트업이 필요로하는 각종 멘토링과 컨설팅을 제공합니다.</p>
                     </div>
                     <div class="section-flex">
                         <div class="side"></div>
@@ -152,7 +152,7 @@
                 <div class="section-wrap">
                     <div class="section-context">
                         <h4 class="section-title"><span class="block"><span class="highlight">협력기관 연계</span><sup>04</sup></span></h4>
-                        <p class="section-text">정부기관 등 외부 육성기관과 연계한 외부 IR 기회 제공, 사업화 자금 지원 추천 등 스타트업 성장 단계별 외부 프로그램 연계를 통해 스타트업의 성장을 지원합니다.</p>
+                        <p class="section-text">정부기관 등 외부 육성기관과 연계한 외부 IR 기회 제공, 사업화 자금 지원 추천 등 <br class="pc">스타트업 성장 단계별 외부 프로그램 연계를 통해 스타트업의 성장을 지원합니다.</p>
                     </div>
                     <ul class="cooperation-list">
                         <li th:each="list : ${cooperation}">
@@ -315,16 +315,10 @@
 	            borderRadius: '0px',
 	        })
 	        tl.to('.section-top', {opacity: 0, yPercent: -10}, '<+15%')
-	        tl.fromTo('.nurture .section-intro .heading', 0.45, {opacity: 0, yPercent: 35}, {
-	            opacity: 1,
-	            yPercent: 0
-	        }, '>+25%')
-	        tl.fromTo('.nurture .section-intro .chart-box', 0.7, {opacity: 0, yPercent: 20}, {
-	            opacity: 1,
-	            yPercent: 0
-	        }, '<+30%')
+            tl.fromTo('.nurture .section-intro .heading', 1, { opacity: 0, yPercent: 35 }, { opacity: 1, yPercent: 0 }, '<+165%')
+            tl.fromTo('.nurture .section-intro .chart-box', 1, { opacity: 0, yPercent: 10 }, { opacity: 1, yPercent: 0 }, '<.5')
 	        tl.to('.nurture .section-intro .background .item', 0.35, {opacity: 0.6}, '<')
-	            .to({}, 1, {})
+                .to({}, {}, '+=1')
 	
 	        ScrollTrigger.create({
 	            animation: tl,

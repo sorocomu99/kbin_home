@@ -641,6 +641,13 @@
         //console.log("seriesIn :: "+seriesIn);
         //console.log("seriesOut :: "+seriesOut);
         //console.log("seriesNow :: "+seriesNow);
+        let data1 = seriesIn; // 입사자
+        let data2 = seriesOut; // 퇴사자
+        let data3 = seriesNow;
+        let maxValue = Math.max(Math.max(...data1), Math.max(...data2)); // 입사자/퇴사자 데이터 중 최대값
+        let maxValue1 = Math.max(...data3);
+        const maxYAxisValue = Math.ceil(maxValue * 1.1); // Y축 최대값을 10% 증가된 값으로 설정
+        const maxYAxisValue1 = Math.ceil(maxValue1 * 1.3);
 
         chart.setOption({
             // title: {
@@ -665,9 +672,27 @@
                     alignWithLabel: true
                 },
             },
-            yAxis: {
-                alignTicks: true,
-            },
+            yAxis: [
+                {
+                    type: 'value',
+                    name: '입사자/퇴사자', // 왼쪽 Y축
+                    position: 'left',
+                    interval: 2, // 증가값
+                    max: maxYAxisValue, // Y축 최대값
+                    splitLine: {
+                        show: false, // 가로 눈금선을 숨김
+                    },
+                },
+                {
+                    type: 'value',
+                    name: '근무자', // 오른쪽 Y축
+                    max: maxYAxisValue1,
+                    position: 'right',
+                    axisLabel: {
+                        show: false
+                    }
+                },
+            ],
             legend: {
                 orient: 'horizontal',
                 // left: '0',
@@ -696,7 +721,8 @@
                         borderRadius: [50, 50, 0, 0],
                     },
                     //data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0]
-                    data: seriesIn
+                    data: seriesIn,
+                    yAxisIndex: 0
                 },
                 {
                     name: '퇴사자(명)',
@@ -706,7 +732,8 @@
                         borderRadius: [50, 50, 0, 0],
                     },
                     //data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-                    data: seriesOut
+                    data: seriesOut,
+                    yAxisIndex: 0
                 },
                 // 근무자 데이터 (뒤에 배경용)
                 {
@@ -729,7 +756,8 @@
                     data: seriesNow,
                     silent: true,
                     tooltip: { show: false },
-                    z: 0
+                    z: 0,
+                    yAxisIndex: 1
                 },
                 // 근무자 데이터 (위에 배경용과 같은 데이터로 설정해주시면 됩니다.)
                 {
@@ -738,7 +766,8 @@
                     color: '#246BEB',
                     //data: [6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,5,6,6,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,8,8,8,8,8,8,8,8,8,8,8],
                     data: seriesNow,
-                    z: 10
+                    z: 10,
+                    yAxisIndex: 1
                 }
             ]
         });

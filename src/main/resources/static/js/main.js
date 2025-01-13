@@ -90,11 +90,12 @@ function introduce() {
                 width: '100vw',
                 height: '100vh',
                 borderRadius: '0px'
-            }, '<')
+            })
             tl1.to('.section-introduce .context', 0.1, { opacity: 0 }, '<')
             tl1.to('.section-introduce .section-title', 0.35, { opacity: 0, y: -75 }, '<')
-            tl1.from('.section-introduce .title', 0.85, { opacity: 0, y: 75 }, '<0.35')
-            tl1.from('.section-introduce .contents', 0.85, { opacity: 0, y: 75, stagger: 0.07 }, '<.5')
+            tl1.from('.section-introduce .title', 1, { opacity: 0, y: 75 }, '<+=125%')
+            tl1.from('.section-introduce .contents', 1, { opacity: 0, y: 55 }, '<.5')
+            tl1.to({}, {}, '+=1')
     
             ScrollTrigger.create({
                 animation: tl1,

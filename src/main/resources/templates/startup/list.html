@@ -36,7 +36,7 @@
                         <input class="input" type="hidden" id="keyWord1" name="keyWord1" value="">
                         <input type="hidden" id="detSearch1" name="detSearch1" value="" />
                         <input type="hidden" id="pageNum" name="pageNum" />
-                        <input type="hidden" name="pageSize" id="pageSize" />
+                        <input type="hidden" name="pageSize" id="pageSize" value="12" />
                         <div class="proximal-pannel">
                         <div class="proximal-filter-body">
                             <div class="proximal-filter-list">
@@ -211,8 +211,8 @@
                     <div class="proximal-result-body">
                         <div class="proximal-result-sort">
                             <span class="text">노출개수</span>
-                            <!--<select class="select" id="selectbox" name="selectbox" onchange="changePageSize()">-->
-                            <select class="select" id="selectbox" name="selectbox">
+                            <select class="select" id="selectbox" name="selectbox" onchange="changePageSize()">
+                            <!--<select class="select" id="selectbox" name="selectbox">-->
                                 <option value="12" th:selected="${searchList.pageSize == '12'}">12개</option>
                                 <option value="24" th:selected="${searchList.pageSize == '24'}">24개</option>
                                 <option value="48" th:selected="${searchList.pageSize == '48'}">48개</option>
@@ -612,6 +612,8 @@
                     body.removeChild(filter);
                 }
             }
+
+            //clickForm();
         }
 
         function removeFilter(element, name) {
@@ -661,6 +663,11 @@
             //var aaa = $(this).attr("src");
             //alert(aaa);
         });
+
+        function clickForm() {
+            actionForm.attr("action", "/kbinnovationhub/startup/list");
+            actionForm.submit();
+        }
 
         function setInputVal() {
             /* 최상단 키워드명 검색어 세팅 시작 */
@@ -786,6 +793,8 @@
             }
             /* 설립일 세팅 종료 */
             document.getElementById('pageSize').value = findList.pageSize;
+
+            //clickForm();
         }
 
         function changePageSize() {

@@ -21,7 +21,7 @@
 .section-visual .word,
 .section-visual .char { will-change: transform; }
 
-.section-introduce { position: relative; margin: 0; max-width: none; height: 200vh; }
+.section-introduce { position: relative; margin: 0; max-width: none; height: 250vh; }
 .section-introduce .sticky { overflow: hidden; position: sticky; top: 0; left: 0; width: 100%; height: 100vh; }
 .section-introduce .background { position: absolute; top: 39vh; left: calc(50vw - 710px); width: 31.4vw; height: 22.2vw; object-fit: cover; border-radius: 24px; }
 .section-introduce .container {position: relative; margin-right: auto; margin-left: auto; max-width: var(--inner); width: 90%; height: 100%; }

@@ -159,7 +159,7 @@ span.flatpickr-weekday { height: 39px; line-height: 39px; }
 
 .nurture .section { padding-top: 160px; padding-bottom: 160px; }
 .nurture .section-top { padding-bottom: 66px; }
-.nurture .section-intro { position: relative; height: 200vh; }
+.nurture .section-intro { position: relative; height: 275vh; }
 .nurture .section-intro .sticky { position: sticky; top: 0; left: 0; width: 100%; height: 100vh; }
 .nurture .section-intro .background { overflow: hidden; z-index: 2; position: absolute; top: calc(1.8vw + 340px); left: 0; right: 0; margin: auto; max-width: 1420px; width: 90%; max-height: 460px; height: calc(95vh - 380px); border-radius: 24px; opacity: 0; }
 .nurture .section-intro .background::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000; border-radius: inherit; }

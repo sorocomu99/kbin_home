@@ -37,6 +37,11 @@ public class StartupService {
 
         // 생성인자로  총 게시물 수, 현재 페이지를 전달
         PageDTO pagination = new PageDTO(totCnt, pageNum);
+        //PageDTO pagination = new PageDTO(totCnt, pageNum, startupSearchDTO.getPageSize());
+
+        if (startupSearchDTO.getPageSize() != null && startupSearchDTO.getPageSize() != "") {
+            pagination.setPageSize(Integer.parseInt(startupSearchDTO.getPageSize()));
+        }
 
         // DB select start index
         int startIndex = pagination.getStartIndex();
