@@ -9,14 +9,14 @@
     <main class="main">
         <div class="apply">
             <div class="apply-image">
-                <img src="/images/dummy/apply-image.jpg" alt="">
+                <img src="/kbinnovationhub/images/dummy/apply-image.jpg" alt="">
             </div>
             <div class="apply-contents">
                 <!--
                     다음으로 버튼 클릭 후 항목에 미 체크되어 있으면 form 태그에 need-invalid 클래스 추가 해주세요.
                     기본상태는 클래스 비워주시면 됩니다.
                 -->
-                <form class="need-invalid">
+                <form class="need-invalid" id="applyForm">
                 <!-- 기본 상태 <form> -->
                     <div class="context">
                         <!-- 질문 -->
@@ -32,12 +32,12 @@
                         <!-- 객관식 -->
                         <div class="input-group">
                             <div class="radio">
-                                <input id="option1-1" class="input" type="radio" name="option1" value="">
+                                <input id="option1-1" class="input" type="radio" name="option1" value="Y">
                                 <i></i>
                                 <label for="option1-1" class="label">예</label>
                             </div>
                             <div class="radio">
-                                <input id="option1-2" class="input" type="radio" name="option1" value="">
+                                <input id="option1-2" class="input" type="radio" name="option1" value="N">
                                 <i></i>
                                 <label for="option1-2" class="label">아니오</label>
                             </div>
@@ -45,9 +45,12 @@
                             <div class="invalid-feedback"><i class="icon icon-danger"></i>항목을 선택 해주세요.</div>
                         </div>
                     </div>
+
+                    <input type="hidden" name="srvy_sn" th:value="${srvy_sn}">
+                    <input type="hidden" name="questCnt" th:value="${questCnt}">
+                    <input type="hidden" name="currentCnt" value="1">
                     <div class="bottom-button">
-                        <!-- 제출버튼입니다. (아래건 임시용) <button class="button button-border" type="submit"><span>다음으로</span> <i class="icon icon-chevron-right"></i></button> -->
-                        <a class="button button-border" href="/starters/apply/input"><span>다음으로</span> <i class="icon icon-chevron-right"></i></a>
+                        <button class="button button-border" href="javascript:void(0);" onclick="applySubmit()"><span>다음으로</span> <i class="icon icon-chevron-right"></i></button>
                     </div>
                 </form>
             </div>
@@ -65,15 +68,37 @@
 
         // 항목 체크 시 유효성 문구 제거
         inputs.forEach(input => input.addEventListener('change', (e) => checkState(e)));
-        
+
         function checkState(input) {
             if(!input.target.checked) {
                 return;
             }
-            
+
             form.classList.remove('need-invalid');
         }
     });
+
+    function applySubmit() {
+        var radioButtons = document.getElementsByName('option1');
+        var radioSelected = false;
+
+        for (var i = 0; i < radioButtons.length; i++) {
+            if (radioButtons[i].checked && radioButtons[i].value === 'Y') {
+                radioSelected = true;
+                break;
+            }
+        }
+
+        if (!radioSelected) {
+            alert('정보 수집·이용에 동의하셔야 다음 단계를 진행하실 수 있습니다.');
+            return;
+        }
+
+        var form = document.getElementById('applyForm');
+        form.method = "POST";
+        form.action = "/kbinnovationhub/starters/apply/input";
+        form.submit();
+    }
     </script>
 </body>
 </html>

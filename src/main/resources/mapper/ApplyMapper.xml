@@ -1,0 +1,94 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kbin.inno.Starters.DAO.ApplyDAO">
+
+    <select id="getSurveyInfo" resultType="com.kbin.inno.Starters.DTO.ApplyDTO">
+        SELECT
+              S.SRVY_SN             --설문 일련번호
+             ,S.SRVY_TTL            --설문 제목
+             ,S.BANE_FILE_SN        --배너 파일 일련번호
+             ,S.TMPR_DEL_YN         --임시 삭제 여부
+             ,S.SPRT_EXPLN_SN	    --지원 안내 일련번호
+             ,S.RECRU_SE	        --모집 구분
+             ,S.RECRU_SCHDL	        --모집일정(기간)
+             ,S.RECRU_BGNG_YMD	    --모집 시작 일자
+             ,S.RECRU_END_YMD	    --모집 종료 일자
+             ,S.RECRU_END_HR	    --모집 종료 시간
+             ,S.RECRU_TRGT_M	    --모집 대상 메인
+             ,S.RECRU_TRGT_S	    --모집 대상 서브
+             ,S.RECRU_FLD_M	        --모집 분야 메인
+             ,S.RECRU_FLD_S	        --모집 분야 서브
+             ,S.SLCTN_PRCS	        --선별 절차
+             ,S.SLCTN_BENEF_CN1	    --선정 혜택 내용1
+             ,S.SLCTN_BENEF_CN2	    --선정 혜택 내용2
+             ,S.SLCTN_BENEF_CN3	    --선정 혜택 내용3
+             ,S.SLCTN_BENEF_CN4	    --선정 혜택 내용4
+        FROM
+            (SELECT
+                 ROWNUM ROWNUMBER
+                  ,A.*
+                  ,B.*
+             FROM KB_SRVY_EXMN_INFO A, KB_SPRT_EXPLN_INFO B
+             WHERE  1=1
+               AND A.SRVY_SN = B.SPRT_EXPLN_SN(+)
+             ORDER BY A.SRVY_SN DESC) S
+--         WHERE ROWNUM = 1
+        WHERE S.SRVY_SN = 14
+    </select>
+
+    <select id="getQuestCnt" parameterType="String" resultType="int">
+        SELECT COUNT(*)
+        FROM
+            (SELECT
+                 ROWNUM ROWNUMBER
+                  ,A.*
+             FROM KB_SRVY_QSTN_INFO A, KB_SRVY_EXMN_INFO B
+             WHERE  1=1
+               AND A.SRVY_SN = B.SRVY_SN(+)
+               AND B.TMPR_DEL_YN = 'N'
+               AND A.SRVY_SN = #{srvy_sn})
+    </select>
+
+    <select id="questionInfo" parameterType="com.kbin.inno.Starters.DTO.ApplyDTO" resultType="com.kbin.inno.Starters.DTO.ApplyDTO">
+        SELECT
+            SRVY_QSTN_SN	        --설문 질문 일련번호
+             ,SRVY_SN	            --설문 일련번호
+             ,QSTN_TYPE	            --질문 유형
+             ,SRVY_QSTN	            --설문 질문
+             ,SRVY_DTL_QSTN	        --설문 질문 상세 내용
+             ,ESNTL_VL_YN	        --필수값 여부
+             ,FRST_RGTR	            --최초등록자
+             ,FRST_REG_DT	        --최초등록일시
+             ,LAST_MDFR	            --최종수정자
+             ,LAST_MDFCN_DT	        --최종수정일시
+        FROM
+            (SELECT
+                 ROWNUM ROWNUMBER
+                  ,A.*
+             FROM KB_SRVY_QSTN_INFO A, KB_SRVY_EXMN_INFO B
+             WHERE  1=1
+               AND A.SRVY_SN = B.SRVY_SN(+)
+               AND B.TMPR_DEL_YN = 'N'
+               AND A.SRVY_SN = #{srvy_sn})
+        WHERE ROWNUMBER = #{current_cnt}
+    </select>
+
+    <select id="questionCheckboxList" parameterType="com.kbin.inno.Starters.DTO.ApplyDTO" resultType="com.kbin.inno.Starters.DTO.ApplyDTO">
+        SELECT
+             A.SRVY_ANS_SN            --보기 일련번호
+            ,A.SRVY_QSTN_SN           --문항 일련번호
+            ,A.ANS_CN                 --답변 내용
+            ,A.AFTR_MVMN              --이후 이동(다음 단계)
+            ,A.FRST_RGTR              --최초등록자
+            ,A.FRST_REG_DT            --최초등록일시
+            ,A.LAST_MDFR              --최종수정자
+            ,A.LAST_MDFCN_DT          --최종수정일시
+            ,A.RSPNS_YMD              --응답일
+        FROM KB_SRVY_ANS_INFO A, KB_SRVY_QSTN_INFO B
+        WHERE  1=1
+          AND A.SRVY_QSTN_SN = B.SRVY_QSTN_SN(+)
+          AND A.SRVY_QSTN_SN = #{srvy_qstn_sn}
+        ORDER BY SRVY_ANS_SN
+    </select>
+</mapper>

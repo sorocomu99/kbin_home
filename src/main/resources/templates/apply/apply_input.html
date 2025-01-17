@@ -9,7 +9,7 @@
     <main class="main">
         <div class="apply">
             <div class="apply-image">
-                <img src="/images/dummy/apply-image.jpg" alt="">
+                <img src="/kbinnovationhub/images/dummy/apply-image.jpg" alt="">
             </div>
             <div class="apply-contents">
                  <!--
@@ -26,9 +26,13 @@
                         <!-- 유효성 체크 문구(form 태그에 need-invalid 클래스가 있으면 아래 문구가 나타납니다) -->
                         <div class="invalid-feedback"><i class="icon icon-danger"></i>항목을 입력해주세요.</div>
                     </div>
+
+                    <input type="hidden" name="srvy_sn" th:value="${srvy_sn}">
+                    <input type="hidden" name="questCnt" th:value="${questCnt}">
+                    <input type="hidden" name="currentCnt" th:value="${currentCnt}">
                     <div class="bottom-button">
                         <!-- 제출버튼입니다. (아래건 임시용) <button class="button button-border" type="submit"><span>다음으로</span> <i class="icon icon-chevron-right"></i></button> -->
-                        <a class="button button-border" href="/starters/apply/check"><span>다음으로</span> <i class="icon icon-chevron-right"></i></a>
+                        <a class="button button-border" href="/kbinnovationhub/starters/apply/check"><span>다음으로</span> <i class="icon icon-chevron-right"></i></a>
                     </div>
                 </form>
             </div>

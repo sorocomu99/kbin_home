@@ -26,7 +26,7 @@ class HeaderComponent extends HTMLElement {
                                 <li>
                                     <div class="title">KB스타터스</div>
                                     <ul class="depth2">
-                                        <li><a href="/kbinnovationhub/starters/support/list">지원하기</a></li>
+                                        <li><a href="/kbinnovationhub/starters/apply/apply_main">지원하기</a></li>
                                         <li><a href="/kbinnovationhub/starters/portfolio/list">포트폴리오</a></li>
                                     </ul>
                                 </li>
