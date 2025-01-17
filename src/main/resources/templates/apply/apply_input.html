@@ -16,23 +16,44 @@
                     다음으로 버튼 클릭 후 항목에 미 체크되어 있으면 form 태그에 need-invalid 클래스 추가 해주세요.
                     기본상태는 클래스 비워주시면 됩니다.
                 -->
-                <form class="need-invalid">
+                <form class="need-invalid" id="applyForm">
                     <!-- 기본 상태 <form> -->
                     <div class="context">
                         <!-- 질문 -->
-                        <h1 class="h5">6. 홈페이지 주소를 입력하세요. (없는 경우 미입력 가능)</h1>
+                        <h1 class="h5" th:text="${questionInfo.rnum}+'. '+${questionInfo.srvy_qstn}"></h1>
                         <!-- 주관식 -->
-                        <input class="input" type="text">
+                        <input class="input" type="text" name="rspns_cn">
                         <!-- 유효성 체크 문구(form 태그에 need-invalid 클래스가 있으면 아래 문구가 나타납니다) -->
                         <div class="invalid-feedback"><i class="icon icon-danger"></i>항목을 입력해주세요.</div>
                     </div>
 
-                    <input type="hidden" name="srvy_sn" th:value="${srvy_sn}">
+                    <input type="hidden" name="rnum" th:value="${questionInfo.rnum}">
                     <input type="hidden" name="questCnt" th:value="${questCnt}">
                     <input type="hidden" name="currentCnt" th:value="${currentCnt}">
+                    <input type="hidden" name="srvy_sn" th:value="${srvy_sn}">
+                    <input type="hidden" name="srvy_qstn_sn" th:value="${questionInfo.srvy_qstn_sn}">
+                    <input type="hidden" name="srvy_ans_sn" value="">
                     <div class="bottom-button">
-                        <!-- 제출버튼입니다. (아래건 임시용) <button class="button button-border" type="submit"><span>다음으로</span> <i class="icon icon-chevron-right"></i></button> -->
-                        <a class="button button-border" href="/kbinnovationhub/starters/apply/check"><span>다음으로</span> <i class="icon icon-chevron-right"></i></a>
+                        <button class="button button-border" onclick="applySubmit()"><span>다음으로</span> <i class="icon icon-chevron-right"></i></button>
+                    </div>
+
+                    <div id="modalComplete" class="modal-container">
+                        <div class="modal-wrapper">
+                            <div class="modal">
+                                <div class="modal-body">
+                                    <p class="heading">제출하기</p>
+                                    <p class="title p5">모든 접수 단계가 완료되었습니다.</p>
+                                    <p class="p">최종 제출 하시겠습니까? <br>예를 누르면, 입력 내용으로 최종 접수됩니다.</p>
+                                    <div class="button-wrap">
+                                        <button class="button button-border" type="button" onclick="closeModal('modalComplete')">아니오</button>
+                                        <button class="button button-primary" type="button" onclick="applySubmit()">예</button>
+                                    </div>
+                                </div>
+                                <div class="modal-foot">
+                                    <a class="close" href="javascript:void(0);" onclick="closeModal('modalComplete')"><span class="blind">팝업 닫기</span></a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -55,10 +76,36 @@
             if(!input.target.value === '') {
                 return;
             }
-            
             form.classList.remove('need-invalid');
         }
     });
+
+    function next() {
+        let currentCnt = parseInt(document.querySelector('input[name="currentCnt"]').value, 10);
+        let questCnt = parseInt(document.querySelector('input[name="questCnt"]').value, 10);
+        alert("currentCnt: " + currentCnt + "\nquestCnt: " + questCnt);
+
+        if(currentCnt > questCnt){
+            openModal('modalComplete');
+        }else{
+            applySubmit();
+        }
+    }
+
+    function applySubmit(){
+        let rspnsCnValue = document.querySelector('input[name="rspns_cn"]').value;
+
+        if (rspnsCnValue === '') {
+            alert("응답을 입력해주세요!");
+            return;
+
+        } else {
+            const form = document.getElementById('applyForm');
+            form.method = "POST";
+            form.action = "/kbinnovationhub/starters/apply/saveAnswer";
+            form.submit();
+        }
+    }
     </script>
 </body>
 </html>

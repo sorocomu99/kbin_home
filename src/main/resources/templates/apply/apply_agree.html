@@ -27,7 +27,7 @@
                             <br>
                             1. 정보의 수집/이용 목적 : KB스타터스 선정을 위한 심사 <br>
                             2. 수집/이용 항목 : 기업명, 사업자번호, 법인등록번호, 이메일, 회사소개서 등 <br>
-                            3. 보유기간 : 2023 하반기 KB스타터스 선정 종료(`23.9월)까지
+                            3. 보유기간 : 2025 상반기 KB스타터스 선정 종료(`25.2월)까지
                         </p>
                         <!-- 객관식 -->
                         <div class="input-group">
@@ -50,7 +50,7 @@
                     <input type="hidden" name="questCnt" th:value="${questCnt}">
                     <input type="hidden" name="currentCnt" value="1">
                     <div class="bottom-button">
-                        <button class="button button-border" href="javascript:void(0);" onclick="applySubmit()"><span>다음으로</span> <i class="icon icon-chevron-right"></i></button>
+                        <button class="button button-border" onclick="applySubmit()"><span>다음으로</span> <i class="icon icon-chevron-right"></i></button>
                     </div>
                 </form>
             </div>
@@ -88,15 +88,14 @@
                 break;
             }
         }
-
         if (!radioSelected) {
             alert('정보 수집·이용에 동의하셔야 다음 단계를 진행하실 수 있습니다.');
             return;
         }
 
-        var form = document.getElementById('applyForm');
+        const form = document.getElementById('applyForm');
         form.method = "POST";
-        form.action = "/kbinnovationhub/starters/apply/input";
+        form.action = "/kbinnovationhub/starters/apply/getQuest";
         form.submit();
     }
     </script>

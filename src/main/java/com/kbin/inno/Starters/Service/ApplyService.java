@@ -28,6 +28,10 @@ public class ApplyService {
     }
 
     public List<ApplyDTO> questionCheckboxList(ApplyDTO questionInfo) {
-        return  applyDAO.questionCheckboxList(questionInfo);
+        return applyDAO.questionCheckboxList(questionInfo);
+    }
+
+    public void saveAnswer(ApplyDTO saveApplyInfo) {
+        applyDAO.saveAnswer(saveApplyInfo);
     }
 }

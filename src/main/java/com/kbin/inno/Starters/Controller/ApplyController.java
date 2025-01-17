@@ -33,19 +33,17 @@ public class ApplyController {
 
     @RequestMapping("/agree")
     public String agree(Model model, @RequestParam String srvy_sn) {
-        int questCnt = applyService.getQuestCnt(srvy_sn);   //문항 개수 가져옴
+        int questCnt = applyService.getQuestCnt(srvy_sn);
+        int currentCnt = 1;
         model.addAttribute("srvy_sn", srvy_sn);
         model.addAttribute("questCnt", questCnt);
-        model.addAttribute("currentCnt", 1);
+        model.addAttribute("currentCnt", currentCnt);
         return "apply/apply_agree";
     }
 
-    @RequestMapping("/input")
-    public String input(Model model, @RequestParam String srvy_sn, @RequestParam int currentCnt, @RequestParam int questCnt) {
-        System.out.println("srvy_sn                ======> " + srvy_sn);
-        System.out.println("현재 문항 번호 currentCnt ======> " + currentCnt);
-        System.out.println("전체 문항 수 questCnt     ======> " + questCnt);
-
+    @RequestMapping("/getQuest")
+    public String getQuest(Model model, @RequestParam String srvy_sn, @RequestParam int currentCnt, @RequestParam int questCnt) {
+        model.asMap().clear();
         String url = "";
         boolean exitLoop = false;
 
@@ -53,72 +51,62 @@ public class ApplyController {
             ApplyDTO applyDTO = new ApplyDTO();
             applyDTO.setSrvy_sn((srvy_sn));
             applyDTO.setCurrent_cnt(currentCnt);
-
             ApplyDTO questionInfo = applyService.questionInfo(applyDTO);
             model.addAttribute("questionInfo", questionInfo);
 
-            System.out.println(i+"번째 타입 ======> "+questionInfo.getQstn_type());
-
-            // Null 체크 테스트용
-            if (questionInfo == null) {
-                System.out.println("questionInfo is null for srvy_sn: " + srvy_sn + " and currentCnt: " + currentCnt);
-            }
-
             switch (questionInfo.getQstn_type()) {
-                case "1":    // 객관식
-                    List<ApplyDTO> checkboxList = applyService.questionCheckboxList(questionInfo);  //객관식 보기 리스트 가져옴
+                case "1":    //객관식
+                    List<ApplyDTO> checkboxList = applyService.questionCheckboxList(questionInfo);
                     model.addAttribute("checkboxList", checkboxList);
                     url = "apply/apply_check";
                     exitLoop = true;
                     break;
-                case "2":    // 주관식
+                case "2":    //주관식
                     url = "apply/apply_input";
                     exitLoop = true;
                     break;
-                case "3":    // 첨부파일
+                case "3":    //첨부파일
                     url = "apply/apply_file";
                     exitLoop = true;
                     break;
-                default:     // 추후 에디터
+                default:     //에디터
                     exitLoop = true;
                     break;
             }
-
-            // exitLoop가 true면 for문 종료
             if (exitLoop) {
                 break;
             }
-
-            System.out.println("for문 나옴");
-            // 총 문항 수와 현재 수가 같으면 종료
-            if (i == questCnt) {
-                break;
-            }
-            currentCnt = i++;
         }
-
-        System.out.println("설문 ID(srvy_sn) ======> " + srvy_sn);
-        System.out.println("총 문항 수 questCnt ======> " + questCnt);
-        System.out.println("다음 문항 번호 currentCnt ======> " + currentCnt);
-
         model.addAttribute("srvy_sn", srvy_sn);
         model.addAttribute("questCnt", questCnt);
         model.addAttribute("currentCnt", currentCnt);
         return url;
     }
 
-    @RequestMapping("/check")
-    public String check() {
-        return "apply/apply_check";
-    }
+    @RequestMapping("/saveAnswer")
+    public String saveAnswer(@RequestParam("srvy_sn") String srvySn,
+                             @RequestParam("rnum") int rnum,
+                             @RequestParam("questCnt") int questCnt,
+                             @RequestParam("currentCnt") int currentCnt,
+                             @RequestParam("srvy_qstn_sn") String srvyQstnSn,
+                             @RequestParam("srvy_ans_sn") String srvyAnsSn,
+                             @RequestParam("rspns_cn") String rspnsCn) {
 
-    @RequestMapping("/file")
-    public String file() {
-        return "apply/apply_file";
-    }
+        ApplyDTO saveApplyInfo = new ApplyDTO();
+        saveApplyInfo.setSrvy_sn(srvySn);
+        saveApplyInfo.setRnum(rnum);
+        saveApplyInfo.setSrvy_qstn_sn(srvyQstnSn);
+        saveApplyInfo.setSrvy_ans_sn(srvyAnsSn);
+        saveApplyInfo.setRspns_cn(rspnsCn);
 
-    @RequestMapping("/complete")
-    public String complete() {
-        return "apply/apply_complete";
+        applyService.saveAnswer(saveApplyInfo);
+
+        if (currentCnt < questCnt) {
+            int nextCnt = ++currentCnt;
+            return "redirect:/starters/apply/getQuest?srvy_sn=" + srvySn + "&currentCnt=" + nextCnt + "&questCnt=" + questCnt;
+        } else if (currentCnt == questCnt) {
+            return "redirect:/starters/apply/apply_main";
+        }
+        return "redirect:/starters/apply/apply_main";
     }
 }

@@ -17,4 +17,6 @@ public interface ApplyDAO {
     ApplyDTO questionInfo(ApplyDTO applyDTO);
 
     List<ApplyDTO> questionCheckboxList(ApplyDTO questionInfo);
+
+    void saveAnswer(ApplyDTO saveApplyInfo);
 }

@@ -55,4 +55,5 @@ public class ApplyDTO implements Serializable {
     private String slctn_prcs;           //선별 절차
 
     private int current_cnt;
+    private int rnum;
 }
