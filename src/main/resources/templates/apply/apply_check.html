@@ -21,6 +21,8 @@
                     <div class="context">
                         <!-- 질문 -->
                         <h1 class="h5" th:text="${questionInfo.rnum}+'. '+${questionInfo.srvy_qstn}"></h1>
+                        <!-- 상세내용 -->
+                        <p th:text="${questionInfo.srvy_dtl_qstn}"></p>
                         <!-- 객관식 -->
                         <div class="input-group">
                             <div class="radio" th:each="list : ${checkboxList}">

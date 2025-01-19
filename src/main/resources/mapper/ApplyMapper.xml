@@ -34,7 +34,6 @@
                AND A.SRVY_SN = B.SPRT_EXPLN_SN(+)
              ORDER BY A.SRVY_SN DESC) S
         WHERE ROWNUM = 1
---         WHERE S.SRVY_SN = 14
     </select>
 
     <select id="getQuestCnt" parameterType="String" resultType="int">
@@ -87,10 +86,12 @@
             ,A.LAST_MDFR              --최종수정자
             ,A.LAST_MDFCN_DT          --최종수정일시
             ,A.RSPNS_YMD              --응답일
+            ,B.SRVY_QSTN              --설문 질문
+            ,B.SRVY_DTL_QSTN          --설문 질문 상세 내용
         FROM KB_SRVY_ANS_INFO A, KB_SRVY_QSTN_INFO B
-        WHERE  1=1
+        WHERE 1=1
           AND A.SRVY_QSTN_SN = B.SRVY_QSTN_SN(+)
-          AND A.SRVY_QSTN_SN = #{srvy_qstn_sn}
+          AND B.SRVY_SN = #{srvy_sn}
         ORDER BY SRVY_ANS_SN
     </select>
 
