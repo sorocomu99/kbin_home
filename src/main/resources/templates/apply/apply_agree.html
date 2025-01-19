@@ -47,10 +47,8 @@
                     </div>
 
                     <input type="hidden" name="srvy_sn" th:value="${srvy_sn}">
-                    <input type="hidden" name="questCnt" th:value="${questCnt}">
-                    <input type="hidden" name="currentCnt" value="1">
                     <div class="bottom-button">
-                        <button class="button button-border" onclick="applySubmit()"><span>다음으로</span> <i class="icon icon-chevron-right"></i></button>
+                        <button class="button button-border" onclick="next()"><span>다음으로</span> <i class="icon icon-chevron-right"></i></button>
                     </div>
                 </form>
             </div>
@@ -78,10 +76,9 @@
         }
     });
 
-    function applySubmit() {
+    function next() {
         var radioButtons = document.getElementsByName('option1');
         var radioSelected = false;
-
         for (var i = 0; i < radioButtons.length; i++) {
             if (radioButtons[i].checked && radioButtons[i].value === 'Y') {
                 radioSelected = true;
@@ -95,7 +92,7 @@
 
         const form = document.getElementById('applyForm');
         form.method = "POST";
-        form.action = "/kbinnovationhub/starters/apply/getQuest";
+        form.action = "/kbinnovationhub/starters/apply/saveCompany";
         form.submit();
     }
     </script>

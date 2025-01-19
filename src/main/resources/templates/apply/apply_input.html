@@ -28,13 +28,14 @@
                     </div>
 
                     <input type="hidden" name="rnum" th:value="${questionInfo.rnum}">
+                    <input type="hidden" name="conm" th:value="${conm}">
                     <input type="hidden" name="questCnt" th:value="${questCnt}">
                     <input type="hidden" name="currentCnt" th:value="${currentCnt}">
                     <input type="hidden" name="srvy_sn" th:value="${srvy_sn}">
                     <input type="hidden" name="srvy_qstn_sn" th:value="${questionInfo.srvy_qstn_sn}">
                     <input type="hidden" name="srvy_ans_sn" value="">
                     <div class="bottom-button">
-                        <button class="button button-border" onclick="applySubmit()"><span>다음으로</span> <i class="icon icon-chevron-right"></i></button>
+                        <button class="button button-border" onclick="checkEnd()"><span>다음으로</span> <i class="icon icon-chevron-right"></i></button>
                     </div>
 
                     <div id="modalComplete" class="modal-container">
@@ -46,7 +47,7 @@
                                     <p class="p">최종 제출 하시겠습니까? <br>예를 누르면, 입력 내용으로 최종 접수됩니다.</p>
                                     <div class="button-wrap">
                                         <button class="button button-border" type="button" onclick="closeModal('modalComplete')">아니오</button>
-                                        <button class="button button-primary" type="button" onclick="applySubmit()">예</button>
+                                        <button class="button button-primary" type="button" onclick="finalSubmit()">예</button>
                                     </div>
                                 </div>
                                 <div class="modal-foot">
@@ -80,23 +81,21 @@
         }
     });
 
-    function next() {
+    function checkEnd() {
         let currentCnt = parseInt(document.querySelector('input[name="currentCnt"]').value, 10);
         let questCnt = parseInt(document.querySelector('input[name="questCnt"]').value, 10);
-        alert("currentCnt: " + currentCnt + "\nquestCnt: " + questCnt);
 
-        if(currentCnt > questCnt){
+        if(currentCnt === questCnt){
             openModal('modalComplete');
         }else{
-            applySubmit();
+            saveAndNext();
         }
     }
 
-    function applySubmit(){
+    function saveAndNext(){
         let rspnsCnValue = document.querySelector('input[name="rspns_cn"]').value;
-
         if (rspnsCnValue === '') {
-            alert("응답을 입력해주세요!");
+            alert("응답을 입력해주세요.");
             return;
 
         } else {
@@ -105,6 +104,39 @@
             form.action = "/kbinnovationhub/starters/apply/saveAnswer";
             form.submit();
         }
+    }
+
+    function finalSubmit() {
+        let rspnsCnField = document.querySelector('input[name="rspns_cn"]');
+        if (!rspnsCnField || rspnsCnField.value.trim() === '') {
+            alert("응답을 입력해주세요.");
+            return;
+        }
+
+        const formData = new FormData(document.getElementById('applyForm'));
+        const dataObject = {};
+        formData.forEach((value, key) => {
+            dataObject[key] = value;
+        });
+        $.ajax({
+            url: '/kbinnovationhub/starters/apply/finalSubmit',
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(dataObject),
+            success: function(response) {
+                if (response.success) {
+                    alert("응답이 저장되었습니다.");
+                    window.location.href = '/kbinnovationhub/starters/apply/apply_main';
+                } else {
+                    alert("응답 저장 실패.");
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+                alert("응답 제출 중 오류가 발생했습니다. 다시 시도해주세요.");
+            }
+        });
     }
     </script>
 </body>

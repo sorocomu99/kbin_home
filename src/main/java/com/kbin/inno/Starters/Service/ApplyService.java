@@ -34,4 +34,8 @@ public class ApplyService {
     public void saveAnswer(ApplyDTO saveApplyInfo) {
         applyDAO.saveAnswer(saveApplyInfo);
     }
+
+    public int finalSubmit(ApplyDTO saveApplyInfo) {
+        return applyDAO.finalSubmit(saveApplyInfo);
+    }
 }

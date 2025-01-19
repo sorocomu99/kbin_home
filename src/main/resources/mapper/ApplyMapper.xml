@@ -97,37 +97,54 @@
     <insert id="saveAnswer" parameterType="com.kbin.inno.Starters.DTO.ApplyDTO">
         INSERT INTO KB_SRVY_RSPNS_INFO
         (
-            SRVY_RSPNS_SN	--설문 응답 일련번호 -> 문항테이블의 rownum 으로 설정해야하는데 DB에서 unique 제약조건에 걸려서 오류남. pk조건 없애야할지 논의 필요. 설계가 좀 이상함.
-            ,SRVY_ANS_SN	--설문 답변 일련번호
-            ,SRVY_QSTN_SN	--설문 질문 일련번호
+            SRVY_RSPNS_SN	--설문 응답 일련번호
+            ,SRVY_QSTN_SN	--설문 문항 일련번호
             ,RSPNS_CN	    --응답 내용
             ,CONM	        --업체명
+            <if test="atch_file_sn != null and atch_file_sn != ''">
             ,ATCH_FILE_SN	--첨부파일 일련번호
+            </if>
             ,RSPNS_YMD	    --응답일
             ,PRGRS_STTS	    --진행 상태(0 : 접수, 1 : 1차 심사, 2 : 2차 심사, 3 : 3차 심사, 4 : 4차 심사, 5 : 5차 심사, 6 : 합격, 9 : 불합격)
-
         )
         VALUES
-            (
---             (SELECT NVL(MAX(SRVY_RSPNS_SN), 0) + 1 FROM KB_SRVY_RSPNS_INFO)
-            #{rnum}
-            <if test="srvy_ans_sn != null and srvy_ans_sn != ''">
-            , #{srvy_ans_sn}
-            </if>
-            <if test="srvy_ans_sn == null or srvy_ans_sn == ''">
-            , 0
-            </if>
+        (
+            (SELECT NVL(MAX(SRVY_RSPNS_SN), 0) + 1 FROM KB_SRVY_RSPNS_INFO)
             , #{srvy_qstn_sn, jdbcType=VARCHAR}
             , #{rspns_cn, jdbcType=VARCHAR}
             , #{conm, jdbcType=VARCHAR}
             <if test="atch_file_sn != null and atch_file_sn != ''">
             , #{atch_file_sn}
             </if>
-            <if test="atch_file_sn == null or atch_file_sn == ''">
+            , TO_CHAR(SYSDATE, 'YYYYMMDD')
             , 0
+        )
+    </insert>
+
+    <insert id="finalSubmit" parameterType="com.kbin.inno.Starters.DTO.ApplyDTO">
+        INSERT INTO KB_SRVY_RSPNS_INFO
+        (
+            SRVY_RSPNS_SN	--설문 응답 일련번호
+            ,SRVY_QSTN_SN	--설문 문항 일련번호
+            ,RSPNS_CN	    --응답 내용
+            ,CONM	        --업체명
+            <if test="atch_file_sn != null and atch_file_sn != ''">
+                ,ATCH_FILE_SN	--첨부파일 일련번호
+            </if>
+            ,RSPNS_YMD	    --응답일
+            ,PRGRS_STTS	    --진행 상태(0 : 접수, 1 : 1차 심사, 2 : 2차 심사, 3 : 3차 심사, 4 : 4차 심사, 5 : 5차 심사, 6 : 합격, 9 : 불합격)
+        )
+        VALUES
+        (
+            (SELECT NVL(MAX(SRVY_RSPNS_SN), 0) + 1 FROM KB_SRVY_RSPNS_INFO)
+            , #{srvy_qstn_sn, jdbcType=VARCHAR}
+            , #{rspns_cn, jdbcType=VARCHAR}
+            , #{conm, jdbcType=VARCHAR}
+            <if test="atch_file_sn != null and atch_file_sn != ''">
+                , #{atch_file_sn}
             </if>
             , TO_CHAR(SYSDATE, 'YYYYMMDD')
             , 0
-            )
+        )
     </insert>
 </mapper>
