@@ -33,8 +33,8 @@
              WHERE  1=1
                AND A.SRVY_SN = B.SPRT_EXPLN_SN(+)
              ORDER BY A.SRVY_SN DESC) S
---         WHERE ROWNUM = 1
-        WHERE S.SRVY_SN = 14
+        WHERE ROWNUM = 1
+--         WHERE S.SRVY_SN = 14
     </select>
 
     <select id="getQuestCnt" parameterType="String" resultType="int">
