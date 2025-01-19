@@ -90,7 +90,7 @@
     <select id="select" parameterType="int" resultType="com.kbin.inno.Community.DTO.HubDTO">
         SELECT HUB_PAGE.HUB_SN
              , HUB_PAGE.HUB_TTL
-             , REPLACE(HUB_PAGE.HUB_CN, 'kbinnovationhub_devadm', 'kbinnovationhub') HUB_CN
+             , REPLACE(REPLACE(HUB_PAGE.HUB_CN, 'kbinnovationhub_devadm', 'kbinnovationhub'), 'kbinnovationhub_adm', 'kbinnovationhub') HUB_CN
              , HUB_PAGE.ATCH_FILE_SN1
              , HUB_PAGE.HUB_PATH_IMG
              , HUB_PAGE.HUB_IMG_NAME

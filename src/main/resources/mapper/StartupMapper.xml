@@ -498,7 +498,7 @@
         SELECT ENT_CD
              , NEWS_ID
              , PROVIDER
-             , NEWS_TTL
+             , REPLACE(NEWS_TTL, '?', '') NEWS_TTL
              , CASE WHEN UPPER(SUBSTR(NEWS_LINK, 1, 4)) LIKE 'HTTP%' THEN NEWS_LINK
                     WHEN NEWS_LINK IS NULL THEN NULL
                ELSE 'https://' || NEWS_LINK

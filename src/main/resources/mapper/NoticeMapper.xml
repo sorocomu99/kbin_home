@@ -97,7 +97,7 @@
         SELECT NOTICE.NTC_SN                              AS NTC_SN
              , NOTICE.MNGR_NM							  AS MNGR_NM
              , NOTICE.NTC_TTL                             AS NTC_TTL
-             , REPLACE(NOTICE.NTC_CN, 'kbinnovationhub_devadm', 'kbinnovationhub') AS NTC_CN
+             , REPLACE(REPLACE(NOTICE.NTC_CN, 'kbinnovationhub_devadm', 'kbinnovationhub'), 'kbinnovationhub_adm', 'kbinnovationhub') AS NTC_CN
              , NOTICE.ATCH_FILE_SN                        AS ATCH_FILE_SN
              , NOTICE.NTC_YN                              AS NTC_YN
              , NOTICE.FRST_REG_DT                         AS FRST_REG_DT
