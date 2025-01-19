@@ -49,24 +49,29 @@
                 type: 'POST',
                 dataType: 'json',
                 success: function(data) {
-                    const portYearList = data.portYearList;
-                    let htmlCode = '';
-                    for(let i = 0; i < portYearList.length; i++) {
-                        htmlCode += '<div class="swiper-slide item">';
-                        htmlCode += '   <a class="button" href="#portfolio-'+portYearList[i].port_yr+'" onclick="selectList('+portYearList[i].port_yr+')">';
-                        htmlCode += '       <span>'+portYearList[i].port_yr+'</span><i class="icon"></i>';
-                        htmlCode += '   </a>';
-                        htmlCode += '</div>';
-                    }
-                    $('#nav-year').html(htmlCode);
+                    if (data.portYearList && data.portYearList.length > 0) {
+                        const portYearList = data.portYearList;
+                        let htmlCode = '';
+                        for(let i = 0; i < portYearList.length; i++) {
+                            htmlCode += '<div class="swiper-slide item">';
+                            htmlCode += '   <a class="button" href="#portfolio-'+portYearList[i].port_yr+'" onclick="selectList('+portYearList[i].port_yr+')">';
+                            htmlCode += '       <span>'+portYearList[i].port_yr+'</span><i class="icon"></i>';
+                            htmlCode += '   </a>';
+                            htmlCode += '</div>';
+                        }
+                        $('#nav-year').html(htmlCode);
 
-                    // sectionHistory();
+                        // sectionHistory();
 
-                    if(year == 'latest'){  //메뉴 처음 들어왔을때 기본값 지정. 가져온 yearList 중에 가장 큰 숫자(최신년도)로 셋팅.
-                        const latestYear = Math.max(...portYearList.map(item => parseInt(item.port_yr, 10)));
-                        selectList(latestYear);
+                        if(year == 'latest'){  //메뉴 처음 들어왔을때 기본값 지정. 가져온 yearList 중에 가장 큰 숫자(최신년도)로 셋팅.
+                            const latestYear = Math.max(...portYearList.map(item => parseInt(item.port_yr, 10)));
+                            selectList(latestYear);
+                        }else{
+                            selectList(year);
+                        }
+
                     }else{
-                        selectList(year);
+                        $('#nav-year').html('<p>등록된 년도 정보가 없습니다.</p>');
                     }
                 },error: function(xhr, status, error) {
                     console.error('Error:', error);
@@ -81,28 +86,32 @@
                 dataType: 'json',
                 data : { keyword : year },
                 success: function(data) {
-                    const selectList = data.selectList;
-                    let htmlCode = '';
-                    htmlCode += '<div id="portfolio-'+selectList[0].port_yr+'" class="row">';
-                    htmlCode += '   <p class="heading heading-dot">'+selectList[0].port_yr+'</p>';
-                    htmlCode += '       <ul class="list">';
-                    for(let i = 0; i < selectList.length; i++) {
-                        htmlCode += '           <li class="item">';
-                        htmlCode += '               <div class="block">';
-                        htmlCode += '                   <div class="image"><img src="\\kbinnovationhub'+selectList[i].file_path+selectList[i].file_name+'" alt=""></div>';
-                        htmlCode += '                   <div class="context">';
-                        htmlCode += '                       <p class="text">'+selectList[i].intro_cn+'</p>';
-                        htmlCode += '                       <p class="title">'+selectList[i].bzenty_nm+'</p>';
-                        htmlCode += '                       <a class="link" href="'+selectList[i].hmpg_link+'" target="_blank"></a>';
-                        htmlCode += '                   </div>';
-                        htmlCode += '               </div>';
-                        htmlCode += '           </li>';
+                    if (data.selectList && data.selectList.length > 0) {
+                        const selectList = data.selectList;
+                        let htmlCode = '';
+                        htmlCode += '<div id="portfolio-'+selectList[0].port_yr+'" class="row">';
+                        htmlCode += '   <p class="heading heading-dot">'+selectList[0].port_yr+'</p>';
+                        htmlCode += '       <ul class="list">';
+                        for(let i = 0; i < selectList.length; i++) {
+                            htmlCode += '           <li class="item">';
+                            htmlCode += '               <div class="block">';
+                            htmlCode += '                   <div class="image"><img src="\\kbinnovationhub'+selectList[i].file_path+selectList[i].file_name+'" alt=""></div>';
+                            htmlCode += '                   <div class="context">';
+                            htmlCode += '                       <p class="text">'+selectList[i].intro_cn+'</p>';
+                            htmlCode += '                       <p class="title">'+selectList[i].bzenty_nm+'</p>';
+                            htmlCode += '                       <a class="link" href="'+selectList[i].hmpg_link+'" target="_blank"></a>';
+                            htmlCode += '                   </div>';
+                            htmlCode += '               </div>';
+                            htmlCode += '           </li>';
+                        }
+                        htmlCode += '       </ul>';
+                        htmlCode += '</div>';
+
+                        $('#port-list').html(htmlCode);
+
+                    }else{
+                        $('#port-list').html('<p>등록된 포트폴리오가 없습니다.</p>');
                     }
-                    htmlCode += '       </ul>';
-                    htmlCode += '</div>';
-
-                    $('#port-list').html(htmlCode);
-
                 },error: function(xhr, status, error) {
                     console.error('Error:', error);
                 }
