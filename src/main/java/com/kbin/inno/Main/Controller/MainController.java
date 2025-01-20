@@ -1,5 +1,6 @@
 package com.kbin.inno.Main.Controller;
 
+import com.kbin.inno.Main.DTO.HistoryDTO;
 import com.kbin.inno.Main.DTO.PopupDTO;
 import com.kbin.inno.Main.DTO.ResultDTO;
 import com.kbin.inno.Main.DTO.VisualDTO;
@@ -30,6 +31,9 @@ public class MainController {
         // 팝업조회
         List<PopupDTO> selectPopup = mainService.selectPopup();
         model.addAttribute("selectPopup", selectPopup);
+        // 연혁 조회
+        List<HistoryDTO> selectHistory = mainService.selectHistory();
+        model.addAttribute("selectHistory", selectHistory);
 
         return "main/main";
     	//return "redirect:/startup/list";

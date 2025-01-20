@@ -25,4 +25,5 @@ public class StartupSearchDTO implements Serializable {
     private String fromDate;
     private String toDate;
     private String pageSize;
+    private String option5;
 }

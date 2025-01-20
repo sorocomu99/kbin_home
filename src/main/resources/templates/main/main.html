@@ -87,23 +87,47 @@
                 <div class="history">
                     <div class="progress"><span class="bar"></span></div>
                     <ol class="list">
+                        <th:block th:if="${selectHistory != null and selectHistory != ''}" th:each="list, listStat : ${selectHistory}">
                         <li class="item">
-                            <div class="side"></div>
+                            <th:block th:if="${listStat.index == 1}">
+                                <div class="side">
+                                    <img class="shape shape-1" src="/kbinnovationhub/images/main/history-shape-1.svg" alt="">
+                                </div>
+                            </th:block>
+                            <th:block th:if="${listStat.index == 8}">
+                                <div class="side">
+                                    <img class="shape shape-2" src="/kbinnovationhub/images/main/history-shape-2.svg" alt="">
+                                </div>
+                            </th:block>
+                            <th:block th:if="${listStat.index == 11}">
+                                <div class="side">
+                                    <img class="shape shape-3" src="/kbinnovationhub/images/main/history-shape-3.svg" alt="">
+                                </div>
+                            </th:block>
+                            <th:block th:if="${listStat.index != 11 and listStat.index != 8 and listStat.index != 1}">
+                                <div class="side"></div>
+                            </th:block>
                             <div class="contents">
-                                <p class="year">2023</p>
+                                <p class="year" th:if="${list.display_yn == 0}" th:text="${list.hstry_yr}">2023</p>
                                 <div class="context">
-                                    <h1>스타트업 네트워킹 확대</h1>
-                                    <ul>
-                                        <li>KB Starters Day 실시</li>
+                                    <h1 th:if="${list.display_yn == 0}" th:text="${list.hstry_lclsf_ttl}">스타트업 네트워킹 확대</h1>
+                                    <ul th:if="${list.display_yn == 0}">
+                                        <th:block th:each="listDet, detStat : ${selectHistory}">
+                                        <li th:if="${list.hstry_yr == listDet.hstry_yr}" th:text="${listDet.hstry_sclsf_ttl}">KB Starters Day 실시</li>
+                                        </th:block>
                                     </ul>
+                                    <!--
                                     <h1>글로벌 지원 체계 확대</h1>
                                     <ul>
                                         <li>싱가포르 현지 AC 프로그램 운영</li>
                                         <li>글로벌 PoC 프로그램 실시</li>
                                     </ul>
+                                    -->
                                 </div>
                             </div>
                         </li>
+                        </th:block>
+                        <!--
                         <li class="item">
                             <div class="side">
                                 <img class="shape shape-1" src="/kbinnovationhub/images/main/history-shape-1.svg" alt="">
@@ -247,6 +271,7 @@
                                 </div>
                             </div>
                         </li>
+                        -->
                     </ol>
                 </div>
             </div>

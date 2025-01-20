@@ -58,7 +58,7 @@ public class StartupService {
         //리스트 조회
         List<StartupDTO> selectList = startupDAO.selectPageList(map);
 
-        //System.out.println("pageNum======================"+pageNum);
+        //System.out.println("startupSearchDTO======================"+startupSearchDTO);
 
         //model 에 담아서 보내기
         model.addAttribute("totCnt", totCnt);
@@ -75,6 +75,7 @@ public class StartupService {
         model.addAttribute("minEmp", map.get("minEmp"));
         model.addAttribute("maxEmp", map.get("maxEmp"));
         model.addAttribute("option4", map.get("date"));
+        model.addAttribute("option5", map.get("option5"));
         //날짜 선택 추가
         model.addAttribute("currentPage", pageNum);
         model.addAttribute("startUpList", selectList);

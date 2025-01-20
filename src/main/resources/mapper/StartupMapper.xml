@@ -97,6 +97,9 @@
                <if test="(fromDate != null and fromDate != '') and (toDate != null and toDate != '')">
                    AND FNDN_YMD BETWEEN #{fromDate} AND #{toDate}
                </if>
+               <if test="option5 == 'KB'">
+                   AND KB_STARTERS_YN = 'Y'
+               </if>
              )
     </select>
     <select id="selectPageList" parameterType="java.util.HashMap" resultType="com.kbin.inno.Startup.DTO.StartupDTO">
@@ -216,6 +219,9 @@
                  </if>
                  <if test="(fromDate != null and fromDate != '') and (toDate != null and toDate != '')">
                      AND FNDN_YMD BETWEEN #{fromDate} AND #{toDate}
+                 </if>
+                 <if test="option5 == 'KB'">
+                     AND KB_STARTERS_YN = 'Y'
                  </if>
                )
          WHERE 1 = 1
