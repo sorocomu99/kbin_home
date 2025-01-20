@@ -87,6 +87,9 @@ public class StartupController {
             resMap.put("toDate", toDate);
         }
         //KB 스타터스 추가
+        if (startupSearchDTO.getOption5() != null && !startupSearchDTO.getOption5().equals("")) {
+            resMap.put("option5", startupSearchDTO.getOption5());
+        }
 
         startupService.startUpList(model, resMap, pageNum, startupSearchDTO);
 

@@ -43,4 +43,25 @@
          WHERE 1 = 1
            AND TO_CHAR(TO_DATE(END_YMD, 'YYYYMMDD'), 'YYYYMMDD') || ' ' || TO_CHAR(TO_DATE(END_HR, 'HH24MI'), 'HH24MI') >= TO_CHAR(SYSDATE, 'YYYYMMDD HH24MI');
     </select>
+
+    <select id="selectHistory" resultType="com.kbin.inno.Main.DTO.HistoryDTO">
+        SELECT HSTRY_YR
+             , HSTRY_LCLSF_SN
+             , HSTRY_LCLSF_TTL
+             , HSTRY_LCLSF_SORT_NO
+             , HSTRY_SCLSF_SN
+             , HSTRY_SCLSF_TTL
+             , HSTRY_SCLSF_SORT_NO
+             , HSTRY_SCLSF_UP_LCLSF_SN
+             , CASE WHEN LAG(HSTRY_LCLSF_SN) OVER (PARTITION BY HSTRY_YR ORDER BY HSTRY_LCLSF_SN ASC, HSTRY_SCLSF_SN ASC) IS NULL THEN 0
+               ELSE LAG(HSTRY_LCLSF_SN) OVER (PARTITION BY HSTRY_YR ORDER BY HSTRY_LCLSF_SN ASC, HSTRY_SCLSF_SN ASC)
+               END AS DISPLAY_YN
+             , '항목 ' || HSTRY_LCLSF_SN AS H_TITLE
+             , 'main_sn' || HSTRY_LCLSF_SN AS MAIN_SN
+             , 'sub_sn' || HSTRY_SCLSF_SN AS SUB_SN
+             , COUNT(HSTRY_LCLSF_SN) OVER (PARTITION BY HSTRY_YR ORDER BY HSTRY_LCLSF_SN ASC) CNT_OVER
+          FROM KB_CO_HSTRY_INFO
+         WHERE 1 = 1
+         ORDER BY HSTRY_YR DESC, HSTRY_LCLSF_SN ASC, HSTRY_SCLSF_SN ASC
+    </select>
 </mapper>

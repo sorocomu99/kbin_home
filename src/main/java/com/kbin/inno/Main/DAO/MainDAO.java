@@ -1,5 +1,6 @@
 package com.kbin.inno.Main.DAO;
 
+import com.kbin.inno.Main.DTO.HistoryDTO;
 import com.kbin.inno.Main.DTO.PopupDTO;
 import com.kbin.inno.Main.DTO.ResultDTO;
 import com.kbin.inno.Main.DTO.VisualDTO;
@@ -17,4 +18,6 @@ public interface MainDAO {
     List<VisualDTO> selectVisual();
     // 팝업 조회
     List<PopupDTO> selectPopup();
+    // 연혁 조회
+    List<HistoryDTO> selectHistory();
 }

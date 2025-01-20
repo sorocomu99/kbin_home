@@ -179,7 +179,7 @@
                                 <div class="proximal-filter-heading">KB스타터스</div>
                                 <div class="proximal-filter-contents">
                                     <div class="check-block">
-                                        <input id="option5-1" class="input" type="checkbox" name="option5" value="KB" onclick="addFilter(this, 'option5-1')" th:checked="${option5 == 'KB'}">
+                                        <input id="option5-1" class="input" type="checkbox" name="option5" value="KB" onclick="addFilter(this, 'option5-1')">
                                         <label for="option5-1" class="label">KB스타터스</label>
                                     </div>
                                 </div>
@@ -792,6 +792,13 @@
                 addFilter(document.getElementById('dateRange'), 'calendar');
             }
             /* 설립일 세팅 종료 */
+
+            if (findList.option5 !== null && findList.option5 !== '') {
+                if (findList.option5 === 'KB') {
+                    document.getElementById('option5-1').click();
+                }
+            }
+
             document.getElementById('pageSize').value = findList.pageSize;
 
             //clickForm();
