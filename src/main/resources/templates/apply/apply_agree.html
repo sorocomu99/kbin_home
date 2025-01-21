@@ -16,7 +16,7 @@
                     다음으로 버튼 클릭 후 항목에 미 체크되어 있으면 form 태그에 need-invalid 클래스 추가 해주세요.
                     기본상태는 클래스 비워주시면 됩니다.
                 -->
-                <form class="need-invalid" id="applyForm">
+                <form id="applyForm">
                 <!-- 기본 상태 <form> -->
                     <div class="context">
                         <!-- 질문 -->
@@ -41,14 +41,13 @@
                                 <i></i>
                                 <label for="option1-2" class="label">아니오</label>
                             </div>
-                            <!-- 유효성 체크 문구(form 태그에 need-invalid 클래스가 있으면 아래 문구가 나타납니다) -->
-                            <div class="invalid-feedback"><i class="icon icon-danger"></i>항목을 선택 해주세요.</div>
+                            <div class="invalid-feedback"><i class="icon icon-danger"></i>정보 수집·이용에 관한 사항에 동의하여야 합니다.</div>
                         </div>
                     </div>
 
-                    <input type="hidden" name="srvy_sn" th:value="${srvy_sn}">
+                    <input type="hidden" name="surveyNo" th:value="${surveyNo}">
                     <div class="bottom-button">
-                        <button class="button button-border" onclick="next()"><span>다음으로</span> <i class="icon icon-chevron-right"></i></button>
+                        <button type="button" class="button button-border" onclick="next()"><span>다음으로</span> <i class="icon icon-chevron-right"></i></button>
                     </div>
                 </form>
             </div>
@@ -77,16 +76,9 @@
     });
 
     function next() {
-        var radioButtons = document.getElementsByName('option1');
-        var radioSelected = false;
-        for (var i = 0; i < radioButtons.length; i++) {
-            if (radioButtons[i].checked && radioButtons[i].value === 'Y') {
-                radioSelected = true;
-                break;
-            }
-        }
-        if (!radioSelected) {
-            alert('정보 수집·이용에 동의하셔야 다음 단계를 진행하실 수 있습니다.');
+        let tosYn = $("input[name='option1']:checked").val();
+        if (!tosYn || tosYn !== "Y") {
+            $("#applyForm").addClass("need-invalid");
             return;
         }
 

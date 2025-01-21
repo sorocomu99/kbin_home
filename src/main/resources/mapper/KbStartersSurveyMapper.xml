@@ -1,0 +1,55 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kbin.inno.Starters.DAO.KbStartersSurvey">
+
+    <select id="getLastSurvey" resultType="com.kbin.inno.Starters.DTO.KbStartersSurveyDTO">
+        SELECT * FROM KB_STARTERS_SURVEY ORDER BY SURVEY_NO DESC FETCH FIRST 1 ROWS ONLY
+    </select>
+
+    <select id="getSurveyInfo" parameterType="com.kbin.inno.Starters.DTO.KbStartersSurveyDTO" resultType="com.kbin.inno.Starters.DTO.KbStartersSurveyDTO">
+        SELECT *
+        FROM KB_STARTERS_SURVEY_INFO
+        WHERE SURVEY_NO = #{survey_no}
+    </select>
+
+    <select id="getQuestionCount" parameterType="com.kbin.inno.Starters.DTO.KbStartersSurveyDTO" resultType="int">
+        SELECT COUNT(*)
+        FROM KB_STARTERS_QUESTION
+        WHERE SURVEY_NO = #{survey_no}
+    </select>
+
+
+    <select id="getQuestion" parameterType="com.kbin.inno.Starters.DTO.KbStartersSurveyDTO" resultType="com.kbin.inno.Starters.DTO.KbStartersQuestionDTO">
+        SELECT question.*,
+               question_type.question_type_nm
+        FROM KB_STARTERS_QUESTION question
+                 LEFT JOIN
+             KB_STARTERS_QUESTION_TYPE question_type
+             ON
+                 question.question_type_no= question_type.question_type_no
+        WHERE question.SURVEY_NO = #{survey_no}
+        ORDER BY question.question_order ASC;
+
+    </select>
+
+    <select id="getOneQuestion" parameterType="com.kbin.inno.Starters.DTO.KbStartersQuestionDTO" resultType="com.kbin.inno.Starters.DTO.KbStartersQuestionDTO">
+        SELECT *
+        FROM KB_STARTERS_QUESTION
+        WHERE QUESTION_NO = #{question_no}
+    </select>
+
+    <select id="getQuestionChoice" parameterType="com.kbin.inno.Starters.DTO.KbStartersQuestionDTO"
+            resultType="com.kbin.inno.Starters.DTO.KbStartersQuestionChoiceDTO">
+        SELECT *
+        FROM KB_STARTERS_QUESTION_CHOICE
+        WHERE QUESTION_NO = #{question_no}
+    </select>
+
+    <select id="getOneQuestionChoice" parameterType="com.kbin.inno.Starters.DTO.KbStartersQuestionChoiceDTO"
+            resultType="com.kbin.inno.Starters.DTO.KbStartersQuestionChoiceDTO">
+        SELECT *
+        FROM KB_STARTERS_QUESTION_CHOICE
+        WHERE QUESTION_CHOICE_NO = #{question_choice_no}
+    </select>
+</mapper>

@@ -30,39 +30,39 @@
                     <p class="heading heading-dot">모집 개요</p>
                     <table class="table">
                         <tbody>
-                            <tr>
-                                <th><span class="number">01</span> 모집 구분</th>
-                                <td><p th:text="${info.recru_se}"></p></td>
-                            </tr>
-                            <tr>
-                                <th><span class="number">02</span> 모집 기간</th>
-                                <td><p th:text="${info.recru_schdl}"></p></td>
-                            </tr>
-                            <tr>
-                                <th><span class="number">03</span> 모집 대상</th>
-                                <td>
-                                    <p class="title" th:text="${info.recru_trgt_m}"></p>
-                                    <p class="sub" th:text="${info.recru_trgt_s}"></p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th><span class="number">04</span> 모집 분야</th>
-                                <td>
-                                    <p class="title" th:text="${info.recru_fld_m}"></p>
-                                    <p class="sub" th:text="${info.recru_fld_s}"></p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th><span class="number">05</span> 선발 절차</th>
-                                <td>
-                                    <p th:text="${info.slctn_prcs}"></p>
-                                </td>
-                            </tr>
+                        <tr>
+                            <th><span class="number">01</span> 모집 구분</th>
+                            <td><p th:text="${info.survey_category}"></p></td>
+                        </tr>
+                        <tr>
+                            <th><span class="number">02</span> 모집 기간</th>
+                            <td><p th:text="${info.survey_date_range}"></p></td>
+                        </tr>
+                        <tr>
+                            <th><span class="number">03</span> 모집 대상</th>
+                            <td>
+                                <p class="title" th:text="${info.survey_target_heading}"></p>
+                                <p class="sub" th:text="${info.survey_target_sub}"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><span class="number">04</span> 모집 분야</th>
+                            <td>
+                                <p class="title" th:text="${info.survey_field_heading}"></p>
+                                <p class="sub" th:text="${info.survey_field_sub}"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><span class="number">05</span> 선발 절차</th>
+                            <td>
+                                <p th:text="${info.survey_select_process}"></p>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
 
-                    <div class="button-wrap">
-                        <a class="button button-border" th:href="@{|/starters/apply/apply_intro?srvy_sn=${info.srvy_sn}|}"><span>지원하기</span></a>
+                    <div th:if="${questionCount != 0}" class="button-wrap">
+                        <a class="button button-border" th:href="@{|/starters/apply/apply_intro?surveyNo=${info.survey_no}|}"><span>지원하기</span></a>
                     </div>
                     <div class="ban">
                         <div class="background"><img class="item" th:src="@{/images/sub/kbstarters/ban-background.jpg}" alt=""></div>
