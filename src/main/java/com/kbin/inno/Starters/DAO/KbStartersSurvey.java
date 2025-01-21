@@ -22,4 +22,12 @@ public interface KbStartersSurvey {
 
     int getQuestionCount(KbStartersSurveyDTO survey);
 
+    int getMaxApplyNo();
+
+    int saveApply(KbStartersApplyDTO apply);
+
+    int getMaxApplyAnswerNo();
+
+    int saveApplyAnswer(KbStartersApplyAnswerDTO answer);
+
 }

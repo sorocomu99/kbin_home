@@ -1,19 +1,22 @@
 package com.kbin.inno.Starters.Controller;
 
 import com.kbin.inno.Starters.DTO.ApplyDTO;
+import com.kbin.inno.Starters.DTO.KbStartersApplyRequestWrapper;
 import com.kbin.inno.Starters.DTO.KbStartersSurveyDTO;
 import com.kbin.inno.Starters.Service.ApplyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -28,6 +31,37 @@ import java.util.Map;
 public class ApplyController {
     @Autowired
     private ApplyService applyService;
+
+    @GetMapping("/banner")
+    public ResponseEntity<Resource> getImage(String filename) throws IOException {
+        // TODO: 파일 경로를 설정해주세요 또는 기존 파일경로를 설정했던 방식으로 사용해주세요
+        String filePath = "/Users/johuiyang/Documents/web/uploads/kbinno/" + filename;
+
+        // 파일이 존재하는지 확인
+        File file = new File(filePath);
+        if (!file.exists()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // 파일을 Resource로 감싸서 반환
+        Resource resource = new FileSystemResource(file);
+
+        // 이미지 파일의 헤더 설정
+        String contentType = "image/jpeg";
+        if (filename.toLowerCase().endsWith(".png")) {
+            contentType = "image/png";
+        } else if (filename.toLowerCase().endsWith(".gif")) {
+            contentType = "image/gif";
+        }
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_TYPE, contentType)
+                .body(resource);
+    }
+
+    @PostMapping("/apply")
+    public ResponseEntity<Map<String, Object>> apply(KbStartersApplyRequestWrapper wrapper) {
+        return ResponseEntity.ok(applyService.apply(wrapper));
+    }
 
     @RequestMapping("/apply_main")
     public String main(Model model) {

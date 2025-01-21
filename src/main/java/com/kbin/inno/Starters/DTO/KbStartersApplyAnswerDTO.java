@@ -16,6 +16,7 @@ public class KbStartersApplyAnswerDTO {
     private int question_choice_no;
     private String answer_content;
     private String answer_file_path;
+    private String answer_original_filename;
     private String answer_filename;
     private int frst_rgtr;
     private Date frst_reg_dt;

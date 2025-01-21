@@ -4,10 +4,13 @@
 <mapper namespace="com.kbin.inno.Starters.DAO.KbStartersSurvey">
 
     <select id="getLastSurvey" resultType="com.kbin.inno.Starters.DTO.KbStartersSurveyDTO">
-        SELECT * FROM KB_STARTERS_SURVEY ORDER BY SURVEY_NO DESC FETCH FIRST 1 ROWS ONLY
+        SELECT *
+        FROM KB_STARTERS_SURVEY
+        ORDER BY SURVEY_NO DESC FETCH FIRST 1 ROWS ONLY
     </select>
 
-    <select id="getSurveyInfo" parameterType="com.kbin.inno.Starters.DTO.KbStartersSurveyDTO" resultType="com.kbin.inno.Starters.DTO.KbStartersSurveyDTO">
+    <select id="getSurveyInfo" parameterType="com.kbin.inno.Starters.DTO.KbStartersSurveyDTO"
+            resultType="com.kbin.inno.Starters.DTO.KbStartersSurveyDTO">
         SELECT *
         FROM KB_STARTERS_SURVEY_INFO
         WHERE SURVEY_NO = #{survey_no}
@@ -20,20 +23,22 @@
     </select>
 
 
-    <select id="getQuestion" parameterType="com.kbin.inno.Starters.DTO.KbStartersSurveyDTO" resultType="com.kbin.inno.Starters.DTO.KbStartersQuestionDTO">
+    <select id="getQuestion" parameterType="com.kbin.inno.Starters.DTO.KbStartersSurveyDTO"
+            resultType="com.kbin.inno.Starters.DTO.KbStartersQuestionDTO">
         SELECT question.*,
                question_type.question_type_nm
         FROM KB_STARTERS_QUESTION question
                  LEFT JOIN
              KB_STARTERS_QUESTION_TYPE question_type
              ON
-                 question.question_type_no= question_type.question_type_no
+                 question.question_type_no = question_type.question_type_no
         WHERE question.SURVEY_NO = #{survey_no}
         ORDER BY question.question_order ASC;
 
     </select>
 
-    <select id="getOneQuestion" parameterType="com.kbin.inno.Starters.DTO.KbStartersQuestionDTO" resultType="com.kbin.inno.Starters.DTO.KbStartersQuestionDTO">
+    <select id="getOneQuestion" parameterType="com.kbin.inno.Starters.DTO.KbStartersQuestionDTO"
+            resultType="com.kbin.inno.Starters.DTO.KbStartersQuestionDTO">
         SELECT *
         FROM KB_STARTERS_QUESTION
         WHERE QUESTION_NO = #{question_no}
@@ -52,4 +57,60 @@
         FROM KB_STARTERS_QUESTION_CHOICE
         WHERE QUESTION_CHOICE_NO = #{question_choice_no}
     </select>
+
+    <select id="getMaxApplyNo" resultType="int">
+        SELECT NVL(MAX(APPLY_NO), 0) + 1
+        FROM KB_STARTERS_APPLY
+    </select>
+
+    <insert id="saveApply" parameterType="com.kbin.inno.Starters.DTO.KbStartersApplyDTO">
+        INSERT INTO KB_STARTERS_APPLY
+        (APPLY_NO, SURVEY_NO, APPLY_STATUS, EMAIL, COMPANY_NAME, FRST_RGTR, FRST_REG_DT, LAST_MDFR, LAST_MDFCN_DT)
+        VALUES (#{apply_no}, #{survey_no}, #{apply_status}, #{email}, #{company_name}, #{frst_rgtr}, SYSDATE,
+                #{last_mdfr}, SYSDATE)
+    </insert>
+
+    <select id="getMaxApplyAnswerNo" resultType="int">
+        SELECT NVL(MAX(APPLY_ANSWER_NO), 0) + 1
+        FROM KB_STARTERS_APPLY_ANSWER
+    </select>
+
+    <insert id="saveApplyAnswer" parameterType="com.kbin.inno.Starters.DTO.KbStartersApplyAnswerDTO">
+        INSERT INTO KB_STARTERS_APPLY_ANSWER
+        (APPLY_ANSWER_NO, APPLY_NO, QUESTION_NO,
+        <if test="question_choice_no != null">
+            QUESTION_CHOICE_NO,
+        </if>
+        <if test="answer_content != null">
+            ANSWER_CONTENT,
+        </if>
+        <if test="answer_file_path != null">
+            ANSWER_FILE_PATH,
+        </if>
+        <if test="answer_filename != null">
+            ANSWER_ORIGINAL_FILENAME,
+        </if>
+        <if test="answer_filename != null">
+            ANSWER_FILENAME,
+        </if>
+        FRST_RGTR, FRST_REG_DT, LAST_MDFR, LAST_MDFCN_DT)
+        VALUES
+        (#{apply_answer_no}, #{apply_no}, #{question_no},
+        <if test="question_choice_no != null">
+            #{question_choice_no},
+        </if>
+        <if test="answer_content != null">
+            #{answer_content},
+        </if>
+        <if test="answer_file_path != null">
+            #{answer_file_path},
+        </if>
+        <if test="answer_original_filename != null">
+            #{answer_original_filename},
+        </if>
+        <if test="answer_filename != null">
+            #{answer_filename},
+        </if>
+        #{frst_rgtr}, SYSDATE, #{last_mdfr}, SYSDATE)
+    </insert>
 </mapper>
