@@ -1,17 +1,22 @@
 package com.kbin.inno.Starters.Controller;
 
 import com.kbin.inno.Starters.DTO.ApplyDTO;
+import com.kbin.inno.Starters.DTO.KbStartersApplyRequestWrapper;
+import com.kbin.inno.Starters.DTO.KbStartersSurveyDTO;
 import com.kbin.inno.Starters.Service.ApplyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -27,76 +32,80 @@ public class ApplyController {
     @Autowired
     private ApplyService applyService;
 
+    @GetMapping("/banner")
+    public ResponseEntity<Resource> getImage(String filename) throws IOException {
+        // TODO: 파일 경로를 설정해주세요 또는 기존 파일경로를 설정했던 방식으로 사용해주세요
+        String filePath = "/Users/johuiyang/Documents/web/uploads/kbinno/" + filename;
+
+        // 파일이 존재하는지 확인
+        File file = new File(filePath);
+        if (!file.exists()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // 파일을 Resource로 감싸서 반환
+        Resource resource = new FileSystemResource(file);
+
+        // 이미지 파일의 헤더 설정
+        String contentType = "image/jpeg";
+        if (filename.toLowerCase().endsWith(".png")) {
+            contentType = "image/png";
+        } else if (filename.toLowerCase().endsWith(".gif")) {
+            contentType = "image/gif";
+        }
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_TYPE, contentType)
+                .body(resource);
+    }
+
+    @PostMapping("/apply")
+    public ResponseEntity<Map<String, Object>> apply(KbStartersApplyRequestWrapper wrapper) {
+        return ResponseEntity.ok(applyService.apply(wrapper));
+    }
+
     @RequestMapping("/apply_main")
     public String main(Model model) {
-        ApplyDTO surveyInfo = applyService.getSurveyInfo(model);
+        KbStartersSurveyDTO lastSurvey = applyService.getLastSurvey();
+        int questionCount = applyService.getQuestionCount(lastSurvey);
+        model.addAttribute("questionCount", questionCount);
+
+        KbStartersSurveyDTO surveyInfo = applyService.getSurveyInfo(lastSurvey);
         model.addAttribute("info", surveyInfo);
         return "apply/apply_main";
     }
 
     @RequestMapping("/apply_intro")
-    public String applyIntro(Model model, @RequestParam String srvy_sn) {
-        model.addAttribute("srvy_sn", srvy_sn);
+    public String applyIntro(Model model, @RequestParam Integer surveyNo) {
+        model.addAttribute("surveyNo", surveyNo);
         return "apply/apply_intro";
     }
 
     @RequestMapping("/agree")
-    public String agree(Model model, @RequestParam String srvy_sn) {
-        model.addAttribute("srvy_sn", srvy_sn);
+    public String agree(Model model, @RequestParam Integer surveyNo) {
+        model.addAttribute("surveyNo", surveyNo);
         return "apply/apply_agree";
     }
 
     @RequestMapping("/saveCompany")
-    public String saveCompany(Model model, @RequestParam String srvy_sn) {
-        int questCnt = applyService.getQuestCnt(srvy_sn);   //총 문항 수 구하기
-        int currentCnt = 1;
-        model.addAttribute("srvy_sn", srvy_sn);
-        model.addAttribute("questCnt", questCnt);
-        model.addAttribute("currentCnt", currentCnt);
+    public String saveCompany(Model model, @RequestParam Integer surveyNo) {
+        model.addAttribute("surveyNo", surveyNo);
         return "apply/apply_company";
     }
 
-    @RequestMapping("/getQuest")
-    public String getQuest(Model model, @RequestParam String srvy_sn, @RequestParam String conm, @RequestParam int currentCnt, @RequestParam int questCnt) {
-        model.asMap().clear();
-        String url = "";
-        boolean exitLoop = false;
+    @RequestMapping("/saveEmail")
+    public String saveEmail(Model model, @RequestParam Integer surveyNo, @RequestParam String companyName) {
+        model.addAttribute("surveyNo", surveyNo);
+        model.addAttribute("companyName", companyName);
+        return "apply/apply_email";
+    }
+    @RequestMapping("/survey")
+    public ModelAndView getQuest() {
+        ModelAndView mv = new ModelAndView("apply/survey");
+        mv.addObject("survey", applyService.getLastSurveyData());
 
-        for (int i = currentCnt; i <= questCnt; i++) {
-            ApplyDTO applyDTO = new ApplyDTO();
-            applyDTO.setSrvy_sn((srvy_sn));
-            applyDTO.setCurrent_cnt(currentCnt);
-            ApplyDTO questionInfo = applyService.questionInfo(applyDTO);
-            model.addAttribute("questionInfo", questionInfo);
-            model.addAttribute("conm", conm);
+        mv.addObject("newLineChar", "\n");
 
-            switch (questionInfo.getQstn_type()) {
-                case "1":    //객관식
-                    List<ApplyDTO> checkboxList = applyService.questionCheckboxList(questionInfo);
-                    model.addAttribute("checkboxList", checkboxList);
-                    url = "apply/apply_check";
-                    exitLoop = true;
-                    break;
-                case "2":    //주관식
-                    url = "apply/apply_input";
-                    exitLoop = true;
-                    break;
-                case "3":    //첨부파일
-                    url = "apply/apply_file";
-                    exitLoop = true;
-                    break;
-                default:     //에디터
-                    exitLoop = true;
-                    break;
-            }
-            if (exitLoop) {
-                break;
-            }
-        }
-        model.addAttribute("srvy_sn", srvy_sn);
-        model.addAttribute("questCnt", questCnt);
-        model.addAttribute("currentCnt", currentCnt);
-        return url;
+        return mv;
     }
 
     @RequestMapping("/saveAnswer")

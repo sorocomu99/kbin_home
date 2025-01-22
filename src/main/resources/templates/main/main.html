@@ -89,24 +89,7 @@
                     <ol class="list">
                         <th:block th:if="${selectHistory != null and selectHistory != ''}" th:each="list, listStat : ${selectHistory}">
                         <li class="item">
-                            <th:block th:if="${listStat.index == 1}">
-                                <div class="side">
-                                    <img class="shape shape-1" src="/kbinnovationhub/images/main/history-shape-1.svg" alt="">
-                                </div>
-                            </th:block>
-                            <th:block th:if="${listStat.index == 8}">
-                                <div class="side">
-                                    <img class="shape shape-2" src="/kbinnovationhub/images/main/history-shape-2.svg" alt="">
-                                </div>
-                            </th:block>
-                            <th:block th:if="${listStat.index == 11}">
-                                <div class="side">
-                                    <img class="shape shape-3" src="/kbinnovationhub/images/main/history-shape-3.svg" alt="">
-                                </div>
-                            </th:block>
-                            <th:block th:if="${listStat.index != 11 and listStat.index != 8 and listStat.index != 1}">
-                                <div class="side"></div>
-                            </th:block>
+                            <div class="side"></div>
                             <div class="contents">
                                 <p class="year" th:if="${list.display_yn == 0}" th:text="${list.hstry_yr}">2023</p>
                                 <div class="context">
