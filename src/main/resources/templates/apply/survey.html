@@ -15,8 +15,6 @@
     </th:block>
     <th:block th:unless="${survey.data.size() == 0}" th:each="question : ${survey.data}">
         <input type="hidden" name="survey_no" th:value="${survey.survey.survey_no}"/>
-        <input type="hidden" name="company_name" th:value="${companyName}"/>
-        <input type="hidden" name="email" th:value="${email}"/>
         <th:block th:if="${question.question_type_no == 1}">
             <div class="apply" th:style="${question.question_order == 1 ? 'display: flex;' : 'display: none;'}"
                  th:attr="data-question-order=${question.question_order}">
@@ -153,18 +151,23 @@
         <div class="modal-wrapper">
             <div class="modal">
                 <div class="modal-body">
-                    <p class="heading">제출하기</p>
-                    <p class="title p5">모든 접수 단계가 완료되었습니다.</p>
-                    <p class="p">최종 제출 하시겠습니까? <br>예를 누르면, 입력 내용으로 최종 접수됩니다.</p>
-                    <div class="button-wrap">
-                        <button class="button button-border" type="button" onclick="closeModal('modalComplete')">아니오
-                        </button>
-                        <button class="button button-primary" type="button" onclick="apply()">예</button>
-                    </div>
+                    <form>
+                        <p class="heading">제출하기</p>
+                        <p class="title p5 text-center">모든 접수 단계가 완료되었습니다.</p>
+                        <p class="p text-center">최종 제출 하시겠습니까? <br><span class="color-primary fw-medium">회사명과 이메일 주소</span>를 입력 후 제출하기를 누르면, <br class="br-small">입력 내용으로 최종 접수됩니다.</p>
+                        <div class="input-wrap">
+                            <input name="companyName" type="text" placeholder="회사명을 입력하세요.">
+                            <input name="email" type="email" placeholder="이메일 주소를 입력하세요.">
+                        </div>
+                        <div class="button-wrap">
+                            <button class="button button-border" type="button" onclick="closeModal('modalComplete')">아니오
+                            </button>
+                            <button class="button button-primary" type="button" onclick="apply()">예</button>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-foot">
-                    <a class="close" href="javascript:void(0);" onclick="closeModal('modalComplete')"><span
-                            class="blind">팝업 닫기</span></a>
+                    <a class="close" href="javascript:" onclick="closeModal('modalComplete')"><span class="blind">팝업 닫기</span></a>
                 </div>
             </div>
         </div>
@@ -256,9 +259,15 @@
     }
 
     function apply() {
+        let companyName = $("input[name='companyName']").val();
+        let email = $("input[name='email']").val();
+        if(!companyName || !email) {
+            alert("회사명과 이메일 주소를 입력해주세요.");
+            return;
+        }
         formData.append("survey_no", $("input[name='survey_no']").val());
-        formData.append("company_name", $("input[name='company_name']").val());
-        formData.append("email", $("input[name='email']").val());
+        formData.append("company_name", companyName);
+        formData.append("email", email);
         $.ajax({
             url: /*[[@{/starters/apply/apply}]]*/,
             type: 'POST',

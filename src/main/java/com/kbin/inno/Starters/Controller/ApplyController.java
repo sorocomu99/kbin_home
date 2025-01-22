@@ -99,10 +99,8 @@ public class ApplyController {
         return "apply/apply_email";
     }
     @RequestMapping("/survey")
-    public ModelAndView getQuest(@RequestParam Integer surveyNo, @RequestParam String companyName, @RequestParam String email) {
+    public ModelAndView getQuest() {
         ModelAndView mv = new ModelAndView("apply/survey");
-        mv.addObject("companyName", companyName);
-        mv.addObject("email", email);
         mv.addObject("survey", applyService.getLastSurveyData());
 
         mv.addObject("newLineChar", "\n");
