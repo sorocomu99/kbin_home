@@ -100,6 +100,16 @@ public class ApplyService {
     @Transactional
     public Map<String, Object> apply(KbStartersApplyRequestWrapper wrapper) {
         try{
+            List<String> allowExts = new ArrayList<>();
+            allowExts.add("jpg");
+            allowExts.add("jpeg");
+            allowExts.add("png");
+            allowExts.add("pdf");
+            allowExts.add("doc");
+            allowExts.add("docx");
+            allowExts.add("hwp");
+            allowExts.add("zip");
+
             Map<String, Object> result = new HashMap<>();
             KbStartersApplyDTO answer = new KbStartersApplyDTO();
             int insertApplyNo = surveyRepository.getMaxApplyNo();
@@ -133,7 +143,9 @@ public class ApplyService {
                         throw new RuntimeException("파일 확장자가 없습니다.");
                     }
                     String extension = filename.substring(filename.lastIndexOf(".") + 1).toLowerCase();
-                    // TODO 확장자 정해서 체크로직 넣어주세요
+                    if(!allowExts.contains(extension)){
+                        throw new RuntimeException("허용되지 않는 파일 확장자입니다.");
+                    }
 
 
                     Map<String, Object> fileResult = fileUploader.insertFile(request.getAnswer_file());
