@@ -5,25 +5,26 @@
 
     <select id="getSurveyInfo" resultType="com.kbin.inno.Starters.DTO.ApplyDTO">
         SELECT
-              S.SRVY_SN             --설문 일련번호
-             ,S.SRVY_TTL            --설문 제목
-             ,S.BANE_FILE_SN        --배너 파일 일련번호
-             ,S.TMPR_DEL_YN         --임시 삭제 여부
-             ,S.SPRT_EXPLN_SN	    --지원 안내 일련번호
-             ,S.RECRU_SE	        --모집 구분
-             ,S.RECRU_SCHDL	        --모집일정(기간)
-             ,S.RECRU_BGNG_YMD	    --모집 시작 일자
-             ,S.RECRU_END_YMD	    --모집 종료 일자
-             ,S.RECRU_END_HR	    --모집 종료 시간
-             ,S.RECRU_TRGT_M	    --모집 대상 메인
-             ,S.RECRU_TRGT_S	    --모집 대상 서브
-             ,S.RECRU_FLD_M	        --모집 분야 메인
-             ,S.RECRU_FLD_S	        --모집 분야 서브
-             ,S.SLCTN_PRCS	        --선별 절차
-             ,S.SLCTN_BENEF_CN1	    --선정 혜택 내용1
-             ,S.SLCTN_BENEF_CN2	    --선정 혜택 내용2
-             ,S.SLCTN_BENEF_CN3	    --선정 혜택 내용3
-             ,S.SLCTN_BENEF_CN4	    --선정 혜택 내용4
+             ROWNUMBER
+             ,S.SRVY_SN
+             ,S.SRVY_TTL            
+             ,S.BANE_FILE_SN        
+             ,S.TMPR_DEL_YN         
+             ,S.SPRT_EXPLN_SN	    
+             ,S.RECRU_SE	        
+             ,S.RECRU_SCHDL	        
+             ,S.RECRU_BGNG_YMD	    
+             ,S.RECRU_END_YMD	    
+             ,S.RECRU_END_HR	    
+             ,S.RECRU_TRGT_M	    
+             ,S.RECRU_TRGT_S	    
+             ,S.RECRU_FLD_M	        
+             ,S.RECRU_FLD_S	        
+             ,S.SLCTN_PRCS	        
+             ,S.SLCTN_BENEF_CN1	    
+             ,S.SLCTN_BENEF_CN2	    
+             ,S.SLCTN_BENEF_CN3	    
+             ,S.SLCTN_BENEF_CN4	    
         FROM
             (SELECT
                  ROWNUM ROWNUMBER
@@ -52,16 +53,16 @@
     <select id="questionInfo" parameterType="com.kbin.inno.Starters.DTO.ApplyDTO" resultType="com.kbin.inno.Starters.DTO.ApplyDTO">
         SELECT
               rnum
-             ,SRVY_QSTN_SN	        --설문 질문 일련번호
-             ,SRVY_SN	            --설문 일련번호
-             ,QSTN_TYPE	            --질문 유형
-             ,SRVY_QSTN	            --설문 질문
-             ,SRVY_DTL_QSTN	        --설문 질문 상세 내용
-             ,ESNTL_VL_YN	        --필수값 여부
-             ,FRST_RGTR	            --최초등록자
-             ,FRST_REG_DT	        --최초등록일시
-             ,LAST_MDFR	            --최종수정자
-             ,LAST_MDFCN_DT	        --최종수정일시
+             ,SRVY_QSTN_SN
+             ,SRVY_SN
+             ,QSTN_TYPE
+             ,SRVY_QSTN
+             ,SRVY_DTL_QSTN
+             ,ESNTL_VL_YN
+             ,FRST_RGTR
+             ,FRST_REG_DT
+             ,LAST_MDFR
+             ,LAST_MDFCN_DT
         FROM
             (SELECT
                  ROWNUM rnum
@@ -77,36 +78,37 @@
     <select id="questionCheckboxList" parameterType="com.kbin.inno.Starters.DTO.ApplyDTO" resultType="com.kbin.inno.Starters.DTO.ApplyDTO">
         SELECT
              ROWNUM rnum
-            ,A.SRVY_ANS_SN            --보기 일련번호
-            ,A.SRVY_QSTN_SN           --문항 일련번호
-            ,A.ANS_CN                 --답변 내용
-            ,A.AFTR_MVMN              --이후 이동(다음 단계)
-            ,A.FRST_RGTR              --최초등록자
-            ,A.FRST_REG_DT            --최초등록일시
-            ,A.LAST_MDFR              --최종수정자
-            ,A.LAST_MDFCN_DT          --최종수정일시
-            ,A.RSPNS_YMD              --응답일
-            ,B.SRVY_QSTN              --설문 질문
-            ,B.SRVY_DTL_QSTN          --설문 질문 상세 내용
+            ,A.SRVY_ANS_SN            
+            ,A.SRVY_QSTN_SN           
+            ,A.ANS_CN                 
+            ,A.AFTR_MVMN              
+            ,A.FRST_RGTR              
+            ,A.FRST_REG_DT            
+            ,A.LAST_MDFR              
+            ,A.LAST_MDFCN_DT          
+            ,A.RSPNS_YMD              
+            ,B.SRVY_QSTN              
+            ,B.SRVY_DTL_QSTN          
         FROM KB_SRVY_ANS_INFO A, KB_SRVY_QSTN_INFO B
         WHERE 1=1
           AND A.SRVY_QSTN_SN = B.SRVY_QSTN_SN(+)
           AND B.SRVY_SN = #{srvy_sn}
+          AND A.SRVY_QSTN_SN = #{srvy_qstn_sn}
         ORDER BY SRVY_ANS_SN
     </select>
 
     <insert id="saveAnswer" parameterType="com.kbin.inno.Starters.DTO.ApplyDTO">
         INSERT INTO KB_SRVY_RSPNS_INFO
         (
-            SRVY_RSPNS_SN	--설문 응답 일련번호
-            ,SRVY_QSTN_SN	--설문 문항 일련번호
-            ,RSPNS_CN	    --응답 내용
-            ,CONM	        --업체명
+            SRVY_RSPNS_SN
+            ,SRVY_QSTN_SN
+            ,RSPNS_CN
+            ,CONM
             <if test="atch_file_sn != null and atch_file_sn != ''">
-            ,ATCH_FILE_SN	--첨부파일 일련번호
+            ,ATCH_FILE_SN	
             </if>
-            ,RSPNS_YMD	    --응답일
-            ,PRGRS_STTS	    --진행 상태(0 : 접수, 1 : 1차 심사, 2 : 2차 심사, 3 : 3차 심사, 4 : 4차 심사, 5 : 5차 심사, 6 : 합격, 9 : 불합격)
+            ,RSPNS_YMD	    
+            ,PRGRS_STTS	    
         )
         VALUES
         (
@@ -125,15 +127,15 @@
     <insert id="finalSubmit" parameterType="com.kbin.inno.Starters.DTO.ApplyDTO">
         INSERT INTO KB_SRVY_RSPNS_INFO
         (
-            SRVY_RSPNS_SN	--설문 응답 일련번호
-            ,SRVY_QSTN_SN	--설문 문항 일련번호
-            ,RSPNS_CN	    --응답 내용
-            ,CONM	        --업체명
+            SRVY_RSPNS_SN
+            ,SRVY_QSTN_SN
+            ,RSPNS_CN
+            ,CONM
             <if test="atch_file_sn != null and atch_file_sn != ''">
-                ,ATCH_FILE_SN	--첨부파일 일련번호
+                ,ATCH_FILE_SN
             </if>
-            ,RSPNS_YMD	    --응답일
-            ,PRGRS_STTS	    --진행 상태(0 : 접수, 1 : 1차 심사, 2 : 2차 심사, 3 : 3차 심사, 4 : 4차 심사, 5 : 5차 심사, 6 : 합격, 9 : 불합격)
+            ,RSPNS_YMD	    
+            ,PRGRS_STTS	    
         )
         VALUES
         (
