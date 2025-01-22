@@ -75,7 +75,11 @@ public class ApplyService {
             questionRequest.setSurvey_no(lastSurvey.getSurvey_no());
             questionRequest.setQuestion_type_no(question.getQuestion_type_no());
             questionRequest.setQuestion_title(question.getQuestion_title());
-            questionRequest.setQuestion_description(question.getQuestion_description());
+            String question_description = question.getQuestion_description();
+            if(question_description != null && question_description.length() > 0) {
+                question_description = question_description.replaceAll("\n", "<br>");
+                questionRequest.setQuestion_description(question_description);
+            }
             questionRequest.setRequired_yn(question.getRequired_yn());
             questionRequest.setQuestion_order(question.getQuestion_order());
             List<KbStartersQuestionChoiceDTO> choices = surveyRepository.getQuestionChoice(question);

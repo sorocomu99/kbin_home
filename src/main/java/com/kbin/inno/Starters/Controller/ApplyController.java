@@ -105,6 +105,8 @@ public class ApplyController {
         mv.addObject("email", email);
         mv.addObject("survey", applyService.getLastSurveyData());
 
+        mv.addObject("newLineChar", "\n");
+
         return mv;
     }
 
