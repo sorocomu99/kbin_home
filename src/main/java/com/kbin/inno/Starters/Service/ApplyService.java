@@ -4,6 +4,7 @@ import com.kbin.inno.FileUploader;
 import com.kbin.inno.Starters.DAO.ApplyDAO;
 import com.kbin.inno.Starters.DAO.KbStartersSurvey;
 import com.kbin.inno.Starters.DTO.*;
+import com.kbin.inno.Startup.DTO.FileDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -148,10 +149,10 @@ public class ApplyService {
                     }
 
 
-                    Map<String, Object> fileResult = fileUploader.insertFile(request.getAnswer_file());
-                    applyAnswer.setAnswer_file_path((String) fileResult.get("filePath"));
-                    applyAnswer.setAnswer_filename((String) fileResult.get("filename"));
-                    applyAnswer.setAnswer_original_filename((String) fileResult.get("originalFilename"));
+                    FileDTO fileResult = fileUploader.insertFile(request.getAnswer_file());
+                    applyAnswer.setAnswer_file_path(fileResult.getFilePath());
+                    applyAnswer.setAnswer_filename(fileResult.getFilename());
+                    applyAnswer.setAnswer_original_filename(fileResult.getOriginalFilename());
                 }
                 surveyRepository.saveApplyAnswer(applyAnswer);
             }

@@ -1,20 +1,29 @@
 package com.kbin.inno;
 
+import com.kbin.inno.Startup.DTO.FileDTO;
+import org.apache.xerces.impl.dv.util.Base64;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.*;
 
 public class FileUploader {
     // 파일 저장
-    public Map<String, Object> insertFile(MultipartFile file) {
+    public FileDTO insertFile(MultipartFile file) {
 
         // 오리지널 파일 이름
         String originalFileName = file.getOriginalFilename();
+
+        String encodedFileName = Base64.encode(originalFileName.getBytes(StandardCharsets.UTF_8));
+
+        System.out.println("Base64 Encoded File Name: " + encodedFileName);
+
 
         // 파일 확장자 설정
         String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
@@ -73,11 +82,10 @@ public class FileUploader {
         // 파일 사이즈 구하기
         int bytes = (int) file.getSize();
 
-        Map<String, Object> result = new HashMap<>();
-        result.put("filename", fileName);
-        result.put("originalFilename", originalFileName);
-        result.put("filePath", "\\upload\\");
-
-        return result;
+        FileDTO fileDTO = new FileDTO();
+        fileDTO.setFilename(fileName);
+        fileDTO.setOriginalFilename(encodedFileName);
+        fileDTO.setFilePath(savePath);
+        return fileDTO;
     }
 }
