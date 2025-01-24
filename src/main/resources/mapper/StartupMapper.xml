@@ -515,7 +515,7 @@
                END THUMB_URL
           FROM KB_API_NEWS_INFO
          WHERE ENT_CD = #{ent_cd}
-           AND NEWS_ID = (SELECT MAX(NEWS_ID) FROM KB_API_NEWS_INFO Z WHERE Z.ENT_CD = #{ent_cd})
+           AND NEWS_ID = (SELECT MAX(NEWS_ID) FROM KB_API_NEWS_INFO Z WHERE Z.ENT_CD = #{ent_cd} and z.THUMB_URL is not null)
     </select>
     <select id="selectNewsList" parameterType="String" resultType="com.kbin.inno.Startup.DTO.NewsDTO">
         /* 뉴스정보 조회 (리스트) */
@@ -539,7 +539,7 @@
                        END THUMB_URL
                   FROM KB_API_NEWS_INFO
                  WHERE ENT_CD = #{ent_cd}
-                   AND NEWS_ID != (SELECT MAX(NEWS_ID) FROM KB_API_NEWS_INFO Z WHERE Z.ENT_CD = #{ent_cd})
+                   AND NEWS_ID != (SELECT MAX(NEWS_ID) FROM KB_API_NEWS_INFO Z WHERE Z.ENT_CD = #{ent_cd} and z.THUMB_URL is not null)
                  ORDER BY SUBSTR(NEWS_ID, 10, LENGTH(NEWS_ID)) DESC
                )
          WHERE 1 = 1

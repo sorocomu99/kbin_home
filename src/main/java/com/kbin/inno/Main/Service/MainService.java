@@ -2,6 +2,7 @@ package com.kbin.inno.Main.Service;
 
 import com.kbin.inno.Main.DAO.MainDAO;
 import com.kbin.inno.Main.DTO.HistoryDTO;
+import com.kbin.inno.Main.DTO.MenuDTO;
 import com.kbin.inno.Main.DTO.PopupDTO;
 import com.kbin.inno.Main.DTO.ResultDTO;
 import com.kbin.inno.Main.DTO.VisualDTO;
@@ -35,5 +36,10 @@ public class MainService {
     // 연혁조회
     public List<HistoryDTO> selectHistory() {
         return mainDAO.selectHistory();
+    }
+
+    // 헤더 메뉴 조회
+    public List<MenuDTO> selectMenu() {
+        return mainDAO.selectMenu();
     }
 }

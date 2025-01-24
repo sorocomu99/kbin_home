@@ -12,6 +12,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -35,7 +36,15 @@ public class ApplyController {
     @GetMapping("/banner")
     public ResponseEntity<Resource> getImage(String filename) throws IOException {
         // TODO: 파일 경로를 설정해주세요 또는 기존 파일경로를 설정했던 방식으로 사용해주세요
-        String filePath = "/Users/johuiyang/Documents/web/uploads/kbinno/" + filename;
+        //String filePath = "/Users/johuiyang/Documents/web/uploads/kbinno/" + filename;
+        //String filePath = "/fsfile/dev_kbinnovation/" + filename;  //개발
+        //String filePath = "/fsfile/kbinnovation/" + filename;  //운영
+        String filePath = "D:\\fsfile\\dev_kbinnovation\\" + filename;  //로컬
+
+        if(!StringUtils.hasText(filename)
+                || (filename.contains("/") || filename.contains("\\"))) {
+            return ResponseEntity.notFound().build();
+        }
 
         // 파일이 존재하는지 확인
         File file = new File(filePath);

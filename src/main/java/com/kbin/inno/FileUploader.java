@@ -40,12 +40,16 @@ public class FileUploader {
         //String savePath = path + "/dev_kbinnovation/";
         */
 //        Path path = Paths.get("D:\\fsfile").toAbsolutePath().normalize();
-//        String savePath = path + "\\dev_kbinnovation\\";
+//        String savePath = path + "D:\\fsfile\\dev_kbinnovation\\";
 
-//        Path path = Paths.get("/fsfile").toAbsolutePath().normalize();
-//        String savePath = path + "/dev_kbinnovation/";
+//        Path path = Paths.get("/fsfile").toAbsolutePath().normalize();  //개발
+//        String savePath = path + "/dev_kbinnovation/";  //개발
+        //Path path = Paths.get("/fsfile").toAbsolutePath().normalize();  //운영
+        String savePath = "D:\\fsfile\\dev_kbinnovation\\";  //로컬
+        //String savePath = "/fsfile/dev_kbinnovation/";  //개발
+        //String savePath = "/fsfile/kbinnovation/";  //운영
 
-        String savePath = "/Users/johuiyang/Documents/web/uploads/kbinno/";
+        //String savePath = "/Users/johuiyang/Documents/web/uploads/kbinno/";
 
         File directory = new File(savePath);
 

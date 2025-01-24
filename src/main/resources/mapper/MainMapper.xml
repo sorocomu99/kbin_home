@@ -64,4 +64,18 @@
          WHERE 1 = 1
          ORDER BY HSTRY_YR DESC, HSTRY_LCLSF_SN ASC, HSTRY_SCLSF_SN ASC
     </select>
+
+    <!-- 메뉴 조회 -->
+    <select id="selectMenu" resultType="com.kbin.inno.Main.DTO.MenuDTO">
+        /* 메뉴 조회 */
+        SELECT MENU_NM
+             , MENU_SN
+             , MENU_DEPTH
+             , MENU_UP_SN
+             , MENU_LINK
+             , MENU_SORT
+        FROM KB_USER_MENU
+        WHERE USE_YN = 'Y'
+        ORDER BY MENU_SN, MENU_SORT
+    </select>
 </mapper>

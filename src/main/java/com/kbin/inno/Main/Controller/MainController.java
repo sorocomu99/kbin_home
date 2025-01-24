@@ -1,14 +1,16 @@
 package com.kbin.inno.Main.Controller;
 
-import com.kbin.inno.Main.DTO.HistoryDTO;
-import com.kbin.inno.Main.DTO.PopupDTO;
-import com.kbin.inno.Main.DTO.ResultDTO;
-import com.kbin.inno.Main.DTO.VisualDTO;
+import com.kbin.inno.Main.DTO.*;
 import com.kbin.inno.Main.Service.MainService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -37,5 +39,15 @@ public class MainController {
 
         return "main/main";
     	//return "redirect:/startup/list";
+    }
+
+    @RequestMapping("/menu/list")
+    @ResponseBody
+    public ResponseEntity<List<MenuDTO>> getImage() {
+        try{
+            return ResponseEntity.ok().body(mainService.selectMenu());
+        }catch (Exception ignored) {
+        }
+        return null;
     }
 }

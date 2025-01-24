@@ -11,7 +11,7 @@
         <div class="section-top-wrap">
             <nav aria-label="Breadcrumb" class="breadcrumb" data-breadcrub-theme="light">
                 <ul>
-                    <li><a href="/"><i class="icon icon-home"></i><span class="blind">HOME</span></a></li>
+                    <li><a href="/kbinnovationhub"><i class="icon icon-home"></i><span class="blind">HOME</span></a></li>
                     <li><a href="/kbinnovationhub/community/notice/list">커뮤니티</a></li>
                     <li><span aria-current="page">공지사항</span></li>
                 </ul>
@@ -34,7 +34,7 @@
                 <li class="file">
                     <ul class="list">
                         <li>
-                            <a th:href="${notice?.ntc_path + notice?.ntc_file_name}" th:download="${notice?.origin_file_name}" title="첨부파일 다운로드">
+                            <a th:href="|\kbinnovationhub${notice?.ntc_path + notice?.ntc_file_name}|"  title="첨부파일 다운로드" target="_filedown" download>
                                 <i class="icon icon-download"></i>
                                 <span th:text="${notice?.origin_file_name}"></span>
                             </a>

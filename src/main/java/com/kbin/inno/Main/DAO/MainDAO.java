@@ -1,9 +1,6 @@
 package com.kbin.inno.Main.DAO;
 
-import com.kbin.inno.Main.DTO.HistoryDTO;
-import com.kbin.inno.Main.DTO.PopupDTO;
-import com.kbin.inno.Main.DTO.ResultDTO;
-import com.kbin.inno.Main.DTO.VisualDTO;
+import com.kbin.inno.Main.DTO.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -20,4 +17,6 @@ public interface MainDAO {
     List<PopupDTO> selectPopup();
     // 연혁 조회
     List<HistoryDTO> selectHistory();
+    // 헤더 메뉴 조회
+    List<MenuDTO> selectMenu();
 }

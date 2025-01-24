@@ -538,7 +538,7 @@
                 </div>
             </div>
             <!-- 뉴스 리스트 시작 -->
-            <div class="proximal-section" th:unless="${selectNewsList == null or selectNewsList.isEmpty()}">
+            <div class="proximal-section" th:unless="${selectNewsMain == null }">
                 <p class="heading">뉴스</p>
                 <div class="news">
                     <article class="headline-main">
@@ -555,7 +555,7 @@
                             </a>
                         </div>
                     </article>
-                    <article class="headline-sub">
+                    <article class="headline-sub" th:if="${!#lists.isEmpty(selectNewsList)}">
                         <article class="item" th:each="newsList, newsStat : ${selectNewsList}">
                             <a class="link" th:href="${newsList.news_link}" target="_blank">
                                 <div class="title" th:text="${newsList.news_ttl}"></div>
@@ -831,7 +831,7 @@
             value: item.nocs
         }));
 
-        console.log("chartData :: "+JSON.stringify(chartData));
+        //console.log("chartData :: "+JSON.stringify(chartData));
 
         // 키워드 데이터 값을 상위 10위 까지만 필터링
         const topData = chartData.sort((a, b) => b.value - a.value).slice(0, 10);
