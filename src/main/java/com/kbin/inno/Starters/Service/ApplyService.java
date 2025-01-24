@@ -6,15 +6,15 @@ import com.kbin.inno.Starters.DAO.KbStartersSurvey;
 import com.kbin.inno.Starters.DTO.*;
 import com.kbin.inno.Startup.DTO.FileDTO;
 import lombok.RequiredArgsConstructor;
+import org.apache.tika.Tika;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -101,7 +101,7 @@ public class ApplyService {
     @Transactional
     public Map<String, Object> apply(KbStartersApplyRequestWrapper wrapper) {
         try{
-            List<String> allowExts = new ArrayList<>();
+            Set<String> allowExts = new HashSet<>();
             allowExts.add("jpg");
             allowExts.add("jpeg");
             allowExts.add("png");
@@ -110,6 +110,17 @@ public class ApplyService {
             allowExts.add("docx");
             allowExts.add("hwp");
             allowExts.add("zip");
+
+            Set<String> allowedMimeTypes = new HashSet<>();
+            allowedMimeTypes.add("image/jpeg"); // jpg, jpeg
+            allowedMimeTypes.add("image/png");  // png
+            allowedMimeTypes.add("application/pdf"); // pdf
+            allowedMimeTypes.add("application/msword"); // doc
+            allowedMimeTypes.add("application/vnd.openxmlformats-officedocument.wordprocessingml.document"); // docx
+            allowedMimeTypes.add("application/zip"); // zip
+            allowedMimeTypes.add("application/x-hwp"); // hwp (한글 파일)
+
+            Tika tika = new Tika();
 
             Map<String, Object> result = new HashMap<>();
             KbStartersApplyDTO answer = new KbStartersApplyDTO();
@@ -140,6 +151,11 @@ public class ApplyService {
                 }
                 if (request.getAnswer_file() != null && request.getAnswer_file().getSize() > 0){
                     String filename = request.getAnswer_file().getOriginalFilename();
+                    String mimeType = tika.detect(request.getAnswer_file().getInputStream());
+                    if(mimeType == null || !allowedMimeTypes.contains(mimeType)){
+                        throw new RuntimeException("허용되지 않는 파일 형식입니다.");
+                    }
+
                     if(!filename.contains(".")){
                         throw new RuntimeException("파일 확장자가 없습니다.");
                     }
