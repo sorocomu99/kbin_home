@@ -34,7 +34,7 @@
                 </div> -->
                 <!-- mp4 영상 -->
                 <video class="video" preload="auto" playsinline controls th:if="${hub.hub_mov_name != null}">
-                    <source th:src="|\kbinnovationhub${hub.hub_path_mov + hub.hub_mov_name}|" type='video/mp4'>
+                    <source th:src="@{${hub.hub_path_mov + hub.hub_mov_name}}" type='video/mp4'>
                 </video>
                 <!-- 이미지 -->
                 <!--<div class="image" id="hub_img">
@@ -48,7 +48,7 @@
                 <li class="file">
                     <ul class="list">
                         <li>
-                            <a th:href="|\kbinnovationhub${hub.hub_path + hub.hub_file_name}|"  title="첨부파일 다운로드" target="_filedown" download>
+                            <a th:href="@{${hub.hub_path + hub.hub_file_name}}"  title="첨부파일 다운로드" target="_filedown" download>
                                 <i class="icon icon-download"></i>
                                 <span th:text="${hub.origin_file_name}"></span>
                             </a>

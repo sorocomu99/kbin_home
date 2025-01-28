@@ -106,7 +106,7 @@
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide" th:each="list : ${interchange}">
                                     <div class="thumbnail">
-                                        <img th:src="|\kbinnovationhub${list?.inter_path + list?.inter_file_name}|" alt="">
+                                        <img th:src="@{${list?.inter_path + list?.inter_file_name}}" alt="">
                                     </div>
                                     <p class="title" th:text="${list.exch_ttl}"></p>
                                     <p class="text" th:text="${list.exch_cn}"></p>

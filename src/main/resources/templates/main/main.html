@@ -45,7 +45,7 @@
                 <div class="swiper">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide" th:each="list : ${selectList}">
-                            <div class="background"><img class="item" th:src="|\kbinnovationhub${list.main_path + list.main_file_name}|" alt=""></div>
+                            <div class="background"><img class="item" th:src="@{${list.main_path + list.main_file_name}}" alt=""></div>
                             <div class="context">
                                 <p class="text" data-split th:utext="${list.main_cn}"></p>
                             </div>
@@ -86,30 +86,51 @@
                 </div>
                 <div class="history">
                     <div class="progress"><span class="bar"></span></div>
-                    <ol class="list">
-                        <th:block th:if="${selectHistory != null and selectHistory != ''}" th:each="list, listStat : ${selectHistory}">
-                        <li class="item">
-                            <div class="side"></div>
+                    <ol class="list" th:if="${yearList != null and yearList != ''}">
+                        <li class="item" th:each="year : ${yearList}">
+                            <div class="side">
+                                <img th:if="${yearStat.first}" class="shape shape-1" th:src="@{${'/images/main/history-shape-1.svg'}}" alt="">
+                            </div>
                             <div class="contents">
-                                <p class="year" th:if="${list.display_yn == 0}" th:text="${list.hstry_yr}">2023</p>
+                                <p class="year" th:text="${year}">2022</p>
                                 <div class="context">
-                                    <h1 th:if="${list.display_yn == 0}" th:text="${list.hstry_lclsf_ttl}">스타트업 네트워킹 확대</h1>
-                                    <ul th:if="${list.display_yn == 0}">
-<!--                                        <th:block th:each="listDet, detStat : ${selectHistory}">-->
-<!--                                        <li th:if="${list.hstry_yr == listDet.hstry_yr}" th:text="${listDet.hstry_sclsf_ttl}">KB Starters Day 실시</li>-->
-<!--                                        </th:block>-->
-                                    </ul>
-                                    <!--
-                                    <h1>글로벌 지원 체계 확대</h1>
-                                    <ul>
-                                        <li>싱가포르 현지 AC 프로그램 운영</li>
-                                        <li>글로벌 PoC 프로그램 실시</li>
-                                    </ul>
-                                    -->
+                                    <!-- 대분류 그룹화를 위해 미리 컨트롤러에서 처리된 데이터 사용 -->
+                                    <th:block th:each="group : ${historyGroups.get(year)}">
+                                        <h1 th:text="${group.hstry_lclsf_ttl}">대분류 제목</h1>
+                                        <ul th:if="${group.hstry_lclsf_ttlList != null and not #lists.isEmpty(group.hstry_lclsf_ttlList)}">
+                                            <th:block th:with="hstry_lclsf_ttlList=${group.hstry_lclsf_ttlList}">
+                                                <span th:each="hstry_lclsf_ttl : ${hstry_lclsf_ttlList}">
+                                                    <p><span style="font-size: 0.6rem;vertical-align: middle">●</span> <span th:utext="${hstry_lclsf_ttl}"></span></p>
+                                                </span>
+                                            </th:block>
+                                        </ul>
+                                    </th:block>
                                 </div>
                             </div>
                         </li>
-                        </th:block>
+
+<!--                        <li class="item">-->
+<!--                            <div class="side"></div>-->
+<!--                            <div class="contents">-->
+<!--                                <p class="year" th:if="${list.display_yn == 0}" th:text="${list.hstry_yr}">2023</p>-->
+<!--                                <div class="context">-->
+<!--                                    <h1 th:if="${list.display_yn == 0}" th:text="${list.hstry_lclsf_ttl}">스타트업 네트워킹 확대</h1>-->
+<!--                                    <ul th:if="${list.display_yn == 0}">-->
+<!--&lt;!&ndash;                                        <th:block th:each="listDet, detStat : ${selectHistory}">&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <li th:if="${list.hstry_yr == listDet.hstry_yr}" th:text="${listDet.hstry_sclsf_ttl}">KB Starters Day 실시</li>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        </th:block>&ndash;&gt;-->
+<!--                                    </ul>-->
+<!--                                    &lt;!&ndash;-->
+<!--                                    <h1>글로벌 지원 체계 확대</h1>-->
+<!--                                    <ul>-->
+<!--                                        <li>싱가포르 현지 AC 프로그램 운영</li>-->
+<!--                                        <li>글로벌 PoC 프로그램 실시</li>-->
+<!--                                    </ul>-->
+<!--                                    &ndash;&gt;-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </li>-->
+<!--                        </th:block>-->
                         <!--
                         <li class="item">
                             <div class="side">

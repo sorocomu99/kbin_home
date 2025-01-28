@@ -73,7 +73,7 @@
                                     <div class="swiper cases-slider">
                                         <div class="swiper-wrapper">
                                             <div class="swiper-slide" th:each="list : ${affiliate}">
-                                                <div class="thumbnail"><img th:src="|\kbinnovationhub${list?.affiliate_path + list?.affiliate_file_name}|" alt=""></div>
+                                                <div class="thumbnail"><img th:src="@{${list?.affiliate_path + list?.affiliate_file_name}}" alt=""></div>
                                                 <p class="sub"><b th:text="${list?.affiliate_nm}"></b> X <span th:text="${list?.starter_nm}"></span></p>
                                                 <p class="title" th:text="${list?.srvc_nm}"></p>
                                                 <div class="chips"><span class="chip" th:text="${list.ctgry_nm}"></span></div>
@@ -157,7 +157,7 @@
                     <ul class="cooperation-list">
                         <li th:each="list : ${cooperation}">
                             <div class="thumbnail">
-                                <img th:src="|\kbinnovationhub${list?.coope_path + list?.coope_file_name}|" th:alt="${list.bzenty_nm}">
+                                <img th:src="@{${list?.coope_path + list?.coope_file_name}}" th:alt="${list.bzenty_nm}">
                             </div>
                         </li>
                     </ul>
@@ -181,17 +181,17 @@
                                             <div class="swiper-wrapper">
                                                 <div class="swiper-slide" th:if="${list?.plc_file_name1 != null}">
                                                     <div class="thumbnail">
-                                                        <img th:src="|\kbinnovationhub${list?.plc_path1 + list?.plc_file_name1}|" alt="">
+                                                        <img th:src="@{${list?.plc_path1 + list?.plc_file_name1}}" alt="">
                                                     </div>
                                                 </div>
                                                 <div class="swiper-slide" th:if="${list?.plc_path2 != null}">
                                                     <div class="thumbnail">
-                                                        <img th:src="|\kbinnovationhub${list?.plc_path2 + list?.plc_file_name2}|" alt="">
+                                                        <img th:src="@{${list?.plc_path2 + list?.plc_file_name2}}" alt="">
                                                     </div>
                                                 </div>
                                                 <div class="swiper-slide" th:if="${list?.plc_path3 != null}">
                                                     <div class="thumbnail">
-                                                        <img th:src="|\kbinnovationhub${list?.plc_path3 + list?.plc_file_name3}|" alt="">
+                                                        <img th:src="@{${list?.plc_path3 + list?.plc_file_name3}}" alt="">
                                                     </div>
                                                 </div>
                                             </div>

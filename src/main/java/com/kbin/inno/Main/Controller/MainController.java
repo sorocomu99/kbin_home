@@ -34,8 +34,7 @@ public class MainController {
         List<PopupDTO> selectPopup = mainService.selectPopup();
         model.addAttribute("selectPopup", selectPopup);
         // 연혁 조회
-        List<HistoryDTO> selectHistory = mainService.selectHistory();
-        model.addAttribute("selectHistory", selectHistory);
+        mainService.selectHistory(model);
 
         return "main/main";
     	//return "redirect:/startup/list";

@@ -46,10 +46,10 @@
                     <li id="magazine-item" class="list" th:each="list, iterStat : ${selectList}">
                         <a class="block" th:href="@{/community/hub/detail/{hub_sn}(hub_sn=${list.hub_sn})}">
                             <th:block th:if="${list.hub_path_img != null and list.hub_path_img != ''}">
-                                <div class="thumbnail"><img th:src="|\kbinnovationhub${list.hub_path_img + list.hub_img_name}|" alt=""></div>
+                                <div class="thumbnail"><img th:src="@{${list.hub_path_img + list.hub_img_name}}" alt=""></div>
                             </th:block>
                             <th:block th:if="${list.hub_path_img == null or list.hub_path_img == ''}">
-                                <div class="thumbnail"><img src="/kbinnovationhub/images/sub/startup/no_news_image.png" alt=""></div>
+                                <div class="thumbnail"><img th:src="@{${'/images/sub/startup/no_news_image.png'}}" alt=""></div>
                             </th:block>
                             <div class="contents">
                                 <div class="row">

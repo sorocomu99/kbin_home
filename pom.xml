@@ -124,6 +124,14 @@
 <!--			&lt;!&ndash; <systemPath>${WEB-INF.lib}/tibero6-jdbc.jar</systemPath> &ndash;&gt;-->
 <!--			<systemPath>${project.basedir}/src/main/resources/lib/tibero6-jdbc.jar</systemPath>-->
 <!--		</dependency>-->
+
+		<dependency>
+			<groupId>com.tmax.tibero</groupId>
+			<artifactId>tibero6-jdbc</artifactId>
+			<version>6</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/tibero6-jdbc.jar</systemPath>
+		</dependency>
         
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
