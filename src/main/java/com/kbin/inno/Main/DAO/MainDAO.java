@@ -14,7 +14,7 @@ public interface MainDAO {
     // 메인 비주얼 조회
     List<VisualDTO> selectVisual();
     // 팝업 조회
-    List<PopupDTO> selectPopup();
+    List<PopupDTO> selectPopup(String staticPath);
     // 연혁 조회
     List<HistoryDTO> selectHistory();
     // 헤더 메뉴 조회

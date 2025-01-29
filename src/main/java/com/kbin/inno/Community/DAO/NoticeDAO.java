@@ -5,6 +5,7 @@ import com.kbin.inno.Community.DTO.SearchDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Mapper
@@ -15,5 +16,5 @@ public interface NoticeDAO {
     // 공지사항 리스트 조회
     List<NoticeDTO> selectList(SearchDTO search);
     // 공지사항 상세 조회
-    NoticeDTO select(int ntc_sn);
+    NoticeDTO select(HashMap<String, Object> map);
 }

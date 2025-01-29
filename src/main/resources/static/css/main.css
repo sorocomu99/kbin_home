@@ -91,7 +91,7 @@
     .section-introduce .container { height: auto; }
     .section-introduce .background { display: none; }
     .section-introduce .section-title { position: static; }
-    .section-introduce .container-2 { overflow: hidden; position: static; margin-top: 60px; padding: 60px; background: url('/kbinnovationhub/images/main/indroduce-background.jpg') no-repeat left 80% center / cover; border-radius: 24px; }
+    .section-introduce .container-2 { overflow: hidden; position: static; margin-top: 60px; padding: 60px; background: url('../images/main/indroduce-background.jpg') no-repeat left 80% center / cover; border-radius: 24px; }
     .section-introduce .contents { border-radius: 24px; }
     .section-introduce .context { position: static; }
     .section-introduce .context .text { font-size: 2rem; }

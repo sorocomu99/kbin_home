@@ -28,7 +28,7 @@
         ORDER BY VISUAL.SORT_NO ASC
     </select>
     <!-- 팝업 조회 -->
-    <select id="selectPopup" resultType="com.kbin.inno.Main.DTO.PopupDTO">
+    <select id="selectPopup" parameterType="java.lang.String" resultType="com.kbin.inno.Main.DTO.PopupDTO">
         /* 팝업 조회 */
         SELECT POPUP_SN
              , MNGR_TTL
@@ -38,7 +38,7 @@
              , END_HR
              , POPUP_LEFT_PSTN
              , POPUP_TOP_PSTN
-             , REPLACE(POPUP_CN, 'kbinnovationhub_devadm', 'kbinnovationhub') POPUP_CN
+             , REPLACE(REPLACE(POPUP_CN, '/kbinnovationhub_devadm/', #{staticPath}), '\kbinnovationhub_devadm\', #{staticPath}) POPUP_CN
           FROM KB_POPUP_INFO
          WHERE 1 = 1
            AND TO_CHAR(TO_DATE(END_YMD, 'YYYYMMDD'), 'YYYYMMDD') || ' ' || TO_CHAR(TO_DATE(END_HR, 'HH24MI'), 'HH24MI') >= TO_CHAR(SYSDATE, 'YYYYMMDD HH24MI');

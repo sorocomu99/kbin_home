@@ -11,8 +11,8 @@
             <div class="section-top-wrap">
                 <nav aria-label="Breadcrumb" class="breadcrumb" data-breadcrub-theme="transparent">
                     <ul>
-                        <li><a href="/kbinnovationhub"><i class="icon icon-home"></i><span class="blind">HOME</span></a></li>
-                        <li><a href="javascript:">스타트업 정보</a></li>
+                        <li><a th:href="@{/}"><i class="icon icon-home"></i><span class="blind">HOME</span></a></li>
+                        <li><a th:href="@{/startup/list}">스타트업 정보</a></li>
                         <li><span aria-current="page">정보검색</span></li>
                     </ul>
                 </nav>
@@ -645,7 +645,7 @@
             pageMoveForm.appendChild(obj);
 
             pageMoveForm.setAttribute('method', 'post');
-            pageMoveForm.setAttribute('action', '/kbinnovationhub/startup/detail');
+            pageMoveForm.setAttribute('action', window.staticPath + 'startup/detail');
             document.body.appendChild(pageMoveForm);
             pageMoveForm.submit();
             //this.preventDefault();
@@ -658,14 +658,14 @@
             e.preventDefault();
             actionForm.find("input[name='pageNum']").val($(this).attr("src"));
 
-            actionForm.attr("action", "/kbinnovationhub/startup/list");
+            actionForm.attr("action", window.staticPath + "startup/list");
             actionForm.submit();
             //var aaa = $(this).attr("src");
             //alert(aaa);
         });
 
         function clickForm() {
-            actionForm.attr("action", "/kbinnovationhub/startup/list");
+            actionForm.attr("action", window.staticPath + "startup/list");
             actionForm.submit();
         }
 
@@ -808,7 +808,7 @@
             var langSelect = document.getElementById("selectbox");
             document.getElementById('pageSize').value = langSelect.options[langSelect.selectedIndex].value;
 
-            actionForm.attr("action", "/kbinnovationhub/startup/list");
+            actionForm.attr("action", window.staticPath + "startup/list");
             actionForm.submit();
         }
 

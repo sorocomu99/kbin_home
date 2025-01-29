@@ -1,39 +1,40 @@
 class HeaderComponent extends HTMLElement {
     connectedCallback() {
+        const path = window.staticPath || '';
         let header_menu = `
                                 <ul class="depth1">
                                     <li>
                                         <div class="title">KB Innovation HUB</div>
                                         <ul class="depth2">
-                                            <li><a href="/kbinnovationhub">HUB센터 소개</a></li>
+                                            <li><a href="` + path + `">HUB센터 소개</a></li>
                                         </ul>
                                     </li>
                                     <li>
                                         <div class="title">스타트업 육성</div>
                                         <ul class="depth2">
-                                            <li><a href="/kbinnovationhub/nurture/domestic/info">국내 프로그램</a></li>
-                                            <li><a href="/kbinnovationhub/nurture/global/info">글로벌 프로그램</a></li>
+                                            <li><a href="` + path + `nurture/domestic/info">국내 프로그램</a></li>
+                                            <li><a href="` + path + `nurture/global/info">글로벌 프로그램</a></li>
                                         </ul>
                                     </li>
                                     <li>
                                         <div class="title">KB스타터스</div>
                                         <ul class="depth2">
-                                            <li><a href="/kbinnovationhub/starters/apply/apply_main">지원하기</a></li>
-                                            <li><a href="/kbinnovationhub/starters/portfolio/list">포트폴리오</a></li>
+                                            <li><a href="` + path + `starters/apply/apply_main">지원하기</a></li>
+                                            <li><a href="` + path + `starters/portfolio/list">포트폴리오</a></li>
                                         </ul>
                                     </li>
                                     <li>
                                         <div class="title">커뮤니티</div>
                                         <ul class="depth2">
-                                            <li><a href="/kbinnovationhub/community/notice/list">공지사항</a></li>
-                                            <li><a href="/kbinnovationhub/community/hub/list">HUB센터 소식</a></li>
-                                            <li><a href="/kbinnovationhub/community/faq/list">FAQ</a></li>
+                                            <li><a href="` + path + `community/notice/list">공지사항</a></li>
+                                            <li><a href="` + path + `community/hub/list">HUB센터 소식</a></li>
+                                            <li><a href="` + path + `community/faq/list">FAQ</a></li>
                                         </ul>
                                     </li>
                                     <li>
                                         <div class="title">스타트업 정보</div>
                                         <ul class="depth2">
-                                            <li><a href="/kbinnovationhub/startup/list">정보검색</a></li>
+                                            <li><a href="` + path + `startup/list">정보검색</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -41,7 +42,7 @@ class HeaderComponent extends HTMLElement {
 
         if(!sessionStorage.getItem("hm")) {
             $.ajax({
-                url: '/kbinnovationhub/menu/list', // 요청 URL
+                url: path + 'menu/list', // 요청 URL
                 type: 'GET', // HTTP 메서드
                 dataType: 'json',
                 async: false,
@@ -64,7 +65,7 @@ class HeaderComponent extends HTMLElement {
             <div class="header-primary">
                 <div class="header-primary-wrap">
                     <h1>
-                        <a class="logo" href="/kbinnovationhub"><span class="blind">KB Innovation HUB</span></a>
+                        <a class="logo" href="` + path + `"><span class="blind">KB Innovation HUB</span></a>
                     </h1>
                     <div class="gnb">
                         <nav class="nav">
@@ -114,7 +115,11 @@ function createMenu(menuData) {
         depth2Menus.forEach(depth2Menu => {
             const depth2Li = document.createElement('li');
             const anchor = document.createElement('a');
-            anchor.href = depth2Menu.menu_link;
+            if(depth2Menu.menu_link !== '/kbinnovationhub') {
+                anchor.href = depth2Menu.menu_link.replace('/kbinnovationhub', window.staticPath.replace(/\/+$/, ''));
+            }else{
+                anchor.href = depth2Menu.menu_link.replace('/kbinnovationhub', window.staticPath !== '/' ? window.staticPath.replace(/\/+$/, '') : window.staticPath);
+            }
             anchor.textContent = depth2Menu.menu_nm;
             depth2Li.appendChild(anchor);
             depth2Ul.appendChild(depth2Li);

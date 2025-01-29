@@ -9,7 +9,7 @@
     <main class="main">
         <div class="apply">
             <div class="apply-image">
-                <img src="/kbinnovationhub/images/dummy/apply-image.jpg" alt="">
+                <img th:src="@{/images/dummy/apply-image.jpg}" alt="">
             </div>
             <div class="apply-contents">
                  <!--
@@ -103,7 +103,7 @@
         } else {
             const form = document.getElementById('applyForm');
             form.method = "POST";
-            form.action = "/kbinnovationhub/starters/apply/saveAnswer";
+            form.action = window.staticPath + "starters/apply/saveAnswer";
             form.submit();
         }
     }
@@ -121,7 +121,7 @@
             dataObject[key] = value;
         });
         $.ajax({
-            url: '/kbinnovationhub/starters/apply/finalSubmit',
+            url: window.staticPath + 'starters/apply/finalSubmit',
             type: 'POST',
             dataType: 'json',
             contentType: 'application/json',
@@ -129,7 +129,7 @@
             success: function(response) {
                 if (response.success) {
                     alert("응답이 저장되었습니다.");
-                    window.location.href = '/kbinnovationhub/starters/apply/apply_main';
+                    window.location.href = window.staticPath + 'starters/apply/apply_main';
                 } else {
                     alert("응답 저장 실패.");
                 }

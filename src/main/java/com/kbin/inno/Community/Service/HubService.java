@@ -3,6 +3,7 @@ package com.kbin.inno.Community.Service;
 import com.kbin.inno.Community.DAO.HubDAO;
 import com.kbin.inno.Community.DTO.HubDTO;
 import com.kbin.inno.Community.DTO.SearchDTO;
+import com.kbin.inno.common.PropertiesValue;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -141,6 +142,10 @@ public class HubService {
 
     // HUB 센터 소식 상세 조회
     public HubDTO select(int hub_sn) {
-        return hubDAO.select(hub_sn);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("hub_sn", hub_sn);
+        map.put("staticPath", PropertiesValue.staticPath.equals("/") ? PropertiesValue.staticPath : PropertiesValue.staticPath + "/");
+
+        return hubDAO.select(map);
     }
 }

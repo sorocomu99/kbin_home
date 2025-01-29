@@ -11,8 +11,8 @@
         <div class="section-top-wrap">
             <nav aria-label="Breadcrumb" class="breadcrumb" data-breadcrub-theme="transparent">
                 <ul>
-                    <li><a href="#"><i class="icon icon-home"></i><span class="blind">HOME</span></a></li>
-                    <li><a href="javascript:">스타트업 정보</a></li>
+                    <li><a th:href="@{/}"><i class="icon icon-home"></i><span class="blind">HOME</span></a></li>
+                    <li><a th:href="@{/startup/list}">스타트업 정보</a></li>
                     <li><span aria-current="page">정보검색</span></li>
                 </ul>
             </nav>
@@ -55,7 +55,7 @@
                 <p class="top-note">*스타트업정보는 KB스타터스 기업 '피치덱'에서 제공합니다.</p>
                 <div class="top-info">
                     <div class="thumbnail">
-                        <img src="/kbinnovationhub/images/sub/startup/top-info-thumbnail-icon.svg" alt="">
+                        <img th:src="@{/images/sub/startup/top-info-thumbnail-icon.svg}" alt="">
                     </div>
                     <div class="contents">
                         <p class="name" th:text="${startupInfo.ent_nm}"></p>

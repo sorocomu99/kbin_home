@@ -1,48 +1,48 @@
 @font-face {
     font-family: 'KBFG Display';
-    src: url('/kbinnovationhub/fonts/KBFGDisplay-Bold.woff2') format('woff2'), url('/kbinnovationhub/fonts/KBFGDisplay-Bold.woff') format('woff');
+    src: url('../fonts/KBFGDisplay-Bold.woff2') format('woff2'), url('../fonts/KBFGDisplay-Bold.woff') format('woff');
     font-weight: bold;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
     font-family: 'KBFG Display';
-    src: url('/kbinnovationhub/fonts/KBFGDisplay-Bold.woff2') format('woff2'), url('/kbinnovationhub/fonts/KBFGDisplay-Bold.woff') format('woff');
+    src: url('../fonts/KBFGDisplay-Bold.woff2') format('woff2'), url('../fonts/KBFGDisplay-Bold.woff') format('woff');
     font-weight: bold;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
     font-family: 'KBFG Display';
-    src: url('/kbinnovationhub/fonts/KBFGDisplay-Light.woff2') format('woff2'), url('/kbinnovationhub/fonts/KBFGDisplay-Light.woff') format('woff');
+    src: url('../fonts/KBFGDisplay-Light.woff2') format('woff2'), url('../fonts/KBFGDisplay-Light.woff') format('woff');
     font-weight: 300;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
     font-family: 'KBFG Display';
-    src: url('/kbinnovationhub/fonts/KBFGDisplay-Medium.woff2') format('woff2'), url('/kbinnovationhub/fonts/KBFGDisplay-Medium.woff') format('woff');
+    src: url('../fonts/KBFGDisplay-Medium.woff2') format('woff2'), url('../fonts/KBFGDisplay-Medium.woff') format('woff');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
     font-family: 'KBFG Text';
-    src: url('/kbinnovationhub/fonts/KBFGText-Bold.woff2') format('woff2'), url('/kbinnovationhub/fonts/KBFGText-Bold.woff') format('woff');
+    src: url('../fonts/KBFGText-Bold.woff2') format('woff2'), url('../fonts/KBFGText-Bold.woff') format('woff');
     font-weight: bold;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
     font-family: 'KBFG Text';
-    src: url('/kbinnovationhub/fonts/KBFGText-Light.woff2') format('woff2'), url('/kbinnovationhub/fonts/KBFGText-Light.woff') format('woff');
+    src: url('../fonts/KBFGText-Light.woff2') format('woff2'), url('../fonts/KBFGText-Light.woff') format('woff');
     font-weight: 300;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
     font-family: 'KBFG Text';
-    src: url('/kbinnovationhub/fonts/KBFGText-Medium.woff2') format('woff2'), url('/kbinnovationhub/fonts/KBFGText-Medium.woff') format('woff');
+    src: url('../fonts/KBFGText-Medium.woff2') format('woff2'), url('../fonts/KBFGText-Medium.woff') format('woff');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
@@ -95,7 +95,7 @@ button::-moz-focus-inner { padding: 0; border: 0 }
 button:disabled { cursor: default }
 input { padding: 16px 20px; height: 65px; font-family: inherit; font-size: inherit; color: #333333; background-color: #ffffff; border: 1px solid #DDDDDD; border-radius: 8px; -webkit-transition: all ease 0.1s; transition: all ease 0.1s }
 textarea { vertical-align: middle; padding: 16px 20px; line-height: inherit; font-family: inherit; font-size: inherit; color: #333333; background-color: #ffffff; border: 1px solid #DDDDDD; border-radius: 0; -webkit-transition: all ease 0.1s; transition: all ease 0.1s; resize: none; overflow-y: auto; -ms-overflow-style: auto }
-select { margin: 0; padding: 16px 50px 16px 20px; height: 65px; font-family: inherit; font-size: inherit; color: #333333; -moz-appearance: none; -webkit-appearance: none; appearance: none; -webkit-appearance: none; background-image: url("/kbinnovationhub/images/select-arrow-fill.svg"); background-color: #ffffff; background-size: auto 14px; background-repeat: no-repeat; background-position: right 18px center; border: 1px solid #DDDDDD; border-radius: 8px; box-shadow: none }
+select { margin: 0; padding: 16px 50px 16px 20px; height: 65px; font-family: inherit; font-size: inherit; color: #333333; -moz-appearance: none; -webkit-appearance: none; appearance: none; -webkit-appearance: none; background-image: url("../images/select-arrow-fill.svg"); background-color: #ffffff; background-size: auto 14px; background-repeat: no-repeat; background-position: right 18px center; border: 1px solid #DDDDDD; border-radius: 8px; box-shadow: none }
 select::-ms-expand { display: none }
 input[type=number] { -moz-appearance: textfield }
 input:-moz-read-only, textarea:-moz-read-only { background-color: #f8f8f8 }
@@ -103,7 +103,7 @@ input:read-only, textarea:read-only { background-color: #f8f8f8 }
 input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0 }
 input.is-invalid { border-color: #FF692D }
 input.is-invalid::placeholder { color: #FF692D }
-select.is-invalid { color: #fff; background-color: #FF692D; border-color: #FF692D; background-image: url("/kbinnovationhub/images/icon-select-arrow-light.svg") }
+select.is-invalid { color: #fff; background-color: #FF692D; border-color: #FF692D; background-image: url("../images/icon-select-arrow-light.svg") }
 textarea.is-invalid { border-color: #FF692D }
 textarea.is-invalid::placeholder { color: #FF692D }
 ::placeholder { color: #999999 }

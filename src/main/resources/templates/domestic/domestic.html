@@ -14,8 +14,8 @@
 	                    <div class="section-top-wrap">
 	                        <nav aria-label="Breadcrumb" class="breadcrumb" data-breadcrub-theme="light">
 	                            <ul>
-	                                <li class="item"><a href="/kbinnovationhub"><i class="icon icon-home"></i><span class="blind">HOME</span></a></li>
-	                                <li class="item"><a href="/kbinnovationhub/nurture/dosmetic/info">스타트업 육성</a></li>
+	                                <li class="item"><a th:href="@{/}"><i class="icon icon-home"></i><span class="blind">HOME</span></a></li>
+	                                <li class="item"><a th:href="@{/nurture/domestic/info}">스타트업 육성</a></li>
 	                                <li class="item"><span aria-current="page">국내 프로그램</span></li>
 	                            </ul>
 	                        </nav>
@@ -23,7 +23,7 @@
 	                    </div>
 	                </div>
 	                <div class="background">
-	                    <img class="item" src="/kbinnovationhub/images/sub/nurture/global/intro-background-domestic.jpg" alt="" />
+	                    <img class="item" th:src="@{/images/sub/nurture/global/intro-background-domestic.jpg}" alt="" />
 	                </div>
 	                <div class="block">
 	                    <div class="flex">
@@ -95,7 +95,7 @@
                     </div>
                     <div class="section-flex">
                         <div class="side">
-                            <img class="kb-logo" src="/kbinnovationhub/images/sub/nurture/domestic/kb-logo-gray.svg" alt="">
+                            <img class="kb-logo" th:src="@{/images/sub/nurture/domestic/kb-logo-gray.svg}" alt="">
                         </div>
                         <div class="contents">
                             <div class="chart-box">
@@ -227,7 +227,7 @@
                             <div class="job">
                                 <div class="job-head">
                                     <div data-animate class="circle-1">
-                                        <img src="/kbinnovationhub/images/sub/nurture/domestic/job-circle.png" alt="국민과 함께하는 일자리 찾기 KB Good Job. KB 국민은행.">
+                                        <img th:src="@{/images/sub/nurture/domestic/job-circle.png}" alt="국민과 함께하는 일자리 찾기 KB Good Job. KB 국민은행.">
                                     </div>
                                     <div data-animate class="circle-2" th:if="${recruit != null}" >
                                         <p class="year" th:text="${recruit?.employ_yr + '년'}"></p>
@@ -258,7 +258,7 @@
                                     </div>
                                 </div>
                                 <div class="job-body">
-                                    <div data-animate class="thumbnail"><img src="/kbinnovationhub/images/sub/nurture/domestic/job-thumbnail.jpg" alt=""></div>
+                                    <div data-animate class="thumbnail"><img th:src="@{/images/sub/nurture/domestic/job-thumbnail.jpg}" alt=""></div>
                                 </div>
                             </div>
                         </div>

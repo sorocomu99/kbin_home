@@ -6,16 +6,14 @@ import com.kbin.inno.Main.DTO.MenuDTO;
 import com.kbin.inno.Main.DTO.PopupDTO;
 import com.kbin.inno.Main.DTO.ResultDTO;
 import com.kbin.inno.Main.DTO.VisualDTO;
+import com.kbin.inno.common.PropertiesValue;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -36,7 +34,7 @@ public class MainService {
 
     // 팝업조회
     public List<PopupDTO> selectPopup() {
-        return mainDAO.selectPopup();
+        return mainDAO.selectPopup(PropertiesValue.staticPath.equals("/") ? PropertiesValue.staticPath : PropertiesValue.staticPath + "/");
     }
 
     // 연혁조회

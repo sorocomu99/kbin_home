@@ -11,8 +11,8 @@
         <div class="section-top-wrap">
             <nav aria-label="Breadcrumb" class="breadcrumb" data-breadcrub-theme="light">
                 <ul>
-                    <li><a href="/kbinnovationhub"><i class="icon icon-home"></i><span class="blind">HOME</span></a></li>
-                    <li><a href="/kbinnovationhub/community/notice/list">커뮤니티</a></li>
+                    <li><a th:href="@{/}"><i class="icon icon-home"></i><span class="blind">HOME</span></a></li>
+                    <li><a th:href="@{/community/notice/list}">커뮤니티</a></li>
                     <li><span aria-current="page">HUB센터 소식</span></li>
                 </ul>
             </nav>
@@ -23,7 +23,7 @@
         <div class="board-list">
             <div class="board-list-head">
                 <div class="col">
-                    <form action="/kbinnovationhub/community/hub/list" method="get">
+                    <form th:action="@{/community/hub/list}" method="get">
                         <div class="search">
                             <select class="form-select" aria-label="" name="type" th:value="${type}">
                                 <option value="all" th:selected="${type} == 'all'">전체</option>
@@ -49,7 +49,7 @@
                                 <div class="thumbnail"><img th:src="@{${list.hub_path_img + list.hub_img_name}}" alt=""></div>
                             </th:block>
                             <th:block th:if="${list.hub_path_img == null or list.hub_path_img == ''}">
-                                <div class="thumbnail"><img th:src="@{${'/images/sub/startup/no_news_image.png'}}" alt=""></div>
+                                <div class="thumbnail"><img th:src="@{/images/sub/startup/no_news_image.png}" alt=""></div>
                             </th:block>
                             <div class="contents">
                                 <div class="row">
@@ -98,7 +98,7 @@
     function morePage() {
         var more_num = $('#more_num').val();
         $.ajax({
-            url: '/kbinnovationhub/community/hub/list/' + more_num, // 요청 URL
+            url: window.staticPath + 'community/hub/list/' + more_num, // 요청 URL
             type: 'GET', // HTTP 메서드
             dataType: 'json',
             success: function(data) {
@@ -111,12 +111,13 @@
                 var htmlCode = '';
                 for(var i = 0; i < selectList.length; i++) {
                     htmlCode += '<li class="list">';
-                    htmlCode += '   <a class="block" href="/kbinnovationhub/community/hub/detail/ ' + selectList[i].hub_sn + '">';
+                    htmlCode += '   <a class="block" href="' + window.staticPath + '"community/hub/detail/ ' + selectList[i].hub_sn + '">';
                     if (selectList[i].hub_path_img !== null && selectList[i].hub_img_name !== '') {
-                        htmlCode += '       <div class="thumbnail"><img src="\\kbinnovationhub' + selectList[i].hub_path_img + selectList[i].hub_img_name + '" alt=""></div>';
+                        htmlCode += '       <div class="thumbnail">' +
+                            '<img src="' + (window.staticPath.replace(/\/+$/, ''))  + selectList[i].hub_path_img + selectList[i].hub_img_name + '" alt=""></div>';
                     }
                     if (selectList[i].hub_path_img === null || selectList[i].hub_img_name === '') {
-                        htmlCode += '       <div class="thumbnail"><img src="/kbinnovationhub/images/sub/startup/no_news_image.png" alt=""></div>';
+                        htmlCode += '       <div class="thumbnail"><img src="' + window.staticPath + 'images/sub/startup/no_news_image.png" alt=""></div>';
                     }
                     htmlCode += '       <div class="contents">';
                     htmlCode += '           <div class="row">';

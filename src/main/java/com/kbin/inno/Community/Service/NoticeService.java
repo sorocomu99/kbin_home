@@ -3,10 +3,12 @@ package com.kbin.inno.Community.Service;
 import com.kbin.inno.Community.DAO.NoticeDAO;
 import com.kbin.inno.Community.DTO.NoticeDTO;
 import com.kbin.inno.Community.DTO.SearchDTO;
+import com.kbin.inno.common.PropertiesValue;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -73,7 +75,11 @@ public class NoticeService {
 
     // 공지사항 상세 페이지 조회
     public void select(int ntc_sn, Model model) {
-        NoticeDTO notice = noticeDAO.select(ntc_sn);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("ntc_sn", ntc_sn);
+        map.put("staticPath", PropertiesValue.staticPath.equals("/") ? PropertiesValue.staticPath : PropertiesValue.staticPath + "/");
+
+        NoticeDTO notice = noticeDAO.select(map);
         model.addAttribute("notice", notice);
     }
 }

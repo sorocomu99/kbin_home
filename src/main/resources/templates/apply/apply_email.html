@@ -9,7 +9,7 @@
     <main class="main">
         <div class="apply">
             <div class="apply-image">
-                <img src="/kbinnovationhub/images/dummy/apply-image.jpg" alt="">
+                <img th:src="@{/images/dummy/apply-image.jpg}" alt="">
             </div>
             <div class="apply-contents">
                  <!--
@@ -51,7 +51,7 @@
         } else {
             const form = document.getElementById('applyForm');
             form.method = "POST";
-            form.action = "/kbinnovationhub/starters/apply/survey";
+            form.action = window.staticPath + "starters/apply/survey";
             form.submit();
         }
     }

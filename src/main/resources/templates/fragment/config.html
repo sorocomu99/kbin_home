@@ -7,35 +7,40 @@
     <title>KB Innovation HUB</title>
 
     <!-- 공통 스타일 시트 -->
-    <link rel="stylesheet" href="/kbinnovationhub/css/swiper-bundle.min.css">
-    <link rel="stylesheet" href="/kbinnovationhub/css/flatpickr.min.css">
-    <link rel="stylesheet" href="/kbinnovationhub/css/base.css">
-    <link rel="stylesheet" href="/kbinnovationhub/css/board.css">
-    <link rel="stylesheet" href="/kbinnovationhub/css/common.css">
-    <link rel="stylesheet" href="/kbinnovationhub/css/main.css">
-    <link rel="stylesheet" href="/kbinnovationhub/css/sub.css">
-
+    <link rel="stylesheet" th:href="@{/css/swiper-bundle.min.css}">
+    <link rel="stylesheet" th:href="@{/css/flatpickr.min.css}">
+    <link rel="stylesheet" th:href="@{/css/base.css}">
+    <link rel="stylesheet" th:href="@{/css/board.css}">
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" th:href="@{/css/sub.css}">
+    <script th:inline="javascript">
+        window.staticPath = /*[[${@environment.getProperty('staticpath')} + '/']]*/'/';
+        if(window.staticPath === '//') {
+            window.staticPath = '/';
+        }
+    </script>
     <!-- 임시 스크립트: 헤더/푸터 컴포넌트 (작업용 임시 파일이므로 개발단계부터는 스크립트 파일 안에 HTML 코드 사용) -->
-    <script src="/kbinnovationhub/components/header.js"></script>
-    <script src="/kbinnovationhub/components/footer.js"></script>
+    <script th:src="@{/components/header.js}"></script>
+    <script th:src="@{/components/footer.js}"></script>
     <script>
         const ENV = 'dev'
     </script>
 
     <!-- 공통 스크립트 -->
-    <script src="/kbinnovationhub/js/scrollreveal.min.js"></script>
-    <script src="/kbinnovationhub/js/gsap.min.js"></script>
-    <script src="/kbinnovationhub/js/ScrollToPlugin.min.js"></script>
-    <script src="/kbinnovationhub/js/ScrollTrigger.min.js"></script>
-    <script src="/kbinnovationhub/js/lenis.min.js"></script>
-    <script src="/kbinnovationhub/js/split-type.min.js"></script>
-    <script src="/kbinnovationhub/js/echarts.min.js"></script>
-    <script src="/kbinnovationhub/js/echarts-wordcloud.min.js"></script>
-    <script src="/kbinnovationhub/js/flatpickr.js"></script>
-    <script src="/kbinnovationhub/js/ko.js"></script>
-    <script src="/kbinnovationhub/js/swiper-bundle.min.js"></script>
-    <script src="/kbinnovationhub/js/countUp.umd.js"></script>
-    <script src="/kbinnovationhub/js/common.js"></script>
-    <script src="/kbinnovationhub/js/jquery-3.6.4.min.js"></script>
+    <script th:src="@{/js/scrollreveal.min.js}"></script>
+    <script th:src="@{/js/gsap.min.js}"></script>
+    <script th:src="@{/js/ScrollToPlugin.min.js}"></script>
+    <script th:src="@{/js/ScrollTrigger.min.js}"></script>
+    <script th:src="@{/js/lenis.min.js}"></script>
+    <script th:src="@{/js/split-type.min.js}"></script>
+    <script th:src="@{/js/echarts.min.js}"></script>
+    <script th:src="@{/js/echarts-wordcloud.min.js}"></script>
+    <script th:src="@{/js/flatpickr.js}"></script>
+    <script th:src="@{/js/ko.js}"></script>
+    <script th:src="@{/js/swiper-bundle.min.js}"></script>
+    <script th:src="@{/js/countUp.umd.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
+    <script th:src="@{/js/jquery-3.6.4.min.js}"></script>
 </head>
 </html>

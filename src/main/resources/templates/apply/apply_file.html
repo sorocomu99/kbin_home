@@ -9,7 +9,7 @@
     <main class="main">
         <div class="apply">
             <div class="apply-image">
-                <img src="/kbinnovationhub/images/dummy/apply-image.jpg" alt="">
+                <img th:src="@{/images/dummy/apply-image.jpg}" alt="">
             </div>
             <div class="apply-contents">
                  <!--
@@ -39,7 +39,7 @@
                     </div>
                     <div class="bottom-button">
                         <!-- 제출버튼입니다. (아래건 임시용) <button class="button button-border" type="submit"><span>다음으로</span> <i class="icon icon-chevron-right"></i></button> -->
-                        <a class="button button-border" href="/kbinnovationhub/starters/apply/complete"><span>다음으로</span> <i class="icon icon-chevron-right"></i></a>
+                        <a class="button button-border" th:href="@{/starters/apply/complete}"><span>다음으로</span> <i class="icon icon-chevron-right"></i></a>
                     </div>
                 </form>
             </div>
