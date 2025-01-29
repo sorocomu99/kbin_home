@@ -1,6 +1,8 @@
 package com.kbin.inno;
 
 import com.kbin.inno.Startup.DTO.FileDTO;
+import com.kbin.inno.common.FilePathUtil;
+import com.kbin.inno.common.PropertiesValue;
 import org.apache.xerces.impl.dv.util.Base64;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -45,11 +47,13 @@ public class FileUploader {
 //        Path path = Paths.get("/fsfile").toAbsolutePath().normalize();  //개발
 //        String savePath = path + "/dev_kbinnovation/";  //개발
         //Path path = Paths.get("/fsfile").toAbsolutePath().normalize();  //운영
-        String savePath = "D:\\fsfile\\dev_kbinnovation\\";  //로컬
+        //String savePath = "D:\\fsfile\\dev_kbinnovation\\";  //로컬
         //String savePath = "/fsfile/dev_kbinnovation/";  //개발
         //String savePath = "/fsfile/kbinnovation/";  //운영
 
         //String savePath = "/Users/johuiyang/Documents/web/uploads/kbinno/";
+
+        String savePath = FilePathUtil.getSavePath(PropertiesValue.profilesActive);
 
         File directory = new File(savePath);
 
@@ -66,7 +70,7 @@ public class FileUploader {
             directory.mkdirs();
         }
 
-        File targetFile = new File(savePath + fileName);
+        File targetFile = new File(savePath + File.separator + fileName);
 
         // 파일 저장
         /*

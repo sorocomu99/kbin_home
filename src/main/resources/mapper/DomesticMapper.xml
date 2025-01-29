@@ -46,7 +46,7 @@
              , AFFI.SORT_NO      AS SORT_NO
              , AFFI.CTGRY_NM     AS CTGRY_NM
              , FILES.FILE_NM     AS AFFILIATE_FILE_NAME
-             , FILES.FILE_PATH   AS AFFILIATE_PATH
+             , REPLACE(FILES.FILE_PATH, '\', '/')   AS AFFILIATE_PATH
           FROM KB_AFFILIATE_INFO AFFI
              , KB_FILE_INFO FILES
          WHERE AFFI.ATCH_FILE_SN = FILES.FILE_SN(+)
@@ -62,7 +62,7 @@
              , COOPE.SORT_NO       AS SORT_NO
              , FILES.ORGNL_FILE_NM AS ORIGIN_FILE_NAME
              , FILES.FILE_NM       AS COOPE_FILE_NAME
-             , FILES.FILE_PATH     AS COOPE_PATH
+             , REPLACE(FILES.FILE_PATH, '\', '/')     AS COOPE_PATH
           FROM KB_COOPE_INFO COOPE
              , KB_FILE_INFO FILES
          WHERE COOPE.ATCH_FILE_ID = FILES.FILE_SN(+)
@@ -77,13 +77,13 @@
              , PLC.PLC_ADDR         AS PLC_ADDR
              , PLC.SORT_NO          AS SORT_NO
              , PLC.ATCH_FILE_SN1    AS ATCH_FILE_SN1
-             , FILES1.FILE_PATH     AS PLC_PATH1
+             , REPLACE(FILES1.FILE_PATH, '\', '/')     AS PLC_PATH1
              , FILES1.FILE_NM       AS PLC_FILE_NAME1
              , PLC.ATCH_FILE_SN2    AS ATCH_FILE_SN2
-             , FILES2.FILE_PATH     AS PLC_PATH2
+             , REPLACE(FILES2.FILE_PATH, '\', '/')     AS PLC_PATH2
              , FILES2.FILE_NM       AS PLC_FILE_NAME2
              , PLC.ATCH_FILE_SN3    AS ATCH_FILE_SN3
-             , FILES3.FILE_PATH     AS PLC_PATH3
+             , REPLACE(FILES3.FILE_PATH, '\', '/')     AS PLC_PATH3
              , FILES3.FILE_NM       AS PLC_FILE_NAME3
         FROM KB_PLC_INFO PLC
            , KB_FILE_INFO FILES1

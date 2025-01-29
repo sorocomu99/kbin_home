@@ -10,7 +10,7 @@
              , EXCH.EXCH_CN        AS EXCH_CN
              , EXCH.EXPSR_YN       AS EXPSR_YN
              , EXCH.SORT_NO        AS SORT_NO
-             , FILES.FILE_PATH     AS INTER_PATH
+             , REPLACE(FILES.FILE_PATH, '\', '/')     AS INTER_PATH
              , FILES.FILE_NM       AS INTER_FILE_NAME
           FROM KB_EXCH_INFO EXCH
              , KB_FILE_INFO FILES

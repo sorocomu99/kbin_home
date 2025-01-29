@@ -32,7 +32,7 @@
                 ,FILES.FILE_SN                                  AS atch_file_sn
                 ,FILES.ORGNL_FILE_NM                            AS ori_file_name
                 ,FILES.FILE_NM                                  AS file_name
-                ,FILES.FILE_PATH                                AS file_path
+                ,REPLACE(FILES.FILE_PATH, '\', '/')                                AS file_path
                 FROM KB_PORT_INFO PORT
                 ,KB_FILE_INFO FILES
                 WHERE

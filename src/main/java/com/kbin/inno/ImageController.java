@@ -4,6 +4,8 @@ import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import com.kbin.inno.common.FilePathUtil;
+import com.kbin.inno.common.PropertiesValue;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
@@ -23,11 +25,13 @@ public class ImageController {
 	@ResponseBody
     public ResponseEntity<Resource> getImage(@PathVariable String imageName) {
         //Path path = Paths.get("D:/fsfile/dev_kbinnovation/").resolve(imageName).normalize();
-        String imagePath = "D:/fsfile/dev_kbinnovation/" + imageName;  //로컬
+        //String imagePath = "D:/fsfile/dev_kbinnovation/" + imageName;  //로컬
         //String imagePath = "/fsfile/dev_kbinnovation/" + imageName;  //개발
         //String imagePath = "/fsfile/kbinnovation/" + imageName;  //운영
         //System.out.println("imagePath==================="+imagePath);
         //Resource resource = new FileSystemResource(path.toString());
+
+        String imagePath = FilePathUtil.getSavePath(PropertiesValue.profilesActive) + File.separator + imageName;
         Resource resource = new FileSystemResource(imagePath);
 
         if (resource.exists()) {
@@ -42,10 +46,12 @@ public class ImageController {
     @RequestMapping("/summernoteimages/{imageName:.+}")
     @ResponseBody
     public ResponseEntity<Resource> getNoteImage(@PathVariable String imageName) {
-    	String imagePath = "D:/fsfile/dev_kbinnovation/" + imageName;  //로컬
+    	//String imagePath = "D:/fsfile/dev_kbinnovation/" + imageName;  //로컬
         //String imagePath = "/fsfile/dev_kbinnovation/" + imageName;  //개발
         //String imagePath = "/fsfile/kbinnovation/" + imageName;  //운영
-    	Resource resource = new FileSystemResource(imagePath);
+
+        String imagePath = FilePathUtil.getSavePath(PropertiesValue.profilesActive) + File.separator + imageName;
+        Resource resource = new FileSystemResource(imagePath);
 
         if (resource.exists()) {
         	//System.out.println("파일 존재: " + resource.getFilename());

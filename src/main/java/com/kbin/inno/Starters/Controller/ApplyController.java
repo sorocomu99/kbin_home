@@ -4,6 +4,8 @@ import com.kbin.inno.Starters.DTO.ApplyDTO;
 import com.kbin.inno.Starters.DTO.KbStartersApplyRequestWrapper;
 import com.kbin.inno.Starters.DTO.KbStartersSurveyDTO;
 import com.kbin.inno.Starters.Service.ApplyService;
+import com.kbin.inno.common.FilePathUtil;
+import com.kbin.inno.common.PropertiesValue;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -39,7 +41,9 @@ public class ApplyController {
         //String filePath = "/Users/johuiyang/Documents/web/uploads/kbinno/" + filename;
         //String filePath = "/fsfile/dev_kbinnovation/" + filename;  //개발
         //String filePath = "/fsfile/kbinnovation/" + filename;  //운영
-        String filePath = "D:\\fsfile\\dev_kbinnovation\\" + filename;  //로컬
+        //String filePath = "D:\\fsfile\\dev_kbinnovation\\" + filename;  //로컬
+
+        String filePath = FilePathUtil.getSavePath(PropertiesValue.profilesActive) + File.separator + filename;
 
         if(!StringUtils.hasText(filename)
                 || (filename.contains("/") || filename.contains("\\"))) {

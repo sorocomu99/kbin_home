@@ -45,7 +45,7 @@
                                    , FILES.FILE_SN                           AS ATCH_FILE_SN
                                    , FILES.ORGNL_FILE_NM                     AS ORIGIN_FILE_NAME
                                    , FILES.FILE_NM                           AS NTC_FILE_NAME
-                                   , FILES.FILE_PATH                         AS NTC_PATH
+                                   , REPLACE(FILES.FILE_PATH, '\', '/')                         AS NTC_PATH
                                 FROM KB_NTC_INFO NTC
                                    , KB_FILE_INFO FILES
                                WHERE NTC.NTC_YN = 'Y'
@@ -64,7 +64,7 @@
                                    , FILES.FILE_SN       AS ATCH_FILE_SN
                                    , FILES.ORGNL_FILE_NM AS ORIGIN_FILE_NAME
                                    , FILES.FILE_NM       AS NTC_FILE_NAME
-                                   , FILES.FILE_PATH     AS NTC_PATH
+                                   , REPLACE(FILES.FILE_PATH, '\', '/')     AS NTC_PATH
                                 FROM KB_NTC_INFO NTC
                                    , KB_FILE_INFO FILES
                                WHERE NTC_YN = 'N'
@@ -110,7 +110,7 @@
              , FILES.FILE_SN                              AS ATCH_FILE_SN
              , FILES.ORGNL_FILE_NM                        AS ORIGIN_FILE_NAME
              , FILES.FILE_NM                              AS NTC_FILE_NAME
-             , FILES.FILE_PATH                            AS NTC_PATH
+             , REPLACE(FILES.FILE_PATH, '\', '/')                            AS NTC_PATH
         FROM (
               SELECT NTC.NTC_SN
                    , NTC.NTC_TTL
@@ -140,7 +140,7 @@
                                   , FILES.FILE_SN                           AS ATCH_FILE_SN
                                   , FILES.ORGNL_FILE_NM                     AS ORIGIN_FILE_NAME
                                   , FILES.FILE_NM                           AS NTC_FILE_NAME
-                                  , FILES.FILE_PATH                         AS NTC_PATH
+                                  , REPLACE(FILES.FILE_PATH, '\', '/')                         AS NTC_PATH
                                FROM KB_NTC_INFO NTC
                                   , KB_FILE_INFO FILES
                                   , KB_MNGR_MBR_INFO MEM
@@ -164,7 +164,7 @@
                                      , FILES.FILE_SN                           AS ATCH_FILE_SN
                                      , FILES.ORGNL_FILE_NM                     AS ORIGIN_FILE_NAME
                                      , FILES.FILE_NM                           AS NTC_FILE_NAME
-                                     , FILES.FILE_PATH                         AS NTC_PATH
+                                     , REPLACE(FILES.FILE_PATH, '\', '/')                         AS NTC_PATH
                                   FROM KB_NTC_INFO NTC
                                      , KB_FILE_INFO FILES
                                      , KB_MNGR_MBR_INFO MEM
