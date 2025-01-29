@@ -196,13 +196,13 @@
                             <dd>
                                 <div class="chips">
                                     <th:block th:if="${bizList.web_srvc_link != null and bizList.web_srvc_link != ''}">
-                                        <a th:href="${bizList.web_srvc_link}" target="_blank"><span class="chip"><i class="icon icon-web"></i> Web</span></a>
+                                        <a th:href="${bizList.web_srvc_link.startsWith('http') ? bizList.web_srvc_link : 'https://' + bizList.web_srvc_link}" target="_blank"><span class="chip"><i class="icon icon-web"></i> Web</span></a>
                                     </th:block>
                                     <th:block th:if="${bizList.apple_app_link != null and bizList.apple_app_link != ''}">
-                                        <a th:href="${bizList.apple_app_link}" target="_blank"><span class="chip"><i class="icon icon-ios"></i> iOS</span></a>
+                                        <a th:href="${bizList.apple_app_link.startsWith('http') ? bizList.apple_app_link : 'https://' + bizList.apple_app_link}" target="_blank"><span class="chip"><i class="icon icon-ios"></i> iOS</span></a>
                                     </th:block>
                                     <th:block th:if="${bizList.google_app_link != null and bizList.google_app_link != ''}">
-                                        <a th:href="${bizList.google_app_link}" target="_blank"><span class="chip"><i class="icon icon-android green"></i> Android</span></a>
+                                        <a th:href="${bizList.google_app_link.startsWith('http') ? bizList.google_app_link : 'https://' + bizList.google_app_link}" target="_blank"><span class="chip"><i class="icon icon-android green"></i> Android</span></a>
                                     </th:block>
                                     <!--<span class="chip"><i class="icon icon-ios"></i> iOS</span>
                                     <span class="chip"><i class="icon icon-android"></i> Android</span>-->
@@ -407,62 +407,59 @@
                         <thead>
                         <tr>
                             <th>항목</th>
-                            <th>2019</th>
-                            <th>2020</th>
-                            <th>2021</th>
-                            <th>2022</th>
-                            <th>2023</th>
+                            <th th:each="slsInfo : ${selectSlsList}" th:text="${slsInfo.yr}">
+                            </th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
                         <tr>
                             <th>매출액</th>
-                            <td><span class="" th:classappend="${selectSlsChgList1.sls_amt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList1.sls_amt_str}"></span></td>
-                            <td><span class="" th:classappend="${selectSlsChgList2.sls_amt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList2.sls_amt_str}"></span></td>
-                            <td><span class="" th:classappend="${selectSlsChgList3.sls_amt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList3.sls_amt_str}"></span></td>
-                            <td><span class="" th:classappend="${selectSlsChgList4.sls_amt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList4.sls_amt_str}"></span></td>
-                            <td><span class="" th:classappend="${selectSlsChgList5.sls_amt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList5.sls_amt_str}"></span></td>
+                            <td th:if="${selectSlsChgList1 != null}"><span class="" th:classappend="${selectSlsChgList1.sls_amt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList1.sls_amt_str}"></span></td>
+                            <td th:if="${selectSlsChgList2 != null}"><span class="" th:classappend="${selectSlsChgList2.sls_amt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList2.sls_amt_str}"></span></td>
+                            <td th:if="${selectSlsChgList3 != null}"><span class="" th:classappend="${selectSlsChgList3.sls_amt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList3.sls_amt_str}"></span></td>
+                            <td th:if="${selectSlsChgList4 != null}"><span class="" th:classappend="${selectSlsChgList4.sls_amt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList4.sls_amt_str}"></span></td>
+                            <td th:if="${selectSlsChgList5 != null}"><span class="" th:classappend="${selectSlsChgList5.sls_amt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList5.sls_amt_str}"></span></td>
                         </tr>
                         <tr>
                             <th>매출원가</th>
-                            <td><span class="" th:classappend="${selectSlsChgList1.sls_cost_amt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList1.sls_cost_amt_str}"></span></td>
-                            <td><span class="" th:classappend="${selectSlsChgList2.sls_cost_amt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList2.sls_cost_amt_str}"></span></td>
-                            <td><span class="" th:classappend="${selectSlsChgList3.sls_cost_amt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList3.sls_cost_amt_str}"></span></td>
-                            <td><span class="" th:classappend="${selectSlsChgList4.sls_cost_amt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList4.sls_cost_amt_str}"></span></td>
-                            <td><span class="" th:classappend="${selectSlsChgList5.sls_cost_amt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList5.sls_cost_amt_str}"></span></td>
+                            <td th:if="${selectSlsChgList1 != null}"><span class="" th:classappend="${selectSlsChgList1.sls_cost_amt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList1.sls_cost_amt_str}"></span></td>
+                            <td th:if="${selectSlsChgList2 != null}"><span class="" th:classappend="${selectSlsChgList2.sls_cost_amt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList2.sls_cost_amt_str}"></span></td>
+                            <td th:if="${selectSlsChgList3 != null}"><span class="" th:classappend="${selectSlsChgList3.sls_cost_amt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList3.sls_cost_amt_str}"></span></td>
+                            <td th:if="${selectSlsChgList4 != null}"><span class="" th:classappend="${selectSlsChgList4.sls_cost_amt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList4.sls_cost_amt_str}"></span></td>
+                            <td th:if="${selectSlsChgList5 != null}"><span class="" th:classappend="${selectSlsChgList5.sls_cost_amt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList5.sls_cost_amt_str}"></span></td>
                         </tr>
                         <tr>
                             <th>매출총이익</th>
-                            <td><span class="" th:classappend="${selectSlsChgList1.sls_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList1.sls_gramt_str}"></span></td>
-                            <td><span class="" th:classappend="${selectSlsChgList2.sls_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList2.sls_gramt_str}"></span></td>
-                            <td><span class="" th:classappend="${selectSlsChgList3.sls_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList3.sls_gramt_str}"></span></td>
-                            <td><span class="" th:classappend="${selectSlsChgList4.sls_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList4.sls_gramt_str}"></span></td>
-                            <td><span class="" th:classappend="${selectSlsChgList5.sls_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList5.sls_gramt_str}"></span></td>
+                            <td th:if="${selectSlsChgList1 != null}"><span class="" th:classappend="${selectSlsChgList1.sls_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList1.sls_gramt_str}"></span></td>
+                            <td th:if="${selectSlsChgList2 != null}"><span class="" th:classappend="${selectSlsChgList2.sls_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList2.sls_gramt_str}"></span></td>
+                            <td th:if="${selectSlsChgList3 != null}"><span class="" th:classappend="${selectSlsChgList3.sls_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList3.sls_gramt_str}"></span></td>
+                            <td th:if="${selectSlsChgList4 != null}"><span class="" th:classappend="${selectSlsChgList4.sls_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList4.sls_gramt_str}"></span></td>
+                            <td th:if="${selectSlsChgList5 != null}"><span class="" th:classappend="${selectSlsChgList5.sls_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList5.sls_gramt_str}"></span></td>
                         </tr>
                         <tr>
                             <th>판관비</th>
-                            <td><span class="" th:classappend="${selectSlsChgList1.sga_amt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList1.sga_amt_str}"></span></td>
-                            <td><span class="" th:classappend="${selectSlsChgList2.sga_amt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList2.sga_amt_str}"></span></td>
-                            <td><span class="" th:classappend="${selectSlsChgList3.sga_amt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList3.sga_amt_str}"></span></td>
-                            <td><span class="" th:classappend="${selectSlsChgList4.sga_amt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList4.sga_amt_str}"></span></td>
-                            <td><span class="" th:classappend="${selectSlsChgList5.sga_amt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList5.sga_amt_str}"></span></td>
+                            <td th:if="${selectSlsChgList1 != null}"><span class="" th:classappend="${selectSlsChgList1.sga_amt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList1.sga_amt_str}"></span></td>
+                            <td th:if="${selectSlsChgList2 != null}"><span class="" th:classappend="${selectSlsChgList2.sga_amt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList2.sga_amt_str}"></span></td>
+                            <td th:if="${selectSlsChgList3 != null}"><span class="" th:classappend="${selectSlsChgList3.sga_amt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList3.sga_amt_str}"></span></td>
+                            <td th:if="${selectSlsChgList4 != null}"><span class="" th:classappend="${selectSlsChgList4.sga_amt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList4.sga_amt_str}"></span></td>
+                            <td th:if="${selectSlsChgList5 != null}"><span class="" th:classappend="${selectSlsChgList5.sga_amt_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList5.sga_amt_str}"></span></td>
                         </tr>
                         <tr>
                             <th>영업이익</th>
-                            <td><span class="" th:classappend="${selectSlsChgList1.operating_profit_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList1.operating_profit_str}"></span></td>
-                            <td><span class="" th:classappend="${selectSlsChgList2.operating_profit_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList2.operating_profit_str}"></span></td>
-                            <td><span class="" th:classappend="${selectSlsChgList3.operating_profit_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList3.operating_profit_str}"></span></td>
-                            <td><span class="" th:classappend="${selectSlsChgList4.operating_profit_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList4.operating_profit_str}"></span></td>
-                            <td><span class="" th:classappend="${selectSlsChgList5.operating_profit_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList5.operating_profit_str}"></span></td>
+                            <td th:if="${selectSlsChgList1 != null}"><span class="" th:classappend="${selectSlsChgList1.operating_profit_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList1.operating_profit_str}"></span></td>
+                            <td th:if="${selectSlsChgList2 != null}"><span class="" th:classappend="${selectSlsChgList2.operating_profit_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList2.operating_profit_str}"></span></td>
+                            <td th:if="${selectSlsChgList3 != null}"><span class="" th:classappend="${selectSlsChgList3.operating_profit_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList3.operating_profit_str}"></span></td>
+                            <td th:if="${selectSlsChgList4 != null}"><span class="" th:classappend="${selectSlsChgList4.operating_profit_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList4.operating_profit_str}"></span></td>
+                            <td th:if="${selectSlsChgList5 != null}"><span class="" th:classappend="${selectSlsChgList5.operating_profit_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList5.operating_profit_str}"></span></td>
                         </tr>
                         <tr>
                             <th>순이익</th>
-                            <td><span class="" th:classappend="${selectSlsChgList1.net_profit_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList1.net_profit_str}"></span></td>
-                            <td><span class="" th:classappend="${selectSlsChgList2.net_profit_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList2.net_profit_str}"></span></td>
-                            <td><span class="" th:classappend="${selectSlsChgList3.net_profit_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList3.net_profit_str}"></span></td>
-                            <td><span class="" th:classappend="${selectSlsChgList4.net_profit_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList4.net_profit_str}"></span></td>
-                            <td><span class="" th:classappend="${selectSlsChgList5.net_profit_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList5.net_profit_str}"></span></td>
+                            <td th:if="${selectSlsChgList1 != null}"><span class="" th:classappend="${selectSlsChgList1.net_profit_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList1.net_profit_str}"></span></td>
+                            <td th:if="${selectSlsChgList2 != null}"><span class="" th:classappend="${selectSlsChgList2.net_profit_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList2.net_profit_str}"></span></td>
+                            <td th:if="${selectSlsChgList3 != null}"><span class="" th:classappend="${selectSlsChgList3.net_profit_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList3.net_profit_str}"></span></td>
+                            <td th:if="${selectSlsChgList4 != null}"><span class="" th:classappend="${selectSlsChgList4.net_profit_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList4.net_profit_str}"></span></td>
+                            <td th:if="${selectSlsChgList5 != null}"><span class="" th:classappend="${selectSlsChgList5.net_profit_col == 'RED'} ? 'color-red' : ''" th:text="${selectSlsChgList5.net_profit_str}"></span></td>
                         </tr>
                         </tbody>
                     </table>
@@ -477,61 +474,57 @@
                         <thead>
                         <tr>
                             <th>항목</th>
-                            <th>2019</th>
-                            <th>2020</th>
-                            <th>2021</th>
-                            <th>2022</th>
-                            <th>2023</th>
+                            <th th:each="astInfo : ${selectAstList}" th:text="${astInfo.yr}">
                         </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <th>유동자산</th>
-                                <td><span class="" th:classappend="${selectAstChgList1.current_assets_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList1.current_assets_str}"></span></td>
-                                <td><span class="" th:classappend="${selectAstChgList2.current_assets_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList2.current_assets_str}"></span></td>
-                                <td><span class="" th:classappend="${selectAstChgList3.current_assets_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList3.current_assets_str}"></span></td>
-                                <td><span class="" th:classappend="${selectAstChgList4.current_assets_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList4.current_assets_str}"></span></td>
-                                <td><span class="" th:classappend="${selectAstChgList5.current_assets_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList5.current_assets_str}"></span></td>
+                                <td th:if="${selectAstChgList1 != null}"><span class="" th:classappend="${selectAstChgList1.current_assets_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList1.current_assets_str}"></span></td>
+                                <td th:if="${selectAstChgList2 != null}"><span class="" th:classappend="${selectAstChgList2.current_assets_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList2.current_assets_str}"></span></td>
+                                <td th:if="${selectAstChgList3 != null}"><span class="" th:classappend="${selectAstChgList3.current_assets_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList3.current_assets_str}"></span></td>
+                                <td th:if="${selectAstChgList4 != null}"><span class="" th:classappend="${selectAstChgList4.current_assets_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList4.current_assets_str}"></span></td>
+                                <td th:if="${selectAstChgList5 != null}"><span class="" th:classappend="${selectAstChgList5.current_assets_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList5.current_assets_str}"></span></td>
                             </tr>
                             <tr>
                                 <th>비유동자</th>
-                                <td><span class="" th:classappend="${selectAstChgList1.non_current_assets_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList1.non_current_assets_str}"></span></td>
-                                <td><span class="" th:classappend="${selectAstChgList2.non_current_assets_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList2.non_current_assets_str}"></span></td>
-                                <td><span class="" th:classappend="${selectAstChgList3.non_current_assets_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList3.non_current_assets_str}"></span></td>
-                                <td><span class="" th:classappend="${selectAstChgList4.non_current_assets_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList4.non_current_assets_str}"></span></td>
-                                <td><span class="" th:classappend="${selectAstChgList5.non_current_assets_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList5.non_current_assets_str}"></span></td>
+                                <td th:if="${selectAstChgList1 != null}"><span class="" th:classappend="${selectAstChgList1.non_current_assets_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList1.non_current_assets_str}"></span></td>
+                                <td th:if="${selectAstChgList2 != null}"><span class="" th:classappend="${selectAstChgList2.non_current_assets_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList2.non_current_assets_str}"></span></td>
+                                <td th:if="${selectAstChgList3 != null}"><span class="" th:classappend="${selectAstChgList3.non_current_assets_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList3.non_current_assets_str}"></span></td>
+                                <td th:if="${selectAstChgList4 != null}"><span class="" th:classappend="${selectAstChgList4.non_current_assets_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList4.non_current_assets_str}"></span></td>
+                                <td th:if="${selectAstChgList5 != null}"><span class="" th:classappend="${selectAstChgList5.non_current_assets_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList5.non_current_assets_str}"></span></td>
                             </tr>
                             <tr>
                                 <th>자산총계</th>
-                                <td><span class="" th:classappend="${selectAstChgList1.ast_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList1.ast_gramt_str}"></span></td>
-                                <td><span class="" th:classappend="${selectAstChgList2.ast_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList2.ast_gramt_str}"></span></td>
-                                <td><span class="" th:classappend="${selectAstChgList3.ast_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList3.ast_gramt_str}"></span></td>
-                                <td><span class="" th:classappend="${selectAstChgList4.ast_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList4.ast_gramt_str}"></span></td>
-                                <td><span class="" th:classappend="${selectAstChgList5.ast_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList5.ast_gramt_str}"></span></td>
+                                <td th:if="${selectAstChgList1 != null}"><span class="" th:classappend="${selectAstChgList1.ast_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList1.ast_gramt_str}"></span></td>
+                                <td th:if="${selectAstChgList2 != null}"><span class="" th:classappend="${selectAstChgList2.ast_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList2.ast_gramt_str}"></span></td>
+                                <td th:if="${selectAstChgList3 != null}"><span class="" th:classappend="${selectAstChgList3.ast_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList3.ast_gramt_str}"></span></td>
+                                <td th:if="${selectAstChgList4 != null}"><span class="" th:classappend="${selectAstChgList4.ast_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList4.ast_gramt_str}"></span></td>
+                                <td th:if="${selectAstChgList5 != null}"><span class="" th:classappend="${selectAstChgList5.ast_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList5.ast_gramt_str}"></span></td>
                             </tr>
                             <tr>
                                 <th>부채총계</th>
-                                <td><span class="" th:classappend="${selectAstChgList1.debt_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList1.debt_gramt_str}"></span></td>
-                                <td><span class="" th:classappend="${selectAstChgList2.debt_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList2.debt_gramt_str}"></span></td>
-                                <td><span class="" th:classappend="${selectAstChgList3.debt_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList3.debt_gramt_str}"></span></td>
-                                <td><span class="" th:classappend="${selectAstChgList4.debt_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList4.debt_gramt_str}"></span></td>
-                                <td><span class="" th:classappend="${selectAstChgList5.debt_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList5.debt_gramt_str}"></span></td>
+                                <td th:if="${selectAstChgList1 != null}"><span class="" th:classappend="${selectAstChgList1.debt_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList1.debt_gramt_str}"></span></td>
+                                <td th:if="${selectAstChgList2 != null}"><span class="" th:classappend="${selectAstChgList2.debt_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList2.debt_gramt_str}"></span></td>
+                                <td th:if="${selectAstChgList3 != null}"><span class="" th:classappend="${selectAstChgList3.debt_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList3.debt_gramt_str}"></span></td>
+                                <td th:if="${selectAstChgList4 != null}"><span class="" th:classappend="${selectAstChgList4.debt_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList4.debt_gramt_str}"></span></td>
+                                <td th:if="${selectAstChgList5 != null}"><span class="" th:classappend="${selectAstChgList5.debt_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList5.debt_gramt_str}"></span></td>
                             </tr>
                             <tr>
                                 <th>자본금</th>
-                                <td><span class="" th:classappend="${selectAstChgList1.cptl_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList1.cptl_str}"></span></td>
-                                <td><span class="" th:classappend="${selectAstChgList2.cptl_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList2.cptl_str}"></span></td>
-                                <td><span class="" th:classappend="${selectAstChgList3.cptl_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList3.cptl_str}"></span></td>
-                                <td><span class="" th:classappend="${selectAstChgList4.cptl_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList4.cptl_str}"></span></td>
-                                <td><span class="" th:classappend="${selectAstChgList5.cptl_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList5.cptl_str}"></span></td>
+                                <td th:if="${selectAstChgList1 != null}"><span class="" th:classappend="${selectAstChgList1.cptl_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList1.cptl_str}"></span></td>
+                                <td th:if="${selectAstChgList2 != null}"><span class="" th:classappend="${selectAstChgList2.cptl_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList2.cptl_str}"></span></td>
+                                <td th:if="${selectAstChgList3 != null}"><span class="" th:classappend="${selectAstChgList3.cptl_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList3.cptl_str}"></span></td>
+                                <td th:if="${selectAstChgList4 != null}"><span class="" th:classappend="${selectAstChgList4.cptl_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList4.cptl_str}"></span></td>
+                                <td th:if="${selectAstChgList5 != null}"><span class="" th:classappend="${selectAstChgList5.cptl_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList5.cptl_str}"></span></td>
                             </tr>
                             <tr>
                                 <th>자본총계</th>
-                                <td><span class="" th:classappend="${selectAstChgList1.cptl_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList1.cptl_gramt_str}"></span></td>
-                                <td><span class="" th:classappend="${selectAstChgList2.cptl_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList2.cptl_gramt_str}"></span></td>
-                                <td><span class="" th:classappend="${selectAstChgList3.cptl_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList3.cptl_gramt_str}"></span></td>
-                                <td><span class="" th:classappend="${selectAstChgList4.cptl_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList4.cptl_gramt_str}"></span></td>
-                                <td><span class="" th:classappend="${selectAstChgList5.cptl_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList5.cptl_gramt_str}"></span></td>
+                                <td th:if="${selectAstChgList1 != null}"><span class="" th:classappend="${selectAstChgList1.cptl_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList1.cptl_gramt_str}"></span></td>
+                                <td th:if="${selectAstChgList2 != null}"><span class="" th:classappend="${selectAstChgList2.cptl_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList2.cptl_gramt_str}"></span></td>
+                                <td th:if="${selectAstChgList3 != null}"><span class="" th:classappend="${selectAstChgList3.cptl_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList3.cptl_gramt_str}"></span></td>
+                                <td th:if="${selectAstChgList4 != null}"><span class="" th:classappend="${selectAstChgList4.cptl_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList4.cptl_gramt_str}"></span></td>
+                                <td th:if="${selectAstChgList5 != null}"><span class="" th:classappend="${selectAstChgList5.cptl_gramt_col == 'RED'} ? 'color-red' : ''" th:text="${selectAstChgList5.cptl_gramt_str}"></span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -775,6 +768,7 @@
     }
 
     function wordChart() {
+
         // 워드 차트 생성
         const chart = echarts.init(document.getElementById('wordChart'), null, {
             renderer: 'svg',

@@ -97,10 +97,11 @@
                                     <!-- 대분류 그룹화를 위해 미리 컨트롤러에서 처리된 데이터 사용 -->
                                     <th:block th:each="group : ${historyGroups.get(year)}">
                                         <h1 th:text="${group.hstry_lclsf_ttl}">대분류 제목</h1>
-                                        <ul th:if="${group.hstry_lclsf_ttlList != null and not #lists.isEmpty(group.hstry_lclsf_ttlList)}">
+                                        <ul style="display: grid;" th:if="${group.hstry_lclsf_ttlList != null and not #lists.isEmpty(group.hstry_lclsf_ttlList)}">
                                             <th:block th:with="hstry_lclsf_ttlList=${group.hstry_lclsf_ttlList}">
-                                                <span th:each="hstry_lclsf_ttl : ${hstry_lclsf_ttlList}">
-                                                    <p><span style="font-size: 0.6rem;vertical-align: middle">●</span> <span th:utext="${hstry_lclsf_ttl}"></span></p>
+                                                <span th:each="hstry_lclsf_ttl : ${hstry_lclsf_ttlList}" style="display: inline-table">
+                                                    <span style="font-size: 0.6rem;vertical-align: middle;margin-right: 0.6rem;">●</span>
+                                                    <span style="word-break: break-word;white-space: pre-wrap" th:utext="${hstry_lclsf_ttl}"></span>
                                                 </span>
                                             </th:block>
                                         </ul>

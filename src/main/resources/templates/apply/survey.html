@@ -265,6 +265,12 @@
             alert("회사명과 이메일 주소를 입력해주세요.");
             return;
         }
+        if (!emailCheck(email)) {
+            alert("유효하지 않은 이메일 주소입니다.");
+            $("input[name='email']").focus()
+            return false;
+        }
+
         formData.append("survey_no", $("input[name='survey_no']").val());
         formData.append("company_name", companyName);
         formData.append("email", email);
@@ -284,6 +290,12 @@
                 }
             }
         });
+    }
+
+    //이메일 정합성 체크
+    function emailCheck(email_address){
+        var email_regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
+        return email_regex.test(email_address);
     }
 
     function changeContent(current, next) {

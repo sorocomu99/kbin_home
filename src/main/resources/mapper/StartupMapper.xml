@@ -551,6 +551,7 @@
              , NOCS
           FROM KB_API_KEYWD_INFO
          WHERE ENT_CD = #{ent_cd}
+           AND KEYWD is not null
          ORDER BY NOCS DESC
     </select>
 </mapper>

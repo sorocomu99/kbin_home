@@ -41,6 +41,10 @@
                     <img src="" alt="">
                 </div>-->
                 <!-- 에디터 작성 -->
+<!--                <p th:utext="${hub.hub_cn}"></p>-->
+            </div>
+            <div class="contents">
+                <!-- 에디터 작성 -->
                 <p th:utext="${hub.hub_cn}"></p>
             </div>
             <!-- 첨부파일 -->
@@ -48,7 +52,7 @@
                 <li class="file">
                     <ul class="list">
                         <li>
-                            <a th:href="@{${hub.hub_path + hub.hub_file_name}}"  title="첨부파일 다운로드" target="_filedown" download>
+                            <a th:href="@{${hub.hub_path + hub.hub_file_name}}"  title="첨부파일 다운로드" target="_filedown" th:attr="download=${hub?.origin_file_name}">
                                 <i class="icon icon-download"></i>
                                 <span th:text="${hub.origin_file_name}"></span>
                             </a>

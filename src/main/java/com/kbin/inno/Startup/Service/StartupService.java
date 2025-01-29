@@ -91,48 +91,31 @@ public class StartupService {
         List<EmploDTO> selectEmploList = startupDAO.selectEmploList(ent_cd);
         //투자정보 조회 (리스트)
         List<InvestDTO> selectInvestList = startupDAO.selectInvestList(ent_cd);
+
         //매출정보 조회 (리스트)
         List<SlsDTO> selectSlsList = startupDAO.selectSlsList(ent_cd);
-        //SlsDTO selectSlsChgList1 = startupDAO.selectSlsChgList(ent_cd, "2019");
-        SlsDTO slsDTO = new SlsDTO();
-        slsDTO.setEnt_cd(ent_cd);
-        slsDTO.setYr("2019");
-        SlsDTO selectSlsChgList1 = startupDAO.selectSlsChgList(slsDTO);
-        slsDTO.setYr("2020");
-        SlsDTO selectSlsChgList2 = startupDAO.selectSlsChgList(slsDTO);
-        slsDTO.setYr("2021");
-        SlsDTO selectSlsChgList3 = startupDAO.selectSlsChgList(slsDTO);
-        slsDTO.setYr("2022");
-        SlsDTO selectSlsChgList4 = startupDAO.selectSlsChgList(slsDTO);
-        slsDTO.setYr("2023");
-        SlsDTO selectSlsChgList5 = startupDAO.selectSlsChgList(slsDTO);
-        /*
-        SlsDTO selectSlsChgList2 = startupDAO.selectSlsChgList(ent_cd, "2020");
-        SlsDTO selectSlsChgList3 = startupDAO.selectSlsChgList(ent_cd, "2021");
-        SlsDTO selectSlsChgList4 = startupDAO.selectSlsChgList(ent_cd, "2022");
-        SlsDTO selectSlsChgList5 = startupDAO.selectSlsChgList(ent_cd, "2023");
-        */
+        model.addAttribute("selectSlsList", selectSlsList);
+        if(selectSlsList != null) {
+            for(int i = 0; i < selectSlsList.size(); i++) {
+                SlsDTO slsDTO = new SlsDTO();
+                slsDTO.setEnt_cd(ent_cd);
+                slsDTO.setYr(selectSlsList.get(i).getYr());
+                model.addAttribute("selectSlsChgList" + (i + 1), startupDAO.selectSlsChgList(slsDTO));
+            }
+        }
+
         //재무상태 조회 (리스트)
         List<AstDTO> selectAstList = startupDAO.selectAstList(ent_cd);
-        AstDTO astDTO = new AstDTO();
-        astDTO.setEnt_cd(ent_cd);
-        astDTO.setYr("2019");
-        AstDTO selectAstChgList1 = startupDAO.selectAstChgList(astDTO);
-        astDTO.setYr("2020");
-        AstDTO selectAstChgList2 = startupDAO.selectAstChgList(astDTO);
-        astDTO.setYr("2021");
-        AstDTO selectAstChgList3 = startupDAO.selectAstChgList(astDTO);
-        astDTO.setYr("2022");
-        AstDTO selectAstChgList4 = startupDAO.selectAstChgList(astDTO);
-        astDTO.setYr("2023");
-        AstDTO selectAstChgList5 = startupDAO.selectAstChgList(astDTO);
-        /*
-        AstDTO selectAstChgList1 = startupDAO.selectAstChgList(ent_cd, "2019");
-        AstDTO selectAstChgList2 = startupDAO.selectAstChgList(ent_cd, "2020");
-        AstDTO selectAstChgList3 = startupDAO.selectAstChgList(ent_cd, "2021");
-        AstDTO selectAstChgList4 = startupDAO.selectAstChgList(ent_cd, "2022");
-        AstDTO selectAstChgList5 = startupDAO.selectAstChgList(ent_cd, "2023");
-        */
+        model.addAttribute("selectAstList", selectAstList);
+        if(selectAstList != null) {
+            for (int i = 0; i < selectAstList.size(); i++) {
+                AstDTO astDTO = new AstDTO();
+                astDTO.setEnt_cd(ent_cd);
+                astDTO.setYr(selectAstList.get(i).getYr());
+                model.addAttribute("selectAstChgList" + (i + 1), startupDAO.selectAstChgList(astDTO));
+            }
+        }
+
         //뉴스 메인 조회 (단건)
         NewsDTO selectNewsMain = startupDAO.selectNewsMain(ent_cd);
         //뉴스정보 조회 (리스트)
@@ -144,21 +127,7 @@ public class StartupService {
         model.addAttribute("selectBizList", selectBizList);
         model.addAttribute("selectEmploList", selectEmploList);
         model.addAttribute("selectInvestList", selectInvestList);
-        
-        model.addAttribute("selectSlsList", selectSlsList);
-        model.addAttribute("selectSlsChgList1", selectSlsChgList1);
-        model.addAttribute("selectSlsChgList2", selectSlsChgList2);
-        model.addAttribute("selectSlsChgList3", selectSlsChgList3);
-        model.addAttribute("selectSlsChgList4", selectSlsChgList4);
-        model.addAttribute("selectSlsChgList5", selectSlsChgList5);
-        
-        model.addAttribute("selectAstChgList1", selectAstChgList1);
-        model.addAttribute("selectAstChgList2", selectAstChgList2);
-        model.addAttribute("selectAstChgList3", selectAstChgList3);
-        model.addAttribute("selectAstChgList4", selectAstChgList4);
-        model.addAttribute("selectAstChgList5", selectAstChgList5);
-        
-        model.addAttribute("selectAstList", selectAstList);
+
         model.addAttribute("selectNewsMain", selectNewsMain);
         model.addAttribute("selectNewsList", selectNewsList);
         model.addAttribute("selectKeywdList", selectKeywdList);
