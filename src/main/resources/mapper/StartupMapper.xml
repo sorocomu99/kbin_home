@@ -438,6 +438,53 @@
                )
          WHERE ROWNUM = 1
     </select>
+    <select id="selectEntSlsList" parameterType="com.kbin.inno.Startup.DTO.SlsDTO" resultType="com.kbin.inno.Startup.DTO.SlsDTO">
+        /* 매출정보 조회 (리스트) */
+        SELECT ENT_CD
+             , YR
+             , SLS_AMT
+             , SLS_COST_AMT
+             , SLS_GRAMT
+             , SGA_AMT
+             , OPERATING_PROFIT
+             , NET_PROFIT
+             , CASE WHEN SLS_AMT >= 0 THEN 'BLACK'
+                    ELSE 'RED'
+            END SLS_AMT_COL
+             , CASE WHEN SLS_COST_AMT >= 0 THEN 'BLACK'
+                    ELSE 'RED'
+            END SLS_COST_AMT_COL
+             , CASE WHEN SLS_GRAMT >= 0 THEN 'BLACK'
+                    ELSE 'RED'
+            END SLS_GRAMT_COL
+             , CASE WHEN SGA_AMT >= 0 THEN 'BLACK'
+                    ELSE 'RED'
+            END SGA_AMT_COL
+             , CASE WHEN OPERATING_PROFIT >= 0 THEN 'BLACK'
+                    ELSE 'RED'
+            END OPERATING_PROFIT_COL
+             , CASE WHEN NET_PROFIT >= 0 THEN 'BLACK'
+                    ELSE 'RED'
+            END NET_PROFIT_COL
+             , TO_CHAR(SLS_AMT, 'fm999,999,999,990.00') SLS_AMT_STR
+             , TO_CHAR(SLS_COST_AMT, 'fm999,999,999,990.00') SLS_COST_AMT_STR
+             , TO_CHAR(SLS_GRAMT, 'fm999,999,999,990.00') SLS_GRAMT_STR
+             , TO_CHAR(SGA_AMT, 'fm999,999,999,990.00') SGA_AMT_STR
+             , TO_CHAR(OPERATING_PROFIT, 'fm999,999,999,990.00') OPERATING_PROFIT_STR
+             , TO_CHAR(NET_PROFIT, 'fm999,999,999,990.00') NET_PROFIT_STR
+        FROM (SELECT ENT_CD
+                   , YR
+                   , (NVL(SLS_AMT, 0) * 1000) / 1000000          SLS_AMT
+                   , (NVL(SLS_COST_AMT, 0) * 1000) / 1000000     SLS_COST_AMT
+                   , (NVL(SLS_GRAMT, 0) * 1000) / 1000000        SLS_GRAMT
+                   , (NVL(SGA_AMT, 0) * 1000) / 1000000          SGA_AMT
+                   , (NVL(OPERATING_PROFIT, 0) * 1000) / 1000000 OPERATING_PROFIT
+                   , (NVL(NET_PROFIT, 0) * 1000) / 1000000       NET_PROFIT
+              FROM KB_API_SLS_INFO
+              WHERE ENT_CD = #{ent_cd}
+             )
+        ORDER BY YR ASC;
+    </select>
     <select id="selectAstList" parameterType="String" resultType="com.kbin.inno.Startup.DTO.AstDTO">
         /* 재무상태 조회 (리스트) */
         SELECT ENT_CD
@@ -499,6 +546,50 @@
                   FROM DUAL
                )
          WHERE ROWNUM = 1
+    </select>
+    <select id="selectEntAstList" parameterType="String" resultType="com.kbin.inno.Startup.DTO.AstDTO">
+        /* 재무상태 조회 (리스트) */
+        SELECT ENT_CD
+             , YR
+             , CURRENT_ASSETS
+             , NON_CURRENT_ASSETS
+             , AST_GRAMT
+             , DEBT_GRAMT
+             , CPTL
+             , CPTL_GRAMT
+             , CASE WHEN CURRENT_ASSETS >= 0 THEN 'BLACK'
+                    ELSE 'RED'
+            END CURRENT_ASSETS_COL
+             , CASE WHEN NON_CURRENT_ASSETS >= 0 THEN 'BLACK'
+                    ELSE 'RED'
+            END NON_CURRENT_ASSETS_COL
+             , CASE WHEN AST_GRAMT >= 0 THEN 'BLACK'
+                    ELSE 'RED'
+            END AST_GRAMT_COL
+             , CASE WHEN DEBT_GRAMT >= 0 THEN 'BLACK'
+                    ELSE 'RED'
+            END DEBT_GRAMT_COL
+             , CASE WHEN CPTL >= 0 THEN 'BLACK'
+                    ELSE 'RED'
+            END CPTL_COL
+             , CASE WHEN CPTL_GRAMT >= 0 THEN 'BLACK'
+                    ELSE 'RED'
+            END CPTL_GRAMT_COL
+             , TO_CHAR(CURRENT_ASSETS, 'fm999,999,999,990.00') CURRENT_ASSETS_STR
+             , TO_CHAR(NON_CURRENT_ASSETS, 'fm999,999,999,990.00') NON_CURRENT_ASSETS_STR
+             , TO_CHAR(AST_GRAMT, 'fm999,999,999,990.00') AST_GRAMT_STR
+             , TO_CHAR(DEBT_GRAMT, 'fm999,999,999,990.00') DEBT_GRAMT_STR
+             , TO_CHAR(CPTL, 'fm999,999,999,990.00') CPTL_STR
+             , TO_CHAR(CPTL_GRAMT, 'fm999,999,999,990.00') CPTL_GRAMT_STR
+        FROM (SELECT ENT_CD, YR, (NVL(CURRENT_ASSETS, 0) * 1000) / 1000000 CURRENT_ASSETS
+                   , (NVL(NON_CURRENT_ASSETS, 0) * 1000) / 1000000 NON_CURRENT_ASSETS
+                   , (NVL(AST_GRAMT, 0) * 1000) / 1000000 AST_GRAMT
+                   , (NVL(DEBT_GRAMT, 0) * 1000) / 1000000 DEBT_GRAMT
+                   , (NVL(CPTL, 0) * 1000) / 1000000 CPTL
+                   , (NVL(CPTL_GRAMT, 0) * 1000) / 1000000 CPTL_GRAMT
+              FROM KB_API_AST_INFO WHERE ENT_CD = #{ent_cd}
+             )
+        ORDER BY YR ASC;
     </select>
     <select id="selectNewsMain" parameterType="String" resultType="com.kbin.inno.Startup.DTO.NewsDTO">
         SELECT ENT_CD

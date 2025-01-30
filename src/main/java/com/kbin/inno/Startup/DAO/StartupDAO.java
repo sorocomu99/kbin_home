@@ -27,10 +27,12 @@ public interface StartupDAO {
     List<SlsDTO> selectSlsList(String ent_cd);
     //SlsDTO selectSlsChgList(String ent_cd, String yr);
     SlsDTO selectSlsChgList(SlsDTO slsDTO);
+    List<SlsDTO> selectEntSlsList(String ent_cd);
     //재무상태 조회 (리스트)
     List<AstDTO> selectAstList(String ent_cd);
     //AstDTO selectAstChgList(String ent_cd, String yr);
     AstDTO selectAstChgList(AstDTO astDTO);
+    List<AstDTO> selectEntAstList(String ent_cd);
     //뉴스 메인 조회 (단건)
     NewsDTO selectNewsMain(String ent_cd);
     //뉴스정보 조회 (리스트)

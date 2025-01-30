@@ -93,26 +93,20 @@ public class StartupService {
         List<InvestDTO> selectInvestList = startupDAO.selectInvestList(ent_cd);
 
         //매출정보 조회 (리스트)
-        List<SlsDTO> selectSlsList = startupDAO.selectSlsList(ent_cd);
+        List<SlsDTO> selectSlsList = startupDAO.selectEntSlsList(ent_cd);
         model.addAttribute("selectSlsList", selectSlsList);
         if(selectSlsList != null) {
             for(int i = 0; i < selectSlsList.size(); i++) {
-                SlsDTO slsDTO = new SlsDTO();
-                slsDTO.setEnt_cd(ent_cd);
-                slsDTO.setYr(selectSlsList.get(i).getYr());
-                model.addAttribute("selectSlsChgList" + (i + 1), startupDAO.selectSlsChgList(slsDTO));
+                model.addAttribute("selectSlsChgList" + (i + 1), selectSlsList.get(i));
             }
         }
 
         //재무상태 조회 (리스트)
-        List<AstDTO> selectAstList = startupDAO.selectAstList(ent_cd);
+        List<AstDTO> selectAstList = startupDAO.selectEntAstList(ent_cd);
         model.addAttribute("selectAstList", selectAstList);
         if(selectAstList != null) {
             for (int i = 0; i < selectAstList.size(); i++) {
-                AstDTO astDTO = new AstDTO();
-                astDTO.setEnt_cd(ent_cd);
-                astDTO.setYr(selectAstList.get(i).getYr());
-                model.addAttribute("selectAstChgList" + (i + 1), startupDAO.selectAstChgList(astDTO));
+                model.addAttribute("selectAstChgList" + (i + 1), selectAstList.get(i));
             }
         }
 
