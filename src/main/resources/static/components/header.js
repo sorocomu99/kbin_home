@@ -40,25 +40,20 @@ class HeaderComponent extends HTMLElement {
                                 </ul>
                                 `;
 
-        if(!sessionStorage.getItem("hm")) {
-            $.ajax({
-                url: path + 'menu/list', // 요청 URL
-                type: 'GET', // HTTP 메서드
-                dataType: 'json',
-                async: false,
-                success: function(data) {
-                    // 게시글 전체 갯수와 li 태그 갯수가 일치하면 종료
-                    if(data !== null) {
-                        header_menu = createMenu(data);
-                        sessionStorage.setItem("hm", header_menu);
-                    }
-                },
-                error: function(xhr, status, error) {
+        $.ajax({
+            url: path + 'menu/list', // 요청 URL
+            type: 'GET', // HTTP 메서드
+            dataType: 'json',
+            async: false,
+            success: function(data) {
+                // 게시글 전체 갯수와 li 태그 갯수가 일치하면 종료
+                if(data !== null) {
+                    header_menu = createMenu(data);
                 }
-            });
-        }else{
-            header_menu = sessionStorage.getItem("hm");
-        }
+            },
+            error: function(xhr, status, error) {
+            }
+        });
 
         this.innerHTML = `
         <header class="header" data-header-theme="light">
@@ -100,6 +95,7 @@ function createMenu(menuData) {
     const depth1Menus = menuData.filter(menu => menu.menu_depth === 1);
 
     depth1Menus.forEach(depth1Menu => {
+        
         const depth1Li = document.createElement('li');
         const titleDiv = document.createElement('div');
         titleDiv.className = 'title';

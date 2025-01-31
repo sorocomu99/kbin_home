@@ -124,8 +124,8 @@
                                         <label for="option2-5" class="label">1,000억원 이상</label>
                                     </div>
                                     <div id="range1" class="block-group block-group-range">
-                                        <input class="input" type="number" id="minAmt" name="minAmt" placeholder="최소"> <span class="span">-</span>
-                                        <input class="input" type="number" id="maxAmt" name="maxAmt" placeholder="최대"> <span class="span">억원</span>
+                                        <input class="input" type="number" id="minAmt" name="minAmt" placeholder="최소" oninput="splitAmt(this, 5)" onblur="splitAmt(this, 5)"> <span class="span">-</span>
+                                        <input class="input" type="number" id="maxAmt" name="maxAmt" placeholder="최대" oninput="splitAmt(this, 5)" onblur="splitAmt(this, 5)"> <span class="span">억원</span>
                                     </div>
                                 </div>
                             </div>
@@ -149,8 +149,8 @@
                                         <label for="option3-4" class="label">100명 초과</label>
                                     </div>
                                     <div id="range2" class="block-group block-group-range">
-                                        <input class="input" type="number" id="minEmp" name="minEmp" th:value="${minEmp}" placeholder="최소"> <span class="span">-</span>
-                                        <input class="input" type="number" id="maxEmp" name="maxEmp" th:value="${minEmp}" placeholder="최대"> <span class="span">명</span>
+                                        <input class="input" type="number" id="minEmp" name="minEmp" th:value="${minEmp}" placeholder="최소" oninput="splitAmt(this, 5)" onblur="splitAmt(this, 5)"> <span class="span">-</span>
+                                        <input class="input" type="number" id="maxEmp" name="maxEmp" th:value="${maxEmp}" placeholder="최대" oninput="splitAmt(this, 5)" onblur="splitAmt(this, 5)"> <span class="span">명</span>
                                     </div>
                                 </div>
                             </div>
@@ -526,7 +526,7 @@
                     this.setAttribute('aria-expanded', 'true');
                     button.querySelector('span').textContent = '상세 옵션 닫기';
                     pannel.classList.add('show');
-                    gsap.to(pannel, 0.35, { height: pannel.scrollHeight })
+                    gsap.to(pannel, 0.35, { height: pannel.scrollHeight + 100 })
                     document.getElementById('detSearch').value = "1";
                     document.getElementById('detSearch1').value = "1";
                 }
@@ -543,7 +543,7 @@
             pannel.style.removeProperty('height');
 
             if(element.type === 'radio') {
-                radio && radio.remove();
+                //radio && radio.remove();
 
                 if(element.name === 'option2') {
                     //console.log(document.querySelector('#range1'));
@@ -585,6 +585,8 @@
 
                 document.querySelectorAll('input[name="option4"]').forEach(input => input.checked = false);
                 document.querySelector('[data-name="option4"]') && document.querySelector('[data-name="option4"]').remove();
+
+                clickForm();
             } else if(type === 'range') {
                 button.setAttribute('type', 'button');
                 filter.setAttribute('onclick', 'removeFilter(this, "' + element.getAttribute('id') + '")');
@@ -595,25 +597,51 @@
                 button.textContent = (element.id === 'range1') ? value1 + '~' + value2 + '억원' : value1 + ' ~ ' + value2 + '명';
                 filter.appendChild(button);
                 body.appendChild(filter);
-            } else if(element.checked) {
-                button.setAttribute('type', 'button');
-                filter.setAttribute('onclick', 'removeFilter(this, "' + element.getAttribute('id') + '")');
 
-                button.classList.add('item');
-                filter.classList.add('filter');
-                filter.dataset.id = element.id;
-                filter.dataset.name = element.name;
-                button.textContent = element.nextElementSibling.textContent;
-                filter.appendChild(button);
-                body.appendChild(filter);
+                clickForm();
+            } else if(element.checked) {
+                if (element && element.id) {
+                    let findEle = false;
+                    $('.proximal-sort-body div').each(function () {
+                        if ($(this).attr('data-id') == element.id) {
+                            $('#' + element.id).prop('checked', false);
+                            $(this).trigger('click');
+                            findEle = true;
+                        } else if ($(this).attr('data-name') == element.name) {
+                            if(element.type === 'radio') {
+                                $(this).trigger('click');
+                            }
+                        }
+                    })
+
+                    if (!findEle) {
+                        buildFilterBtn(button, filter, element, body);
+
+                    }
+                }else{
+                    buildFilterBtn(button, filter, element, body);
+                }
+                clickForm();
             } else {
                 const filter = document.querySelector('[data-id="' + element.id + '"]');
                 if(filter) {
                     body.removeChild(filter);
+                    clickForm();
                 }
             }
+        }
 
-            //clickForm();
+        function buildFilterBtn(button, filter, element, body) {
+            button.setAttribute('type', 'button');
+            filter.setAttribute('onclick', 'removeFilter(this, "' + element.getAttribute('id') + '")');
+
+            button.classList.add('item');
+            filter.classList.add('filter');
+            filter.dataset.id = element.id;
+            filter.dataset.name = element.name;
+            button.textContent = element.nextElementSibling.textContent;
+            filter.appendChild(button);
+            body.appendChild(filter);
         }
 
         function removeFilter(element, name) {
@@ -624,13 +652,15 @@
 
                 input.value = '';
                 input.classList.remove('selected');
-
+                clickForm();
                 return;
             }
 
 
             element.classList.remove('selected');
             document.getElementById(name).checked = false;
+
+            clickForm()
         }
 
         function detailPage(ent_cd) {
@@ -665,11 +695,12 @@
         });
 
         function clickForm() {
-            actionForm.attr("action", window.staticPath + "startup/list");
             actionForm.submit();
         }
 
         function setInputVal() {
+            const body = document.querySelector('.proximal-sort-body');
+
             /* 최상단 키워드명 검색어 세팅 시작 */
             if (findList.keyWord !== '' && findList.keyWord !== null) {
                 document.getElementById('keyWord').value = findList.keyWord;
@@ -685,65 +716,65 @@
             if (findList.option1 !== null && findList.option1 !== '') {
                 var str = findList.option1;
                 if (str.indexOf('ZZZ') > -1) {
-                    document.getElementById('option1-1').click();
+                    document.getElementById('option1-1').checked = true;
                 }
                 if (str.indexOf('SEED') > -1) {
-                    document.getElementById('option1-2').click();
+                    document.getElementById('option1-2').checked = true;
                 }
                 if (str.indexOf('PREA') > -1) {
-                    document.getElementById('option1-3').click();
+                    document.getElementById('option1-3').checked = true;
                 }
                 if (str.indexOf('SERIESA') > -1) {
-                    document.getElementById('option1-4').click();
+                    document.getElementById('option1-4').checked = true;
                 }
                 if (str.indexOf('SERIESB') > -1) {
-                    document.getElementById('option1-5').click();
+                    document.getElementById('option1-5').checked = true;
                 }
                 if (str.indexOf('SERIESC') > -1) {
-                    document.getElementById('option1-6').click();
+                    document.getElementById('option1-6').checked = true;
                 }
                 if (str.indexOf('SERIESD') > -1) {
-                    document.getElementById('option1-7').click();
+                    document.getElementById('option1-7').checked = true;
                 }
                 if (str.indexOf('SERIESE') > -1) {
-                    document.getElementById('option1-8').click();
+                    document.getElementById('option1-8').checked = true;
                 }
                 if (str.indexOf('SERIESF') > -1) {
-                    document.getElementById('option1-9').click();
+                    document.getElementById('option1-9').checked = true;
                 }
                 if (str.indexOf('SERIESG') > -1) {
-                    document.getElementById('option1-10').click();
+                    document.getElementById('option1-10').checked = true;
                 }
                 if (str.indexOf('PREIPO') > -1) {
-                    document.getElementById('option1-11').click();
+                    document.getElementById('option1-11').checked = true;
                 }
                 if (str.indexOf('SERIESIPO') > -1) {
-                    document.getElementById('option1-12').click();
+                    document.getElementById('option1-12').checked = true;
                 }
                 if (str.indexOf('M&A') > -1) {
-                    document.getElementById('option1-13').click();
+                    document.getElementById('option1-13').checked = true;
                 }
                 if (str.indexOf('TIPS') > -1) {
-                    document.getElementById('option1-14').click();
+                    document.getElementById('option1-14').checked = true;
                 }
             }
             /* 최종 투자단계 세팅 종료 */
             /* 투자금액 세팅 시작 */
             if (findList.option2 !== null && findList.option2 !== '') {
                 if (findList.option2 === '9') {
-                    document.getElementById('option2-1').click();
+                    document.getElementById('option2-1').checked = true;
                 }
                 if (findList.option2 === '10') {
-                    document.getElementById('option2-2').click();
+                    document.getElementById('option2-2').checked = true;
                 }
                 if (findList.option2 === '100') {
-                    document.getElementById('option2-3').click();
+                    document.getElementById('option2-3').checked = true;
                 }
                 if (findList.option2 === '500') {
-                    document.getElementById('option2-4').click();
+                    document.getElementById('option2-4').checked = true;
                 }
                 if (findList.option2 === '1000') {
-                    document.getElementById('option2-5').click();
+                    document.getElementById('option2-5').checked = true;
                 }
             }
             if (findList.minAmt !== '' && findList.minAmt !== null) {
@@ -756,16 +787,16 @@
             /* 근무자 세팅 시작 */
             if (findList.option3 !== null && findList.option3 !== '') {
                 if (findList.option3 === '10') {
-                    document.getElementById('option3-1').click();
+                    document.getElementById('option3-1').checked = true;
                 }
                 if (findList.option3 === '11') {
-                    document.getElementById('option3-2').click();
+                    document.getElementById('option3-2').checked = true;
                 }
                 if (findList.option3 === '51') {
-                    document.getElementById('option3-3').click();
+                    document.getElementById('option3-3').checked = true;
                 }
                 if (findList.option3 === '100') {
-                    document.getElementById('option3-4').click();
+                    document.getElementById('option3-4').checked = true;
                 }
             }
             if (findList.minEmp !== '' && findList.minEmp !== null) {
@@ -778,28 +809,57 @@
             /* 설립일 세팅 시작 */
             if (findList.option4 !== null && findList.option4 !== '') {
                 if (findList.option4 === '3') {
-                    document.getElementById('option4-1').click();
+                    document.getElementById('option4-1').checked = true;
                 }
                 if (findList.option4 === '7') {
-                    document.getElementById('option4-2').click();
+                    document.getElementById('option4-2').checked = true;
                 }
                 if (findList.option4 === '10') {
-                    document.getElementById('option4-3').click();
+                    document.getElementById('option4-3').checked = true;
                 }
             }
             if (findList.dateRange !== '' && findList.dateRange !== null) {
                 document.getElementById('dateRange').value = findList.dateRange;
-                addFilter(document.getElementById('dateRange'), 'calendar');
+
+                const filter = document.createElement('div');
+                const button = document.createElement('button');
+                const element = document.getElementById('dateRange');
+
+                button.setAttribute('type', 'button');
+                filter.setAttribute('onclick', 'removeFilter(this, "' + element.getAttribute('id') + '")');
+
+                button.classList.add('item');
+                filter.classList.add('filter');
+                filter.dataset.name = 'calendar';
+
+                button.textContent = element.value;
+                //alert(document.getElementById('dateRange').value);
+                filter.appendChild(button);
+                body.appendChild(filter);
+
+                element.classList.add('selected');
+
+                document.querySelectorAll('input[name="option4"]').forEach(input => input.checked = false);
+                document.querySelector('[data-name="option4"]') && document.querySelector('[data-name="option4"]').remove();
+//                addFilter(document.getElementById('dateRange'), 'calendar');
             }
             /* 설립일 세팅 종료 */
 
             if (findList.option5 !== null && findList.option5 !== '') {
                 if (findList.option5 === 'KB') {
-                    document.getElementById('option5-1').click();
+                    document.getElementById('option5-1').checked = true;
                 }
             }
 
             document.getElementById('pageSize').value = findList.pageSize;
+
+            $('input[name^=option]').each(function() {
+                if ($(this).prop('checked')) {
+                    const filter = document.createElement('div');
+                    const button = document.createElement('button');
+                    buildFilterBtn(button, filter, this, body);
+                }
+            })
 
             //clickForm();
         }
@@ -871,6 +931,12 @@
 
         function pageMove(pageNo) {
             // 미사용 코드 제거.
+        }
+
+        function splitAmt(obj, len) {
+            if(obj.value.length > len) {
+                obj.value = obj.value.slice(0, len);
+            }
         }
     </script>
 </body>

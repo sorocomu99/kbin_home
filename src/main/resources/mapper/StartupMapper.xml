@@ -129,7 +129,7 @@
                              , C.SUM_INVEST_AMT
                              , (SELECT CASE WHEN SUM(INVEST_AMT) IS NULL THEN '비공개'
                                             WHEN SUM(INVEST_AMT) = 0 THEN '비공개'
-                                            ELSE TO_CHAR(TO_CHAR(SUM(INVEST_AMT)/ 100000000), 'fm999,999,999,990.00') || ' 억원'
+                                            ELSE REPLACE(REGEXP_REPLACE(TO_CHAR(TO_CHAR(SUM(INVEST_AMT)/ 100000000), 'fm999,999,999,990.00'), '\$|\.([1-9])0$','.\1'), '.00', '')  || ' 억원'
                                         END INVEST_AMT_STR
                                    FROM KB_API_INVEST_INFO WHERE A.ENT_CD = ENT_CD GROUP BY ENT_CD) INVEST_AMT_STR
                         FROM KB_API_STARTER_INFO A
@@ -281,7 +281,7 @@
              , (SELECT NVL((SUM(INVEST_AMT) / 100000000), 0) FROM KB_API_INVEST_INFO WHERE ENT_CD = #{ent_cd}) INVEST_AMT
              , NVL((SELECT CASE WHEN SUM(INVEST_AMT) IS NULL THEN '비공개'
                                 WHEN SUM(INVEST_AMT) = 0 THEN '비공개'
-                           ELSE TO_CHAR(TO_CHAR(SUM(INVEST_AMT)/ 100000000), 'fm999,999,999,990.00') || ' 억원'
+                           ELSE REPLACE(REGEXP_REPLACE(TO_CHAR(TO_CHAR(SUM(INVEST_AMT)/ 100000000), 'fm999,999,999,990.00'), '\$|\.([1-9])0$','.\1'), '.00', '')  || ' 억원'
                            END INVEST_AMT_STR
                       FROM KB_API_INVEST_INFO WHERE ENT_CD = #{ent_cd} GROUP BY ENT_CD), '비공개') INVEST_AMT_STR
              , NVL((SELECT CASE WHEN LENGTH(SERIES_NM) = 1 THEN 'Series ' || SUBSTR(SERIES_NM, -1)
@@ -357,7 +357,7 @@
              , (INVEST_AMT / 100000000) INVEST_AMT
              , CASE WHEN INVEST_AMT IS NULL THEN '비공개'
                     WHEN INVEST_AMT = 0 THEN '비공개'
-               ELSE TO_CHAR((INVEST_AMT / 100000000), 'fm999,999,999,990.00') || ' 억원'
+               ELSE REPLACE(REGEXP_REPLACE(TO_CHAR((INVEST_AMT / 100000000), 'fm999,999,999,990.00'), '\$|\.([1-9])0$','.\1'), '.00', '')  || ' 억원'
                END INVEST_AMT_STR
              , INVEST_YMD
              , NEWS_LINK
@@ -466,12 +466,12 @@
              , CASE WHEN NET_PROFIT >= 0 THEN 'BLACK'
                     ELSE 'RED'
             END NET_PROFIT_COL
-             , TO_CHAR(SLS_AMT, 'fm999,999,999,990.00') SLS_AMT_STR
-             , TO_CHAR(SLS_COST_AMT, 'fm999,999,999,990.00') SLS_COST_AMT_STR
-             , TO_CHAR(SLS_GRAMT, 'fm999,999,999,990.00') SLS_GRAMT_STR
-             , TO_CHAR(SGA_AMT, 'fm999,999,999,990.00') SGA_AMT_STR
-             , TO_CHAR(OPERATING_PROFIT, 'fm999,999,999,990.00') OPERATING_PROFIT_STR
-             , TO_CHAR(NET_PROFIT, 'fm999,999,999,990.00') NET_PROFIT_STR
+             , REPLACE(REGEXP_REPLACE(TO_CHAR(SLS_AMT, 'fm999,999,999,990.00'), '\$|\.([1-9])0$','.\1'), '.00', '') SLS_AMT_STR
+             , REPLACE(REGEXP_REPLACE(TO_CHAR(SLS_COST_AMT, 'fm999,999,999,990.00'), '\$|\.([1-9])0$','.\1'), '.00', '') SLS_COST_AMT_STR
+             , REPLACE(REGEXP_REPLACE(TO_CHAR(SLS_GRAMT, 'fm999,999,999,990.00'), '\$|\.([1-9])0$','.\1'), '.00', '') SLS_GRAMT_STR
+             , REPLACE(REGEXP_REPLACE(TO_CHAR(SGA_AMT, 'fm999,999,999,990.00'), '\$|\.([1-9])0$','.\1'), '.00', '') SGA_AMT_STR
+             , REPLACE(REGEXP_REPLACE(TO_CHAR(OPERATING_PROFIT, 'fm999,999,999,990.00'), '\$|\.([1-9])0$','.\1'), '.00', '') OPERATING_PROFIT_STR
+             , REPLACE(REGEXP_REPLACE(TO_CHAR(NET_PROFIT, 'fm999,999,999,990.00'), '\$|\.([1-9])0$','.\1'), '.00', '') NET_PROFIT_STR
         FROM (SELECT ENT_CD
                    , YR
                    , (NVL(SLS_AMT, 0) * 1000) / 1000000          SLS_AMT
@@ -575,12 +575,12 @@
              , CASE WHEN CPTL_GRAMT >= 0 THEN 'BLACK'
                     ELSE 'RED'
             END CPTL_GRAMT_COL
-             , TO_CHAR(CURRENT_ASSETS, 'fm999,999,999,990.00') CURRENT_ASSETS_STR
-             , TO_CHAR(NON_CURRENT_ASSETS, 'fm999,999,999,990.00') NON_CURRENT_ASSETS_STR
-             , TO_CHAR(AST_GRAMT, 'fm999,999,999,990.00') AST_GRAMT_STR
-             , TO_CHAR(DEBT_GRAMT, 'fm999,999,999,990.00') DEBT_GRAMT_STR
-             , TO_CHAR(CPTL, 'fm999,999,999,990.00') CPTL_STR
-             , TO_CHAR(CPTL_GRAMT, 'fm999,999,999,990.00') CPTL_GRAMT_STR
+             , REPLACE(REGEXP_REPLACE(TO_CHAR(CURRENT_ASSETS, 'fm999,999,999,990.00'), '\$|\.([1-9])0$','.\1'), '.00', '') CURRENT_ASSETS_STR
+             , REPLACE(REGEXP_REPLACE(TO_CHAR(NON_CURRENT_ASSETS, 'fm999,999,999,990.00'), '\$|\.([1-9])0$','.\1'), '.00', '') NON_CURRENT_ASSETS_STR
+             , REPLACE(REGEXP_REPLACE(TO_CHAR(AST_GRAMT, 'fm999,999,999,990.00'), '\$|\.([1-9])0$','.\1'), '.00', '') AST_GRAMT_STR
+             , REPLACE(REGEXP_REPLACE(TO_CHAR(DEBT_GRAMT, 'fm999,999,999,990.00'), '\$|\.([1-9])0$','.\1'), '.00', '') DEBT_GRAMT_STR
+             , REPLACE(REGEXP_REPLACE(TO_CHAR(CPTL, 'fm999,999,999,990.00'), '\$|\.([1-9])0$','.\1'), '.00', '') CPTL_STR
+             , REPLACE(REGEXP_REPLACE(TO_CHAR(CPTL_GRAMT, 'fm999,999,999,990.00'), '\$|\.([1-9])0$','.\1'), '.00', '') CPTL_GRAMT_STR
         FROM (SELECT ENT_CD, YR, (NVL(CURRENT_ASSETS, 0) * 1000) / 1000000 CURRENT_ASSETS
                    , (NVL(NON_CURRENT_ASSETS, 0) * 1000) / 1000000 NON_CURRENT_ASSETS
                    , (NVL(AST_GRAMT, 0) * 1000) / 1000000 AST_GRAMT

@@ -331,20 +331,28 @@
 
     // 페이지 로드 시 초기화
     $(document).ready(function () {
-        let hash = window.location.hash;
-
-        if (hash.startsWith("#step-")) {
-            let step = parseInt(hash.replace("#step-", ""));
-            if (!isNaN(step)) {
-                // 초기 로드 시 해시가 있으면 해당 스텝으로 이동
-                changeContent(null, step);
+        if(!sessionStorage.getItem('reload')) {
+            let hash = window.location.hash;
+            if (hash.startsWith("#step-")) {
+                let step = parseInt(hash.replace("#step-", ""));
+                if (!isNaN(step)) {
+                    // 초기 로드 시 해시가 있으면 해당 스텝으로 이동
+                    changeContent(null, step);
+                }
+            } else {
+                // 초기 스텝으로 설정
+                window.location.hash = "step-1";
             }
-        } else {
-            // 초기 스텝으로 설정
+        }else{
+            sessionStorage.removeItem('reload');
             window.location.hash = "step-1";
         }
     });
 
+    $(window).on('beforeunload', function() {
+        // 새로고침시 해시 초기화 용도
+        sessionStorage.setItem('reload', 'Y')
+    });
 
 </script>
 </body>

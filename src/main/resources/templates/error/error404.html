@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment/config :: configFragment"></head>
+<body>
+<!-- 헤더 -->
+<app-header></app-header>
+
+<!-- 본문 -->
+<main class="main">
+    <div class="home" style="text-align: center; margin-top: 20rem;">
+        <h1>페이지를 찾을 수 없습니다.</h1>
+        <p>
+            서비스 이용에 불편을 드려 죄송합니다.<br class="hidden-m">
+            새로고침 버튼을 클릭하여 다시 한번 시도해 주시기 바랍니다.<br class="hidden-m">
+            계속 같은 현상이 발생할 경우 2-3분후 다시 시도해 주시기 바랍니다.<br class="hidden-m">
+            감사합니다.
+        </p>
+        <div class="item-btn">
+            <div class="btn-area">
+                <ul class="btn-list">
+                    <li><a href="javascript:history.back()" class="icon-ko"><span style="color: blue; text-decoration: underline">돌아가기</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- 푸터 -->
+<app-footer></app-footer>
+
+<!-- 개별페이지 스크립트 -->
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>
