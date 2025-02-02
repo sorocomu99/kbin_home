@@ -169,6 +169,10 @@
                                         <input id="option4-3" class="input" type="radio" name="option4" value="10" onclick="addFilter(this, 'option4-3')" th:checked="${option4 == '10'}">
                                         <label for="option4-3" class="label">7년~10년</label>
                                     </div>
+                                    <div class="check-block">
+                                        <input id="option4-4" class="input" type="radio" name="option4" value="11" onclick="addFilter(this, 'option4-4')" th:checked="${option4 == '11'}">
+                                        <label for="option4-4" class="label">10년 초과</label>
+                                    </div>
                                     <div class="block-group block-group-calendar">
                                         <input id="dateRange" name="dateRange" class="input" type="text">
                                         <i class="icon-calendar"></i>
@@ -526,7 +530,7 @@
                     this.setAttribute('aria-expanded', 'true');
                     button.querySelector('span').textContent = '상세 옵션 닫기';
                     pannel.classList.add('show');
-                    gsap.to(pannel, 0.35, { height: pannel.scrollHeight + 100 })
+                    gsap.to(pannel, 0.35, { height: 100 + '%'})
                     document.getElementById('detSearch').value = "1";
                     document.getElementById('detSearch1').value = "1";
                 }
@@ -816,6 +820,9 @@
                 }
                 if (findList.option4 === '10') {
                     document.getElementById('option4-3').checked = true;
+                }
+                if (findList.option4 === '11') {
+                    document.getElementById('option4-4').checked = true;
                 }
             }
             if (findList.dateRange !== '' && findList.dateRange !== null) {

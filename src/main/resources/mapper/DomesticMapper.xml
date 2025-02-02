@@ -56,18 +56,20 @@
     <!-- 국내 프로그램 - 협력 기관 리스트 조회 -->
     <select id="selectCooperation" resultType="com.kbin.inno.Nurture.DTO.CooperationDTO">
         /* 국내 프로그램 - 협력 기관 리스트 조회 */
-        SELECT COOPE.COOPE_SN      AS COOPE_SN
-             , COOPE.BZENTY_NM     AS BZENTY_NM
-             , COOPE.EXPSR_YN      AS EXPSR_YN
-             , COOPE.SORT_NO       AS SORT_NO
-             , FILES.ORGNL_FILE_NM AS ORIGIN_FILE_NAME
-             , FILES.FILE_NM       AS COOPE_FILE_NAME
-             , REPLACE(FILES.FILE_PATH, '\', '/')     AS COOPE_PATH
-          FROM KB_COOPE_INFO COOPE
-             , KB_FILE_INFO FILES
-         WHERE COOPE.ATCH_FILE_ID = FILES.FILE_SN(+)
-           AND COOPE.EXPSR_YN = 'Y'
-         ORDER BY COOPE.SORT_NO ASC
+        select COOPE_SN, BZENTY_NM, EXPSR_YN, SORT_NO, ORIGIN_FILE_NAME, COOPE_FILE_NAME, COOPE_PATH
+        from (SELECT COOPE.COOPE_SN                     AS COOPE_SN
+                   , COOPE.BZENTY_NM                    AS BZENTY_NM
+                   , COOPE.EXPSR_YN                     AS EXPSR_YN
+                   , COOPE.SORT_NO                      AS SORT_NO
+                   , FILES.ORGNL_FILE_NM                AS ORIGIN_FILE_NAME
+                   , FILES.FILE_NM                      AS COOPE_FILE_NAME
+                   , REPLACE(FILES.FILE_PATH, '\', '/') AS COOPE_PATH
+              FROM KB_COOPE_INFO COOPE
+                 , KB_FILE_INFO FILES
+              WHERE COOPE.ATCH_FILE_ID = FILES.FILE_SN(+)
+                AND COOPE.EXPSR_YN = 'Y'
+              ORDER BY COOPE.SORT_NO ASC) as data
+        where rownum <![CDATA[<=]]> 50
     </select>
     <!-- 국내 프로그램 - 육성 공간 조회 -->
     <select id="selectPlace" resultType="com.kbin.inno.Nurture.DTO.PlaceDTO">

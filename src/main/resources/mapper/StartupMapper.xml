@@ -87,13 +87,16 @@
                    AND FNDN_YMD <![CDATA[<]]>= (SELECT ADD_MONTHS(SYSDATE, -36) FROM DUAL)
                </if>
                <if test="date == 7">
-                   AND FNDN_YMD <![CDATA[>]]>= (SELECT ADD_MONTHS(SYSDATE, -36) FROM DUAL)
-                   OR FNDN_YMD <![CDATA[<]]>= (SELECT ADD_MONTHS(SYSDATE, -84) FROM DUAL)
+                   AND (FNDN_YMD <![CDATA[>]]>= (SELECT ADD_MONTHS(SYSDATE, -36) FROM DUAL)
+                   OR FNDN_YMD <![CDATA[<]]>= (SELECT ADD_MONTHS(SYSDATE, -84) FROM DUAL))
                </if>
                <if test="date == 10">
-                   AND FNDN_YMD <![CDATA[>]]>= (SELECT ADD_MONTHS(SYSDATE, -84) FROM DUAL)
-                   OR FNDN_YMD <![CDATA[<]]>= (SELECT ADD_MONTHS(SYSDATE, -120) FROM DUAL)
+                   AND (FNDN_YMD <![CDATA[>]]>= (SELECT ADD_MONTHS(SYSDATE, -84) FROM DUAL)
+                   OR FNDN_YMD <![CDATA[<]]>= (SELECT ADD_MONTHS(SYSDATE, -120) FROM DUAL))
                </if>
+                <if test="date == 11">
+                    AND FNDN_YMD <![CDATA[<]]> (SELECT ADD_MONTHS(SYSDATE, -120) FROM DUAL)
+                </if>
                <if test="(fromDate != null and fromDate != '') and (toDate != null and toDate != '')">
                    AND FNDN_YMD BETWEEN #{fromDate} AND #{toDate}
                </if>
@@ -210,13 +213,16 @@
                      AND FNDN_YMD <![CDATA[<]]>= (SELECT ADD_MONTHS(SYSDATE, -36) FROM DUAL)
                  </if>
                  <if test="date == 7">
-                      AND FNDN_YMD <![CDATA[>]]>= (SELECT ADD_MONTHS(SYSDATE, -36) FROM DUAL)
-                       OR FNDN_YMD <![CDATA[<]]>= (SELECT ADD_MONTHS(SYSDATE, -84) FROM DUAL)
+                      AND (FNDN_YMD <![CDATA[>]]>= (SELECT ADD_MONTHS(SYSDATE, -36) FROM DUAL)
+                       OR FNDN_YMD <![CDATA[<]]>= (SELECT ADD_MONTHS(SYSDATE, -84) FROM DUAL))
                  </if>
                  <if test="date == 10">
-                      AND FNDN_YMD <![CDATA[>]]>= (SELECT ADD_MONTHS(SYSDATE, -84) FROM DUAL)
-                       OR FNDN_YMD <![CDATA[<]]>= (SELECT ADD_MONTHS(SYSDATE, -120) FROM DUAL)
+                      AND (FNDN_YMD <![CDATA[>]]>= (SELECT ADD_MONTHS(SYSDATE, -84) FROM DUAL)
+                       OR FNDN_YMD <![CDATA[<]]>= (SELECT ADD_MONTHS(SYSDATE, -120) FROM DUAL))
                  </if>
+                <if test="date == 11">
+                    AND FNDN_YMD <![CDATA[<]]> (SELECT ADD_MONTHS(SYSDATE, -120) FROM DUAL)
+                </if>
                  <if test="(fromDate != null and fromDate != '') and (toDate != null and toDate != '')">
                      AND FNDN_YMD BETWEEN #{fromDate} AND #{toDate}
                  </if>
