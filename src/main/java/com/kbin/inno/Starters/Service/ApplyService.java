@@ -165,7 +165,7 @@ public class ApplyService {
                     }
 
 
-                    FileDTO fileResult = fileUploader.insertFile(request.getAnswer_file());
+                    FileDTO fileResult = fileUploader.insertFile(request.getAnswer_file(), "apply");
                     applyAnswer.setAnswer_file_path(fileResult.getFilePath());
                     applyAnswer.setAnswer_filename(fileResult.getFilename());
                     applyAnswer.setAnswer_original_filename(fileResult.getOriginalFilename());

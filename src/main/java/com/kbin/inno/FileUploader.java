@@ -17,7 +17,7 @@ import java.util.*;
 
 public class FileUploader {
     // 파일 저장
-    public FileDTO insertFile(MultipartFile file) {
+    public FileDTO insertFile(MultipartFile file, String fileSubPath) {
 
         // 오리지널 파일 이름
         String originalFileName = file.getOriginalFilename();
@@ -53,7 +53,7 @@ public class FileUploader {
 
         //String savePath = "/Users/johuiyang/Documents/web/uploads/kbinno/";
 
-        String savePath = FilePathUtil.getSavePath(PropertiesValue.profilesActive);
+        String savePath = FilePathUtil.getSavePath(PropertiesValue.profilesActive).concat(File.separator).concat(fileSubPath);
 
         File directory = new File(savePath);
 
