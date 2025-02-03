@@ -14,11 +14,29 @@
     <link rel="stylesheet" th:href="@{/css/common.css}">
     <link rel="stylesheet" th:href="@{/css/main.css}">
     <link rel="stylesheet" th:href="@{/css/sub.css}">
+
+    <script th:src="@{/js/jquery-3.6.4.min.js}"></script>
     <script th:inline="javascript">
         window.staticPath = /*[[${@environment.getProperty('staticpath')} + '/']]*/'/';
         if(window.staticPath === '//') {
             window.staticPath = '/';
         }
+
+        let menuData = '';
+
+        $.ajax({
+            url: window.staticPath + 'menu/list', // 요청 URL
+            type: 'GET', // HTTP 메서드
+            dataType: 'json',
+            success: function(data) {
+                // 게시글 전체 갯수와 li 태그 갯수가 일치하면 종료
+                if(data !== null) {
+                    menuData = data;
+                }
+            },
+            error: function(xhr, status, error) {
+            }
+        });
     </script>
     <!-- 임시 스크립트: 헤더/푸터 컴포넌트 (작업용 임시 파일이므로 개발단계부터는 스크립트 파일 안에 HTML 코드 사용) -->
     <script th:src="@{/components/header.js}"></script>
@@ -41,6 +59,5 @@
     <script th:src="@{/js/swiper-bundle.min.js}"></script>
     <script th:src="@{/js/countUp.umd.js}"></script>
     <script th:src="@{/js/common.js}"></script>
-    <script th:src="@{/js/jquery-3.6.4.min.js}"></script>
 </head>
 </html>
