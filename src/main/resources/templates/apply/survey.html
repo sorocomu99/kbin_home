@@ -19,7 +19,7 @@
             <div class="apply" th:style="${question.question_order == 1 ? 'display: flex;' : 'display: none;'}"
                  th:attr="data-question-order=${question.question_order}">
                 <div class="apply-image">
-                    <img th:src="@{/starters/apply/banner(filename=${survey.survey.banner_filename})}" alt="">
+                    <img th:src="@{${survey?.survey?.banner_file_path + survey?.survey?.banner_filename}}" alt="">
                 </div>
                 <div class="apply-contents">
                     <div class="survey-form">
@@ -61,7 +61,7 @@
             <div class="apply" th:style="${question.question_order == 1 ? 'display: flex;' : 'display: none;'}"
                  th:attr="data-question-order=${question.question_order}">
                 <div class="apply-image">
-                    <img th:src="@{/starters/apply/banner(filename=${survey.survey.banner_filename})}" alt="">
+                    <img th:src="@{${survey?.survey?.banner_file_path + survey?.survey?.banner_filename}}" alt="">
                 </div>
                 <div class="apply-contents">
                     <div class="survey-form">
@@ -93,7 +93,7 @@
             <div class="apply" th:style="${question.question_order == 1 ? 'display: flex;' : 'display: none;'}"
                  th:attr="data-question-order=${question.question_order}">
                 <div class="apply-image">
-                    <img th:src="@{/starters/apply/banner(filename=${survey.survey.banner_filename})}" alt="">
+                    <img th:src="@{${survey?.survey?.banner_file_path + survey?.survey?.banner_filename}}" alt="">
                 </div>
                 <div class="apply-contents">
                     <div class="survey-form">
@@ -132,7 +132,7 @@
             <div class="apply" th:style="${question.question_order == 1 ? 'display: flex;' : 'display: none;'}"
                  th:attr="data-question-order=${question.question_order}">
                 <div class="apply-image">
-                    <img th:src="@{/starters/apply/banner(filename=${survey.survey.banner_filename})}" alt="">
+                    <img th:src="@{${survey?.survey?.banner_file_path + survey?.survey?.banner_filename}}" alt="">
                 </div>
                 <div class="apply-contents">
                     <input type="hidden" name="question_type_no" th:value="${question.question_type_no}">

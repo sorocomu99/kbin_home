@@ -87,6 +87,8 @@ public class FileUploader {
             throw new RuntimeException(e);
         }
 
+        //TODO: author krh 2025-02-03, 월, 12:37 : sftp 전송해야 관리자에서 확인을 할텐데...
+
         // 파일 사이즈 구하기
         int bytes = (int) file.getSize();
 
