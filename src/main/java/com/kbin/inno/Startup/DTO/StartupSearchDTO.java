@@ -19,6 +19,7 @@ public class StartupSearchDTO implements Serializable {
     private String maxEmp;     //최대근무자 입력값
     private String option4;    //설립일
     private String dateRange;  //날짜 입력
+    private String dateRange2;  //날짜 입력
     private String keyWord1;   //마스터 폼의 입력값을 디테일폼에 세팅을 위한 변수
     private String detSearch;
     private String detSearch1;

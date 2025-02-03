@@ -83,12 +83,11 @@ public class StartupController {
             String dateRange = startupSearchDTO.getDateRange();
             String fromDate = dateRange.substring(0, 10).replace("-", "");
             resMap.put("fromDate", fromDate);
-            if(dateRange.length() > 13) {
-                String toDate = dateRange.substring(13, 23).replace("-", "");
-                resMap.put("toDate", toDate);
-            }else{
-                resMap.put("toDate", fromDate);
-            }
+        }
+        if (startupSearchDTO.getDateRange2() != null && !startupSearchDTO.getDateRange2().equals("")) {
+            String dateRange2 = startupSearchDTO.getDateRange2();
+            String toDate = dateRange2.substring(0, 10).replace("-", "");
+            resMap.put("toDate", toDate);
         }
         //KB 스타터스 추가
         if (startupSearchDTO.getOption5() != null && !startupSearchDTO.getOption5().equals("")) {

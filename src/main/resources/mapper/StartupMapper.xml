@@ -97,9 +97,15 @@
                 <if test="date == 11">
                     AND FNDN_YMD <![CDATA[<]]> (SELECT ADD_MONTHS(SYSDATE, -120) FROM DUAL)
                 </if>
-               <if test="(fromDate != null and fromDate != '') and (toDate != null and toDate != '')">
-                   AND FNDN_YMD BETWEEN #{fromDate} AND #{toDate}
-               </if>
+                <if test="(fromDate != null and fromDate != '') and (toDate == null or toDate == '')">
+                    AND FNDN_YMD <![CDATA[>]]>= #{fromDate}
+                </if>
+                <if test="(fromDate == null or fromDate == '') and (toDate != null and toDate != '')">
+                    AND FNDN_YMD <![CDATA[<]]>= #{toDate}
+                </if>
+                <if test="(fromDate != null and fromDate != '') and (toDate != null and toDate != '')">
+                    AND FNDN_YMD BETWEEN #{fromDate} AND #{toDate}
+                </if>
                <if test="option5 == 'KB'">
                    AND KB_STARTERS_YN = 'Y'
                </if>
@@ -223,9 +229,15 @@
                 <if test="date == 11">
                     AND FNDN_YMD <![CDATA[<]]> (SELECT ADD_MONTHS(SYSDATE, -120) FROM DUAL)
                 </if>
-                 <if test="(fromDate != null and fromDate != '') and (toDate != null and toDate != '')">
-                     AND FNDN_YMD BETWEEN #{fromDate} AND #{toDate}
+                 <if test="(fromDate != null and fromDate != '') and (toDate == null or toDate == '')">
+                     AND FNDN_YMD <![CDATA[>]]>= #{fromDate}
                  </if>
+                <if test="(fromDate == null or fromDate == '') and (toDate != null and toDate != '')">
+                    AND FNDN_YMD <![CDATA[<]]>= #{toDate}
+                </if>
+                <if test="(fromDate != null and fromDate != '') and (toDate != null and toDate != '')">
+                    AND FNDN_YMD BETWEEN #{fromDate} AND #{toDate}
+                </if>
                  <if test="option5 == 'KB'">
                      AND KB_STARTERS_YN = 'Y'
                  </if>

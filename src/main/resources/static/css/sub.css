@@ -687,6 +687,7 @@ span.flatpickr-weekday { height: 39px; line-height: 39px; }
 .proximal-filter-contents { flex: 1 1; display: flex; flex-wrap: wrap; align-items: center; margin: -4px; }
 .proximal-filter-contents .check-block { padding: 4px; width: 14.2857%; font-size: 1.5rem; }
 .proximal-filter-contents .block-group { width: 28.5714%; }
+.proximal-filter-contents .block-group-calendar { width: 15.2857%; }
 .proximal-sort { display: flex; align-items: center; }
 .proximal-sort-head { display: flex; width: 140px; font-weight: 700; color: #222222; }
 .proximal-sort-head .icon-filter { display: inline-block; margin-left: -4px; margin-right: 8px; width: 24px; height: 24px; background: url('../images/filter.svg') no-repeat center / auto 100%; }
@@ -853,6 +854,7 @@ span.flatpickr-weekday { height: 39px; line-height: 39px; }
     .proximal-filter-list { flex-direction: column; padding: 10px 34px; }
     .proximal-filter-contents .check-block { width: 25%; }
     .proximal-filter-contents .block-group { width: 50%; }
+    .proximal-filter-contents .block-group-calendar { width: 22%; }
     .proximal-filter-foot { flex-direction: column; padding: 14px 34px; }
     .proximal-sort { flex-direction: column; align-items: flex-start; justify-content: flex-start; }
     .proximal-sort-head { margin-bottom: 14px; }
@@ -927,6 +929,7 @@ span.flatpickr-weekday { height: 39px; line-height: 39px; }
     .proximal-filter-list { padding: 10px 24px; }
     .proximal-filter-contents .check-block { width: 50%; }
     .proximal-filter-contents .block-group { width: 100%; }
+    .proximal-filter-contents .block-group-calendar { width: 44%; }
 
     .proximal-result-head { flex-direction: column; align-items: flex-start; }
     .proximal-result-head .heading { margin-bottom: 12px; width: 100%; font-size: 1.6rem; }

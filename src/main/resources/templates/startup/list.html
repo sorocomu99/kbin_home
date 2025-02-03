@@ -174,7 +174,12 @@
                                         <label for="option4-4" class="label">10년 초과</label>
                                     </div>
                                     <div class="block-group block-group-calendar">
-                                        <input id="dateRange" name="dateRange" class="input" type="text">
+                                        <input id="dateRange" name="dateRange" class="input" type="text" placeholder="최소">
+                                        <i class="icon-calendar"></i>
+                                    </div>
+                                    <div><span class="span">~</span></div>
+                                    <div class="block-group block-group-calendar">
+                                        <input id="dateRange2" name="dateRange2" class="input" type="text" placeholder="최대">
                                         <i class="icon-calendar"></i>
                                     </div>
                                 </div>
@@ -355,13 +360,14 @@
 
     <!-- 스크립트 -->
     <script th:inline="javascript">
-        let fp;
+        let fp, fp2;
 
         var findList = [[${searchList}]];
         //console.log(findList);
         //console.log(findList);
         window.addEventListener('DOMContentLoaded', () => {
             calendar();
+            calendar2();
             proximalPannel();
             setInputVal();
             proximalFloaing();
@@ -423,7 +429,6 @@
 
             fp = flatpickr(input, {
                 locale: "ko",
-                mode: "range",
                 dateFormat: "Y-m-d",
                 onValueUpdate: function(selectedDates, dateStr, instance) {
                     state = true;
@@ -436,7 +441,32 @@
                             body.removeChild(node);
                         }
 
-                        addFilter(input, 'calendar');
+                        //addFilter(input, 'calendar');
+                    }
+                }
+            });
+        }
+
+        function calendar2() {
+            const input = document.getElementById('dateRange2');
+            const body = document.querySelector('.proximal-sort-body');
+            let state = false;
+
+            fp2 = flatpickr(input, {
+                locale: "ko",
+                dateFormat: "Y-m-d",
+                onValueUpdate: function(selectedDates, dateStr, instance) {
+                    state = true;
+                },
+                onClose: function(selectedDates, dateStr, instance){
+                    if(dateStr) {
+                        const node = document.querySelector('[data-name="dateRange2"]');
+
+                        if(node) {
+                            body.removeChild(node);
+                        }
+
+                        //addFilter(input, 'calendar2');
                     }
                 }
             });
@@ -569,6 +599,12 @@
                     input.value = '';
                     input.classList.remove('selected');
                     document.querySelector('[data-name="calendar"]') && document.querySelector('[data-name="calendar"]').remove();
+
+                    const input2 = document.getElementById('dateRange2');
+
+                    input2.value = '';
+                    input2.classList.remove('selected');
+                    document.querySelector('[data-name="calendar2"]') && document.querySelector('[data-name="calendar2"]').remove();
                 }
             }
 
@@ -582,6 +618,25 @@
 
                 button.textContent = element.value;
                 //alert(document.getElementById('dateRange').value);
+                filter.appendChild(button);
+                body.appendChild(filter);
+
+                element.classList.add('selected');
+
+                document.querySelectorAll('input[name="option4"]').forEach(input => input.checked = false);
+                document.querySelector('[data-name="option4"]') && document.querySelector('[data-name="option4"]').remove();
+
+                clickForm();
+            } else if(type === 'calendar2') {
+                button.setAttribute('type', 'button');
+                filter.setAttribute('onclick', 'removeFilter(this, "' + element.getAttribute('id') + '")');
+
+                button.classList.add('item');
+                filter.classList.add('filter');
+                filter.dataset.name = 'calendar2';
+
+                button.textContent = element.value;
+                //alert(document.getElementById('dateRange2').value);
                 filter.appendChild(button);
                 body.appendChild(filter);
 
@@ -653,6 +708,13 @@
 
             if(name === 'dateRange') {
                 const input = document.getElementById('dateRange');
+
+                input.value = '';
+                input.classList.remove('selected');
+                clickForm();
+                return;
+            }else if(name === 'dateRange2') {
+                const input = document.getElementById('dateRange2');
 
                 input.value = '';
                 input.classList.remove('selected');
@@ -850,6 +912,32 @@
                 document.querySelector('[data-name="option4"]') && document.querySelector('[data-name="option4"]').remove();
 //                addFilter(document.getElementById('dateRange'), 'calendar');
             }
+
+            if (findList.dateRange2 !== '' && findList.dateRange2 !== null) {
+                document.getElementById('dateRange2').value = findList.dateRange2;
+
+                const filter = document.createElement('div');
+                const button = document.createElement('button');
+                const element = document.getElementById('dateRange2');
+
+                button.setAttribute('type', 'button');
+                filter.setAttribute('onclick', 'removeFilter(this, "' + element.getAttribute('id') + '")');
+
+                button.classList.add('item');
+                filter.classList.add('filter');
+                filter.dataset.name = 'calendar2';
+
+                button.textContent = element.value;
+                //alert(document.getElementById('dateRange2').value);
+                filter.appendChild(button);
+                body.appendChild(filter);
+
+                element.classList.add('selected');
+
+                document.querySelectorAll('input[name="option4"]').forEach(input => input.checked = false);
+                document.querySelector('[data-name="option4"]') && document.querySelector('[data-name="option4"]').remove();
+//                addFilter(document.getElementById('dateRange2'), 'calendar2');
+            }
             /* 설립일 세팅 종료 */
 
             if (findList.option5 !== null && findList.option5 !== '') {
@@ -929,6 +1017,23 @@
 
                 if (minEmp === maxEmp) {
                     alert("근무자 최소값과 최대값이 같습니다.");
+                    return false;
+                }
+            }
+
+            let dateRange = $('#dateRange').val();
+            let dateRange2 = $('#dateRange2').val();
+
+            if (dateRange !== "" && dateRange2 !== "") {
+                dateRange = Number(dateRange.replaceAll('-',''));
+                dateRange2 = Number(dateRange2.replaceAll('-',''));
+                if (dateRange > dateRange2) {
+                    alert("설립일 최소값은 최대값보다 클 수 없습니다.");
+                    return false;
+                }
+
+                if (dateRange === dateRange2) {
+                    alert("설립일 최소값과 최대값이 같습니다.");
                     return false;
                 }
             }
