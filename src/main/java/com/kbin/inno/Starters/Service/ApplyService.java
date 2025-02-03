@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
@@ -165,7 +165,7 @@ public class ApplyService {
                     }
 
 
-                    FileDTO fileResult = fileUploader.insertFile(request.getAnswer_file());
+                    FileDTO fileResult = fileUploader.insertFile(request.getAnswer_file(), "apply".concat(File.separator).concat(getToDay("yyyyMMdd")));
                     applyAnswer.setAnswer_file_path(fileResult.getFilePath());
                     applyAnswer.setAnswer_filename(fileResult.getFilename());
                     applyAnswer.setAnswer_original_filename(fileResult.getOriginalFilename());
@@ -179,5 +179,18 @@ public class ApplyService {
         catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private static String getToDay(String pattern) {
+        String toDay = null;
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat(pattern, Locale.KOREA);
+            Date d = new Date();
+            toDay = sdf.format(d);
+        } catch (Exception e) {
+
+        }
+
+        return toDay;
     }
 }
