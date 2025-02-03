@@ -711,12 +711,18 @@ span.flatpickr-weekday { height: 39px; line-height: 39px; }
 .proximal-result-info .col { display: flex; align-items: center; }
 .proximal-result-info .item-1 { display: block; margin-right: 32px; font-size: 1.8rem; font-weight: 500; color: #222; }
 .proximal-result-info .item-1:last-child { margin-right: 0; }
-.proximal-result-info .item-2 { display: block; position: relative; padding: 0 28px; font-size: 1.6rem; color: #666; }
+.proximal-result-info .item-2 { display: inline-flex; position: relative; padding: 0 20px; font-size: 1.6rem; color: #666; font-weight: 700; }
 .proximal-result-info .item-2::after { content: ''; position: absolute; top: 0; right: 0; bottom: 0; margin: auto; width: 1px; height: 50%; background: #757575; }
 .proximal-result-info .item-2:last-child { padding-right: 0; }
 .proximal-result-info .item-2:last-child::after { content: none; }
 .proximal-result-info .item-2.on { font-weight: 700; color: var(--clr-dark); }
-
+.proximal-result-info .item-2 .icon { display: inline-block; margin-right: 0.6rem; width: 24px; height: 24px; background-repeat: no-repeat; background-position: center; background-size: auto 100%; }
+.proximal-result-info .item-blue { color: #3B68B9; }
+.proximal-result-info .item-blue .icon { background-image: url('../images/sub/startup/chip-blue.svg'); }
+.proximal-result-info .item-red { color: #FF4C4C; }
+.proximal-result-info .item-red .icon { background-image: url('../images/sub/startup/chip-red.svg'); }
+.proximal-result-info .item-green { color: #35794E; }
+.proximal-result-info .item-green .icon { background-image: url('../images/sub/startup/chip-green.svg'); }
 .proximal-list { display: flex; flex-wrap: wrap; margin: -10px; }
 .proximal-list-item { padding: 10px; width: 33.3333%; }
 .proximal-list-link { display: flex; flex-direction: column; justify-content: space-between; position: relative; padding: 32px; height: 100%; cursor: pointer; }
@@ -776,7 +782,9 @@ span.flatpickr-weekday { height: 39px; line-height: 39px; }
 .proximal-section .datatable .chips .chip .icon-web::before { background-image: url('../images/sub/startup/chip-web.png'); }
 .proximal-section .datatable .chips .chip .icon-ios::before { background-image: url('../images/sub/startup/chip-ios.svg'); }
 .proximal-section .datatable .chips .chip .icon-android::before { background-image: url('../images/sub/startup/chip-android.svg'); }
-.proximal-section .process { display: flex; margin: -15px; }
+.proximal-section .process { display: flex; margin: -15px; min-width: 750px; box-sizing: border-box; }
+.proximal-section .process-slide { max-width: 100%; }
+.proximal-section .process-slide .swiper-slide { width: auto; }
 .proximal-section .process li { flex: 1 1; position: relative; padding: 15px; }
 .proximal-section .process li:not(:last-child)::after { content: ''; position: absolute; top: 0; bottom: 0; right: -15px; margin: auto; width: 30px; height: 30px; background: url('../images/sub/startup/process-chevron-right.svg') no-repeat center / auto 50%; }
 .proximal-section .process .box { padding: 24px 20px; height: 100%; border: 1px solid var(--border); border-radius: 8px; }
@@ -865,7 +873,8 @@ span.flatpickr-weekday { height: 39px; line-height: 39px; }
     .proximal-result-sort .text { font-size: 1.5rem; }
     .proximal-result-sort .select { height: 45px; font-size: 1.5rem; }
     .proximal-result-info .item-1 { margin-right: 24px; font-size: 1.6rem; }
-    .proximal-result-info .item-2 { padding: 0 16px; font-size: 1.5rem; }
+    .proximal-result-info .item-2 { padding: 0 16px; font-size: 1.4rem; }
+    .proximal-result-info .item-2 .icon { width: 16px; height: 16px; }
     .proximal-list { margin: -6px; }
     .proximal-list-item { padding: 6px; width: 50%; }
     .proximal-list-link { padding: 24px; }
@@ -925,14 +934,14 @@ span.flatpickr-weekday { height: 39px; line-height: 39px; }
     .proximal-result-sort .text { font-size: 1.4rem; }
     .proximal-result-info { flex-direction: column; align-items: flex-start; padding: 14px 24px; }
     .proximal-result-info .item-1 { margin-bottom: 10px; margin-right: 20px; font-size: 1.5rem; }
-    .proximal-result-info .item-2 { padding: 0 10px; font-size: 1.4rem; }
+    .proximal-result-info .item-2 { padding: 0 8px; font-size: 1.2rem; }
     .proximal-result-info .item-2:first-child { padding-left: 0; }
     .proximal-list-item { width: 100%; }
     .proximal-list-link .chip { font-size: 1.2rem; }
 
     .proximal-view { padding: 60px 0 120px; }
-    .proximal-section { padding: 34px; }
-    .proximal-section .top-note { font-size: 1.3rem; }
+    .proximal-section { padding: 34px 24px; }
+    .proximal-section .top-note { font-size: 1.2rem; }
     .proximal-section .top-info { flex-direction: column; margin-bottom: 35px; }
     .proximal-section .top-info .thumbnail { width: 100px; height: 100px; }
     .proximal-section .top-info .name { font-size: 2.4rem; }
@@ -951,7 +960,7 @@ span.flatpickr-weekday { height: 39px; line-height: 39px; }
     .proximal-section .news .headline-main .thumbnail { margin-bottom: 14px; }
     .proximal-section .keyword .title { font-size: 1.8rem; }
     .proximal-section .keyword .title .note { font-size: 1.3rem; }
-    .proximal-section .datatable .row { flex-wrap: wrap; padding-top: 12px; padding-bottom: 12px; }
+    .proximal-section .datatable .row { display: block; padding-top: 12px; padding-bottom: 12px; }
     .proximal-section .datatable .col { padding-top: 10px; padding-bottom: 10px; padding-right: 0; padding-left: 0; flex-basis: 50%; }
     .proximal-section .datatable .chips .chip { font-size: 1.3rem; }
     .proximal-section .table-dashboard .text { font-size: 1.6rem; }
