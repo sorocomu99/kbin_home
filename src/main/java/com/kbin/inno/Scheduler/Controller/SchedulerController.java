@@ -36,7 +36,7 @@ public class SchedulerController {
     @Autowired
     SchedulerService schedulerService;
 
-    //@Scheduled(cron="0/10 * * * * ?")
+    //@Scheduled(cron="0 0 2 * * ?")
     @GetMapping("/api")
     public String scheduleRun() {
         int result = 200;
