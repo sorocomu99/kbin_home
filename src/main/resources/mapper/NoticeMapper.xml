@@ -97,10 +97,7 @@
         SELECT NOTICE.NTC_SN                              AS NTC_SN
              , NOTICE.MNGR_NM							  AS MNGR_NM
              , NOTICE.NTC_TTL                             AS NTC_TTL
-             , REPLACE(REPLACE(
-                    REPLACE(REPLACE(NOTICE.NTC_CN, '/kbinnovationhub_devadm/', #{staticPath}), '\kbinnovationhub_devadm\', #{staticPath})
-                           , '/kbinnovationhub_adm/', #{staticPath}), '\kbinnovationhub_adm\', #{staticPath})
-                        AS NTC_CN
+             , REPLACE(REPLACE(REPLACE(REPLACE(NOTICE.NTC_CN, '/kbinnovationhub_devadm/', #{staticPath}), '\kbinnovationhub_devadm\', #{staticPath}), '/kbinnovationhub_adm/', #{staticPath}), '\kbinnovationhub_adm\', #{staticPath}) AS NTC_CN
              , NOTICE.ATCH_FILE_SN                        AS ATCH_FILE_SN
              , NOTICE.NTC_YN                              AS NTC_YN
              , NOTICE.FRST_REG_DT                         AS FRST_REG_DT

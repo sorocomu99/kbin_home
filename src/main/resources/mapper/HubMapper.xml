@@ -90,10 +90,7 @@
     <select id="select" parameterType="Map" resultType="com.kbin.inno.Community.DTO.HubDTO">
         SELECT HUB_PAGE.HUB_SN
              , HUB_PAGE.HUB_TTL
-             , REPLACE(REPLACE(
-                               REPLACE(REPLACE(HUB_PAGE.HUB_CN, '/kbinnovationhub_devadm/', #{staticPath}), '\kbinnovationhub_devadm\', #{staticPath})
-                           , '/kbinnovationhub_adm/', #{staticPath}), '\kbinnovationhub_adm\', #{staticPath})
-            AS HUB_CN
+             , REPLACE(REPLACE(REPLACE(REPLACE(HUB_PAGE.HUB_CN, '/kbinnovationhub_devadm/', #{staticPath}), '\kbinnovationhub_devadm\', #{staticPath}), '/kbinnovationhub_adm/', #{staticPath}), '\kbinnovationhub_adm\', #{staticPath}) AS HUB_CN
              , HUB_PAGE.ATCH_FILE_SN1
              , HUB_PAGE.HUB_PATH_IMG
              , HUB_PAGE.HUB_IMG_NAME

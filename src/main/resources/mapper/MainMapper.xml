@@ -38,10 +38,7 @@
              , END_HR
              , POPUP_LEFT_PSTN
              , POPUP_TOP_PSTN
-             , REPLACE(REPLACE(
-                               REPLACE(REPLACE(POPUP_CN, '/kbinnovationhub_devadm/', #{staticPath}), '\kbinnovationhub_devadm\', #{staticPath})
-                           , '/kbinnovationhub_adm/', #{staticPath}), '\kbinnovationhub_adm\', #{staticPath})
-                AS POPUP_CN
+             , REPLACE(REPLACE(REPLACE(REPLACE(POPUP_CN, '/kbinnovationhub_devadm/', #{staticPath}), '\kbinnovationhub_devadm\', #{staticPath}), '/kbinnovationhub_adm/', #{staticPath}), '\kbinnovationhub_adm\', #{staticPath}) AS POPUP_CN
           FROM KB_POPUP_INFO
          WHERE 1 = 1
            AND TO_CHAR(TO_DATE(END_YMD, 'YYYYMMDD'), 'YYYYMMDD') || ' ' || TO_CHAR(TO_DATE(END_HR, 'HH24MI'), 'HH24MI') >= TO_CHAR(SYSDATE, 'YYYYMMDD HH24MI');
