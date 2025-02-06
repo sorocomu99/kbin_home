@@ -19,7 +19,6 @@ public class MenuInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        System.out.println(request.getRequestURI());
         request.setAttribute("menuList", mainService.selectMenu());
         return true;
     }

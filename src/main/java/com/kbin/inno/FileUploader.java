@@ -24,7 +24,7 @@ public class FileUploader {
 
         String encodedFileName = Base64.encode(originalFileName.getBytes(StandardCharsets.UTF_8));
 
-        System.out.println("Base64 Encoded File Name: " + encodedFileName);
+        //System.out.println("Base64 Encoded File Name: " + encodedFileName);
 
 
         // 파일 확장자 설정
@@ -57,14 +57,14 @@ public class FileUploader {
 
         File directory = new File(savePath);
 
-        System.out.println("savePath====================="+savePath);
+        //System.out.println("savePath====================="+savePath);
 
         // 디렉토리 없으면 생성
         //File directory = new File(savePath + fileName);
         //File directory = new File(savePath);
         //File directory = new File(savePath + fileName);
 
-        System.out.println("directory====================="+directory);
+        //System.out.println("directory====================="+directory);
 
         if(!directory.exists()) {
             directory.mkdirs();
