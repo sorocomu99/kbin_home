@@ -160,14 +160,36 @@
                             <input name="email" type="email" placeholder="이메일 주소를 입력하세요.">
                         </div>
                         <div class="button-wrap">
-                            <button class="button button-border" type="button" onclick="closeModal('modalComplete')">아니오
+                            <button class="button button-border" type="button" onclick="closeModal('modalComplete')">닫기
                             </button>
-                            <button class="button button-primary" type="button" onclick="apply()">예</button>
+                            <button class="button button-primary" type="button" onclick="apply()">제출하기</button>
                         </div>
                     </form>
                 </div>
                 <div class="modal-foot">
                     <a class="close" href="javascript:" onclick="closeModal('modalComplete')"><span class="blind">팝업 닫기</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modalCompleteInfo" class="modal-container">
+        <div class="modal-wrapper">
+            <div class="modal">
+                <div class="modal-body">
+                    <form>
+                        <p class="heading">제출완료</p>
+                        <p class="title p5 text-center">제출이 완료되었습니다.</p>
+                        <p class="p text-center"><br class="br-small"></p>
+                        회사명 : <span class="color-primary fw-medium"><input name="companyNameCompl" type="text" disabled="disabled"></span>
+                        <p></p>
+                        이메일 : <span class="color-primary fw-medium"><input name="emailCompl" type="text" disabled="disabled"></span>
+                        <div class="button-wrap">
+                            <button class="button button-border" type="button" onclick="closeModal('modalCompleteInfo');location.href = window.staticPath + 'starters/apply/apply_main';">닫기</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-foot">
+                    <a class="close" href="javascript:" onclick="closeModal('modalCompleteInfo');location.href = window.staticPath + 'starters/apply/apply_main';"><span class="blind">팝업 닫기</span></a>
                 </div>
             </div>
         </div>
@@ -261,8 +283,14 @@
     function apply() {
         let companyName = $("input[name='companyName']").val();
         let email = $("input[name='email']").val();
-        if(!companyName || !email) {
-            alert("회사명과 이메일 주소를 입력해주세요.");
+        if(!companyName) {
+            alert("회사명을 입력해주세요.");
+            $("input[name='companyName']").focus();
+            return;
+        }
+        if(!email) {
+            alert("이메일 주소를 입력해주세요.");
+            $("input[name='email']").focus();
             return;
         }
         if (!emailCheck(email)) {
@@ -284,7 +312,13 @@
             success: function (response) {
                 if (response.result == 'success') {
                     alert("접수가 완료되었습니다.");
-                    location.href = /*[[@{/starters/apply/apply_main}]]*/;
+
+                    $("input[name='companyNameCompl']").val(companyName);
+                    $("input[name='emailCompl']").val(email);
+
+                    closeModal('modalComplete');
+                    openModal('modalCompleteInfo');
+
                 } else {
                     alert(response.message);
                 }

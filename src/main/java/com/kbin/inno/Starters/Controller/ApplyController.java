@@ -79,11 +79,14 @@ public class ApplyController {
     @RequestMapping("/apply_main")
     public String main(Model model) {
         KbStartersSurveyDTO lastSurvey = applyService.getLastSurvey();
-        int questionCount = applyService.getQuestionCount(lastSurvey);
-        model.addAttribute("questionCount", questionCount);
 
-        KbStartersSurveyDTO surveyInfo = applyService.getSurveyInfo(lastSurvey);
-        model.addAttribute("info", surveyInfo);
+        if(lastSurvey != null) {
+            int questionCount = applyService.getQuestionCount(lastSurvey);
+            model.addAttribute("questionCount", questionCount);
+
+            KbStartersSurveyDTO surveyInfo = applyService.getSurveyInfo(lastSurvey);
+            model.addAttribute("info", surveyInfo);
+        }
         return "apply/apply_main";
     }
 
