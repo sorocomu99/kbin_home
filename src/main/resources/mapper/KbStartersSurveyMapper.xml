@@ -6,7 +6,7 @@
     <select id="getLastSurvey" resultType="com.kbin.inno.Starters.DTO.KbStartersSurveyDTO">
         SELECT *
         FROM KB_STARTERS_SURVEY
-        WHERE DELETE_YN = 'C'
+        WHERE DELETE_YN in ('C', 'D')
         ORDER BY SURVEY_NO DESC FETCH FIRST 1 ROWS ONLY
     </select>
 

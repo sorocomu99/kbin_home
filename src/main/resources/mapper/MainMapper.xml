@@ -68,14 +68,21 @@
     <!-- 메뉴 조회 -->
     <select id="selectMenu" resultType="com.kbin.inno.Main.DTO.MenuDTO">
         /* 메뉴 조회 */
+        WITH MenuWithChildren AS (
+            SELECT DISTINCT m1.MENU_SN
+            FROM KB_USER_MENU m1
+            INNER JOIN KB_USER_MENU m2 ON m1.MENU_SN = m2.MENU_UP_SN
+            WHERE m1.MENU_DEPTH = 1 AND m2.MENU_DEPTH = 2 AND m1.USE_YN = 'Y' AND m2.USE_YN = 'Y'
+        )
         SELECT MENU_NM
              , MENU_SN
              , MENU_DEPTH
              , MENU_UP_SN
              , MENU_LINK
              , MENU_SORT
-        FROM KB_USER_MENU
+        FROM KB_USER_MENU m
         WHERE USE_YN = 'Y'
-        ORDER BY MENU_SN, MENU_SORT
+          AND (MENU_DEPTH = 2 OR (MENU_DEPTH = 1 AND MENU_SN IN (SELECT MENU_SN FROM MenuWithChildren)))
+        ORDER BY MENU_SN, MENU_SORT;
     </select>
 </mapper>

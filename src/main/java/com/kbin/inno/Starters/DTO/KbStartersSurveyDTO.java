@@ -37,4 +37,5 @@ public class KbStartersSurveyDTO {
     private int last_mdfr;               //최종 수정자
     private Date last_mdfcn_dt;          //최종 수정 일시
 
+    private String delete_yn;
 }

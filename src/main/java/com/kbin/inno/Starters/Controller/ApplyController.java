@@ -86,6 +86,7 @@ public class ApplyController {
 
             KbStartersSurveyDTO surveyInfo = applyService.getSurveyInfo(lastSurvey);
             model.addAttribute("info", surveyInfo);
+            model.addAttribute("closeYn", lastSurvey.getDelete_yn());
         }
         return "apply/apply_main";
     }

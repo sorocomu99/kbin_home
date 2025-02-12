@@ -23,7 +23,7 @@
             <div class="kbstarters-wrap">
                 <!-- 데이터가 없을 경우 메시지 표시 -->
                 <div th:if="${info == null}">
-                    <p>현재 모집중인 지원서가 없습니다.</p>
+                    <p>현재 모집중인 공고가 없습니다.</p>
                 </div>
 
                 <div th:unless="${info == null}">
@@ -61,8 +61,11 @@
                         </tbody>
                     </table>
 
-                    <div th:if="${questionCount != 0}" class="button-wrap">
+                    <div th:if="${questionCount != 0 and closeYn == 'C'}" class="button-wrap">
                         <a class="button button-border" th:href="@{|/starters/apply/survey|}"><span>지원하기</span></a>
+                    </div>
+                    <div th:if="${questionCount != 0 and closeYn == 'D'}" class="button-wrap">
+                        <a class="button close button-border"><span>지원이 마감되었습니다.</span></a>
                     </div>
                     <div class="ban">
                         <div class="background"><img class="item" th:src="@{/images/sub/kbstarters/ban-background.jpg}" alt=""></div>
