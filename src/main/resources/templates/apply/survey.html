@@ -13,8 +13,8 @@
             location.href = /*[[@{/apply/apply_main}]]*/;
         </script>
     </th:block>
+    <input type="hidden" name="survey_no" th:value="${survey.survey.survey_no}"/>
     <th:block th:unless="${survey.data.size() == 0}" th:each="question : ${survey.data}">
-        <input type="hidden" name="survey_no" th:value="${survey.survey.survey_no}"/>
         <th:block th:if="${question.question_type_no == 1}">
             <div class="apply" th:style="${question.question_order == 1 ? 'display: flex;' : 'display: none;'}"
                  th:attr="data-question-order=${question.question_order}">
@@ -159,6 +159,10 @@
                             <input name="companyName" type="text" placeholder="회사명을 입력하세요.">
                             <input name="email" type="email" placeholder="이메일 주소를 입력하세요.">
                         </div>
+                        <div class="input-wrap" style="margin-top: 10px;">
+                            <input name="none" type="text" style="visibility: hidden">
+                            <input name="emailValid" type="email" placeholder="이메일 주소 확인 (재입력)">
+                        </div>
                         <div class="button-wrap">
                             <button class="button button-border" type="button" onclick="closeModal('modalComplete')">닫기
                             </button>
@@ -178,7 +182,7 @@
                 <div class="modal-body">
                     <form>
                         <p class="heading">제출완료</p>
-                        <p class="title p5 text-center">제출이 완료되었습니다.</p>
+                        <p class="title p5 text-center">아래의 정보로 제출이 완료되었습니다.</p>
                         <p class="p text-center"><br class="br-small"></p>
                         회사명 : <span class="color-primary fw-medium"><input name="companyNameCompl" type="text" disabled="disabled"></span>
                         <p></p>
@@ -203,7 +207,6 @@
 <script th:inline="javascript">
     const formData = new FormData();
     let maxQuestionOrder = [[${survey.data.get(survey.data.size() - 1).question_order}]];
-    let formDataIndex = 0;
 
     $("input[name='file[]']").change(function () {
         let file = $(this).val();
@@ -220,6 +223,8 @@
         } else {
             let questionTypeNo = $form.find("input[name='question_type_no']").val();
             let required = $form.find("input[name='required']").val();
+            let questionOrder = $form.find("input[name='question_order']").val();
+
             if (questionTypeNo == 1) {
                 if (required === 'Y') {
                     let checked = $form.find("input[name='answerCheck']:checked").val();
@@ -228,11 +233,15 @@
                         return;
                     }
                 }
-                let questionNo = $form.find("input[name='question_no']").val();
-                formData.append(`answers[${formDataIndex}].question_no`, questionNo);
+
                 let questionChoiceNo = $form.find("input[name='answerCheck']:checked").val();
-                formData.append(`answers[${formDataIndex}].question_choice_no`, questionChoiceNo);
-                formDataIndex++;
+                if(questionChoiceNo) {
+                    let questionNo = $form.find("input[name='question_no']").val();
+                    formData.set(`answers[${questionOrder}].question_no`, questionNo);
+
+                    formData.set(`answers[${questionOrder}].question_choice_no`, questionChoiceNo);
+                }
+
                 let nextQuestionOrder = $form.find("input[name='answerCheck']:checked").attr('data-next-question');
                 if (!nextQuestionOrder || nextQuestionOrder == 0) {
                     nextQuestionOrder = parseInt(currentQuestionOrder) + 1;
@@ -247,10 +256,10 @@
                     }
                 }
                 let questionNo = $form.find("input[name='question_no']").val();
-                formData.append(`answers[${formDataIndex}].question_no`, questionNo);
+                formData.set(`answers[${questionOrder}].question_no`, questionNo);
                 let answer = $form.find("input[name='answer']").val();
-                formData.append(`answers[${formDataIndex}].answer_content`, answer);
-                formDataIndex++;
+                formData.set(`answers[${questionOrder}].answer_content`, answer);
+
                 changeContent(currentQuestionOrder, parseInt(currentQuestionOrder) + 1);
             } else if (questionTypeNo == 3) {
                 if (required === 'Y') {
@@ -261,17 +270,15 @@
                     }
                 }
                 let questionNo = $form.find("input[name='question_no']").val();
-                formData.append(`answers[${formDataIndex}].question_no`, questionNo);
+                formData.set(`answers[${questionOrder}].question_no`, questionNo);
                 let fileInput = $form.find("input[name='file[]']")[0];
                 let files = fileInput ? fileInput.files : null;
 
                 if (files && files.length > 0) {
                     for (let i = 0; i < files.length; i++) {
-                        formData.append(`answers[${formDataIndex}].answer_file`, files[i]);
+                        formData.set(`answers[${questionOrder}].answer_file`, files[i]);
                     }
                 }
-                formDataIndex++;
-
 
                 changeContent(currentQuestionOrder, parseInt(currentQuestionOrder) + 1);
             } else if (questionTypeNo == 4) {
@@ -283,6 +290,7 @@
     function apply() {
         let companyName = $("input[name='companyName']").val();
         let email = $("input[name='email']").val();
+        let emailValid = $("input[name='emailValid']").val();
         if(!companyName) {
             alert("회사명을 입력해주세요.");
             $("input[name='companyName']").focus();
@@ -293,37 +301,88 @@
             $("input[name='email']").focus();
             return;
         }
+
         if (!emailCheck(email)) {
             alert("유효하지 않은 이메일 주소입니다.");
             $("input[name='email']").focus()
             return false;
         }
 
-        formData.append("survey_no", $("input[name='survey_no']").val());
-        formData.append("company_name", companyName);
-        formData.append("email", email);
+        if(!emailValid) {
+            alert("이메일 주소를 입력해주세요.");
+            $("input[name='emailValid']").focus();
+            return;
+        }
+
+        if (!emailCheck(emailValid)) {
+            alert("유효하지 않은 이메일 주소입니다.");
+            $("input[name='emailValid']").focus()
+            return false;
+        }
+
+        if(email !== emailValid) {
+            alert("입력한 이메일 주소가 서로 일치하지 않습니다. 다시 확인해 주세요.");
+            $("input[name='emailValid']").focus()
+            return false;
+        }
+
+        formData.set("survey_no", $("input[name='survey_no']").val());
+        formData.set("company_name", companyName);
+        formData.set("email", email);
+
+        let dupCheck = false;
+
+        const dupChkData = new FormData();
+        dupChkData.set("survey_no", $("input[name='survey_no']").val());
+        dupChkData.set("email", email);
+
         $.ajax({
-            url: /*[[@{/starters/apply/apply}]]*/,
+            url: /*[[@{/starters/apply/checkPreApply}]]*/,
             type: 'POST',
-            data: formData,
+            data: dupChkData,
             processData: false,
             contentType: false,
+            async: false,
             dataType: 'json',
             success: function (response) {
-                if (response.result == 'success') {
-                    alert("접수가 완료되었습니다.");
-
-                    $("input[name='companyNameCompl']").val(companyName);
-                    $("input[name='emailCompl']").val(email);
-
-                    closeModal('modalComplete');
-                    openModal('modalCompleteInfo');
-
-                } else {
-                    alert(response.message);
+                if (response.result == 'dup') {
+                    dupCheck = true;
                 }
             }
         });
+
+        let applyTf = true;
+
+        if(dupCheck) {
+            if(!confirm('이미 지원하신 이력이 있습니다. 다시 지원하시겠습니까?')) {
+                applyTf = false;
+            }
+        }
+
+        if(applyTf) {
+            $.ajax({
+                url: /*[[@{/starters/apply/apply}]]*/,
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                dataType: 'json',
+                success: function (response) {
+                    if (response.result == 'success') {
+                        alert("접수가 완료되었습니다.");
+
+                        $("input[name='companyNameCompl']").val(companyName);
+                        $("input[name='emailCompl']").val(email);
+
+                        closeModal('modalComplete');
+                        openModal('modalCompleteInfo');
+
+                    } else {
+                        alert(response.result);
+                    }
+                }
+            });
+        }
     }
 
     //이메일 정합성 체크
@@ -333,8 +392,11 @@
     }
 
     function changeContent(current, next) {
-        if (next > maxQuestionOrder || next == 99) {
+        if ((next > maxQuestionOrder && next != 98) || next == 99) {
             openModal('modalComplete');
+            return;
+        }else if(next == 98){
+            alert(`선택하신 답변으로는 다음 단계로 진행할 수 없습니다.`);
             return;
         }
 

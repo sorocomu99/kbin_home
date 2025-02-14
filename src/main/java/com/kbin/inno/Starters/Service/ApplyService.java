@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -98,6 +99,19 @@ public class ApplyService {
         return survey;
     }
 
+    public Map<String, Object> checkPreApply(KbStartersApplyRequestWrapper wrapper) {
+        Map<String, Object> result = new HashMap<>();
+
+        KbStartersApplyDTO answer = new KbStartersApplyDTO();
+        answer.setSurvey_no(wrapper.getSurvey_no());
+        answer.setEmail(wrapper.getEmail());
+
+        int prevApplyCnt = surveyRepository.getPrevApplyCnt(answer);
+
+        result.put("result", prevApplyCnt > 0 ? "dup" : "none");
+        return result;
+    }
+
     @Transactional
     public Map<String, Object> apply(KbStartersApplyRequestWrapper wrapper) {
         try{
@@ -125,9 +139,10 @@ public class ApplyService {
             Map<String, Object> result = new HashMap<>();
             KbStartersApplyDTO answer = new KbStartersApplyDTO();
             int insertApplyNo = surveyRepository.getMaxApplyNo();
+            String applyStatus = surveyRepository.getOneApplyStatus(wrapper.getSurvey_no());
             answer.setApply_no(insertApplyNo);
             answer.setSurvey_no(wrapper.getSurvey_no());
-            answer.setApply_status("접수");
+            answer.setApply_status(StringUtils.hasText(applyStatus) ? applyStatus : "접수");
             answer.setEmail(wrapper.getEmail());
             answer.setCompany_name(wrapper.getCompany_name());
             answer.setFrst_rgtr(0);
@@ -138,39 +153,44 @@ public class ApplyService {
             FileUploader fileUploader = new FileUploader();
 
             for(KbStartersAnswerRequest request : wrapper.getAnswers()) {
-                KbStartersApplyAnswerDTO applyAnswer = new KbStartersApplyAnswerDTO();
-                int insertApplyAnswerNo = surveyRepository.getMaxApplyAnswerNo();
-                applyAnswer.setApply_answer_no(insertApplyAnswerNo);
-                applyAnswer.setApply_no(insertApplyNo);
-                applyAnswer.setQuestion_no(request.getQuestion_no());
-                if (request.getQuestion_choice_no() != null) {
-                    applyAnswer.setQuestion_choice_no(request.getQuestion_choice_no());
-                }
-                if (request.getAnswer_content() != null) {
-                    applyAnswer.setAnswer_content(request.getAnswer_content());
-                }
-                if (request.getAnswer_file() != null && request.getAnswer_file().getSize() > 0){
-                    String filename = request.getAnswer_file().getOriginalFilename();
-                    String mimeType = tika.detect(request.getAnswer_file().getInputStream());
-                    if(mimeType == null || !allowedMimeTypes.contains(mimeType)){
-                        throw new RuntimeException("허용되지 않는 파일 형식입니다.");
+                if(request.getQuestion_no() != 0) {
+                    KbStartersApplyAnswerDTO applyAnswer = new KbStartersApplyAnswerDTO();
+                    int insertApplyAnswerNo = surveyRepository.getMaxApplyAnswerNo();
+                    applyAnswer.setApply_answer_no(insertApplyAnswerNo);
+                    applyAnswer.setApply_no(insertApplyNo);
+                    applyAnswer.setQuestion_no(request.getQuestion_no());
+                    if (request.getQuestion_choice_no() != null) {
+                        applyAnswer.setQuestion_choice_no(request.getQuestion_choice_no());
                     }
-
-                    if(!filename.contains(".")){
-                        throw new RuntimeException("파일 확장자가 없습니다.");
+                    if (request.getAnswer_content() != null) {
+                        applyAnswer.setAnswer_content(request.getAnswer_content());
                     }
-                    String extension = filename.substring(filename.lastIndexOf(".") + 1).toLowerCase();
-                    if(!allowExts.contains(extension)){
-                        throw new RuntimeException("허용되지 않는 파일 확장자입니다.");
+                    if (request.getAnswer_file() != null && request.getAnswer_file().getSize() > 0){
+                        String filename = request.getAnswer_file().getOriginalFilename();
+                        String mimeType = tika.detect(request.getAnswer_file().getInputStream());
+                        if(mimeType == null || !allowedMimeTypes.contains(mimeType)){
+                            result.put("result", "허용되지 않는 파일 형식입니다.");
+                            return result;
+                        }
+
+                        if(!filename.contains(".")){
+                            result.put("result", "파일 확장자가 없습니다.");
+                            return result;
+                        }
+                        String extension = filename.substring(filename.lastIndexOf(".") + 1).toLowerCase();
+                        if(!allowExts.contains(extension)){
+                            result.put("result", "허용되지 않는 파일 확장자입니다.");
+                            return result;
+                        }
+
+
+                        FileDTO fileResult = fileUploader.insertFile(request.getAnswer_file(), "apply".concat(File.separator).concat(getToDay("yyyyMMdd")));
+                        applyAnswer.setAnswer_file_path(fileResult.getFilePath());
+                        applyAnswer.setAnswer_filename(fileResult.getFilename());
+                        applyAnswer.setAnswer_original_filename(fileResult.getOriginalFilename());
                     }
-
-
-                    FileDTO fileResult = fileUploader.insertFile(request.getAnswer_file(), "apply".concat(File.separator).concat(getToDay("yyyyMMdd")));
-                    applyAnswer.setAnswer_file_path(fileResult.getFilePath());
-                    applyAnswer.setAnswer_filename(fileResult.getFilename());
-                    applyAnswer.setAnswer_original_filename(fileResult.getOriginalFilename());
+                    surveyRepository.saveApplyAnswer(applyAnswer);
                 }
-                surveyRepository.saveApplyAnswer(applyAnswer);
             }
 
             result.put("result", "success");

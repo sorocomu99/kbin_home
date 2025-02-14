@@ -63,6 +63,9 @@ public class NoticeService {
         search.setStart(start);
 
         // 리스트 조회
+        // 상단 공지 리스트는 첫 페이지에만 조회
+        model.addAttribute("selectNotiList", page == 1 ? noticeDAO.selectNotiList(search) : "");
+
         List<NoticeDTO> selectList = noticeDAO.selectList(search);
 
         model.addAttribute("repeat", repeat);

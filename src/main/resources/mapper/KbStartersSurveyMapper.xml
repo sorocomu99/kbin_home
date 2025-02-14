@@ -59,9 +59,26 @@
         WHERE QUESTION_CHOICE_NO = #{question_choice_no}
     </select>
 
+    <select id="getOneApplyStatus" resultType="java.lang.String">
+        SELECT NVL(APPLY_STATUS, '접수') AS APPLYSTATUS
+          FROM KB_STARTERS_SURVEY KSS
+          LEFT JOIN KB_STARTERS_APPLY_STATUS KSAS
+            ON KSS.SURVEY_NO = KSAS.SURVEY_NO
+               AND KSAS.SURVEY_NO = #{survey_no}
+               AND KSAS.SEQ = 1
+          WHERE KSS.SURVEY_NO = #{survey_no}
+    </select>
+
     <select id="getMaxApplyNo" resultType="int">
         SELECT NVL(MAX(APPLY_NO), 0) + 1
         FROM KB_STARTERS_APPLY
+    </select>
+
+    <select id="getPrevApplyCnt" resultType="int" parameterType="com.kbin.inno.Starters.DTO.KbStartersApplyDTO">
+        SELECT count(APPLY_NO) as cnt
+        FROM KB_STARTERS_APPLY
+        WHERE SURVEY_NO = #{survey_no}
+          AND EMAIL = #{email}
     </select>
 
     <insert id="saveApply" parameterType="com.kbin.inno.Starters.DTO.KbStartersApplyDTO">

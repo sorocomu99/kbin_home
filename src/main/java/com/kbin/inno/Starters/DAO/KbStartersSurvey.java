@@ -22,6 +22,10 @@ public interface KbStartersSurvey {
 
     int getQuestionCount(KbStartersSurveyDTO survey);
 
+    int getPrevApplyCnt(KbStartersApplyDTO answer);
+
+    String getOneApplyStatus(int surveyNo);
+
     int getMaxApplyNo();
 
     int saveApply(KbStartersApplyDTO apply);

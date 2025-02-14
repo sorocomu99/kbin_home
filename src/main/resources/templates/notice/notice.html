@@ -72,10 +72,28 @@
                             </div>
                         </div>
                         <div class="tbody" role="rowgroup">
-                            <div class="tr" role="row" th:each="list : ${selectList}">
+                            <div class="tr" role="row" th:if="${selectNotiList != ''}" th:each="list : ${selectNotiList}">
                                 <div class="td" role="cell">
-                                    <i class="icon icon-notice" th:if="${list.ntc_yn =='Y'}"></i>
-                                    <th:block th:unless="${list.ntc_yn =='Y'}" th:text="${list.ntc_sn}"></th:block>
+                                    <i class="icon icon-notice"></i>
+                                </div>
+                                <div class="td text-left" role="cell">
+                                    <a class="link" th:href="@{/community/notice/detail/{ntc_sn}(ntc_sn=${list.ntc_sn})}">
+                                        <span class="title" th:text="${list.ntc_ttl}"></span>
+                                        <i class="icon icon-file"></i>
+                                    </a>
+                                </div>
+                                <div class="td" role="cell">
+                                    <a th:href="@{${list.ntc_path + list.ntc_file_name}}" target="_filedown" title="첨부파일 다운로드" th:if="${list.atch_file_sn != 0}" th:attr="download=${list?.origin_file_name}">
+                                        <i class="icon icon-file"></i>
+                                    </a>
+                                </div>
+                                <div class="td" role="cell">
+                                    <span class="date" th:text="${list.frst_reg_dt}"></span>
+                                </div>
+                            </div>
+                            <div class="tr" role="row" th:each="list, iterStat : ${selectList}">
+                                <div class="td" role="cell">
+                                    <th:block th:text="${pageCount - ((currentPage - 1) * 10) - iterStat.index}"></th:block>
                                 </div>
                                 <div class="td text-left" role="cell">
                                     <a class="link" th:href="@{/community/notice/detail/{ntc_sn}(ntc_sn=${list.ntc_sn})}">

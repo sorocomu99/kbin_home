@@ -13,6 +13,8 @@ import java.util.List;
 public interface NoticeDAO {
     // 공지사항 리스트 갯수 조회
     int selectPageCount(SearchDTO search);
+    // 공지사항 공지 리스트 조회
+    List<NoticeDTO> selectNotiList(SearchDTO search);
     // 공지사항 리스트 조회
     List<NoticeDTO> selectList(SearchDTO search);
     // 공지사항 상세 조회

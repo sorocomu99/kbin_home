@@ -7,7 +7,7 @@
         /* 공지사항 리스트 갯수 조회(전체) */
         SELECT COUNT(*)
           FROM KB_NTC_INFO
-         WHERE 1=1
+         WHERE EXPSR_YN = 'Y'
         <if test='keyword != null and keyword != ""'>
         <choose>
         <when test="type == 'all'">
@@ -23,6 +23,47 @@
         </choose>
         </if>
     </select>
+
+    <!-- 공지사항 공지 리스트 조회 -->
+    <select id="selectNotiList" parameterType="com.kbin.inno.Community.DTO.SearchDTO" resultType="com.kbin.inno.Community.DTO.NoticeDTO">
+        /* 공지사항 리스트 조회 */
+        /* 리스트 조회 */
+        SELECT NOTICE.*
+        FROM (
+            SELECT NTC.NTC_SN                              AS NTC_SN
+                 , NTC.NTC_TTL                             AS NTC_TTL
+                 , NTC.NTC_CN                              AS NTC_CN
+                 , TO_CHAR(NTC.FRST_REG_DT, 'YYYY.MM.DD') AS FRST_REG_DT
+                 , NTC.NTC_YN                              AS NTC_YN
+                 , FILES.FILE_SN                           AS ATCH_FILE_SN
+                 , FILES.ORGNL_FILE_NM                     AS ORIGIN_FILE_NAME
+                 , FILES.FILE_NM                           AS NTC_FILE_NAME
+                 , REPLACE(FILES.FILE_PATH, '\', '/')                         AS NTC_PATH
+                 , NTC.SORT_NO                             AS SORT_NO
+             FROM KB_NTC_INFO NTC
+                  , KB_FILE_INFO FILES
+            WHERE NTC.NTC_YN = 'Y'
+              AND NTC.EXPSR_YN = 'Y'
+              AND NTC.ATCH_FILE_SN = FILES.FILE_SN(+)
+        ) NOTICE
+        WHERE 1=1
+        <if test='keyword != null and keyword != ""'>
+            <choose>
+                <when test="type == 'all'">
+                    AND NOTICE.NTC_TTL LIKE '%'|| #{keyword} ||'%'
+                    OR NOTICE.NTC_CN   LIKE '%'|| #{keyword} ||'%'
+                </when>
+                <when test="type == 'title'">
+                    AND NOTICE.NTC_TTL LIKE '%'|| #{keyword} ||'%'
+                </when>
+                <when test="type == 'content'">
+                    AND NOTICE.NTC_CN   LIKE '%'|| #{keyword} ||'%'
+                </when>
+            </choose>
+        </if>
+        ORDER BY NOTICE.SORT_NO, NOTICE.NTC_SN DESC
+    </select>
+
     <!-- 공지사항 리스트 조회 -->
     <select id="selectList" parameterType="com.kbin.inno.Community.DTO.SearchDTO" resultType="com.kbin.inno.Community.DTO.NoticeDTO">
         /* 공지사항 리스트 조회 */
@@ -30,31 +71,11 @@
           FROM
               (
                /* 순번 매기기 */
-               SELECT ROWNUM ROWNUMBER
-                    , NOTICE.*
+               SELECT NOTICE.*
                  FROM
                      (
                       /* 리스트 조회 */
-                      SELECT NTC.*
-                        FROM (
-                              SELECT NTC.NTC_SN                              AS NTC_SN
-                                   , NTC.NTC_TTL                             AS NTC_TTL
-                                   , NTC.NTC_CN                              AS NTC_CN
-                                   , TO_CHAR(NTC.FRST_REG_DT, 'YYYY.MM.DD') AS FRST_REG_DT
-                                   , NTC.NTC_YN                              AS NTC_YN
-                                   , FILES.FILE_SN                           AS ATCH_FILE_SN
-                                   , FILES.ORGNL_FILE_NM                     AS ORIGIN_FILE_NAME
-                                   , FILES.FILE_NM                           AS NTC_FILE_NAME
-                                   , REPLACE(FILES.FILE_PATH, '\', '/')                         AS NTC_PATH
-                                FROM KB_NTC_INFO NTC
-                                   , KB_FILE_INFO FILES
-                               WHERE NTC.NTC_YN = 'Y'
-                                 AND NTC.EXPSR_YN = 'Y'
-                                 AND NTC.ATCH_FILE_SN = FILES.FILE_SN(+)
-                               ORDER BY NTC.SORT_NO, NTC.NTC_SN DESC
-                              ) NTC
-                       UNION ALL
-                       SELECT NTC.*
+                       SELECT NOTICE.*
                         FROM (
                               SELECT NTC.NTC_SN                              AS NTC_SN
                                    , NTC.NTC_TTL                             AS NTC_TTL
@@ -65,29 +86,30 @@
                                    , FILES.ORGNL_FILE_NM AS ORIGIN_FILE_NAME
                                    , FILES.FILE_NM       AS NTC_FILE_NAME
                                    , REPLACE(FILES.FILE_PATH, '\', '/')     AS NTC_PATH
+                                   , ROW_NUMBER() OVER(ORDER BY NTC.SORT_NO, NTC.NTC_SN DESC) ROWNUMBER
                                 FROM KB_NTC_INFO NTC
                                    , KB_FILE_INFO FILES
-                               WHERE NTC_YN = 'N'
-                                 AND NTC.EXPSR_YN = 'Y'
+                               WHERE NTC.EXPSR_YN = 'Y'
                                  AND NTC.ATCH_FILE_SN = FILES.FILE_SN(+)
                                ORDER BY NTC.SORT_NO, NTC.NTC_SN DESC
-                             ) NTC
-                      ) NOTICE
+                             ) NOTICE
                         WHERE 1=1
                         <if test='keyword != null and keyword != ""'>
-                        <choose>
-                        <when test="type == 'all'">
-                          AND NOTICE.NTC_TTL LIKE '%'|| #{keyword} ||'%'
-                           OR NOTICE.NTC_CN   LIKE '%'|| #{keyword} ||'%'
-                        </when>
-                        <when test="type == 'title'">
-                          AND NOTICE.NTC_TTL LIKE '%'|| #{keyword} ||'%'
-                        </when>
-                        <when test="type == 'content'">
-                          AND NOTICE.NTC_CN   LIKE '%'|| #{keyword} ||'%'
-                        </when>
-                        </choose>
+                            <choose>
+                                <when test="type == 'all'">
+                                    AND NOTICE.NTC_TTL LIKE '%'|| #{keyword} ||'%'
+                                    OR NOTICE.NTC_CN   LIKE '%'|| #{keyword} ||'%'
+                                </when>
+                                <when test="type == 'title'">
+                                    AND NOTICE.NTC_TTL LIKE '%'|| #{keyword} ||'%'
+                                </when>
+                                <when test="type == 'content'">
+                                    AND NOTICE.NTC_CN   LIKE '%'|| #{keyword} ||'%'
+                                </when>
+                            </choose>
                         </if>
+                      ) NOTICE
+                ORDER BY ROWNUMBER DESC
                ) NOTICE_PAGE
            WHERE ROWNUMBER BETWEEN #{start} AND #{end}
     </select>

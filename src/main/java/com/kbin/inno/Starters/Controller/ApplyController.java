@@ -71,6 +71,11 @@ public class ApplyController {
                 .body(resource);
     }
 
+    @PostMapping("/checkPreApply")
+    public ResponseEntity<Map<String, Object>> checkPreApply(KbStartersApplyRequestWrapper wrapper) {
+        return ResponseEntity.ok(applyService.checkPreApply(wrapper));
+    }
+
     @PostMapping("/apply")
     public ResponseEntity<Map<String, Object>> apply(KbStartersApplyRequestWrapper wrapper) {
         return ResponseEntity.ok(applyService.apply(wrapper));
