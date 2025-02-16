@@ -74,7 +74,7 @@
                         <if test='ctgry != null and ctgry != ""'>
                           AND FAQ_CTGRY.FAQ_CTGRY = #{ctgry}
                         </if>
-                        ORDER BY FAQ_CTGRY.SORT_NO, FAQ_CTGRY.FAQ_SN DESC
+                        ORDER BY FAQ_CTGRY.FAQ_CTGRY, FAQ_CTGRY.SORT_NO, FAQ_CTGRY.FAQ_SN DESC
                        ) FAQ
                ) FAQ_PAGE
            WHERE ROWNUMBER BETWEEN #{start} AND #{end}
