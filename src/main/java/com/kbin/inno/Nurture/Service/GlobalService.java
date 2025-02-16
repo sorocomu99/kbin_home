@@ -2,6 +2,7 @@ package com.kbin.inno.Nurture.Service;
 
 import com.kbin.inno.Nurture.DAO.GlobalDAO;
 import com.kbin.inno.Nurture.DTO.InterchangeDTO;
+import com.kbin.inno.Nurture.DTO.PlaceDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,5 +18,10 @@ public class GlobalService {
     // 글로벌 현지 교류 리스트 조회
     public List<InterchangeDTO> selectInterchange() {
         return globalDAO.selectInterchange();
+    }
+
+    // 육성 공간 조회
+    public List<PlaceDTO> selectPlace() {
+        return globalDAO.selectPlace();
     }
 }
